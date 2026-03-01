@@ -1216,35 +1216,127 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-  nav { padding: 12px 16px; flex-wrap: wrap; }
+  /* NAV */
+  nav { padding: 8px 12px; }
   .nav-logo { font-size: 1rem; }
-  .nav-links { gap: 6px; flex-wrap: wrap; justify-content: center; width: 100%; padding-top: 8px; }
-  .nav-links a:not(.cta-btn) { font-size: 0.75rem; padding: 6px 10px; background: var(--cream); border-radius: 6px; border: 1px solid var(--border); }
-  .nav-links .cta-btn { font-size: 0.75rem; padding: 6px 12px; }
-  .section { padding: 80px 20px; }
-  .stats-row { grid-template-columns: 1fr; }
-  .how-grid { grid-template-columns: 1fr; }
-  .compare-grid { grid-template-columns: 1fr; gap: 20px; }
+  .nav-links { gap: 4px; }
+  .nav-links a:not(.cta-btn) { font-size: 0.6rem; padding: 5px 7px; }
+  .nav-links .cta-btn { font-size: 0.6rem; padding: 5px 10px; }
+
+  /* LANDING PAGE */
+  .hero { padding: 70px 16px 40px; min-height: auto; }
+  .hero-tagline { font-size: 0.65rem !important; }
+  .hero h1 { font-size: 1.7rem !important; line-height: 1.2 !important; }
+  .hero-sub { font-size: 0.82rem !important; padding: 0 4px; }
+  .hero-actions { flex-direction: column; align-items: center; gap: 10px; }
+  .hero-actions .btn-primary { font-size: 0.85rem !important; padding: 12px 28px !important; }
+  .hero-actions .btn-secondary { font-size: 0.75rem !important; padding: 10px 20px !important; }
+  .hero-scroll-hint { display: none; }
+  .section { padding: 40px 14px; }
+  .section-label { font-size: 0.6rem; }
+  .section-title { font-size: 1.2rem; line-height: 1.3; }
+  .section-body { font-size: 0.82rem; }
+  .stats-row { grid-template-columns: 1fr; gap: 10px; }
+  .stat-card { padding: 14px; }
+  .stat-number { font-size: 1.8rem; }
+  .stat-label { font-size: 0.75rem; }
+  .how-grid { grid-template-columns: 1fr; gap: 10px; }
+  .how-card { padding: 16px; }
+  .how-card h3 { font-size: 0.95rem; }
+  .how-card p { font-size: 0.78rem; }
+  .compare-grid { grid-template-columns: 1fr; gap: 14px; }
   .compare-arrow { transform: rotate(90deg); }
-  .hero { padding: 120px 20px 80px; }
-  .hero-actions { flex-direction: column; align-items: center; }
+  .compare-card { padding: 14px; }
+  .compare-card h3 { font-size: 0.9rem; }
+  .compare-card p, .compare-card li { font-size: 0.75rem; }
+
+  /* SPECTRUM / CONVERSATION PAGE */
+  .spectrum-page { padding-top: 45px; }
+  .topic-selector { padding: 4px 8px; gap: 4px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .topic-selector::-webkit-scrollbar { display: none; }
+  .topic-btn { font-size: 0.58rem; padding: 5px 9px; white-space: nowrap; flex-shrink: 0; }
+  .filter-bar { padding: 6px 10px 12px; gap: 6px; }
+  .filter-bar label { font-size: 0.6rem; }
+  .filter-bar select { font-size: 0.65rem; padding: 3px 6px; }
+  .cat-btn { font-size: 0.52rem !important; padding: 3px 6px !important; }
+  #perspective-count { font-size: 0.6rem !important; }
+
+  /* Hide desktop grid, show mobile swipe */
   .spectrum-grid { display: none !important; }
-  .mobile-swipe-view { display: block !important; padding-bottom: 40px; }
-  .spectrum-axis-container { padding: 0 12px; }
-  .spectrum-axis { padding: 10px 16px; margin-bottom: 12px; }
-  .topic-selector { flex-wrap: wrap; gap: 6px; padding: 6px 12px; }
-  .topic-selector button { font-size: 0.7rem; padding: 6px 10px; }
-  .commentariat-filters { flex-wrap: wrap; gap: 6px; padding: 6px 16px; }
-  .commentariat-filters button { font-size: 0.7rem; padding: 6px 10px; }
-  .cat-btn { font-size: 0.65rem !important; padding: 5px 8px !important; }
-  .commentator-card { font-size: 0.9rem; }
-  .card-body { padding: 16px; }
-  .card-tweet { font-size: 0.85rem; padding: 10px 12px; }
-  .card-scores { gap: 4px; }
-  .score-pill { font-size: 0.6rem; padding: 2px 6px; }
-  .commentariat-grid { padding: 0 12px 80px; grid-template-columns: 1fr; }
-  .mobile-col-label { display: block; text-align: center; font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; padding: 8px 0; margin-top: 8px; border-radius: 6px; }
-  .spectrum-col-header-row { display: none !important; }
+  .spectrum-axis-container { padding: 0 8px; }
+  .spectrum-axis { padding: 5px 10px; margin-bottom: 6px; border-radius: 6px; }
+  .spectrum-axis span { font-size: 0.45rem; letter-spacing: 0.04em; }
+  .mobile-swipe-view { display: block !important; padding-bottom: 20px; }
+  .mobile-swipe-tabs { margin: 0 8px 8px; border-radius: 8px; }
+  .mobile-tab { padding: 8px 0; font-size: 0.6rem; }
+
+  /* MOBILE CARD STYLES */
+  .mobile-swipe-view .commentator-card { border-radius: 8px; overflow: visible; }
+  .mobile-swipe-view .commentator-card:hover { transform: none; box-shadow: none; }
+  .mobile-swipe-view .card-spectrum-bar { height: 3px; }
+  .mobile-swipe-view .card-body { padding: 10px; }
+  .mobile-swipe-view .card-top { gap: 8px; margin-bottom: 6px; }
+  .mobile-swipe-view .card-avatar { width: 28px; height: 28px; font-size: 0.65rem; }
+  .mobile-swipe-view .card-info h3 { font-size: 0.8rem; }
+  .mobile-swipe-view .card-handle { font-size: 0.55rem; }
+  .mobile-swipe-view .card-role { font-size: 0.6rem; margin-top: 0; }
+  .mobile-swipe-view .card-category { font-size: 0.5rem; padding: 2px 6px; margin-bottom: 6px; }
+  .mobile-swipe-view .take-title { font-size: 0.65rem; margin-bottom: 3px; }
+  .mobile-swipe-view .card-tweet { font-size: 0.72rem; line-height: 1.45; padding: 7px 9px; margin-bottom: 6px; border-radius: 5px; }
+  .mobile-swipe-view .card-tweet::before { font-size: 0.6rem; top: 5px; right: 6px; }
+  .mobile-swipe-view .take-source { font-size: 0.55rem; margin-bottom: 4px; }
+  .mobile-swipe-view .take-source a { font-size: 0.55rem; }
+  .mobile-swipe-view .steelman-toggle { margin-bottom: 8px; }
+  .mobile-swipe-view .steelman-toggle button { font-size: 0.55rem; padding: 3px 7px; }
+  .mobile-swipe-view .steelman-toggle button svg { width: 12px; height: 12px; }
+  .mobile-swipe-view .steelman-text { font-size: 0.65rem; line-height: 1.45; padding: 7px 9px; }
+  .mobile-swipe-view .steelman-label { font-size: 0.55rem; }
+  .mobile-swipe-view .card-scores { gap: 2px; flex-wrap: wrap; }
+  .mobile-swipe-view .score-pill { font-size: 0.45rem; padding: 1px 4px; }
+
+  /* COMMENTARIAT PAGE */
+  .commentariat-page { padding-top: 45px; }
+  .commentariat-grid { padding: 0 8px 30px; grid-template-columns: 1fr; gap: 8px; }
+  .commentariat-filters { padding: 4px 8px; gap: 4px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .commentariat-filters::-webkit-scrollbar { display: none; }
+  .commentariat-filters button { font-size: 0.55rem; padding: 4px 7px; white-space: nowrap; flex-shrink: 0; }
+  .comm-card-inner { padding: 8px; gap: 6px; }
+  .comm-card-name { font-size: 0.75rem; }
+  .comm-card-handle { font-size: 0.55rem; }
+  .comm-card-role { font-size: 0.55rem; }
+  .comm-card .card-scores { gap: 2px; }
+  .comm-card .score-pill { font-size: 0.45rem; padding: 1px 4px; }
+  .comm-card canvas { width: 55px !important; height: 55px !important; }
+
+  /* LISTEN & LEARN PAGE */
+  .listen-page { padding-top: 45px; }
+  .listen-grid { grid-template-columns: 1fr; gap: 10px; padding: 0 10px; }
+  .listen-col-header { font-size: 0.8rem; }
+  .listen-card { padding: 10px; }
+  .listen-card-name { font-size: 0.8rem; }
+  .listen-card-show { font-size: 0.65rem; }
+  .listen-ep-title { font-size: 0.7rem; }
+  .listen-ep-meta { font-size: 0.6rem; }
+  .listen-ep-link { font-size: 0.65rem; }
+
+  /* METHOD PAGE */
+  .method-page { padding-top: 45px; }
+  .method-page h2 { font-size: 1.1rem; }
+  .method-page h3 { font-size: 0.9rem; }
+  .method-page p, .method-page li { font-size: 0.75rem; line-height: 1.55; }
+  .method-page table { font-size: 0.65rem; }
+  .method-page th, .method-page td { padding: 4px 6px; }
+
+  /* ABOUT PAGE */
+  .about-page { padding-top: 45px; }
+  .about-page h2 { font-size: 1.2rem; }
+  .about-page p { font-size: 0.78rem; line-height: 1.55; }
+
+  /* FOOTERS */
+  footer { padding: 20px 10px !important; }
+  footer p { font-size: 0.65rem !important; }
+  footer .nav-logo { font-size: 0.85rem !important; }
+  footer div[style*="margin-bottom:10px"] a { font-size: 0.65rem !important; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -1273,7 +1365,7 @@ footer {
 .listen-ep-link:hover { text-decoration: underline; }
 .listen-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
 .listen-badge.new { background: #e8f5e9; color: #2e7d32; }
-@media (max-width: 768px) { .listen-grid { grid-template-columns: 1fr; } }
+
 
 </style>
 </head>
@@ -1297,7 +1389,7 @@ function showPage(page) {
 
 <nav>
   <div class="nav-logo" onclick="showPage('landing')">
-    <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+    <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
   </div>
   <div class="nav-links">
     <a href="javascript:void(0)" onclick="showPage('landing')">Home</a>
@@ -1332,11 +1424,11 @@ function showPage(page) {
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-number blue">2x</div>
-          <div class="stat-label">Americans imagine twice as many opponents hold "extreme" views as actually do <span style="font-size:0.7em; opacity:0.6;">(More in Common / YouGov)</span></div>
+          <div class="stat-label">Americans imagine twice as many opponents hold "extreme" views as actually do</div>
         </div>
         <div class="stat-card">
           <div class="stat-number gray">77%</div>
-          <div class="stat-label">of Americans think others live in a media bubble — but only 32% think they do <span style="font-size:0.7em; opacity:0.6;">(Ipsos)</span></div>
+          <div class="stat-label">of Americans think others live in a media bubble — but only 32% think they do</div>
         </div>
         <div class="stat-card">
           <div class="stat-number red">0</div>
@@ -1415,14 +1507,15 @@ function showPage(page) {
     <div class="section-inner">
       <h2 class="section-title">Ready to see the whole picture?</h2>
       <p class="cta-sub">Explore how America's sharpest minds think about the issues that matter most.</p>
-      <a class="btn-primary" href="javascript:void(0)" onclick="showPage('spectrum')" style="font-size:1.1rem; padding: 16px 40px;">Enter the Spectrum →</a>
+      <a class="btn-primary" href="javascript:void(0)" onclick="showPage('spectrum')" style="font-size:1.1rem; padding: 16px 40px;">Enter the Conversation →</a>
     </div>
   </section>
 
   <footer>
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block;">
-      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
     </div>
+    <div style="margin-bottom:10px;"><a href="https://x.com/defuseus" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">𝕏 @defuseus</a><span style="color:var(--border);">|</span><a href="https://www.instagram.com/defuseus/" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">📷 @defuseus</a></div>
     <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
   </footer>
 </div>
@@ -1542,8 +1635,9 @@ function showPage(page) {
 
   <footer>
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
-      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
     </div>
+    <div style="margin-bottom:10px;"><a href="https://x.com/defuseus" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">𝕏 @defuseus</a><span style="color:var(--border);">|</span><a href="https://www.instagram.com/defuseus/" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">📷 @defuseus</a></div>
     <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
     <p style="margin-top:12px; font-size:0.8rem; color:var(--text-muted); max-width:600px; margin-left:auto; margin-right:auto; line-height:1.6; font-style:italic;">In our current beta stage, many takes are sourced from longstanding public positions and are not verbatim quotes. Soon, all takes will be sourced verbatim as soon as our commentators write, speak, or tweet.</p>
   </footer>
@@ -1588,8 +1682,9 @@ function showPage(page) {
 
   <footer>
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
-      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
     </div>
+    <div style="margin-bottom:10px;"><a href="https://x.com/defuseus" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">𝕏 @defuseus</a><span style="color:var(--border);">|</span><a href="https://www.instagram.com/defuseus/" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">📷 @defuseus</a></div>
     <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
     <p style="margin-top:12px; font-size:0.8rem; color:var(--text-muted); max-width:600px; margin-left:auto; margin-right:auto; line-height:1.6; font-style:italic;">In our current beta stage, many takes are sourced from longstanding public positions and are not verbatim quotes. Soon, all takes will be sourced verbatim as soon as our commentators write, speak, or tweet.</p>
   </footer>
@@ -1853,8 +1948,9 @@ function showPage(page) {
 
   <footer style="text-align:center; padding:48px 24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:0.9rem;">
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
-      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
     </div>
+    <div style="margin-bottom:10px;"><a href="https://x.com/defuseus" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">𝕏 @defuseus</a><span style="color:var(--border);">|</span><a href="https://www.instagram.com/defuseus/" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">📷 @defuseus</a></div>
     <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
   </footer>
 </div>
@@ -1972,8 +2068,9 @@ function showPage(page) {
 
   <footer style="text-align:center; padding:48px 24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:0.9rem;">
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
-      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
     </div>
+    <div style="margin-bottom:10px;"><a href="https://x.com/defuseus" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">𝕏 @defuseus</a><span style="color:var(--border);">|</span><a href="https://www.instagram.com/defuseus/" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">📷 @defuseus</a></div>
     <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
   </footer>
 </div>
@@ -2003,7 +2100,7 @@ function showPage(page) {
         <h2 style="font-family:var(--serif); font-size:1.6rem; font-weight:700; color:var(--text-primary); margin-bottom:16px;">Who's included — and who's not.</h2>
         <p style="margin-bottom:24px;">We curated roughly 150 of the most influential political commentators in the United States. We think diversity of opinion is important — essential, actually. That's the whole premise of this project.</p>
         <p style="margin-bottom:24px;">But we also believe a working Overton window should be wide, not infinite. There's a difference between a perspective that challenges your assumptions and one that poisons the conversation. We tried to draw that line thoughtfully, and that may explain why certain political commentators have been intentionally left off.</p>
-        <p style="margin-bottom:24px;">If you think we got it wrong — either by including someone we shouldn't have or leaving out someone we should — we want to hear about it.</p>
+        <p style="margin-bottom:24px;">If you think we got it wrong — either by including someone we shouldn't have or leaving out someone we should — don't be afraid to <a href="mailto:jesse@defuse.us" style="color:var(--mid-blue); text-decoration:underline;">let us know</a>. Similarly, if you are part of the commentariat and would like to push back on your political score, we want to <a href="mailto:jesse@defuse.us" style="color:var(--mid-blue); text-decoration:underline;">hear about it</a>.</p>
       </div>
 
       <div style="border-top:1px solid var(--border); padding-top:40px; margin-top:40px;">
@@ -2012,7 +2109,7 @@ function showPage(page) {
 
         <p style="margin-bottom:32px;">If any part of this resonates, reach out. We're building this in the open and we want collaborators, not just users.</p>
 
-        <a href="/cdn-cgi/l/email-protection#48202d242427082c2d2e3d3b2d66252d2c2129" style="display:inline-block; padding:14px 32px; background:var(--deep-blue); color:#fff; text-decoration:none; border-radius:8px; font-weight:600; font-size:1rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Get in touch →</a>
+        <a href="mailto:jesse@defuse.us" style="display:inline-block; padding:14px 32px; background:var(--deep-blue); color:#fff; text-decoration:none; border-radius:8px; font-weight:600; font-size:1rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Get in touch →</a>
       </div>
     </div>
 
@@ -2020,8 +2117,9 @@ function showPage(page) {
 
   <footer style="text-align:center; padding:48px 24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:0.9rem;">
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
-      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M2 10 C2 2.5, 2 0.5, 8 0 C14 0.5, 14 2.5, 14 10" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M2 14 C2 21.5, 2 23.5, 8 24 C14 23.5, 14 21.5, 14 14" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
     </div>
+    <div style="margin-bottom:10px;"><a href="https://x.com/defuseus" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">𝕏 @defuseus</a><span style="color:var(--border);">|</span><a href="https://www.instagram.com/defuseus/" target="_blank" rel="noopener" style="color:var(--text-muted); text-decoration:none; margin:0 10px; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">📷 @defuseus</a></div>
     <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
   </footer>
 </div>
@@ -2170,6 +2268,13 @@ const commentators = [
         source: "The Joe Rogan Experience / NBC News, Jan 2026",
         url: "https://www.nbcnews.com/pop-culture/pop-culture-news/joe-rogan-criticizes-ice-tactics-podcast-rcna253931",
         steelman: "Rogan represents millions of Trump voters who supported tough-on-crime immigration enforcement but are disturbed by the militarized reality of mass deportation targeting non-criminals. His position — pro-enforcement, anti-cruelty — may be the actual median American view that neither party fully represents."
+      },
+      {
+        topics: ["culture", "domestic-policy"], events: ["epstein"], title: "On the Epstein files as the scandal that should unite left and right",
+        text: "This is the one thing that everyone should agree on — left, right, whatever. Exposed a massive pedophile ring connected to the most powerful people on earth, and somehow nobody went to jail except Ghislaine Maxwell. Three million pages of documents and the media treats it like a slow news day. If this doesn't wake people up to how captured our institutions are, nothing will.",
+        source: "The Joe Rogan Experience, multiple episodes discussing Epstein files, January-February 2026",
+        url: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        steelman: "Rogan's framing cuts through partisan noise: the Epstein scandal is uniquely bipartisan, implicating figures connected to both Clintons and Trump. His massive platform (estimated 14.5 million listeners per episode) means his repeated coverage drives more public awareness than traditional investigative journalism, and his 'common man' outrage reflects genuine grassroots demand for accountability."
       }]
   },
   {
@@ -2249,6 +2354,13 @@ const commentators = [
         source: "Tucker Carlson Show, consistent position 2023-2025",
         url: "https://en.wikipedia.org/wiki/Tucker_Carlson",
         steelman: "Carlson's populist anti-interventionism resonates with Americans tired of foreign commitments. His geographic framing highlights a real military challenge: the U.S. would be projecting force across the Pacific against China fighting in its near-abroad, a massive logistical disadvantage that Pentagon simulations consistently flag."
+      },
+      {
+        topics: ["culture", "domestic-policy"], events: ["epstein"], title: "On Epstein as an intelligence 'employee' and the Bondi cover-up",
+        text: "Epstein was an employee, not a boss. He was a connector acting on behalf of others. He himself is an idiot — purely feral intelligence. Where did his money come from? Nobody has answered that. And rather than just admit there isn't much left, Pam Bondi made ludicrous claims on cable news she couldn't back up, and this current outrage is the result.",
+        source: "Megyn Kelly Show interview, February 26, 2026; Tucker Carlson Show coverage of Epstein files, February 2026",
+        url: "https://thehill.com/media/5399802-tucker-carlson-blames-bondi-epstein/",
+        steelman: "Carlson's framing — that Epstein was a tool of more powerful interests, not a mastermind — challenges both the simplistic 'rich predator' narrative and the government's claim that the story ends with Epstein's death. His willingness to criticize Trump's own AG (Bondi) over the handling demonstrates intellectual independence from partisan loyalty on this issue."
       }
     ]
   },
@@ -2524,6 +2636,13 @@ const commentators = [
         source: "System Update on Rumble, 'Selling Insane AI-powered Surveillance', Aug 2025",
         url: "https://rumble.com/c/GGreenwald",
         steelman: "Greenwald\'s career arc — from breaking the Snowden leaks to warning about AI surveillance — gives him unique credibility on the convergence of technology and state power. His argument that both parties enable surveillance when in power challenges the assumption that civil liberties have a natural partisan home."
+      },
+      {
+        topics: ["culture", "domestic-policy"], events: ["epstein"], title: "On the Epstein files proving blackmail was real — despite the DOJ's denials",
+        text: "Top Trump law enforcement officials — Bondi, Patel, Bongino — spent years denouncing Biden for hiding Epstein's client list and blackmail operations. Then they suddenly announced their 'exhaustive review' found no client list and no credible evidence of blackmail. But from the files made public, we know one thing for certain: blackmail and extortion were casually and routinely used in this world.",
+        source: "Glenn Greenwald Substack, 'The Epstein Files: The Blackmail of Billionaire Leon Black', February 16, 2026",
+        url: "https://greenwald.substack.com/p/the-epstein-files-the-blackmail-of",
+        steelman: "Greenwald's detailed analysis of the Leon Black files documents specific, evidence-based instances of extortion within Epstein's orbit — moving the blackmail question from conspiracy theory to documented fact. His equal-opportunity critique of both Biden and Trump administrations for protecting Epstein-connected figures demonstrates the bipartisan nature of the cover-up."
       }]
   },
   {
@@ -3231,6 +3350,13 @@ const commentators = [
         source: "DarkHorse Podcast, consistent position 2024-2025",
         url: "https://www.youtube.com/@DarkHorsePodcastClips",
         steelman: "Weinstein\'s evolutionary biology background frames AI risk in terms of cognitive dependency rather than existential doom."
+      },
+      {
+        topics: ["culture", "domestic-policy"], events: ["epstein"], title: "On the Epstein saga as proof that elites wield invisible leverage over institutions",
+        text: "The Epstein saga, like COVID propaganda and other institutional failures, has exposed a deeper problem: elites wield leverage out of sight while government, media, and universities rely on theatrical expertise to bolster public authority. Our institutions so consistently engage in the exact inverse of good governance that many Americans are left wondering what remains of our democratic republic.",
+        source: "Dad Saves America podcast, April 9, 2025; DarkHorse Podcast #312 and #313, February-March 2026",
+        url: "https://www.youtube.com/@DarkHorsePod",
+        steelman: "Bret Weinstein connects Epstein to a broader pattern of institutional failure that transcends partisan lines — the same institutions that failed on Epstein also failed on COVID oversight, academic integrity, and intelligence accountability. His evolutionary lens suggests these aren't isolated scandals but symptoms of institutions captured by perverse incentives."
       }]
   },
   {
@@ -3242,6 +3368,13 @@ const commentators = [
         source: "The Portal podcast, consistent position 2024-2025",
         url: "https://www.youtube.com/@EricWeinsteinPhD",
         steelman: "Weinstein\'s concept of the Distributed Idea Suppression Complex — that institutions systematically suppress ideas threatening their funding models — resonates across political lines."
+      },
+      {
+        topics: ["culture", "domestic-policy"], events: ["epstein"], title: "On Epstein as an intelligence 'construct' — not a real financier",
+        text: "I don't know who Jeffrey Epstein was but I would certainly bet money that he was a product of at least one or more elements of the intelligence community. He certainly was not a financier in any standard sense. That was a cover story. This is not an actual human — this is a construct of someone. Someone has created a fake human being called Jeffrey Epstein.",
+        source: "The Diary of a CEO with Steven Bartlett, July 14, 2025; The Portal Episode 25, March 2020",
+        url: "https://www.newsweek.com/jeffrey-epstein-intelligence-asset-eric-weinstein-stephen-bartlett-diary-ceo-2099041",
+        steelman: "Weinstein met Epstein personally circa 2004 and immediately sensed something was off. His core questions — where are the trading records, the former employees, the prime brokers? — remain largely unanswered years later. The 'construct' theory gains credibility from the still-unexplained source of Epstein's wealth and his extraordinary access to scientists and world leaders despite having no verifiable financial track record."
       }]
   },
   {
@@ -4480,7 +4613,30 @@ function renderMobileSwipe(allCards) {
   const leftPanel = document.getElementById('mobile-panel-left');
   const centerPanel = document.getElementById('mobile-panel-center');
   const rightPanel = document.getElementById('mobile-panel-right');
+  const swipeView = document.getElementById('mobile-swipe-view');
   if (!leftPanel || !centerPanel || !rightPanel) return;
+  
+  // Show prompt if no cards
+  if (!allCards || allCards.length === 0) {
+    const tabs = document.getElementById('mobile-swipe-tabs');
+    const container = document.getElementById('mobile-swipe-container');
+    if (tabs) tabs.style.display = 'none';
+    if (container) container.innerHTML = '<div style="text-align:center; padding:40px 16px;"><div style="font-family:var(--serif); font-size:1.1rem; font-weight:600; color:var(--text-primary); margin-bottom:8px;">Select an issue or event above</div><p style="font-size:0.78rem; color:var(--text-secondary);">Choose a topic to see perspectives from across the political spectrum.</p></div>';
+    return;
+  }
+  // Restore tabs and container
+  const tabs = document.getElementById('mobile-swipe-tabs');
+  const container = document.getElementById('mobile-swipe-container');
+  if (tabs) tabs.style.display = 'flex';
+  if (container && !document.getElementById('mobile-swipe-track')) {
+    container.innerHTML = '<div class="mobile-swipe-track" id="mobile-swipe-track"><div class="mobile-swipe-panel" id="mobile-panel-left"></div><div class="mobile-swipe-panel" id="mobile-panel-center"></div><div class="mobile-swipe-panel" id="mobile-panel-right"></div></div>';
+  }
+  
+  // Re-get panels in case they were rebuilt
+  const lp = document.getElementById('mobile-panel-left');
+  const cp = document.getElementById('mobile-panel-center');
+  const rp = document.getElementById('mobile-panel-right');
+  if (!lp || !cp || !rp) return;
   
   const leftCards = allCards.filter(c => c && c._column === 'left');
   const centerCards = allCards.filter(c => c && c._column === 'center');
@@ -4537,9 +4693,9 @@ function renderMobileSwipe(allCards) {
   
   const emptyMsg = '<div style="text-align:center; padding:40px 20px; color:var(--text-muted); font-style:italic;">No takes in this column for the selected topic.</div>';
   
-  leftPanel.innerHTML = leftCards.length ? leftCards.map(mobileCardHtml).join('') : emptyMsg;
-  centerPanel.innerHTML = centerCards.length ? centerCards.map(mobileCardHtml).join('') : emptyMsg;
-  rightPanel.innerHTML = rightCards.length ? rightCards.map(mobileCardHtml).join('') : emptyMsg;
+  lp.innerHTML = leftCards.length ? leftCards.map(mobileCardHtml).join('') : emptyMsg;
+  cp.innerHTML = centerCards.length ? centerCards.map(mobileCardHtml).join('') : emptyMsg;
+  rp.innerHTML = rightCards.length ? rightCards.map(mobileCardHtml).join('') : emptyMsg;
   
   // Reset to left column
   switchMobileColumn('left');
