@@ -614,6 +614,8 @@ footer {
   gap: 20px;
 }
 
+.mobile-col-label { display: none; }
+
 .commentator-card {
   background: white;
   border-radius: 12px;
@@ -1173,13 +1175,22 @@ footer {
   .compare-arrow { transform: rotate(90deg); }
   .hero { padding: 120px 20px 80px; }
   .hero-actions { flex-direction: column; align-items: center; }
-  .spectrum-grid { grid-template-columns: 1fr; padding: 0 20px 80px; }
-  .spectrum-axis-container { padding: 0 20px; }
-  .topic-selector { flex-wrap: wrap; gap: 6px; padding: 6px 16px; }
+  .spectrum-grid { grid-template-columns: 1fr; padding: 0 12px 80px; gap: 12px; }
+  .spectrum-axis-container { padding: 0 12px; }
+  .spectrum-axis { padding: 10px 16px; margin-bottom: 20px; }
+  .topic-selector { flex-wrap: wrap; gap: 6px; padding: 6px 12px; }
   .topic-selector button { font-size: 0.7rem; padding: 6px 10px; }
   .commentariat-filters { flex-wrap: wrap; gap: 6px; padding: 6px 16px; }
   .commentariat-filters button { font-size: 0.7rem; padding: 6px 10px; }
   .cat-btn { font-size: 0.65rem !important; padding: 5px 8px !important; }
+  .commentator-card { font-size: 0.9rem; }
+  .card-body { padding: 16px; }
+  .card-tweet { font-size: 0.85rem; padding: 10px 12px; }
+  .card-scores { gap: 4px; }
+  .score-pill { font-size: 0.6rem; padding: 2px 6px; }
+  .commentariat-grid { padding: 0 12px 80px; grid-template-columns: 1fr; }
+  .mobile-col-label { display: block; text-align: center; font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; padding: 8px 0; margin-top: 8px; border-radius: 6px; }
+  .spectrum-col-header-row { display: none !important; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -4135,7 +4146,7 @@ function renderCards() {
     }
 
     const columnHeader = `
-      <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: -8px;">
+      <div class="spectrum-col-header-row" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: -8px;">
         <div style="text-align:center; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-blue); font-weight: 500;">← Left</div>
         <div style="text-align:center; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;"><span style="color: var(--purple);">Center</span></div>
         <div style="text-align:center; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-red); font-weight: 500;">Right →</div>
@@ -4165,8 +4176,12 @@ function renderCards() {
           </div>
         `;
       }).join('');
+      const mColLabel = c._column === 'left' ? '← Left' : (c._column === 'right' ? 'Right →' : 'Center');
+      const mColColor = c._column === 'left' ? 'var(--mid-blue)' : (c._column === 'right' ? 'var(--mid-red)' : 'var(--purple)');
+      const mColBg = c._column === 'left' ? 'var(--pale-blue)' : (c._column === 'right' ? 'var(--pale-red)' : '#f0ecf5');
       return `
         <div class="commentator-card" style="animation: fadeUp 0.4s ${Math.min(i * 0.04, 0.6)}s both;">
+          <div class="mobile-col-label" style="color:${mColColor}; background:${mColBg};">${mColLabel}</div>
           <div class="card-spectrum-bar" style="background: linear-gradient(to right, ${color}88, ${color});"></div>
           <div class="card-body">
             <div class="card-top">
@@ -4248,7 +4263,7 @@ function renderCards() {
 
   // Column header for the L-C-R layout
   const columnHeader = sortBy === 'spectrum' ? `
-    <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: -8px;">
+    <div class="spectrum-col-header-row" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: -8px;">
       <div style="text-align:center; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-blue); font-weight: 500;">← Left</div>
       <div style="text-align:center; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;"><span style="color: var(--purple);">Center</span></div>
       <div style="text-align:center; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-red); font-weight: 500;">Right →</div>
@@ -4293,8 +4308,13 @@ function renderCards() {
       `;
     }).join('');
 
+    const colLabel = c._column === 'left' ? '← Left' : (c._column === 'right' ? 'Right →' : 'Center');
+    const colColor = c._column === 'left' ? 'var(--mid-blue)' : (c._column === 'right' ? 'var(--mid-red)' : 'var(--purple)');
+    const colBg = c._column === 'left' ? 'var(--pale-blue)' : (c._column === 'right' ? 'var(--pale-red)' : '#f0ecf5');
+
     return `
       <div class="commentator-card" style="animation: fadeUp 0.4s ${Math.min(i * 0.04, 0.6)}s both;">
+        <div class="mobile-col-label" style="color:${colColor}; background:${colBg};">${colLabel}</div>
         <div class="card-spectrum-bar" style="background: linear-gradient(to right, ${color}88, ${color});"></div>
         <div class="card-body">
           <div class="card-top">
