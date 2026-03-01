@@ -616,6 +616,59 @@ footer {
 
 .mobile-col-label { display: none; }
 
+/* Mobile Swipe View */
+.mobile-swipe-view { display: none; }
+
+.mobile-swipe-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0 12px 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid rgba(0,0,0,0.1);
+}
+
+.mobile-tab {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: white;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+.mobile-tab[data-col="left"].active { background: var(--deep-blue); color: white; }
+.mobile-tab[data-col="center"].active { background: var(--purple); color: white; }
+.mobile-tab[data-col="right"].active { background: var(--deep-red); color: white; }
+
+.mobile-swipe-container {
+  overflow: hidden;
+  margin: 0 12px;
+  position: relative;
+}
+
+.mobile-swipe-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: 300%;
+}
+
+.mobile-swipe-panel {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 4px;
+}
+
 .commentator-card {
   background: white;
   border-radius: 12px;
@@ -1175,9 +1228,10 @@ footer {
   .compare-arrow { transform: rotate(90deg); }
   .hero { padding: 120px 20px 80px; }
   .hero-actions { flex-direction: column; align-items: center; }
-  .spectrum-grid { grid-template-columns: 1fr; padding: 0 12px 80px; gap: 12px; }
+  .spectrum-grid { display: none !important; }
+  .mobile-swipe-view { display: block !important; padding-bottom: 40px; }
   .spectrum-axis-container { padding: 0 12px; }
-  .spectrum-axis { padding: 10px 16px; margin-bottom: 20px; }
+  .spectrum-axis { padding: 10px 16px; margin-bottom: 12px; }
   .topic-selector { flex-wrap: wrap; gap: 6px; padding: 6px 12px; }
   .topic-selector button { font-size: 0.7rem; padding: 6px 10px; }
   .commentariat-filters { flex-wrap: wrap; gap: 6px; padding: 6px 16px; }
@@ -1469,6 +1523,22 @@ function showPage(page) {
   </div>
 
   <div class="spectrum-grid" id="spectrum-grid"></div>
+
+  <!-- Mobile swipe view (hidden on desktop) -->
+  <div class="mobile-swipe-view" id="mobile-swipe-view">
+    <div class="mobile-swipe-tabs" id="mobile-swipe-tabs">
+      <button class="mobile-tab active" data-col="left" onclick="switchMobileColumn('left')">← Left</button>
+      <button class="mobile-tab" data-col="center" onclick="switchMobileColumn('center')">Center</button>
+      <button class="mobile-tab" data-col="right" onclick="switchMobileColumn('right')">Right →</button>
+    </div>
+    <div class="mobile-swipe-container" id="mobile-swipe-container">
+      <div class="mobile-swipe-track" id="mobile-swipe-track">
+        <div class="mobile-swipe-panel" id="mobile-panel-left"></div>
+        <div class="mobile-swipe-panel" id="mobile-panel-center"></div>
+        <div class="mobile-swipe-panel" id="mobile-panel-right"></div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
@@ -4124,6 +4194,7 @@ function renderCards() {
         <p style="font-size: 1rem; color: var(--text-secondary); max-width: 480px; margin: 0 auto;">Choose a Key Issue or Current Event to see how voices across the political spectrum weigh in — side by side.</p>
       </div>
     `;
+    renderMobileSwipe([]);
     return;
   }
 
@@ -4209,6 +4280,7 @@ function renderCards() {
     };
 
     grid.innerHTML = columnHeader + ordered.map((item, i) => manualCardMapper(item, i)).join('');
+    renderMobileSwipe(ordered);
 
     requestAnimationFrame(() => {
       ordered.forEach((item, i) => {
@@ -4369,6 +4441,7 @@ function renderCards() {
   }
   
   grid.innerHTML = html;
+  renderMobileSwipe(ordered);
 }
 
 // Expand to show all perspectives
@@ -4380,6 +4453,127 @@ function expandPerspectives() {
   window._showAllPerspectives = true;
   renderCards();
 }
+
+// ===== MOBILE SWIPE VIEW =====
+var mobileCurrentCol = 'left';
+
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+function switchMobileColumn(col) {
+  mobileCurrentCol = col;
+  const track = document.getElementById('mobile-swipe-track');
+  if (!track) return;
+  
+  const offset = col === 'left' ? 0 : (col === 'center' ? -100/3 : -200/3);
+  track.style.transform = `translateX(${offset}%)`;
+  
+  // Update tabs
+  document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.mobile-tab[data-col="${col}"]`).classList.add('active');
+}
+
+function renderMobileSwipe(allCards) {
+  if (!isMobile()) return;
+  
+  const leftPanel = document.getElementById('mobile-panel-left');
+  const centerPanel = document.getElementById('mobile-panel-center');
+  const rightPanel = document.getElementById('mobile-panel-right');
+  if (!leftPanel || !centerPanel || !rightPanel) return;
+  
+  const leftCards = allCards.filter(c => c && c._column === 'left');
+  const centerCards = allCards.filter(c => c && c._column === 'center');
+  const rightCards = allCards.filter(c => c && c._column === 'right');
+  
+  function mobileCardHtml(c, i) {
+    const color = getSpectrumColor(c.composite, c.category, c.orthodoxy);
+    const [catLabel, catColor, catBg] = getCategoryLabel(c.category);
+    const takesHtml = c.takes.map((t, ti) => {
+      const takeId = `mob-take-${c.name.replace(/\s/g,'')}-${ti}`;
+      return `
+        <div class="card-take">
+          <div class="take-title">${t.title}</div>
+          <div class="card-tweet" style="border-color: ${color};">${t.text}</div>
+          <div class="take-source"><a href="${t.url}" target="_blank" rel="noopener">📎 ${t.source}</a></div>
+          <div class="steelman-toggle">
+            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><svg style="display:inline-block;vertical-align:middle;margin-right:5px;" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.2" fill="currentColor" opacity="0.7"/><path d="M8.5 16.5c0-2 1.6-3.5 3.5-3.5s3.5 1.5 3.5 3.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg> Steel-man this take</button>
+          </div>
+          <div class="steelman-text" id="sm-${takeId}">
+            <span class="steelman-label">AI Steel-man — the strongest version of this argument</span>
+            ${t.steelman}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+    return `
+      <div class="commentator-card">
+        <div class="card-spectrum-bar" style="background: linear-gradient(to right, ${color}88, ${color});"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-avatar" style="background: ${color};">${getInitials(c.name)}</div>
+            <div>
+              <div class="card-info">
+                <h3><a href="${wikiUrl(c.name)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${c.name}</a></h3>
+                <div class="card-handle">${c.handle}</div>
+              </div>
+              <div class="card-role">${c.role}</div>
+            </div>
+          </div>
+          <span class="card-category" style="background: ${catBg}; color: ${catColor};">${catLabel}</span>
+          ${takesHtml}
+          <div class="card-scores">
+            <span class="score-pill" style="${scorePillStyle(c.domestic)}">Domestic: ${c.domestic}</span>
+            <span class="score-pill" style="${scorePillStyle(c.foreign)}">Foreign: ${c.foreign}</span>
+            <span class="score-pill" style="${scorePillStyle(c.trade)}">Trade: ${c.trade}</span>
+            <span class="score-pill" style="${scorePillStyle(c.cultural)}">Culture: ${c.cultural}</span>
+            <span class="score-pill" style="${orthodoxyPillStyle(c.orthodoxy)}">Orthodoxy: ${c.orthodoxy}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  const emptyMsg = '<div style="text-align:center; padding:40px 20px; color:var(--text-muted); font-style:italic;">No takes in this column for the selected topic.</div>';
+  
+  leftPanel.innerHTML = leftCards.length ? leftCards.map(mobileCardHtml).join('') : emptyMsg;
+  centerPanel.innerHTML = centerCards.length ? centerCards.map(mobileCardHtml).join('') : emptyMsg;
+  rightPanel.innerHTML = rightCards.length ? rightCards.map(mobileCardHtml).join('') : emptyMsg;
+  
+  // Reset to left column
+  switchMobileColumn('left');
+}
+
+// Touch swipe handling for mobile
+(function() {
+  let startX = 0, startY = 0, tracking = false;
+  const cols = ['left', 'center', 'right'];
+  
+  document.addEventListener('touchstart', function(e) {
+    const container = document.getElementById('mobile-swipe-container');
+    if (!container || !container.contains(e.target)) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    tracking = true;
+  }, { passive: true });
+  
+  document.addEventListener('touchend', function(e) {
+    if (!tracking) return;
+    tracking = false;
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const dx = endX - startX;
+    const dy = endY - startY;
+    
+    // Only trigger if horizontal swipe is dominant and significant
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      const idx = cols.indexOf(mobileCurrentCol);
+      if (dx < 0 && idx < 2) switchMobileColumn(cols[idx + 1]); // swipe left → next
+      if (dx > 0 && idx > 0) switchMobileColumn(cols[idx - 1]); // swipe right → prev
+    }
+  }, { passive: true });
+})();
 
 function toggleSteelman(cardId) {
   const sm = document.getElementById('sm-' + cardId);
