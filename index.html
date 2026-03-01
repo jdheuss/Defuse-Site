@@ -661,7 +661,7 @@ footer {
 }
 
 .mobile-swipe-panel {
-  width: 100%;
+  width: 33.333%;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -1218,7 +1218,8 @@ footer {
 @media (max-width: 768px) {
   /* NAV */
   nav { padding: 8px 12px; }
-  .nav-logo { font-size: 1rem; }
+  .nav-logo { font-size: 0.85rem; }
+  .nav-logo .u svg { width: 11px; height: 17px; }
   .nav-links { gap: 4px; }
   .nav-links a:not(.cta-btn) { font-size: 0.6rem; padding: 5px 7px; }
   .nav-links .cta-btn { font-size: 0.6rem; padding: 5px 10px; }
@@ -1300,13 +1301,19 @@ footer {
   .commentariat-filters { padding: 4px 8px; gap: 4px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .commentariat-filters::-webkit-scrollbar { display: none; }
   .commentariat-filters button { font-size: 0.55rem; padding: 4px 7px; white-space: nowrap; flex-shrink: 0; }
-  .comm-card-inner { padding: 8px; gap: 6px; }
-  .comm-card-name { font-size: 0.75rem; }
+  .comm-card-inner { padding: 10px; gap: 10px; grid-template-columns: 1fr 100px !important; }
+  .comm-card-name { font-size: 0.8rem; }
   .comm-card-handle { font-size: 0.55rem; }
-  .comm-card-role { font-size: 0.55rem; }
-  .comm-card .card-scores { gap: 2px; }
-  .comm-card .score-pill { font-size: 0.45rem; padding: 1px 4px; }
-  .comm-card canvas { width: 55px !important; height: 55px !important; }
+  .comm-card-role { font-size: 0.6rem; margin-bottom: 6px; }
+  .comm-card-cat { font-size: 0.5rem; padding: 2px 6px; margin-bottom: 6px; }
+  .comm-card-issues { gap: 3px; }
+  .comm-issue-tag { font-size: 0.55rem; padding: 2px 6px; }
+  .comm-view-takes { font-size: 0.6rem !important; }
+  .comm-card .card-scores, .comm-card-scores-mini { gap: 2px; }
+  .comm-card .score-pill, .score-mini { font-size: 0.45rem; padding: 1px 4px; }
+  .spider-chart-container { width: 90px !important; height: 90px !important; }
+  .spider-chart-container canvas { width: 90px !important; height: 90px !important; }
+  .spider-chart-container:hover { transform: scale(2.2); }
 
   /* LISTEN & LEARN PAGE */
   .listen-page { padding-top: 45px; }
