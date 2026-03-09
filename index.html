@@ -105,6 +105,19 @@ nav {
   transition: all 0.2s;
 }
 .nav-links .cta-btn:hover { background: var(--mid-blue); color: white; }
+.nav-links a.nav-gradient {
+  background: linear-gradient(90deg, #3B7DD8, #7B4EA0, #D4A012, #D83B3B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+.nav-links a.nav-gradient:hover {
+  background: linear-gradient(90deg, #D83B3B, #D4A012, #7B4EA0, #3B7DD8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .mobile-hamburger { display: none; }
 
 /* Visible scrollbar for dropdowns */
@@ -1677,7 +1690,7 @@ function showPage(page) {
   <button class="mobile-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); this.textContent = this.textContent === '☰' ? '✕' : '☰';" aria-label="Menu">☰</button>
   <div class="nav-links">
     <a href="javascript:void(0)" onclick="showPage('landing')">Home</a>
-    <a href="javascript:void(0)" onclick="showPage('spectrum')">The Conversation</a>
+    <a href="javascript:void(0)" onclick="showPage('spectrum')" class="nav-gradient">The Conversation</a>
     <a href="javascript:void(0)" onclick="showPage('commentariat')">The Commentariat</a>
     <a href="javascript:void(0)" onclick="showPage('steelcentral')">Steel-Man Central</a>
     <a href="javascript:void(0)" onclick="showPage('fingerprint')">Your Fingerprint</a>
@@ -1830,7 +1843,7 @@ function showPage(page) {
 <div id="spectrum-page" class="spectrum-page">
   <div class="spectrum-header">
     <h1>The Conversation</h1>
-    <p>What commentators are actually saying about the news right now — curated across the political spectrum, presented side by side. Click "Steel-man" to see the most charitable interpretation of any take.</p>
+    <p style="color: var(--text-primary); font-weight: 600;">What commentators are actually saying about the news right now — curated across the political spectrum, presented side by side. Click "Steel-man" to see the most charitable interpretation of any take.</p>
   </div>
 
   <div style="text-align:center; padding: 10px 40px 0;">
@@ -2444,7 +2457,10 @@ function showPage(page) {
 <!-- ===== FINGERPRINT QUIZ PAGE ===== -->
 <div id="steelcentral-page" class="steelcentral-page" style="display:none;">
   <div class="steelcentral-header">
-    <h1><span class="steelman-icon-lg" style="color:var(--gold);"></span> Steel-Man Central™</h1>
+    <h1><span class="steelman-icon-lg" style="color:var(--gold);"></span> Steel-Man Central™ <span class="steelman-info-icon" tabindex="0" aria-label="What is steel-manning?">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle; cursor:help; opacity:0.4;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><text x="12" y="17" text-anchor="middle" fill="currentColor" font-size="14" font-weight="700">?</text></svg>
+      <span class="steelman-tooltip">A "straw man" is when you deliberately weaken someone's position to defeat it easily. For example, your brother advocates for bike lanes, and you accuse him of wanting to ban cars. A steel-man does the opposite. Your brother's bike lane position? Defuse would say that it optimizes urban efficiency and safety by decongesting traffic and improving infrastructure longevity.</span>
+    </span></h1>
     <p>The strongest version of every argument — left, right, and alternative. AI-generated, editorially curated, and designed to make you think harder, not angrier.</p>
   </div>
   <div class="steelcentral-topics" id="steelcentral-topics"></div>
