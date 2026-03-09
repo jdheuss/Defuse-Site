@@ -141,7 +141,7 @@ nav {
   scrollbar-color: rgba(0,0,0,0.18) rgba(0,0,0,0.04);
 }
 
-/* Steel-manning tooltip */
+/* Steel manning tooltip */
 .steelman-info-icon {
   position: relative;
   display: inline-flex;
@@ -838,7 +838,7 @@ footer {
   opacity: 0.4;
 }
 
-/* Steel-man toggle */
+/* Steel man toggle */
 .steelman-toggle {
   display: flex;
   align-items: center;
@@ -1580,6 +1580,17 @@ footer {
 .steelcentral-topic-btn.active { background: var(--text-primary); color: white; border-color: var(--text-primary); }
 .steelcentral-question { text-align: center; padding: 0 24px; margin-bottom: 24px; }
 .steelcentral-question h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--dark); max-width: 700px; margin: 0 auto; line-height: 1.35; }
+.steelcentral-opinion { max-width: 680px; margin: 0 auto 28px; padding: 0 24px; }
+.steelcentral-opinion-inner { background: var(--card-bg); border-radius: 14px; padding: 20px 24px; border: 1px solid var(--border); }
+.steelcentral-opinion-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.steelcentral-opinion-title { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.steelcentral-bipartisan { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 100px; font-family: var(--sans); font-size: 0.72rem; font-weight: 700; }
+.steelcentral-opinion-canvas { width: 100%; height: 120px; display: block; }
+.steelcentral-opinion-labels { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 0.68rem; color: var(--text-muted); margin-top: 4px; }
+.steelcentral-opinion-legend { display: flex; gap: 16px; justify-content: center; margin-top: 10px; font-family: var(--sans); font-size: 0.7rem; color: var(--text-secondary); }
+.steelcentral-opinion-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.steelcentral-opinion-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; }
+@media (max-width: 768px) { .steelcentral-opinion-canvas { height: 90px; } }
 .steelcentral-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; max-width: 1100px; margin: 0 auto 40px; padding: 0 24px; }
 .steelcentral-card { background: var(--card-bg); border-radius: 14px; padding: 24px; border-top: 4px solid; display: flex; flex-direction: column; }
 .steelcentral-card.left-card { border-color: var(--deep-blue); }
@@ -1691,8 +1702,8 @@ function showPage(page) {
   <div class="nav-links">
     <a href="javascript:void(0)" onclick="showPage('landing')">Home</a>
     <a href="javascript:void(0)" onclick="showPage('spectrum')" class="nav-gradient">The Conversation</a>
+    <a href="javascript:void(0)" onclick="showPage('steelcentral')">Steel Man Central</a>
     <a href="javascript:void(0)" onclick="showPage('commentariat')">The Commentariat</a>
-    <a href="javascript:void(0)" onclick="showPage('steelcentral')">Steel-Man Central</a>
     <a href="javascript:void(0)" onclick="showPage('fingerprint')">Your Fingerprint</a>
     <a href="javascript:void(0)" onclick="showPage('method')">The Method</a>
     <a href="javascript:void(0)" onclick="showPage('about')">About</a>
@@ -1755,7 +1766,7 @@ function showPage(page) {
         </div>
         <div class="how-card">
           <div class="how-icon red"><span class="steelman-icon-lg"></span></div>
-          <h3 style="display:inline-flex; align-items:center; gap:6px;">Steel-manning <span class="steelman-info-icon" tabindex="0" aria-label="What is steel-manning?">
+          <h3 style="display:inline-flex; align-items:center; gap:6px;">Steel manning <span class="steelman-info-icon" tabindex="0" aria-label="What is steel manning?">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:middle; cursor:help; opacity:0.5;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><text x="12" y="17" text-anchor="middle" fill="currentColor" font-size="14" font-weight="700">?</text></svg>
             <span class="steelman-tooltip">A "straw man" is when you deliberately weaken someone's position to defeat it easily. For example, your brother advocates for bike lanes, and you accuse him of wanting to ban cars. A steel-man does the opposite. Your brother's bike lane position? Defuse would say that it optimizes urban efficiency and safety by decongesting traffic and improving infrastructure longevity.</span>
           </span></h3>
@@ -1791,7 +1802,7 @@ function showPage(page) {
             <li>Explicit bias, clearly labeled</li>
             <li>Charitable view of the other side</li>
             <li>Curated for intellectual diversity</li>
-            <li>AI-powered steel-manning of every take</li>
+            <li>AI-powered steel manning of every take</li>
           </ul>
         </div>
       </div>
@@ -1843,7 +1854,7 @@ function showPage(page) {
 <div id="spectrum-page" class="spectrum-page">
   <div class="spectrum-header">
     <h1>The Conversation</h1>
-    <p style="color: var(--text-primary); font-weight: 600;">What commentators are actually saying about the news right now — curated across the political spectrum, presented side by side. Click "Steel-man" to see the most charitable interpretation of any take.</p>
+    <p style="color: var(--text-primary); font-weight: 600;">What commentators are actually saying about the news right now — curated across the political spectrum, presented side by side. Click "Steel man" to see the most charitable interpretation of any take.</p>
   </div>
 
   <div style="text-align:center; padding: 10px 40px 0;">
@@ -1866,7 +1877,7 @@ function showPage(page) {
   <div style="text-align:center; padding: 12px 24px 4px; max-width:600px; margin:0 auto;">
     <a href="javascript:void(0)" onclick="showPage('steelcentral')" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:linear-gradient(135deg, #fef9f0, #f8f6f0); border:1.5px solid rgba(212,160,18,0.3); border-radius:10px; text-decoration:none; color:var(--text-primary); font-size:0.88rem; font-weight:600; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='rgba(212,160,18,0.3)';this.style.transform='none'">
       <span class="steelman-icon" style="width:18px;height:18px;color:var(--gold);"></span>
-      Looking for the big policy questions? Visit Steel-Man Central™ →
+      Looking for the big policy questions? Visit Steel Man Central™ →
     </a>
   </div>
 
@@ -2421,7 +2432,7 @@ function showPage(page) {
 
       <p style="margin-bottom:24px;">That's a naive thought, and we know it. But Defuse was built on the belief that naivety might be exactly what political media needs right now. The entire industry is optimized to make you angry, afraid, and certain that the other side is either stupid or evil. We think that's a design flaw, not a feature.</p>
 
-      <p style="margin-bottom:24px;">So we built something different. Defuse puts left, center, and right side by side — on the same issue, on the same page. Every take gets a steel-man: the most charitable, intellectually honest interpretation, even for ideas you disagree with. Especially for ideas you disagree with.</p>
+      <p style="margin-bottom:24px;">So we built something different. Defuse puts left, center, and right side by side — on the same issue, on the same page. Every take gets a steel man: the most charitable, intellectually honest interpretation, even for ideas you disagree with. Especially for ideas you disagree with.</p>
 
       <p style="margin-bottom:40px;">We're not centrists. We're not "both sides" people. We have our own views. But we believe you can hold strong convictions and still think the other side has something worth hearing. That's not weakness. That's the whole point.</p>
 
@@ -2457,7 +2468,7 @@ function showPage(page) {
 <!-- ===== FINGERPRINT QUIZ PAGE ===== -->
 <div id="steelcentral-page" class="steelcentral-page" style="display:none;">
   <div class="steelcentral-header">
-    <h1><span class="steelman-icon-lg" style="color:var(--gold);"></span> Steel-Man Central™ <span class="steelman-info-icon" tabindex="0" aria-label="What is steel-manning?">
+    <h1><span class="steelman-icon-lg" style="color:var(--gold);"></span> Steel Man Central™ <span class="steelman-info-icon" tabindex="0" aria-label="What is steel manning?">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle; cursor:help; opacity:0.4;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><text x="12" y="17" text-anchor="middle" fill="currentColor" font-size="14" font-weight="700">?</text></svg>
       <span class="steelman-tooltip">A "straw man" is when you deliberately weaken someone's position to defeat it easily. For example, your brother advocates for bike lanes, and you accuse him of wanting to ban cars. A steel-man does the opposite. Your brother's bike lane position? Defuse would say that it optimizes urban efficiency and safety by decongesting traffic and improving infrastructure longevity.</span>
     </span></h1>
@@ -5536,10 +5547,10 @@ function renderCards() {
             <div class="card-tweet" style="border-color: ${color};">${t.text}</div>
             <div class="take-source"><a href="${t.url}" target="_blank" rel="noopener">📎 ${t.source}</a></div>
             <div class="steelman-toggle">
-              <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel-man this take</button>
+              <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel man this take</button>
             </div>
             <div class="steelman-text" id="sm-${takeId}">
-              <span class="steelman-label">AI Steel-man — the strongest version of this argument</span>
+              <span class="steelman-label">AI Steel man — the strongest version of this argument</span>
               ${t.steelman}
             </div>
           </div>
@@ -5692,10 +5703,10 @@ function renderCards() {
           <div class="card-tweet" style="border-color: ${color};">${t.text}</div>
           <div class="take-source"><a href="${t.url}" target="_blank" rel="noopener">📎 ${t.source}</a></div>
           <div class="steelman-toggle">
-            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel-man this take</button>
+            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel man this take</button>
           </div>
           <div class="steelman-text" id="sm-${takeId}">
-            <span class="steelman-label">AI Steel-man — the strongest version of this argument</span>
+            <span class="steelman-label">AI Steel man — the strongest version of this argument</span>
             ${t.steelman}
           </div>
         </div>
@@ -5855,10 +5866,10 @@ function renderMobileSwipe(allCards, overflowCards) {
           <div class="card-tweet" style="border-color: ${color};">${t.text}</div>
           <div class="take-source"><a href="${t.url}" target="_blank" rel="noopener">📎 ${t.source}</a></div>
           <div class="steelman-toggle">
-            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel-man this take</button>
+            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel man this take</button>
           </div>
           <div class="steelman-text" id="sm-${takeId}">
-            <span class="steelman-label">AI Steel-man — the strongest version of this argument</span>
+            <span class="steelman-label">AI Steel man — the strongest version of this argument</span>
             ${t.steelman}
           </div>
         </div>
@@ -5949,11 +5960,11 @@ function toggleSteelman(cardId) {
   if (sm.style.display === 'block') {
     sm.style.display = 'none';
     btn.classList.remove('active');
-    btn.innerHTML = shieldIcon + ' Steel-man this take';
+    btn.innerHTML = shieldIcon + ' Steel man this take';
   } else {
     sm.style.display = 'block';
     btn.classList.add('active');
-    btn.innerHTML = shieldIcon + ' Hide steel-man';
+    btn.innerHTML = shieldIcon + ' Hide steel man';
   }
 }
 
@@ -6254,10 +6265,10 @@ function openCommentatorModal(name) {
           <div class="card-tweet" style="border-color: ${color};">${t.text}</div>
           <div class="take-source"><a href="${t.url}" target="_blank" rel="noopener">📎 ${t.source}</a></div>
           <div class="steelman-toggle">
-            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel-man this take</button>
+            <button onclick="toggleSteelman('${takeId}')" id="btn-${takeId}"><span class="steelman-icon"></span> Steel man this take</button>
           </div>
           <div class="steelman-text" id="sm-${takeId}">
-            <span class="steelman-label">AI Steel-man — the strongest version of this argument</span>
+            <span class="steelman-label">AI Steel man — the strongest version of this argument</span>
             ${t.steelman}
           </div>
         </div>
@@ -6718,7 +6729,7 @@ function renderProfileDashboard() {
   var topicsRead = profile.topicsRead || [];
   if (typeof steelManTopics !== 'undefined') {
     html += '<div class="profile-section">';
-    html += '<h4><span class="steelman-icon" style="width:16px;height:16px;"></span> Steel-Man Central™ progress <span style="font-weight:400; font-size:0.82rem; color:var(--text-muted);">(' + topicsRead.length + '/' + steelManTopics.length + ')</span></h4>';
+    html += '<h4><span class="steelman-icon" style="width:16px;height:16px;"></span> Steel Man Central™ progress <span style="font-weight:400; font-size:0.82rem; color:var(--text-muted);">(' + topicsRead.length + '/' + steelManTopics.length + ')</span></h4>';
     html += '<div class="profile-topics-grid">';
     steelManTopics.forEach(function(t) {
       var read = topicsRead.indexOf(t.key) !== -1;
@@ -6730,7 +6741,7 @@ function renderProfileDashboard() {
 
   // Actions
   html += '<div class="profile-actions">';
-  html += '<button class="profile-btn-primary" onclick="showPage(\'steelcentral\')">Explore Steel-Man Central →</button>';
+  html += '<button class="profile-btn-primary" onclick="showPage(\'steelcentral\')">Explore Steel Man Central →</button>';
   html += '<button class="profile-btn-secondary" onclick="resetQuiz()">Retake Quiz</button>';
   html += '<button class="profile-btn-secondary" onclick="if(confirm(\'Clear your profile and start fresh?\')){clearProfile();}" style="color:var(--deep-red); border-color:rgba(216,59,59,0.2);">Reset Profile</button>';
   html += '</div>';
@@ -7323,9 +7334,9 @@ function copyShareText() {
 // ===== STEEL-MAN CENTRAL™ DATA =====
 var steelManTopics = [
   { key:'tariffs', title:'Tariffs & Trade', question:'Do tariffs protect American workers — or just raise their prices?',
-    left:{ label:'The Progressive Case', arg:'Free trade agreements devastated American manufacturing communities, suppressing wages and eliminating millions of middle-class jobs while enriching multinational corporations. Strategic government intervention — including targeted tariffs — can rebuild domestic industry, strengthen labor bargaining power, and reduce dangerous dependence on adversarial supply chains. The workers who bore the costs of globalization deserve more than retraining pamphlets.', voices:['Robert Reich','Krystal Ball','Paul Krugman'] },
-    right:{ label:'The Conservative/Populist Case', arg:'Decades of naïve free trade ideology shipped American jobs to China while gutting the communities that built this country. Tariffs are the only language Beijing understands — they aren\'t charity; they\'re leverage. A nation that can\'t make its own steel, chips, and medicine isn\'t a free nation — it\'s a dependent one.', voices:['Saagar Enjeti','Batya Ungar-Sargon','Scott Jennings'] },
-    alt:{ label:'The Pragmatist View', arg:'Both sides overstate their case. Tariffs work when they\'re surgical, temporary, and paired with domestic investment — but broad tariffs are just consumer taxes that hurt the poorest Americans most. The real policy failure isn\'t free trade itself; it\'s that we never invested the gains into the communities that bore the costs of transition.', voices:['Tyler Cowen','Scott Galloway','Fareed Zakaria'] }},
+    left:{ label:'The Progressive Case', arg:'Free trade agreements devastated American manufacturing communities, suppressing wages and eliminating millions of middle-class jobs while enriching multinational corporations. But tariffs alone aren\'t the answer — they\'re a regressive tax on consumers. The real failure was trading freely without investing the gains into the workers who bore the costs: universal healthcare, robust retraining, portable pensions, and a genuine safety net. Trade policy without labor policy is just exploitation with extra steps.', voices:['Robert Reich','Chris Hayes','Paul Krugman'] },
+    right:{ label:'The Conservative (Free-Market) Case', arg:'Tariffs are taxes on American consumers, period. When you impose a 25% tariff on Chinese steel, the price of every car, appliance, and building goes up. The Peterson Institute found steel tariffs cost consumers $900,000 per job saved. The answer to Chinese cheating isn\'t self-imposed economic damage — it\'s multilateral enforcement, strategic decoupling in critical sectors, and trusting markets to allocate resources better than politicians picking winners and losers.', voices:['George Will','Tyler Cowen','Niall Ferguson'] },
+    alt:{ label:'The Populist Case', arg:'The free-trade consensus was a bipartisan scam that enriched Wall Street and Washington while gutting the heartland. Tariffs aren\'t elegant economics — they\'re leverage. China steals our IP, manipulates its currency, and subsidizes state champions. You don\'t fight that with more WTO filings. A nation that can\'t make its own steel, chips, and medicine isn\'t free — it\'s dependent. Both parties sold out American workers; tariffs are the first honest admission that globalization has losers, and those losers matter.', voices:['Saagar Enjeti','Batya Ungar-Sargon','Krystal Ball'] }},
   { key:'domestic-policy', title:'Domestic Policy', question:'How much should the federal government shape citizens\' economic lives?',
     left:{ label:'The Progressive Case', arg:'Markets left to themselves produce grotesque inequality, environmental destruction, and cycles of crisis that punish the most vulnerable. The New Deal, Social Security, Medicare — every major gain for ordinary Americans came through government action, not market magic. The question isn\'t whether government should act, but whether we have the courage to make it act wisely.', voices:['Robert Reich','Chris Hayes','Ezra Klein'] },
     right:{ label:'The Conservative Case', arg:'Every dollar the government spends is a dollar it took from someone who earned it. Federal programs don\'t just cost money — they cost freedom. They create dependency, crowd out private innovation, and concentrate power in a bureaucracy that answers to no one. The founders limited government for a reason: power corrupts, and unlimited government power corrupts absolutely.', voices:['Ben Shapiro','Thomas Sowell','George Will'] },
@@ -7412,9 +7423,9 @@ var currentSteelTopic = null;
 // Expanded deep-dive content for each topic/side
 var steelManExpanded = {
   'tariffs': {
-    left: "The economic evidence is overwhelming: tariffs function as a regressive consumption tax. When the Trump administration imposed tariffs on Chinese goods in 2018-2019, the Federal Reserve Bank of New York estimated American consumers and businesses bore nearly 100% of the cost — approximately $831 per household annually.<p>The mechanism is straightforward: when a 25% tariff hits imported steel, domestic producers raise their prices to just below the tariff-inflated import price, pocketing the difference. The Peterson Institute found steel tariffs saved approximately 1,800 jobs but cost consumers $900,000 per job saved through higher prices on everything from cars to appliances.</p><p>Historically, protectionism has a dismal track record. The Smoot-Hawley Tariff Act of 1930 triggered retaliatory tariffs worldwide and deepened the Great Depression — global trade volume collapsed 66%. More recently, EU retaliatory tariffs on bourbon, Harley-Davidsons, and agricultural products hurt the very rural communities tariff advocates claim to protect.</p><p>The deeper problem: tariffs treat symptoms while ignoring the disease. Manufacturing job losses are driven primarily by automation, not trade. The U.S. produces more manufactured goods than ever — with fewer workers. A welder displaced by a robot gains nothing from a tariff on Chinese steel. The progressive solution is investing in workers: robust retraining, portable benefits, and a modernized safety net that treats economic disruption as a shared cost.</p>",
-    right: "Free trade theory works in textbooks — and fails in practice when trading partners don't play by the same rules. China's rise wasn't built on comparative advantage; it was built on currency manipulation, IP theft estimated at $225-600 billion annually by the IP Commission, forced technology transfers, and massive state subsidies to strategic industries.<p>The human cost of 'free trade' is not abstract. Between 1999 and 2011, the 'China Shock' — documented by MIT economist David Autor — eliminated approximately 2.4 million American manufacturing jobs. Entire Rust Belt communities were hollowed out, driving spikes in opioid addiction, family breakdown, and deaths of despair. Economists who promised smooth transitions to 'knowledge economy' jobs were catastrophically wrong.</p><p>Tariffs are not ideal — no serious advocate claims otherwise. They're a second-best instrument in a world where genuine free trade with reciprocal rules doesn't exist. When the EU imposes a 10% tariff on American cars while we charge 2.5% on theirs, that's not free trade — it's a subsidy to European automakers.</p><p>The national security dimension is critical. America's dependence on China for rare earth minerals (80% of supply), pharmaceutical ingredients (40%+ of generic drug inputs), and advanced components represents a strategic vulnerability no amount of economic efficiency justifies. As COVID demonstrated, a country that can't make its own masks has outsourced too much.</p>",
-    alt: "The honest assessment: both sides are partially right and largely talking past each other. Standard models show tariffs reduce aggregate welfare — but 'aggregate welfare' is cold comfort to the factory worker in Youngstown whose job moved to Shenzhen while coastal elites got cheaper iPhones.<p>The pragmatist position: America's trade policy failure isn't that we traded too much, but that we traded without adequate domestic policy to share the gains and cushion the losses. Denmark trades more freely than the U.S. but has 'flexicurity' — easy hiring/firing with generous unemployment insurance and retraining. Result: high trade, low inequality, broad public support for globalization.</p><p>Targeted tariffs can be justified in narrow circumstances: when partners violate WTO rules, when industries are genuinely critical for national security (not the claim that Canadian aluminum threatens defense), or as temporary negotiating leverage. Broad-based tariffs are economic self-harm dressed as toughness.</p><p>The real agenda: (1) aggressive enforcement through multilateral institutions, (2) strategic industrial policy for genuinely critical sectors like semiconductors, (3) radical overhaul of Trade Adjustment Assistance into a genuine second-chance system, and (4) tax policy ensuring gains from trade don't concentrate exclusively at the top.</p>"
+    left: "The progressive position holds two truths simultaneously: free trade as practiced devastated working communities, AND tariffs are a terrible fix. Between 1999 and 2011, the 'China Shock' eliminated 2.4 million American manufacturing jobs — documented by MIT economist David Autor. Entire Rust Belt communities were hollowed out, driving spikes in opioid addiction, family breakdown, and deaths of despair.<p>But tariffs don't help those workers. The Federal Reserve Bank of New York estimated consumers bore nearly 100% of Trump-era tariff costs — roughly $831 per household annually. The Peterson Institute found steel tariffs saved 1,800 jobs at a cost of $900,000 per job saved. That's not worker protection; it's corporate welfare with populist branding.</p><p>The real betrayal was bipartisan: both parties championed trade deals that enriched multinationals while offering displaced workers nothing but underfunded retraining programs with dismal track records. Denmark trades more freely than America but has 'flexicurity' — generous unemployment insurance, robust retraining, portable benefits. Result: high trade, low inequality, broad public support for globalization.</p><p>The progressive agenda: trade freely but invest massively in the people trade displaces. Universal healthcare that isn't tied to employment. Portable pensions. Genuine retraining with wage insurance. A raised minimum wage and strengthened unions. The problem was never trade — it was trading without a safety net.</p>",
+    right: "Tariffs are taxes on American consumers — this is not a matter of opinion, it's accounting. When a 25% tariff hits imported steel, the price of every car, appliance, and building goes up. Domestic steel producers don't keep prices low; they raise them to just below the tariff-inflated import price, pocketing the difference as windfall profit. The consumer pays either way.<p>The Smoot-Hawley Tariff Act of 1930 is the definitive case study: it triggered retaliatory tariffs worldwide and collapsed global trade volume by 66%, deepening the Great Depression. More recently, EU retaliatory tariffs on bourbon, Harley-Davidsons, and soybeans hurt the exact rural communities that tariff advocates claim to champion.</p><p>China's cheating is real — but tariffs are the wrong weapon. Multilateral pressure through trade alliances (the original TPP was designed precisely for this), WTO enforcement, strategic decoupling in genuinely critical sectors (semiconductors, pharmaceuticals), and reciprocity requirements are all more effective than across-the-board tariffs that amount to a national sales tax.</p><p>The deeper principle: governments are terrible at picking industrial winners. Every tariff creates a lobbying constituency that fights to keep it forever. Sugar tariffs, in place since 1789, cost American consumers $3.7 billion annually to protect an industry that employs 142,000 people. That's the endgame of protectionism — permanent, inefficient rent-seeking masquerading as patriotism.</p>",
+    alt: "The free-trade consensus was a bipartisan lie. Republicans promised markets would self-correct. Democrats promised retraining would work. Both were wrong, and 2.4 million American manufacturing workers paid the price while Washington economists collected speaking fees at Davos.<p>China didn't play by the rules — ever. IP theft estimated at $225-600 billion annually by the IP Commission. Forced technology transfers as the price of market access. Currency manipulation. Massive state subsidies to strategic industries. Responding to this with WTO filings is like bringing a subpoena to a gunfight.</p><p>Tariffs aren't elegant economics — they're leverage, and leverage is the only language great powers understand. When the EU imposes a 10% tariff on American cars while we charge 2.5% on theirs, that's not free trade — it's a subsidy to European automakers paid by American taxpayers. Reciprocity isn't protectionism; it's fairness.</p><p>The national security case is unanswerable. America's dependence on China for rare earth minerals (80% of supply), pharmaceutical ingredients (40%+ of generic drug inputs), and advanced components represents a strategic vulnerability that no economic efficiency argument can justify. COVID proved it: a country that can't make its own masks and ventilators has outsourced its sovereignty. Both parties sold out American workers for corporate donor cash. Tariffs are the first honest policy admission that globalization created losers — and those losers matter more than GDP charts.</p>"
   },
   'domestic-policy': {
     left: "The periods of greatest American prosperity coincided with active government intervention. The GI Bill created the suburban middle class. The Interstate Highway System built the infrastructure of modern commerce. Medicare cut elderly poverty from 35% to under 10%. Social Security remains the most effective anti-poverty program in American history.<p>The New Deal didn't just rescue America from the Depression — it built the institutional infrastructure (FDIC, SEC, minimum wage, labor protections) that made the postwar boom possible. Countries that consistently rank highest in quality of life — Norway, Denmark, Sweden, Canada — all have substantially larger government sectors than the United States.</p><p>Markets are extraordinary engines of innovation but systematically fail at providing public goods (roads, research, defense), correcting externalities (pollution, financial contagion), and ensuring equitable access to necessities (healthcare, education). The question isn't whether government should intervene — it's whether we design interventions intelligently.</p><p>The American economy currently features the highest income inequality among developed nations, a shrinking middle class, declining life expectancy, and infrastructure rated D+ by the American Society of Civil Engineers. The 'small government' experiment of the last 40 years — deregulation, tax cuts, austerity — produced spectacular wealth at the top and stagnation everywhere else.</p>",
@@ -7518,6 +7529,122 @@ var steelManExpanded = {
   }
 };
 
+// Opinion distribution data per topic
+// Each side has peaks: [{c: center 0-10 (left-to-right), h: height 0-1, s: spread}]
+// bp: bipartisan index 0-100
+var opinionDistributions = {
+  'tariffs':          { dem: [{c:3.5,h:0.7,s:1.8},{c:7,h:0.3,s:1.2}], rep: [{c:7.5,h:0.6,s:1.5},{c:3,h:0.35,s:1.3}], bp:62, note:'Unusual cross-partisan support — populists on both sides favor tariffs' },
+  'domestic-policy':  { dem: [{c:7.5,h:0.9,s:1.6}], rep: [{c:2.5,h:0.85,s:1.5}], bp:22, note:'Deep ideological divide on the role of government' },
+  'foreign-policy':   { dem: [{c:7,h:0.7,s:2}], rep: [{c:4,h:0.5,s:1.5},{c:8,h:0.4,s:1.3}], bp:38, note:'Right is split between hawks and restraint populists' },
+  'immigration':      { dem: [{c:7,h:0.8,s:1.8}], rep: [{c:2,h:0.9,s:1.3}], bp:18, note:'One of the most polarized issues in American politics' },
+  'ai-tech':          { dem: [{c:6.5,h:0.65,s:2.2}], rep: [{c:4.5,h:0.6,s:2.2}], bp:55, note:'Broad agreement AI needs governance — disagreement on how' },
+  'healthcare':       { dem: [{c:8,h:0.9,s:1.4}], rep: [{c:2.5,h:0.8,s:1.5}], bp:20, note:'Stark left-right divide, but growing bipartisan support for price transparency' },
+  'culture':          { dem: [{c:7.5,h:0.85,s:1.5}], rep: [{c:2,h:0.9,s:1.3}], bp:15, note:'Most culturally polarized topic — almost no overlap' },
+  'free-speech':      { dem: [{c:6.5,h:0.7,s:2}], rep: [{c:3.5,h:0.7,s:2}], bp:45, note:'Both sides value free speech — disagree on what threatens it' },
+  'abortion':         { dem: [{c:8,h:0.85,s:1.5}], rep: [{c:3,h:0.7,s:1.8},{c:6,h:0.3,s:1}], bp:28, note:'More nuance than polling suggests — many hold middle positions' },
+  'gender-identity':  { dem: [{c:7.5,h:0.75,s:1.8}], rep: [{c:2,h:0.85,s:1.2}], bp:20, note:'Highly polarized, but majorities agree on anti-discrimination protections' },
+  'climate':          { dem: [{c:8.5,h:0.9,s:1.3}], rep: [{c:3,h:0.6,s:1.8},{c:6,h:0.3,s:1.2}], bp:30, note:'Growing Republican acceptance of climate science, divergence on solutions' },
+  'israel':           { dem: [{c:6.5,h:0.5,s:2.5}], rep: [{c:2.5,h:0.8,s:1.5}], bp:32, note:'Democrats deeply split internally; Republicans more unified' },
+  'taiwan':           { dem: [{c:5.5,h:0.6,s:2}], rep: [{c:4,h:0.65,s:2}], bp:65, note:'Rare bipartisan consensus — majorities in both parties support deterrence' },
+  'maha':             { dem: [{c:6,h:0.5,s:2.2}], rep: [{c:4,h:0.6,s:2}], bp:48, note:'Food quality concerns cross party lines; vaccine skepticism does not' },
+  'college-value':    { dem: [{c:6.5,h:0.6,s:2}], rep: [{c:3.5,h:0.7,s:1.8}], bp:50, note:'Growing bipartisan skepticism about cost — diverge on alternatives' },
+  'wealth-inequality':{ dem: [{c:8,h:0.9,s:1.4}], rep: [{c:3,h:0.8,s:1.5}], bp:22, note:'Fundamental disagreement on whether inequality is a problem or a feature' },
+  'policing':         { dem: [{c:7.5,h:0.8,s:1.6}], rep: [{c:2,h:0.9,s:1.2}], bp:18, note:'Heavily polarized — but both sides support body cameras and accountability' },
+  'glp1':             { dem: [{c:6,h:0.6,s:2}], rep: [{c:5,h:0.6,s:2}], bp:60, note:'Largely non-partisan — debate is medical/cultural, not political' },
+  'nuclear':          { dem: [{c:7,h:0.65,s:2}], rep: [{c:4,h:0.6,s:2}], bp:50, note:'Moderate consensus on non-proliferation, disagreement on deterrence strategy' },
+  'hiroshima':        { dem: [{c:7,h:0.6,s:2.2}], rep: [{c:3,h:0.75,s:1.8}], bp:35, note:'Generational divide as much as partisan — younger voters more critical' },
+  'churchill':        { dem: [{c:6.5,h:0.6,s:2.2}], rep: [{c:3,h:0.8,s:1.5}], bp:40, note:'Less partisan than cultural — historians more critical than general public' }
+};
+
+function drawOpinionChart(canvasId, topicKey) {
+  var data = opinionDistributions[topicKey];
+  if (!data) return;
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  var W = rect.width, H = rect.height;
+  var pad = { l: 10, r: 10, t: 10, b: 20 };
+  var plotW = W - pad.l - pad.r;
+  var plotH = H - pad.t - pad.b;
+
+  ctx.clearRect(0, 0, W, H);
+
+  function gauss(x, center, height, spread) {
+    return height * Math.exp(-Math.pow(x - center, 2) / (2 * spread * spread));
+  }
+
+  var N = 200;
+  var demY = new Array(N).fill(0);
+  var repY = new Array(N).fill(0);
+  for (var i = 0; i < N; i++) {
+    var x = (i / (N - 1)) * 10;
+    data.dem.forEach(function(p) { demY[i] += gauss(x, p.c, p.h, p.s); });
+    data.rep.forEach(function(p) { repY[i] += gauss(x, p.c, p.h, p.s); });
+  }
+
+  var maxY = 0;
+  for (var i = 0; i < N; i++) {
+    if (demY[i] > maxY) maxY = demY[i];
+    if (repY[i] > maxY) maxY = repY[i];
+  }
+  maxY *= 1.15;
+
+  function toX(i) { return pad.l + (i / (N - 1)) * plotW; }
+  function toY(v) { return pad.t + plotH - (v / maxY) * plotH; }
+
+  // Overlap fill (purple)
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(0));
+  for (var i = 0; i < N; i++) ctx.lineTo(toX(i), toY(Math.min(demY[i], repY[i])));
+  ctx.lineTo(toX(N - 1), toY(0));
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(123,78,160,0.25)';
+  ctx.fill();
+
+  // Dem fill
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(0));
+  for (var i = 0; i < N; i++) ctx.lineTo(toX(i), toY(demY[i]));
+  ctx.lineTo(toX(N - 1), toY(0));
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(59,125,216,0.12)';
+  ctx.fill();
+
+  // Rep fill
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(0));
+  for (var i = 0; i < N; i++) ctx.lineTo(toX(i), toY(repY[i]));
+  ctx.lineTo(toX(N - 1), toY(0));
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(216,59,59,0.12)';
+  ctx.fill();
+
+  // Dem curve
+  ctx.beginPath();
+  for (var i = 0; i < N; i++) {
+    if (i === 0) ctx.moveTo(toX(i), toY(demY[i])); else ctx.lineTo(toX(i), toY(demY[i]));
+  }
+  ctx.strokeStyle = '#3B7DD8'; ctx.lineWidth = 2.5; ctx.stroke();
+
+  // Rep curve
+  ctx.beginPath();
+  for (var i = 0; i < N; i++) {
+    if (i === 0) ctx.moveTo(toX(i), toY(repY[i])); else ctx.lineTo(toX(i), toY(repY[i]));
+  }
+  ctx.strokeStyle = '#D83B3B'; ctx.lineWidth = 2.5; ctx.stroke();
+
+  // Baseline
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t + plotH);
+  ctx.lineTo(pad.l + plotW, pad.t + plotH);
+  ctx.strokeStyle = 'rgba(0,0,0,0.1)'; ctx.lineWidth = 1; ctx.stroke();
+}
+
 function toggleSteelExpand(id) {
   var el = document.getElementById(id);
   var btn = document.getElementById('btn-' + id);
@@ -7553,7 +7680,30 @@ function renderSteelCentral(topicKey) {
 
   // Render content
   var contentEl = document.getElementById('steelcentral-content');
+  var opData = opinionDistributions[topicKey];
   var ch = '<div class="steelcentral-question"><h2>' + topic.question + '</h2></div>';
+
+  // Opinion distribution chart
+  if (opData) {
+    var bpColor = opData.bp >= 55 ? '#059669' : opData.bp >= 35 ? '#D4A012' : '#D83B3B';
+    var bpBg = opData.bp >= 55 ? 'rgba(5,150,105,0.08)' : opData.bp >= 35 ? 'rgba(212,160,18,0.08)' : 'rgba(216,59,59,0.08)';
+    var bpLabel = opData.bp >= 55 ? 'Common ground' : opData.bp >= 35 ? 'Some overlap' : 'Polarized';
+    ch += '<div class="steelcentral-opinion"><div class="steelcentral-opinion-inner">';
+    ch += '<div class="steelcentral-opinion-header">';
+    ch += '<span class="steelcentral-opinion-title">Where Americans Stand</span>';
+    ch += '<span class="steelcentral-bipartisan" style="color:' + bpColor + '; background:' + bpBg + ';">' + bpLabel + ' · ' + opData.bp + '%</span>';
+    ch += '</div>';
+    ch += '<canvas class="steelcentral-opinion-canvas" id="opinion-chart-' + topicKey + '"></canvas>';
+    ch += '<div class="steelcentral-opinion-labels"><span>← Progressive position</span><span>Conservative position →</span></div>';
+    ch += '<div class="steelcentral-opinion-legend">';
+    ch += '<span><i style="background:#3B7DD8;"></i> Democrats</span>';
+    ch += '<span><i style="background:#D83B3B;"></i> Republicans</span>';
+    ch += '<span><i style="background:rgba(123,78,160,0.5);"></i> Overlap</span>';
+    ch += '</div>';
+    if (opData.note) ch += '<div style="text-align:center; font-size:0.75rem; color:var(--text-muted); font-style:italic; margin-top:8px;">' + opData.note + '</div>';
+    ch += '</div></div>';
+  }
+
   ch += '<div class="steelcentral-grid">';
 
   var sides = [
@@ -7584,6 +7734,10 @@ function renderSteelCentral(topicKey) {
   ch += '</div>';
   contentEl.innerHTML = ch;
   document.getElementById('steelcentral-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Draw opinion chart
+  requestAnimationFrame(function() {
+    drawOpinionChart('opinion-chart-' + topicKey, topicKey);
+  });
   // Track this topic as read
   if (typeof trackTopicRead === 'function') trackTopicRead(topicKey);
 }
