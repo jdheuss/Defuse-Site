@@ -1504,6 +1504,42 @@ footer {
 .quiz-closest-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .quiz-closest-chip { padding: 6px 14px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; border: 1.5px solid; cursor: pointer; transition: all 0.2s; }
 .quiz-closest-chip:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.quiz-otherside { margin-top: 24px; padding: 20px; background: linear-gradient(135deg, #fef9f0, #f8f6f0); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); border-left: 3px solid var(--gold); }
+.quiz-otherside h4 { font-family: var(--serif); font-size: 1rem; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.quiz-otherside-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 16px; max-width: 500px; margin-left: auto; margin-right: auto; font-style: italic; }
+.quiz-otherside-list { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.quiz-otherside-card { padding: 14px 18px; background: white; border-radius: 10px; border: 1.5px solid rgba(0,0,0,0.08); cursor: pointer; transition: all 0.2s; min-width: 160px; text-align: left; }
+.quiz-otherside-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); border-color: var(--gold); }
+.quiz-otherside-name { font-family: var(--serif); font-size: 0.95rem; font-weight: 700; margin-bottom: 3px; }
+.quiz-otherside-role { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.35; }
+.quiz-otherside-tag { font-size: 0.68rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; border: 1.5px solid; display: inline-block; }
+@media (max-width: 768px) {
+  .quiz-otherside-list { flex-direction: column; align-items: center; }
+  .quiz-otherside-card { width: 100%; max-width: 280px; }
+}
+
+/* Profile Dashboard */
+.profile-dash { max-width: 640px; margin: 0 auto; }
+.profile-header { text-align: center; margin-bottom: 28px; }
+.profile-welcome { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.profile-archetype { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+.profile-date { font-size: 0.78rem; color: var(--text-muted); }
+.profile-name-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; }
+.profile-name-input { font-family: var(--sans); font-size: 1rem; font-weight: 600; padding: 6px 12px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; text-align: center; max-width: 220px; background: white; outline: none; transition: border-color 0.2s; }
+.profile-name-input:focus { border-color: var(--deep-blue); }
+.profile-name-save { padding: 6px 14px; font-family: var(--sans); font-size: 0.8rem; font-weight: 600; background: var(--text-primary); color: white; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+.profile-name-save:hover { background: var(--mid-blue); }
+.profile-section { background: var(--card-bg); border-radius: 14px; padding: 20px; border: 1px solid var(--border); margin-bottom: 16px; }
+.profile-section h4 { font-family: var(--serif); font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+.profile-topics-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.profile-topic-pill { font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 100px; background: rgba(212,160,18,0.1); color: var(--gold); border: 1px solid rgba(212,160,18,0.2); }
+.profile-topic-pill.unread { background: rgba(0,0,0,0.03); color: var(--text-muted); border-color: rgba(0,0,0,0.08); }
+.profile-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.profile-actions button { padding: 10px 22px; border-radius: 10px; font-family: var(--sans); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.profile-btn-primary { background: var(--text-primary); color: white; border: none; }
+.profile-btn-primary:hover { background: var(--mid-blue); }
+.profile-btn-secondary { background: white; color: var(--text-secondary); border: 1.5px solid rgba(0,0,0,0.12); }
+.profile-btn-secondary:hover { border-color: var(--text-primary); color: var(--text-primary); }
 .quiz-recs { margin-top: 28px; }
 .quiz-recs h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
 .quiz-recs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; }
@@ -1516,6 +1552,78 @@ footer {
 @media (max-width: 768px) {
   .quiz-recs-grid { grid-template-columns: 1fr; }
 }
+
+/* Newsletter signup */
+.newsletter-section { background: linear-gradient(135deg, #f8f6f0, #faf9f5); border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+/* Steel Man Central */
+.steelcentral-page { display: none; min-height: 100vh; padding-top: 80px; }
+.steelcentral-header { text-align: center; padding: 40px 24px 12px; }
+.steelcentral-header h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; justify-content: center; gap: 10px; }
+.steelcentral-header p { color: var(--text-secondary); max-width: 640px; margin: 12px auto 0; font-size: 1.05rem; line-height: 1.6; }
+.steelcentral-topics { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 800px; margin: 24px auto; padding: 0 24px; }
+.steelcentral-topic-btn { padding: 8px 18px; border-radius: 100px; border: 1.5px solid rgba(0,0,0,0.12); background: white; font-family: var(--sans); font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+.steelcentral-topic-btn:hover { border-color: var(--text-primary); color: var(--text-primary); }
+.steelcentral-topic-btn.active { background: var(--text-primary); color: white; border-color: var(--text-primary); }
+.steelcentral-question { text-align: center; padding: 0 24px; margin-bottom: 24px; }
+.steelcentral-question h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--dark); max-width: 700px; margin: 0 auto; line-height: 1.35; }
+.steelcentral-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; max-width: 1100px; margin: 0 auto 40px; padding: 0 24px; }
+.steelcentral-card { background: var(--card-bg); border-radius: 14px; padding: 24px; border-top: 4px solid; display: flex; flex-direction: column; }
+.steelcentral-card.left-card { border-color: var(--deep-blue); }
+.steelcentral-card.right-card { border-color: var(--deep-red); }
+.steelcentral-card.alt-card { border-color: var(--gold); }
+.steelcentral-card-label { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.steelcentral-card.left-card .steelcentral-card-label { color: var(--deep-blue); }
+.steelcentral-card.right-card .steelcentral-card-label { color: var(--deep-red); }
+.steelcentral-card.alt-card .steelcentral-card-label { color: var(--gold); }
+.steelcentral-card-arg { font-size: 0.92rem; line-height: 1.65; color: var(--text-primary); flex: 1; margin-bottom: 16px; font-style: italic; }
+.steelcentral-card-voices { border-top: 1px solid var(--border); padding-top: 12px; }
+.steelcentral-card-voices-label { font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 6px; }
+.steelcentral-card-voices-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.steelcentral-voice-chip { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(0,0,0,0.04); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+.steelcentral-voice-chip:hover { background: rgba(0,0,0,0.08); color: var(--text-primary); }
+.steelcentral-expand-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; background: none; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--sans); font-size: 0.76rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; margin-bottom: 12px; }
+.steelcentral-expand-btn:hover { border-color: var(--text-primary); color: var(--text-primary); }
+.steelcentral-expanded { display: none; font-size: 0.88rem; line-height: 1.7; color: var(--text-primary); padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); margin-bottom: 16px; }
+.steelcentral-expanded.show { display: block; animation: fadeUp 0.3s ease-out; }
+.steelcentral-expanded p { margin-bottom: 12px; }
+.steelcentral-expanded strong { font-weight: 700; }
+.steelcentral-ai-note { text-align: center; max-width: 600px; margin: 0 auto 40px; padding: 0 24px; }
+.steelcentral-ai-note p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; padding: 12px 16px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.04); }
+@media (max-width: 768px) {
+  .steelcentral-page { padding-top: 45px; }
+  .steelcentral-grid { grid-template-columns: 1fr; gap: 16px; }
+  .steelcentral-header h1 { font-size: 1.6rem; }
+  .steelcentral-question h2 { font-size: 1.2rem; }
+}
+.newsletter-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+.newsletter-inner h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+.newsletter-inner p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+.newsletter-form { display: flex; gap: 10px; max-width: 460px; margin: 0 auto; }
+.newsletter-form input[type="email"] { flex: 1; padding: 14px 18px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 10px; font-size: 0.95rem; font-family: var(--sans); background: white; outline: none; transition: border-color 0.2s; }
+.newsletter-form input[type="email"]:focus { border-color: var(--deep-blue); }
+.newsletter-form button { padding: 14px 28px; background: var(--text-primary); color: white; border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600; font-family: var(--sans); cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+.newsletter-form button:hover { background: var(--mid-blue); }
+.newsletter-success { display: none; padding: 16px; background: rgba(34,197,94,0.08); border: 1.5px solid rgba(34,197,94,0.2); border-radius: 10px; color: #15803d; font-size: 0.92rem; font-weight: 500; }
+.newsletter-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; }
+@media (max-width: 768px) {
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form button { width: 100%; }
+}
+
+/* Share card */
+.share-section { margin-top: 28px; padding: 20px; background: var(--warm-bg); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); }
+.share-section h4 { font-family: var(--serif); font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+.share-preview { display: flex; justify-content: center; margin-bottom: 14px; }
+.share-preview canvas { border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); max-width: 100%; height: auto; }
+.share-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.share-btn { padding: 10px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; font-family: var(--sans); cursor: pointer; border: none; transition: all 0.2s; }
+.share-btn-download { background: var(--text-primary); color: white; }
+.share-btn-download:hover { background: var(--mid-blue); }
+.share-btn-x { background: #000; color: white; }
+.share-btn-x:hover { background: #333; }
+.share-btn-copy { background: white; color: var(--text-primary); border: 1.5px solid rgba(0,0,0,0.12); }
+.share-btn-copy:hover { border-color: var(--text-primary); }
 .listen-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .listen-col-header { text-align: center; font-family: var(--serif); font-size: 1.1rem; font-weight: 700; padding: 12px 0 8px; border-bottom: 3px solid; margin-bottom: 8px; }
 .listen-col-header.left { color: var(--deep-blue); border-color: var(--deep-blue); }
@@ -1549,7 +1657,7 @@ function showPage(page) {
   // Close mobile nav if open
   var nl = document.querySelector('.nav-links'); if (nl) nl.classList.remove('mobile-open');
   var hb = document.querySelector('.mobile-hamburger'); if (hb) hb.textContent = '☰';
-  var pages = ['landing', 'spectrum', 'commentariat', 'about', 'listen', 'method', 'fingerprint'];
+  var pages = ['landing', 'spectrum', 'commentariat', 'about', 'listen', 'method', 'fingerprint', 'steelcentral'];
   for (var i = 0; i < pages.length; i++) {
     var el = document.getElementById(pages[i] + '-page');
     if (el) el.style.display = (pages[i] === page) ? 'block' : 'none';
@@ -1571,6 +1679,7 @@ function showPage(page) {
     <a href="javascript:void(0)" onclick="showPage('landing')">Home</a>
     <a href="javascript:void(0)" onclick="showPage('spectrum')">The Conversation</a>
     <a href="javascript:void(0)" onclick="showPage('commentariat')">The Commentariat</a>
+    <a href="javascript:void(0)" onclick="showPage('steelcentral')">Steel-Man Central</a>
     <a href="javascript:void(0)" onclick="showPage('fingerprint')">Your Fingerprint</a>
     <a href="javascript:void(0)" onclick="showPage('method')">The Method</a>
     <a href="javascript:void(0)" onclick="showPage('about')">About</a>
@@ -1691,6 +1800,23 @@ function showPage(page) {
     </div>
   </section>
 
+  <section class="section newsletter-section">
+    <div class="section-inner newsletter-inner">
+      <h2>Get the Weekly Defuse</h2>
+      <p>Every week, one issue. Every side. The strongest version of every argument — delivered to your inbox so you never have to wonder what the other side <em>actually</em> thinks.</p>
+      <div id="newsletter-form-wrap">
+        <div class="newsletter-form" id="newsletter-form">
+          <input type="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" />
+          <button type="button" onclick="subscribeNewsletter()">Subscribe free</button>
+        </div>
+        <div class="newsletter-note">Free forever. No spam. Unsubscribe anytime.</div>
+      </div>
+      <div class="newsletter-success" id="newsletter-success">
+        ✓ You're in. Watch your inbox for the next Weekly Defuse.
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="nav-logo" style="margin-bottom:12px; display:inline-block;">
       <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
@@ -1704,7 +1830,7 @@ function showPage(page) {
 <div id="spectrum-page" class="spectrum-page">
   <div class="spectrum-header">
     <h1>The Conversation</h1>
-    <p>Curated perspectives from across the political landscape, presented side by side. Click "Steel-man" to see the most charitable interpretation of any take.</p>
+    <p>What commentators are actually saying about the news right now — curated across the political spectrum, presented side by side. Click "Steel-man" to see the most charitable interpretation of any take.</p>
   </div>
 
   <div style="text-align:center; padding: 10px 40px 0;">
@@ -1724,37 +1850,11 @@ function showPage(page) {
     </div>
   </div>
 
-  <div style="text-align:center; padding: 6px 40px 0;">
-    <div class="section-label" style="margin-bottom:6px;">The Big Questions</div>
-  </div>
-  <div class="topic-selector">
-    <button class="topic-btn issue-btn" data-key="tariffs" onclick="selectTopic(this, 'tariffs')">Tariffs & Trade</button>
-    <button class="topic-btn issue-btn" data-key="domestic-policy" onclick="selectTopic(this, 'domestic-policy')">Domestic Policy</button>
-    <button class="topic-btn issue-btn" data-key="foreign-policy" onclick="selectTopic(this, 'foreign-policy')">Foreign Policy</button>
-    <button class="topic-btn issue-btn" data-key="immigration" onclick="selectTopic(this, 'immigration')">Immigration</button>
-    <button class="topic-btn issue-btn" data-key="ai-tech" onclick="selectTopic(this, 'ai-tech')">AI & Technology</button>
-    <div style="position:relative; display:inline-block;">
-      <button class="topic-btn issue-btn dropdown-trigger" id="more-qs-btn" onclick="toggleMoreQs()" style="display:inline-flex; align-items:center; gap:6px;">More Q's <span style="font-size:0.7em;">▼</span></button>
-      <div id="more-qs-dropdown" style="display:none; position:absolute; top:calc(100% + 6px); left:50%; transform:translateX(-50%); background:white; border:1.5px solid rgba(0,0,0,0.1); border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12); z-index:100; min-width:200px; max-height:320px; overflow-y:scroll; padding:6px 0;" class="scrollable-dropdown">
-        <button onclick="selectTopicFromDropdown(this, 'healthcare')" data-key="healthcare" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Healthcare</button>
-        <button onclick="selectTopicFromDropdown(this, 'culture')" data-key="culture" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Culture Wars</button>
-        <button onclick="selectTopicFromDropdown(this, 'free-speech')" data-key="free-speech" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Free Speech</button>
-        <button onclick="selectTopicFromDropdown(this, 'abortion')" data-key="abortion" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Abortion</button>
-        <button onclick="selectTopicFromDropdown(this, 'gender-identity')" data-key="gender-identity" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Gender Identity</button>
-        <button onclick="selectTopicFromDropdown(this, 'climate')" data-key="climate" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Climate Change</button>
-        <button onclick="selectTopicFromDropdown(this, 'israel')" data-key="israel" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Israel</button>
-        <button onclick="selectTopicFromDropdown(this, 'taiwan')" data-key="taiwan" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Taiwan</button>
-        <button onclick="selectTopicFromDropdown(this, 'maha')" data-key="maha" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">MAHA</button>
-        <button onclick="selectTopicFromDropdown(this, 'college-value')" data-key="college-value" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Value of College</button>
-        <button onclick="selectTopicFromDropdown(this, 'glp1')" data-key="glp1" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">GLP-1 Meds</button>
-        <button onclick="selectTopicFromDropdown(this, 'nuclear')" data-key="nuclear" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Nuclear Proliferation</button>
-        <button onclick="selectTopicFromDropdown(this, 'hiroshima')" data-key="hiroshima" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Dropping the Atom Bomb</button>
-        <button onclick="selectTopicFromDropdown(this, 'churchill')" data-key="churchill" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Churchill in WW2</button>
-        <button onclick="selectTopicFromDropdown(this, 'wealth-inequality')" data-key="wealth-inequality" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Wealth Inequality</button>
-        <button onclick="selectTopicFromDropdown(this, 'policing')" data-key="policing" style="display:block; width:100%; text-align:left; padding:10px 20px; border:none; background:none; font-family:var(--sans); font-size:0.9rem; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:background 0.15s;" onmouseover="this.style.background='var(--warm-bg)'" onmouseout="this.style.background='none'">Policing in the USA</button>
-        <div id="more-qs-scroll-indicator" style="text-align:center; padding:6px 0 4px; font-size:0.65rem; color:var(--text-muted); font-family:var(--sans); letter-spacing:0.3px; pointer-events:none; position:sticky; bottom:0; background:linear-gradient(transparent, white 40%); margin-top:-4px;">↓ scroll for more</div>
-      </div>
-    </div>
+  <div style="text-align:center; padding: 12px 24px 4px; max-width:600px; margin:0 auto;">
+    <a href="javascript:void(0)" onclick="showPage('steelcentral')" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:linear-gradient(135deg, #fef9f0, #f8f6f0); border:1.5px solid rgba(212,160,18,0.3); border-radius:10px; text-decoration:none; color:var(--text-primary); font-size:0.88rem; font-weight:600; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='rgba(212,160,18,0.3)';this.style.transform='none'">
+      <span class="steelman-icon" style="width:18px;height:18px;color:var(--gold);"></span>
+      Looking for the big policy questions? Visit Steel-Man Central™ →
+    </a>
   </div>
 
   <div id="topic-question" style="text-align:center; padding: 8px 40px 0; max-width:720px; margin:0 auto; display:none;">
@@ -2342,11 +2442,29 @@ function showPage(page) {
 <!-- Commentator Detail Modal -->
 
 <!-- ===== FINGERPRINT QUIZ PAGE ===== -->
+<div id="steelcentral-page" class="steelcentral-page" style="display:none;">
+  <div class="steelcentral-header">
+    <h1><span class="steelman-icon-lg" style="color:var(--gold);"></span> Steel-Man Central™</h1>
+    <p>The strongest version of every argument — left, right, and alternative. AI-generated, editorially curated, and designed to make you think harder, not angrier.</p>
+  </div>
+  <div class="steelcentral-topics" id="steelcentral-topics"></div>
+  <div id="steelcentral-content"></div>
+  <div class="steelcentral-ai-note">
+    <p>🤖 Arguments are generated and refined by AI, then editorially reviewed for accuracy and intellectual honesty. Commentator tags reflect likely agreement based on their public positions, not direct endorsement. <a href="javascript:void(0)" onclick="showPage('method')" style="color:var(--deep-blue);">Learn about our methodology →</a></p>
+  </div>
+  <footer style="text-align:center; padding:48px 24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:0.9rem;">
+    <div class="nav-logo" style="margin-bottom:12px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeU" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeU2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeU2)" stroke-width="2.4" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeU)" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+    </div>
+    <p>Defuse our political conversation. &copy; 2026 Defuse Media.</p>
+  </footer>
+</div>
+
 <div id="fingerprint-page" class="fingerprint-page" style="display:none;">
   <div class="quiz-container" id="quiz-area">
     <div class="quiz-header">
       <h2>Your Political Fingerprint</h2>
-      <p>Answer 15 quick questions to discover where you land on the five dimensions that define today's political landscape. No sign-up, no data stored — just self-knowledge.</p>
+      <p>Answer 15 quick questions to discover where you land on the five dimensions that define today's political landscape. Your results are saved locally so you can pick up where you left off.</p>
     </div>
     <div class="quiz-progress" id="quiz-progress"></div>
     <div id="quiz-body"></div>
@@ -2378,8 +2496,10 @@ function showPage(page) {
   document.getElementById('listen-page').style.display = page === 'listen' ? 'block' : 'none';
   document.getElementById('method-page').style.display = page === 'method' ? 'block' : 'none';
   document.getElementById('fingerprint-page').style.display = page === 'fingerprint' ? 'block' : 'none';
+  document.getElementById('steelcentral-page').style.display = page === 'steelcentral' ? 'block' : 'none';
   if (page === 'method' && typeof renderArchetypes === 'function') renderArchetypes();
   if (page === 'fingerprint' && typeof initQuiz === 'function') initQuiz();
+  if (page === 'steelcentral' && typeof renderSteelCentral === 'function') renderSteelCentral();
   if (page === 'spectrum') {
     document.getElementById('spectrum-page').classList.add('page-transition');
     renderCards();
@@ -6454,8 +6574,174 @@ var quizAnswers = [];
 var quizStep = 0;
 var quizInitialized = false;
 
+// ===== PROFILE PERSISTENCE =====
+function saveProfile(scores, archetype, closest, otherSide) {
+  var profile = {
+    name: '',
+    scores: scores,
+    archetype: { name: archetype.name, color: archetype.color, desc: archetype.desc },
+    closest: closest.map(function(c) { return { name: c.name, composite: c.composite, category: c.category, orthodoxy: c.orthodoxy }; }),
+    otherSide: otherSide.map(function(c) { return { name: c.name, composite: c.composite, category: c.category, orthodoxy: c.orthodoxy, role: c.role || '' }; }),
+    topicsRead: [],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  // Preserve existing name and topicsRead if profile already exists
+  var existing = loadProfile();
+  if (existing) {
+    profile.name = existing.name || '';
+    profile.topicsRead = existing.topicsRead || [];
+  }
+  localStorage.setItem('defuse_profile', JSON.stringify(profile));
+  return profile;
+}
+
+function loadProfile() {
+  try {
+    var data = localStorage.getItem('defuse_profile');
+    return data ? JSON.parse(data) : null;
+  } catch(e) { return null; }
+}
+
+function saveProfileName(name) {
+  var profile = loadProfile();
+  if (profile) {
+    profile.name = name;
+    profile.updatedAt = new Date().toISOString();
+    localStorage.setItem('defuse_profile', JSON.stringify(profile));
+  }
+}
+
+function trackTopicRead(topicKey) {
+  var profile = loadProfile();
+  if (profile) {
+    if (!profile.topicsRead) profile.topicsRead = [];
+    if (profile.topicsRead.indexOf(topicKey) === -1) {
+      profile.topicsRead.push(topicKey);
+      profile.updatedAt = new Date().toISOString();
+      localStorage.setItem('defuse_profile', JSON.stringify(profile));
+    }
+  }
+}
+
+function clearProfile() {
+  localStorage.removeItem('defuse_profile');
+  quizInitialized = false;
+  quizRetaking = false;
+  quizAnswers = new Array(quizQuestions.length).fill(null);
+  quizStep = 0;
+  renderQuizStep();
+}
+
+function renderProfileDashboard() {
+  var profile = loadProfile();
+  if (!profile) return;
+
+  var s = profile.scores;
+  var a = profile.archetype;
+  var displayName = profile.name || 'Explorer';
+  var dateStr = new Date(profile.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  // Hide progress dots
+  document.getElementById('quiz-progress').innerHTML = '';
+
+  var html = '<div class="profile-dash" style="animation: fadeUp 0.4s ease-out forwards;">';
+
+  // Header
+  html += '<div class="profile-header">';
+  html += '<div class="profile-welcome">Welcome back, ' + displayName + '</div>';
+  html += '<div class="profile-name-row">';
+  html += '<input class="profile-name-input" id="profile-name-input" value="' + (profile.name || '') + '" placeholder="Set your name" maxlength="30" />';
+  html += '<button class="profile-name-save" onclick="var n=document.getElementById(\'profile-name-input\').value.trim(); if(n){saveProfileName(n); document.querySelector(\'.profile-welcome\').textContent=\'Welcome back, \'+n; this.textContent=\'✓ Saved\'; var b=this; setTimeout(function(){b.textContent=\'Save\';},1500);}">Save</button>';
+  html += '</div>';
+  html += '<div class="profile-archetype" style="color:' + a.color + ';">' + a.name + '</div>';
+  html += '<div class="profile-date">Fingerprint taken ' + dateStr + '</div>';
+  html += '</div>';
+
+  // Spider chart
+  html += '<div class="profile-section">';
+  html += '<div class="quiz-spider-wrap"><canvas id="quiz-spider" width="400" height="400" style="width:200px;height:200px;"></canvas></div>';
+  html += '<div class="quiz-scores" style="justify-content:center;">';
+  html += '<span class="quiz-score-pill" style="' + scorePillColor(s.domestic) + '">Domestic: ' + s.domestic + '</span>';
+  html += '<span class="quiz-score-pill" style="' + scorePillColor(s.foreign) + '">Foreign: ' + s.foreign + '</span>';
+  html += '<span class="quiz-score-pill" style="' + scorePillColor(s.trade) + '">Trade: ' + s.trade + '</span>';
+  html += '<span class="quiz-score-pill" style="' + scorePillColor(s.cultural) + '">Culture: ' + s.cultural + '</span>';
+  html += '<span class="quiz-score-pill" style="background:#F0F0EE; color:#666;">Orthodoxy: ' + s.orthodoxy + '</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Closest commentators
+  if (profile.closest && profile.closest.length > 0) {
+    html += '<div class="profile-section">';
+    html += '<h4>Your closest commentators</h4>';
+    html += '<div class="quiz-closest-list">';
+    profile.closest.forEach(function(c) {
+      var color = typeof getSpectrumColor === 'function' ? getSpectrumColor(c.composite, c.category, c.orthodoxy) : '#666';
+      html += '<span class="quiz-closest-chip" style="color:' + color + '; border-color:' + color + ';" onclick="openCommentatorModal(\'' + c.name.replace(/'/g, "\\'") + '\')">' + c.name + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+
+  // Other side
+  if (profile.otherSide && profile.otherSide.length > 0) {
+    var userComposite = (s.domestic + s.cultural) / 2;
+    var sideLabel = userComposite > 5 ? 'the right' : 'the left';
+    html += '<div class="profile-section" style="border-left:3px solid var(--gold);">';
+    html += '<h4><span class="steelman-icon" style="width:16px;height:16px;"></span> Fair voices from ' + sideLabel + '</h4>';
+    html += '<div class="quiz-closest-list">';
+    profile.otherSide.forEach(function(c) {
+      var color = typeof getSpectrumColor === 'function' ? getSpectrumColor(c.composite, c.category, c.orthodoxy) : '#666';
+      html += '<span class="quiz-closest-chip" style="color:' + color + '; border-color:' + color + ';" onclick="openCommentatorModal(\'' + c.name.replace(/'/g, "\\'") + '\')">' + c.name + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+
+  // Topics explored in Steel Man Central
+  var topicsRead = profile.topicsRead || [];
+  if (typeof steelManTopics !== 'undefined') {
+    html += '<div class="profile-section">';
+    html += '<h4><span class="steelman-icon" style="width:16px;height:16px;"></span> Steel-Man Central™ progress <span style="font-weight:400; font-size:0.82rem; color:var(--text-muted);">(' + topicsRead.length + '/' + steelManTopics.length + ')</span></h4>';
+    html += '<div class="profile-topics-grid">';
+    steelManTopics.forEach(function(t) {
+      var read = topicsRead.indexOf(t.key) !== -1;
+      html += '<span class="profile-topic-pill' + (read ? '' : ' unread') + '" style="cursor:pointer;" onclick="showPage(\'steelcentral\'); setTimeout(function(){renderSteelCentral(\'' + t.key + '\');},100);">' + (read ? '✓ ' : '') + t.title + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+
+  // Actions
+  html += '<div class="profile-actions">';
+  html += '<button class="profile-btn-primary" onclick="showPage(\'steelcentral\')">Explore Steel-Man Central →</button>';
+  html += '<button class="profile-btn-secondary" onclick="resetQuiz()">Retake Quiz</button>';
+  html += '<button class="profile-btn-secondary" onclick="if(confirm(\'Clear your profile and start fresh?\')){clearProfile();}" style="color:var(--deep-red); border-color:rgba(216,59,59,0.2);">Reset Profile</button>';
+  html += '</div>';
+
+  html += '</div>';
+
+  document.getElementById('quiz-body').innerHTML = html;
+
+  // Draw spider chart
+  requestAnimationFrame(function() {
+    var canvas = document.getElementById('quiz-spider');
+    if (canvas && typeof drawSpiderChart === 'function') {
+      drawSpiderChart(canvas, s, a.color);
+    }
+  });
+}
+
+var quizRetaking = false;
+
 function initQuiz() {
-  // Only skip init if quiz is already in progress (not on results page)
+  // If user has a saved profile and isn't actively retaking, show dashboard
+  var profile = loadProfile();
+  if (profile && profile.scores && !quizRetaking) {
+    renderProfileDashboard();
+    return;
+  }
+  // Only skip init if quiz is already in progress
   if (quizInitialized && quizStep < quizQuestions.length) return;
   quizAnswers = new Array(quizQuestions.length).fill(null);
   quizStep = 0;
@@ -6464,6 +6750,7 @@ function initQuiz() {
 }
 
 function resetQuiz() {
+  quizRetaking = true;
   quizAnswers = new Array(quizQuestions.length).fill(null);
   quizStep = 0;
   quizInitialized = true;
@@ -6610,6 +6897,55 @@ function getClosestCommentators(scores, count) {
   return scored.slice(0, count);
 }
 
+function getBestOtherSide(scores, count) {
+  if (typeof allCommentators === 'undefined') return [];
+  var userComposite = (scores.domestic + scores.cultural) / 2;
+  var userLeansLeft = userComposite > 5;
+
+  // Exclude polarizing / flame-thrower figures — not fair interlocutors
+  var excludeList = [
+    'Candace Owens', 'Tucker Carlson', 'Sean Hannity', 'Mark Levin',
+    'Laura Ingraham', 'Matt Walsh', 'Steven Crowder', 'Ann Coulter',
+    'Michael Knowles', 'Dennis Prager', 'Buck Sexton', 'Clay Travis',
+    'Mollie Hemingway', 'Rich Lowry',
+    'Joy Reid', 'Ibram X. Kendi', 'Hasan Piker',
+    'Rachel Maddow', 'Stephen Colbert'
+  ];
+
+  var candidates = allCommentators.filter(function(c) {
+    // Skip excluded names
+    if (excludeList.indexOf(c.name) !== -1) return false;
+    // Skip people without enough data
+    if (!c.domestic || !c.cultural || !c.orthodoxy) return false;
+    var theirComposite = (c.composite !== undefined) ? c.composite : ((c.domestic + c.cultural) / 2);
+    // Must be on the other side
+    if (userLeansLeft && theirComposite >= 4.5) return false;  // need clearly right-leaning
+    if (!userLeansLeft && theirComposite <= 5.5) return false;  // need clearly left-leaning
+    // Must be independent thinkers (orthodoxy <= 5)
+    if (c.orthodoxy > 5) return false;
+    return true;
+  });
+
+  // Score them: reward being on the other side but not maximally extreme,
+  // reward low orthodoxy (independent thinking), reward some distance from user
+  var scored = candidates.map(function(c) {
+    var theirComposite = c.composite || ((c.domestic + c.cultural) / 2);
+    // Distance from center (0 = center, higher = more extreme)
+    var extremity = Math.abs(theirComposite - 5);
+    // Prefer moderate-other-side over extreme-other-side
+    // Orthodoxy penalty: lower is better (more independent)
+    var quality = (5 - c.orthodoxy) * 2  // reward low orthodoxy
+                  - extremity * 0.5;      // slight penalty for being too extreme
+    return {
+      name: c.name, composite: c.composite, category: c.category,
+      orthodoxy: c.orthodoxy, quality: quality, role: c.role || ''
+    };
+  });
+
+  scored.sort(function(a, b) { return b.quality - a.quality; });
+  return scored.slice(0, count);
+}
+
 function scorePillColor(val) {
   if (val <= 3) return 'background:#F9E4DE; color:#B85C3A;';
   if (val <= 4) return 'background:#FCEEE8; color:#C4724D;';
@@ -6640,6 +6976,11 @@ function renderQuizResults() {
   var archetype = getQuizArchetype(scores);
   var closest = getClosestCommentators(scores, 5);
   var recOutlets = getRecommendedOutlets(scores, 4);
+  var otherSide = getBestOtherSide(scores, 3);
+
+  // Save profile to localStorage
+  saveProfile(scores, archetype, closest, otherSide);
+  quizRetaking = false;
 
   renderQuizProgress();
   var html = '<div class="quiz-results" style="animation: fadeUp 0.4s ease-out forwards;">';
@@ -6663,7 +7004,28 @@ function renderQuizResults() {
     html += '<div class="quiz-closest-list">';
     closest.forEach(function(c) {
       var color = typeof getSpectrumColor === 'function' ? getSpectrumColor(c.composite, c.category, c.orthodoxy) : '#666';
-      html += '<span class="quiz-closest-chip" style="color:' + color + '; border-color:' + color + ';" onclick="showPage(\'commentariat\')">' + c.name + '</span>';
+      html += '<span class="quiz-closest-chip" style="color:' + color + '; border-color:' + color + ';" onclick="openCommentatorModal(\'' + c.name.replace(/'/g, "\\'") + '\')">' + c.name + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+
+  // "Other side" — fair interlocutors
+  var otherSide = getBestOtherSide(scores, 3);
+  if (otherSide.length > 0) {
+    var userComposite = (scores.domestic + scores.cultural) / 2;
+    var sideLabel = userComposite > 5 ? 'the right' : 'the left';
+    html += '<div class="quiz-otherside">';
+    html += '<h4><span class="steelman-icon"></span> Test your ideas: 3 fair voices from ' + sideLabel + '</h4>';
+    html += '<p class="quiz-otherside-desc">These thinkers disagree with you — but they\'ll make you sharper. Low orthodoxy, high intellectual honesty. The kind of people worth arguing with.</p>';
+    html += '<div class="quiz-otherside-list">';
+    otherSide.forEach(function(c) {
+      var color = typeof getSpectrumColor === 'function' ? getSpectrumColor(c.composite, c.category, c.orthodoxy) : '#666';
+      html += '<div class="quiz-otherside-card" onclick="openCommentatorModal(\'' + c.name.replace(/'/g, "\\'") + '\')">';
+      html += '<div class="quiz-otherside-name" style="color:' + color + ';">' + c.name + '</div>';
+      if (c.role) html += '<div class="quiz-otherside-role">' + c.role + '</div>';
+      html += '<div class="quiz-otherside-tag" style="color:' + color + '; border-color:' + color + ';">Orthodoxy: ' + c.orthodoxy + '/10</div>';
+      html += '</div>';
     });
     html += '</div>';
     html += '</div>';
@@ -6686,6 +7048,17 @@ function renderQuizResults() {
     html += '</div>';
   }
 
+  // Share card
+  html += '<div class="share-section">';
+  html += '<h4>📤 Share your fingerprint</h4>';
+  html += '<div class="share-preview" id="share-preview"></div>';
+  html += '<div class="share-buttons">';
+  html += '<button class="share-btn share-btn-download" onclick="downloadShareCard()">⬇ Download image</button>';
+  html += '<button class="share-btn share-btn-x" onclick="shareToX()">𝕏 Post to X</button>';
+  html += '<button class="share-btn share-btn-copy" onclick="copyShareText()">Copy text</button>';
+  html += '</div>';
+  html += '</div>';
+
   html += '<div style="margin-top:32px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">';
   html += '<button class="quiz-btn quiz-btn-back" onclick="resetQuiz()">Retake Quiz</button>';
   html += '<button class="quiz-btn quiz-btn-next" onclick="showPage(\'spectrum\')">Explore the Conversation →</button>';
@@ -6700,7 +7073,503 @@ function renderQuizResults() {
     if (canvas && typeof drawSpiderChart === 'function') {
       drawSpiderChart(canvas, scores, archetype.color);
     }
+    // Generate share card after a short delay to let spider chart render
+    setTimeout(drawShareCard, 300);
   });
+}
+
+// ===== NEWSLETTER SIGNUP =====
+function subscribeNewsletter() {
+  var email = document.getElementById('newsletter-email').value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('newsletter-email').style.borderColor = '#D83B3B';
+    document.getElementById('newsletter-email').focus();
+    return;
+  }
+  // Store locally (replace with real API endpoint later: Mailchimp, ConvertKit, etc.)
+  var subs = JSON.parse(localStorage.getItem('defuse_subscribers') || '[]');
+  if (subs.indexOf(email) === -1) subs.push(email);
+  localStorage.setItem('defuse_subscribers', JSON.stringify(subs));
+  document.getElementById('newsletter-form-wrap').style.display = 'none';
+  document.getElementById('newsletter-success').style.display = 'block';
+}
+
+// ===== SHAREABLE FINGERPRINT CARD =====
+function generateShareCard(scores, archetype, closest) {
+  var W = 1200, H = 630;
+  var canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  var ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#FAFAF8';
+  ctx.fillRect(0, 0, W, H);
+
+  // Top accent bar
+  var grad = ctx.createLinearGradient(0, 0, W, 0);
+  grad.addColorStop(0, '#3B7DD8');
+  grad.addColorStop(0.35, '#7B4EA0');
+  grad.addColorStop(0.65, '#D4A012');
+  grad.addColorStop(1, '#D83B3B');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, 6);
+
+  // Branding
+  ctx.fillStyle = '#1a1a1a';
+  ctx.font = 'bold 28px Georgia, serif';
+  ctx.fillText('DEFUSE', 48, 56);
+
+  // "My Political Fingerprint"
+  ctx.fillStyle = '#666';
+  ctx.font = '18px -apple-system, sans-serif';
+  ctx.fillText('My Political Fingerprint', 48, 88);
+
+  // Archetype name
+  ctx.fillStyle = archetype.color;
+  ctx.font = 'bold 52px Georgia, serif';
+  ctx.fillText(archetype.name, 48, 180);
+
+  // Archetype description (word wrap)
+  ctx.fillStyle = '#555';
+  ctx.font = '20px -apple-system, sans-serif';
+  var words = archetype.desc.split(' ');
+  var line = '', y = 220, maxW = 620;
+  for (var i = 0; i < words.length; i++) {
+    var test = line + words[i] + ' ';
+    if (ctx.measureText(test).width > maxW && i > 0) {
+      ctx.fillText(line.trim(), 48, y);
+      line = words[i] + ' ';
+      y += 28;
+    } else {
+      line = test;
+    }
+  }
+  ctx.fillText(line.trim(), 48, y);
+
+  // Score pills
+  var dims = [
+    { label: 'Domestic', val: scores.domestic, color: '#3B7DD8' },
+    { label: 'Foreign', val: scores.foreign, color: '#2E6BC0' },
+    { label: 'Trade', val: scores.trade, color: '#D4A012' },
+    { label: 'Culture', val: scores.cultural, color: '#7B4EA0' },
+    { label: 'Orthodoxy', val: scores.orthodoxy, color: '#6B7280' }
+  ];
+  var pillY = y + 50;
+  for (var d = 0; d < dims.length; d++) {
+    var px = 48 + d * 128;
+    ctx.fillStyle = dims[d].color + '18';
+    ctx.beginPath();
+    var rr = 10, rw = 118, rh = 56;
+    ctx.moveTo(px + rr, pillY);
+    ctx.lineTo(px + rw - rr, pillY);
+    ctx.quadraticCurveTo(px + rw, pillY, px + rw, pillY + rr);
+    ctx.lineTo(px + rw, pillY + rh - rr);
+    ctx.quadraticCurveTo(px + rw, pillY + rh, px + rw - rr, pillY + rh);
+    ctx.lineTo(px + rr, pillY + rh);
+    ctx.quadraticCurveTo(px, pillY + rh, px, pillY + rh - rr);
+    ctx.lineTo(px, pillY + rr);
+    ctx.quadraticCurveTo(px, pillY, px + rr, pillY);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = dims[d].color;
+    ctx.font = 'bold 22px -apple-system, sans-serif';
+    ctx.fillText(dims[d].val.toFixed(1), px + 12, pillY + 24);
+    ctx.fillStyle = '#888';
+    ctx.font = '13px -apple-system, sans-serif';
+    ctx.fillText(dims[d].label, px + 12, pillY + 44);
+  }
+
+  // Spider chart on the right side
+  var cx = 920, cy = 320, radius = 180;
+  var labels = ['domestic', 'foreign', 'trade', 'cultural', 'orthodoxy'];
+  var n = labels.length;
+  // Grid
+  for (var ring = 1; ring <= 5; ring++) {
+    var r = radius * ring / 5;
+    ctx.beginPath();
+    for (var j = 0; j <= n; j++) {
+      var angle = (Math.PI * 2 * j / n) - Math.PI / 2;
+      var sx = cx + r * Math.cos(angle);
+      var sy = cy + r * Math.sin(angle);
+      if (j === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+    }
+    ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  // Axes
+  for (var j = 0; j < n; j++) {
+    var angle = (Math.PI * 2 * j / n) - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + radius * Math.cos(angle), cy + radius * Math.sin(angle));
+    ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+    ctx.stroke();
+  }
+  // Data polygon
+  ctx.beginPath();
+  for (var j = 0; j <= n; j++) {
+    var idx = j % n;
+    var angle = (Math.PI * 2 * idx / n) - Math.PI / 2;
+    var val = scores[labels[idx]] / 10;
+    var sx = cx + radius * val * Math.cos(angle);
+    var sy = cy + radius * val * Math.sin(angle);
+    if (j === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+  }
+  ctx.fillStyle = archetype.color + '30';
+  ctx.fill();
+  ctx.strokeStyle = archetype.color;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  // Dots & labels
+  var labelNames = ['Domestic', 'Foreign', 'Trade', 'Culture', 'Orthodoxy'];
+  for (var j = 0; j < n; j++) {
+    var angle = (Math.PI * 2 * j / n) - Math.PI / 2;
+    var val = scores[labels[j]] / 10;
+    var sx = cx + radius * val * Math.cos(angle);
+    var sy = cy + radius * val * Math.sin(angle);
+    ctx.beginPath();
+    ctx.arc(sx, sy, 5, 0, Math.PI * 2);
+    ctx.fillStyle = archetype.color;
+    ctx.fill();
+    // Label at edge
+    var lx = cx + (radius + 24) * Math.cos(angle);
+    var ly = cy + (radius + 24) * Math.sin(angle);
+    ctx.fillStyle = '#888';
+    ctx.font = '14px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(labelNames[j], lx, ly + 5);
+  }
+  ctx.textAlign = 'left';
+
+  // Closest commentators
+  if (closest && closest.length > 0) {
+    var comY = pillY + 90;
+    ctx.fillStyle = '#999';
+    ctx.font = '14px -apple-system, sans-serif';
+    ctx.fillText('Closest commentators:', 48, comY);
+    ctx.fillStyle = '#333';
+    ctx.font = '16px -apple-system, sans-serif';
+    var names = closest.map(function(c) { return c.name; }).join('  ·  ');
+    ctx.fillText(names, 48, comY + 24);
+  }
+
+  // Bottom CTA
+  ctx.fillStyle = '#bbb';
+  ctx.font = '16px -apple-system, sans-serif';
+  ctx.fillText('Take the quiz → defuse.us', 48, H - 32);
+
+  return canvas;
+}
+
+function drawShareCard() {
+  var scores = computeQuizScores();
+  var archetype = getQuizArchetype(scores);
+  var closest = getClosestCommentators(scores, 5);
+  var canvas = generateShareCard(scores, archetype, closest);
+  var preview = document.getElementById('share-preview');
+  if (preview) {
+    preview.innerHTML = '';
+    canvas.style.maxWidth = '100%';
+    canvas.style.height = 'auto';
+    canvas.id = 'share-canvas';
+    preview.appendChild(canvas);
+  }
+}
+
+function downloadShareCard() {
+  var canvas = document.getElementById('share-canvas');
+  if (!canvas) return;
+  var link = document.createElement('a');
+  link.download = 'my-defuse-fingerprint.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function shareToX() {
+  var scores = computeQuizScores();
+  var archetype = getQuizArchetype(scores);
+  var text = 'My political fingerprint: ' + archetype.name + ' — Domestic ' + scores.domestic + ' | Foreign ' + scores.foreign + ' | Trade ' + scores.trade + ' | Culture ' + scores.cultural + ' | Orthodoxy ' + scores.orthodoxy + '\n\nTake the quiz at defuse.us';
+  var url = 'https://x.com/intent/tweet?text=' + encodeURIComponent(text);
+  window.open(url, '_blank');
+}
+
+function copyShareText() {
+  var scores = computeQuizScores();
+  var archetype = getQuizArchetype(scores);
+  var text = 'My Defuse fingerprint: ' + archetype.name + ' — Domestic ' + scores.domestic + ' | Foreign ' + scores.foreign + ' | Trade ' + scores.trade + ' | Culture ' + scores.cultural + ' | Orthodoxy ' + scores.orthodoxy + ' — Take the quiz at defuse.us';
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.querySelector('.share-btn-copy');
+    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(function() { btn.textContent = 'Copy text'; }, 2000); }
+  });
+}
+
+// ===== STEEL-MAN CENTRAL™ DATA =====
+var steelManTopics = [
+  { key:'tariffs', title:'Tariffs & Trade', question:'Do tariffs protect American workers — or just raise their prices?',
+    left:{ label:'The Progressive Case', arg:'Free trade agreements devastated American manufacturing communities, suppressing wages and eliminating millions of middle-class jobs while enriching multinational corporations. Strategic government intervention — including targeted tariffs — can rebuild domestic industry, strengthen labor bargaining power, and reduce dangerous dependence on adversarial supply chains. The workers who bore the costs of globalization deserve more than retraining pamphlets.', voices:['Robert Reich','Krystal Ball','Paul Krugman'] },
+    right:{ label:'The Conservative/Populist Case', arg:'Decades of naïve free trade ideology shipped American jobs to China while gutting the communities that built this country. Tariffs are the only language Beijing understands — they aren\'t charity; they\'re leverage. A nation that can\'t make its own steel, chips, and medicine isn\'t a free nation — it\'s a dependent one.', voices:['Saagar Enjeti','Batya Ungar-Sargon','Scott Jennings'] },
+    alt:{ label:'The Pragmatist View', arg:'Both sides overstate their case. Tariffs work when they\'re surgical, temporary, and paired with domestic investment — but broad tariffs are just consumer taxes that hurt the poorest Americans most. The real policy failure isn\'t free trade itself; it\'s that we never invested the gains into the communities that bore the costs of transition.', voices:['Tyler Cowen','Scott Galloway','Fareed Zakaria'] }},
+  { key:'domestic-policy', title:'Domestic Policy', question:'How much should the federal government shape citizens\' economic lives?',
+    left:{ label:'The Progressive Case', arg:'Markets left to themselves produce grotesque inequality, environmental destruction, and cycles of crisis that punish the most vulnerable. The New Deal, Social Security, Medicare — every major gain for ordinary Americans came through government action, not market magic. The question isn\'t whether government should act, but whether we have the courage to make it act wisely.', voices:['Robert Reich','Chris Hayes','Ezra Klein'] },
+    right:{ label:'The Conservative Case', arg:'Every dollar the government spends is a dollar it took from someone who earned it. Federal programs don\'t just cost money — they cost freedom. They create dependency, crowd out private innovation, and concentrate power in a bureaucracy that answers to no one. The founders limited government for a reason: power corrupts, and unlimited government power corrupts absolutely.', voices:['Ben Shapiro','Thomas Sowell','George Will'] },
+    alt:{ label:'The Pragmatist View', arg:'The debate isn\'t really "big government vs. small government" — it\'s competent government vs. incompetent government. Singapore has massive state intervention and thrives. The USSR had massive state intervention and collapsed. The question should be: for any given problem, does government or the private sector have a better track record of solving it? Answer honestly, case by case.', voices:['Tyler Cowen','Nate Silver','Cass Sunstein'] }},
+  { key:'foreign-policy', title:'Foreign Policy', question:'Should America police the world, or focus on home?',
+    left:{ label:'The Progressive Case', arg:'American military intervention has a catastrophic track record: Vietnam, Iraq, Libya — each left the target country worse off and America less safe. The trillion dollars spent on the "War on Terror" could have rebuilt every school, bridge, and hospital in America. True security comes from diplomacy, development, and leading by example — not from aircraft carriers.', voices:['Ben Rhodes','Chris Hayes','Mehdi Hasan'] },
+    right:{ label:'The Realist/Restraint Case', arg:'We\'re $35 trillion in debt defending countries that won\'t defend themselves. Europe, Japan, and South Korea are rich enough to fund their own militaries — they choose not to because we foot the bill. Every dollar spent on foreign bases is a dollar not spent on the border, on veterans, on Americans. It\'s time our allies paid their fair share.', voices:['Saagar Enjeti','Glenn Greenwald','Bret Weinstein'] },
+    alt:{ label:'The Internationalist View', arg:'The post-WWII order America built — NATO, free trade, nuclear nonproliferation — isn\'t charity. It\'s the most successful peace architecture in human history. Great powers don\'t get to retire. If America retreats, the vacuum gets filled by China, Russia, and regional strongmen whose values we definitely don\'t share. Strategic engagement isn\'t imperialism; it\'s insurance.', voices:['Fareed Zakaria','David French','Niall Ferguson'] }},
+  { key:'immigration', title:'Immigration', question:'How do we balance being a nation of immigrants with enforcing borders?',
+    left:{ label:'The Progressive Case', arg:'Immigrants are the engine of American dynamism — founding companies, filling essential jobs, and enriching communities. The "border crisis" is manufactured by politicians who need a scapegoat. The real crisis is a broken legal immigration system that forces desperate people into illegal channels, and an economy that exploits undocumented labor while denying those workers basic protections.', voices:['Jon Stewart','Ezra Klein','Van Jones'] },
+    right:{ label:'The Conservative Case', arg:'A nation without borders isn\'t a nation. Legal immigration built America — illegal immigration undermines it. Uncontrolled immigration suppresses wages for working-class Americans, strains public services, and makes a mockery of the millions who waited in line legally. Compassion doesn\'t mean open borders; it means an orderly system that works for everyone.', voices:['Ben Shapiro','David French','Megyn Kelly'] },
+    alt:{ label:'The Pragmatist View', arg:'Both sides are arguing about enforcement while ignoring the economics. The U.S. has more job openings than unemployed people. We need immigration — we just need it to be legal, orderly, and economically rational. The real solution is a points-based system that matches immigrants to labor market needs, a pathway for those already here, and actual enforcement at the employer level.', voices:['Matthew Yglesias','Coleman Hughes','Bari Weiss'] }},
+  { key:'ai-tech', title:'AI & Technology', question:'Is AI humanity\'s greatest tool or most dangerous invention?',
+    left:{ label:'The Progressive Case', arg:'AI is being built by a handful of corporations with no democratic accountability, trained on everyone\'s data without consent, and deployed to replace workers who have zero safety net. Without regulation, AI will be the most powerful engine of inequality in human history — concentrating wealth and power in a techno-oligarchy while everyone else competes with machines for scraps.', voices:['Shoshana Zuboff','Chris Hayes','Robert Reich'] },
+    right:{ label:'The Innovation Case', arg:'Regulation kills innovation, and AI is no exception. America leads the world in AI because our system rewards risk-takers, not bureaucrats. China is racing to dominate AI — every regulation we impose is a gift to Beijing. The greatest risk isn\'t AI itself; it\'s falling behind adversaries who will use it without our scruples.', voices:['Marc Andreessen','Peter Thiel','Eric Weinstein'] },
+    alt:{ label:'The Responsible Development View', arg:'This isn\'t an either/or. AI will be transformative in medicine, science, and education — but only if we get the safety architecture right. The people building the most powerful AI systems are themselves warning about the risks. Taking those warnings seriously isn\'t anti-progress; it\'s the difference between harnessing nuclear energy and building nuclear weapons.', voices:['Dario Amodei','Sam Altman','Jonathan Haidt'] }},
+  { key:'healthcare', title:'Healthcare', question:'Is healthcare a right the government must guarantee, or a market service?',
+    left:{ label:'The Progressive Case', arg:'We spend more per capita on healthcare than any nation on earth and get worse outcomes. The reason is simple: we organized healthcare around profit rather than health. Every other wealthy democracy guarantees coverage. We let insurance companies decide who lives and who dies based on spreadsheets. This isn\'t a policy debate — it\'s a moral emergency.', voices:['Robert Reich','Chris Hayes','Jon Stewart'] },
+    right:{ label:'The Market Case', arg:'Government-run healthcare means rationing, wait times, and bureaucrats overriding your doctor. The VA — the government\'s own healthcare system — is a national scandal. Competition, price transparency, and health savings accounts would do more to reduce costs than any government program. The solution to a broken market isn\'t no market; it\'s a better market.', voices:['Ben Shapiro','Thomas Sowell','Ben Sasse'] },
+    alt:{ label:'The Hybrid View', arg:'Neither pure markets nor pure government has solved healthcare anywhere. Every successful system — Germany, Switzerland, Singapore — is a hybrid. The American debate pretends these are the only two options when the actual answer is probably mandatory catastrophic coverage with competitive markets for everything else, and ruthless price transparency.', voices:['Ezra Klein','Scott Galloway','Nate Silver'] }},
+  { key:'culture', title:'Culture Wars', question:'Are institutions becoming more inclusive — or captured by ideology?',
+    left:{ label:'The Progressive Case', arg:'For centuries, "neutral" institutions reflected the biases of the people who built them — overwhelmingly white, male, and affluent. What critics call "wokeness" is simply marginalized groups finally having a voice. Discomfort with that isn\'t neutrality; it\'s nostalgia for a hierarchy that worked for you. Inclusion isn\'t ideology; exclusion was.', voices:['Ibram X. Kendi','Jemele Hill','Ta-Nehisi Coates'] },
+    right:{ label:'The Conservative Case', arg:'Institutions aren\'t becoming more inclusive — they\'re becoming more conformist. Diversity of demographics without diversity of thought isn\'t progress; it\'s a new orthodoxy wearing the mask of liberation. When a university fires a professor for questioning DEI training, that\'s not justice — it\'s the thing justice is supposed to protect against.', voices:['Bari Weiss','Coleman Hughes','Jordan Peterson'] },
+    alt:{ label:'The Liberal View', arg:'Both sides are catastrophizing. Yes, some institutions have overcorrected. Yes, historical injustices are real and ongoing. The answer isn\'t to dismiss all reform as "woke" or all criticism as "racist" — it\'s to insist that inclusion and free inquiry are both non-negotiable, and that any movement that sacrifices one for the other will eventually lose both.', voices:['Jonathan Haidt','Yascha Mounk','Andrew Sullivan'] }},
+  { key:'free-speech', title:'Free Speech', question:'Where\'s the line between free expression and genuine harm?',
+    left:{ label:'The Progressive Case', arg:'Free speech isn\'t just about government censorship — it\'s about power. When billionaires own the platforms, algorithms amplify extremism for profit, and disinformation campaigns destabilize democracy, "more speech" isn\'t a solution; it\'s a fairy tale. Speech has consequences, and those consequences fall hardest on the people with the least power to fight back.', voices:['Mehdi Hasan','Shoshana Zuboff','Chris Hayes'] },
+    right:{ label:'The Free Speech Absolutist Case', arg:'The cure for bad speech is more speech — not less. Every generation thinks it can be trusted to censor wisely, and every generation is wrong. The ACLU once defended Nazis\' right to march because they understood that the power to silence your enemy today is the power to silence you tomorrow. Hate speech laws always end up protecting the powerful from criticism.', voices:['Glenn Greenwald','Matt Taibbi','Bill Maher'] },
+    alt:{ label:'The Institutional View', arg:'The real threat to free speech isn\'t government censorship or platform moderation — it\'s the culture of certainty. When you\'re absolutely sure you\'re right, silencing the other side feels like a moral obligation rather than a power grab. The best argument for free speech is that we\'re all wrong about something, and we need dissent to figure out what.', voices:['Sam Harris','Coleman Hughes','Bari Weiss'] }},
+  { key:'abortion', title:'Abortion', question:'Should abortion access be a constitutional right — or a matter for voters in each state?',
+    left:{ label:'The Pro-Choice Case', arg:'Bodily autonomy is the most fundamental right — without it, no other right means anything. Forcing someone to carry a pregnancy against their will is state-compelled use of a person\'s body, full stop. Abortion bans don\'t stop abortions; they stop safe abortions. The women who suffer most are always the poorest, the youngest, and the most vulnerable.', voices:['Rachel Maddow','Jon Stewart','Ezra Klein'] },
+    right:{ label:'The Pro-Life Case', arg:'At some point between conception and birth, a human life begins that deserves legal protection. Science is clear that a distinct human organism — with unique DNA, a beating heart, and the capacity to feel pain — exists well before viability. A society that refuses to draw any line isn\'t being progressive; it\'s being evasive about the hardest moral question there is.', voices:['David French','Ross Douthat','Ben Sasse'] },
+    alt:{ label:'The Federalist View', arg:'Roe v. Wade was always constitutionally shaky — even Ruth Bader Ginsburg said so. Returning this to voters doesn\'t ban abortion; it democratizes the decision. Different communities have genuinely different moral convictions, and a federal system exists precisely to let them govern accordingly. The alternative is permanent culture war imposed by nine unelected judges.', voices:['Andrew Sullivan','Jonah Goldberg','Nate Silver'] }},
+  { key:'gender-identity', title:'Gender Identity', question:'Should gender identity be self-determined — or defined by biology?',
+    left:{ label:'The Progressive Case', arg:'Transgender people have existed in every culture throughout history. The medical consensus is clear: gender-affirming care saves lives, and social acceptance reduces suicide rates dramatically. Denying someone\'s identity isn\'t "protecting biology" — it\'s using biology as a weapon against people who are already among the most vulnerable in our society.', voices:['Jon Stewart','John Oliver','Chris Hayes'] },
+    right:{ label:'The Traditionalist Case', arg:'Biological sex is binary, observable, and relevant — in medicine, in sports, in spaces designed to protect women. Compassion for gender dysphoria doesn\'t require abandoning material reality. When a 12-year-old can\'t get a tattoo but can start puberty blockers, the adults in the room have failed. Caution isn\'t bigotry; it\'s responsibility.', voices:['Bari Weiss','Jordan Peterson','Megyn Kelly'] },
+    alt:{ label:'The Nuanced View', arg:'Most people agree on more than they realize: trans people deserve dignity and legal protection; biological sex is medically relevant; children\'s cases require extraordinary caution; adults should have autonomy. The culture war incentivizes maximalist positions on both sides because nuance doesn\'t generate clicks. Most Americans are quietly in the reasonable middle.', voices:['Coleman Hughes','Jonathan Haidt','Andrew Sullivan'] }},
+  { key:'climate', title:'Climate Change', question:'Is climate change an existential emergency — or an overstated crisis?',
+    left:{ label:'The Urgent Action Case', arg:'The science isn\'t uncertain — it\'s terrifying. We\'re on track for 3°C of warming, which means mass displacement, agricultural collapse, and ecosystem destruction on a scale civilization has never faced. Every year of delay makes the eventual cost exponentially higher. The fossil fuel industry spent decades manufacturing doubt, and we fell for it. Green energy isn\'t sacrifice; it\'s survival.', voices:['Chris Hayes','Ezra Klein','Shoshana Zuboff'] },
+    right:{ label:'The Skeptic/Adaptation Case', arg:'Climate change is real but the apocalyptic framing is counterproductive. Bjorn Lomborg\'s analysis shows that the cost of aggressive decarbonization exceeds the cost of the damage. Innovation and adaptation — not regulation and austerity — are how rich societies solve problems. Banning gas stoves while China opens coal plants isn\'t climate policy; it\'s performance art.', voices:['Niall Ferguson','Bret Weinstein','Jordan Peterson'] },
+    alt:{ label:'The Techno-Optimist View', arg:'The actual trajectory is better than either side admits. Solar costs dropped 90% in a decade. Nuclear is making a comeback. The market is decarbonizing faster than any regulation mandated. The path forward is investment in clean energy R&D, nuclear, and carbon capture — not cultural warfare over whether your car or your hamburger makes you a bad person.', voices:['Steven Pinker','Tyler Cowen','Marc Andreessen'] }},
+  { key:'israel', title:'Israel', question:'Is Israel a force for good in the Middle East — or an obstacle to peace?',
+    left:{ label:'The Critical Case', arg:'You can support Israel\'s right to exist and still recognize that 57 years of military occupation, expanding settlements, and collective punishment of civilian populations violates international law and basic human decency. The power asymmetry is staggering. Unconditional U.S. support enables the worst impulses of Israeli policy and guarantees perpetual conflict.', voices:['Mehdi Hasan','Chris Hayes','Ta-Nehisi Coates'] },
+    right:{ label:'The Pro-Israel Case', arg:'Israel is the only democracy in a region of authoritarian regimes, the only country where Arab citizens vote freely, and the only reliable U.S. ally between the Mediterranean and India. It faces genuine existential threats from state and non-state actors sworn to its destruction. Demanding Israel meet standards no other nation at war is held to isn\'t fairness — it\'s a double standard with a long history.', voices:['Ben Shapiro','David French','Bari Weiss'] },
+    alt:{ label:'The Realist View', arg:'The two-state solution is functionally dead but nothing has replaced it. Both maximalist positions — "from the river to the sea" and "Greater Israel" — guarantee permanent conflict. The uncomfortable truth is that peace requires concessions neither side\'s current leadership is willing to make, and external pressure without internal will always fails.', voices:['Fareed Zakaria','Ian Bremmer','Andrew Sullivan'] }},
+  { key:'taiwan', title:'Taiwan', question:'Is Taiwan worth defending militarily — or is it someone else\'s fight?',
+    left:{ label:'The Restraint Case', arg:'A war with China over Taiwan would be the most catastrophic conflict since World War II — potentially nuclear, certainly devastating to the global economy, and fought 6,000 miles from American shores. Taiwan\'s 23 million people deserve self-determination, but that principle can\'t mean automatic U.S. military commitment everywhere. Diplomacy and deterrence, not tripwires.', voices:['Ben Rhodes','Glenn Greenwald','Bret Weinstein'] },
+    right:{ label:'The Defense Case', arg:'Taiwan produces 90% of the world\'s advanced semiconductors. A Chinese takeover would give Beijing a chokehold on the entire global technology supply chain — your phone, your car, your defense systems. This isn\'t abstract geopolitics; it\'s the most strategically important island on earth. Credible deterrence is the only thing preventing invasion. Ambiguity invites aggression.', voices:['Niall Ferguson','Ben Shapiro','Bret Baier'] },
+    alt:{ label:'The Strategic View', arg:'The smartest move isn\'t choosing between war and surrender — it\'s making the invasion so costly that China never attempts it. That means arming Taiwan to the teeth (asymmetric defense, not fighter jets), diversifying semiconductor production, and maintaining strategic ambiguity. The goal is to make the status quo more attractive than the alternative — for everyone.', voices:['Ian Bremmer','Fareed Zakaria','Ezra Klein'] }},
+  { key:'maha', title:'MAHA', question:'Is Make America Healthy Again a genuine health crusade — or pseudoscience with political branding?',
+    left:{ label:'The Skeptic Case', arg:'RFK Jr. is an anti-vaccine conspiracy theorist with no medical credentials who\'s been rejected by his own family. "Make America Healthy Again" wraps dangerous pseudoscience in populist packaging. When he questions vaccine safety, he\'s not being brave — he\'s endangering children with measles and polio. The food system needs reform, but not from someone who can\'t distinguish science from paranoia.', voices:['Chris Hayes','Rachel Maddow','Paul Krugman'] },
+    right:{ label:'The Populist Case', arg:'The American food system is poisoning us and the institutions supposed to protect us are captured by the industries they regulate. The FDA approved opioids. The USDA subsidizes corn syrup. Rates of obesity, diabetes, and autoimmune disease have skyrocketed. You don\'t need to agree with RFK on every vaccine claim to recognize that someone needs to burn down the regulatory-industrial complex.', voices:['Saagar Enjeti','Joe Rogan','Bret Weinstein'] },
+    alt:{ label:'The Evidence-Based View', arg:'The MAHA movement is right about the problems and wrong about many of the solutions. Ultra-processed food, regulatory capture, and perverse agricultural subsidies are real and serious. But the answer is better science and stronger regulation — not less science and weaker regulation. Skepticism of institutions should lead to reform, not rejection of the expertise those institutions are supposed to house.', voices:['Sam Harris','Jonathan Haidt','Ezra Klein'] }},
+  { key:'college-value', title:'Value of College', question:'Is a four-year degree still worth the cost — or a broken promise?',
+    left:{ label:'The Defense of Higher Ed', arg:'College remains the single most reliable path to economic mobility. Lifetime earnings for degree holders average $1.2 million more than non-graduates. The crisis isn\'t education — it\'s cost. State disinvestment turned a public good into a private debt trap. The answer is to fund public universities properly, not to abandon the most powerful equalizer in American life.', voices:['Robert Reich','Ezra Klein','Paul Krugman'] },
+    right:{ label:'The Market Disruption Case', arg:'Universities have become bloated, ideologically captured, and outrageously expensive. Tuition has risen 1,200% since 1980 — three times faster than inflation — while adding armies of administrators, not professors. Mike Rowe is right: we need more welders and fewer gender studies majors. Trade schools, apprenticeships, and bootcamps deliver better ROI for most Americans.', voices:['Ben Shapiro','Jordan Peterson','Megyn Kelly'] },
+    alt:{ label:'The Reform View', arg:'The real question isn\'t "college vs. no college" — it\'s which college, which major, at what price. A computer science degree from a state school has enormous ROI. A $250K liberal arts degree from a private university is a financial gamble most families shouldn\'t take. We need radical price transparency, skin-in-the-game for universities (income-share agreements), and an end to the stigma around non-degree paths.', voices:['Scott Galloway','Tyler Cowen','Coleman Hughes'] }},
+  { key:'wealth-inequality', title:'Wealth Inequality', question:'Are billionaires immoral — or proof the system works?',
+    left:{ label:'The Progressive Case', arg:'No one earns a billion dollars. You extract it — from workers who aren\'t paid their productivity gains, from a tax code riddled with loopholes, from a political system you\'ve purchased. Since 1979, worker productivity rose 60% while median wages rose 16%. Billionaires aren\'t proof the system works — they\'re proof the system is rigged.', voices:['Robert Reich','Chris Hayes','Krystal Ball'] },
+    right:{ label:'The Free Market Case', arg:'Jeff Bezos is rich because hundreds of millions of people voluntarily chose Amazon over the alternative. Wealth creation isn\'t zero-sum — it expands the pie. The top 1% pay more in federal income tax than the bottom 90% combined. Punishing success doesn\'t help the poor; it just makes everyone poorer. Capitalism has lifted more people out of poverty than any system in human history.', voices:['Thomas Sowell','Ben Shapiro','Tyler Cowen'] },
+    alt:{ label:'The Reform Capitalist View', arg:'Both narratives are lazy. Billionaires aren\'t inherently immoral, but extreme concentration of wealth is inherently destabilizing to democracy. The answer isn\'t abolishing capitalism — it\'s fixing the rules: close carried interest loopholes, fund the IRS, tax capital gains at income rates, and invest in the public goods (education, infrastructure, healthcare) that created the conditions for wealth creation in the first place.', voices:['Scott Galloway','Ezra Klein','Mark Cuban'] }},
+  { key:'policing', title:'Policing in the USA', question:'Does American policing need fundamental reform — or more support and resources?',
+    left:{ label:'The Reform Case', arg:'American police kill roughly 1,000 people per year — more than any other wealthy democracy. The racial disparities are stark and well-documented. Qualified immunity shields officers from accountability. Sending armed officers to mental health calls, homeless complaints, and traffic stops is a design failure, not a personnel failure. Reimagining public safety isn\'t anti-police; it\'s pro-community.', voices:['Chris Hayes','Van Jones','Bakari Sellers'] },
+    right:{ label:'The Law & Order Case', arg:'Crime is real, violent crime destroys communities, and police are the thin line between order and chaos. The "defund the police" movement led to the deadliest surge in homicides in modern American history — overwhelmingly in Black and brown neighborhoods. The people who suffer most from under-policing aren\'t in the suburbs; they\'re in the inner cities where progressives claim to be helping.', voices:['Ben Shapiro','Scott Jennings','Megyn Kelly'] },
+    alt:{ label:'The Evidence-Based View', arg:'Both "defund" and "back the blue" are bumper stickers, not policies. The evidence says: targeted policing of violent crime works; stop-and-frisk doesn\'t. Body cameras reduce complaints against officers by 90%. Mental health response teams reduce arrests and save money. The goal should be less crime AND less unnecessary force — and the data shows you can have both.', voices:['Coleman Hughes','Nate Silver','Van Jones'] }},
+  { key:'glp1', title:'GLP-1 Meds', question:'Are GLP-1 drugs a miracle of modern medicine — or a shortcut that masks deeper problems?',
+    left:{ label:'The Public Health Case', arg:'Obesity is the number one driver of chronic disease, disability, and healthcare costs in America. GLP-1 drugs like Ozempic and Mounjaro produce 15-25% weight loss — results no diet, exercise program, or behavioral intervention has ever matched at scale. Withholding these drugs because of "willpower" moralism is like refusing insulin because diabetics should just eat better.', voices:['Ezra Klein','Scott Galloway','Mark Cuban'] },
+    right:{ label:'The Skeptic Case', arg:'We\'re about to put 40% of America on a lifelong injectable drug made by pharmaceutical companies that spent decades creating the opioid crisis. The long-term safety data doesn\'t exist. The food industry that made everyone sick will keep making them sick — now with a pharmaceutical Band-Aid. This is symptom management masquerading as a cure, and Big Pharma will make trillions.', voices:['Saagar Enjeti','Joe Rogan','Bret Weinstein'] },
+    alt:{ label:'The Both/And View', arg:'GLP-1 drugs are a genuine breakthrough AND the food system needs fixing. Both things are true simultaneously. Making these drugs affordable and accessible while reforming agricultural subsidies, food labeling, and school nutrition isn\'t contradictory — it\'s comprehensive. The mistake is treating this as either/or when the obesity crisis clearly demands every tool available.', voices:['Sam Harris','Jonathan Haidt','Dario Amodei'] }},
+  { key:'nuclear', title:'Nuclear Proliferation', question:'Can nuclear proliferation ever be fully contained — or must we learn to live with the bomb?',
+    left:{ label:'The Disarmament Case', arg:'Nine nations hold 12,500 nuclear warheads — enough to destroy civilization several times over. The Non-Proliferation Treaty was a promise: nuclear states would disarm while non-nuclear states would abstain. Nuclear states broke that promise, spending trillions modernizing arsenals instead. Every year without disarmament makes proliferation more likely and catastrophe more inevitable.', voices:['Ben Rhodes','Chris Hayes','Mehdi Hasan'] },
+    right:{ label:'The Deterrence Case', arg:'Nuclear weapons are the reason great powers haven\'t fought a direct war since 1945 — the longest such peace in modern history. MAD is ugly but it works. Unilateral disarmament would be the most dangerous act in human history, inviting aggression from every nuclear-armed adversary. The bomb can\'t be uninvented; it can only be managed through strength.', voices:['Niall Ferguson','Ben Shapiro','Bret Baier'] },
+    alt:{ label:'The Realist View', arg:'Complete disarmament is a fantasy — states won\'t give up their ultimate insurance policy. But so is complacency. The real risks are non-state actors, accidental launch, and the slow erosion of arms control treaties. Pragmatic arms reduction, hardened command-and-control systems, and diplomatic engagement with emerging nuclear states are unglamorous but essential.', voices:['Ian Bremmer','Fareed Zakaria','Sam Harris'] }},
+  { key:'hiroshima', title:'Dropping the Atom Bomb', question:'Was dropping the atomic bomb on Japan a necessary evil — or an unforgivable atrocity?',
+    left:{ label:'The Revisionist Case', arg:'Japan was already trying to surrender through Soviet intermediaries. The bombs killed 200,000 civilians — overwhelmingly women, children, and elderly — in the two most destructive single acts in human history. Newly declassified documents show top U.S. commanders including Eisenhower and MacArthur opposed the bombings as militarily unnecessary. The real target was the Soviet Union, not Japan.', voices:['Chris Hayes','Ta-Nehisi Coates','Mehdi Hasan'] },
+    right:{ label:'The Traditional Case', arg:'Imperial Japan killed 20 million people across Asia and fought with suicidal ferocity on every island. Operation Downfall — the planned invasion — was projected to cost 500,000-1,000,000 American casualties and millions of Japanese. The bombs ended the war in days, not months. Judging 1945 decisions by 2025 morality while ignoring the alternative — a land invasion of Japan — isn\'t ethics; it\'s hindsight cosplaying as wisdom.', voices:['Niall Ferguson','Ben Shapiro','Victor Davis Hanson'] },
+    alt:{ label:'The Historian\'s View', arg:'Both narratives oversimplify. The bombs likely shortened the war, but Japan\'s surrender was triggered by multiple factors — including the Soviet invasion of Manchuria. The real lesson isn\'t whether Truman was right or wrong, but that humanity created a weapon it cannot control and has spent 80 years trying to avoid using again. The moral horror of Hiroshima is precisely what makes nuclear deterrence work.', voices:['Ian Bremmer','Steven Pinker','Fareed Zakaria'] }},
+  { key:'churchill', title:'Churchill in WW2', question:'Was Churchill the indispensable hero of WW2 — or a deeply flawed imperialist who happened to be right about Hitler?',
+    left:{ label:'The Critical Case', arg:'Churchill was a lifelong white supremacist who called Indians "a beastly people with a beastly religion" while overseeing a famine that killed 3 million Bengalis. He used chemical weapons on Iraqi villagers, opposed Indian independence until forced, and championed empire at every turn. Being right about Hitler doesn\'t erase being wrong about everything else — it just makes the mythology more convenient.', voices:['Mehdi Hasan','Ta-Nehisi Coates','Chris Hayes'] },
+    right:{ label:'The Heroic Case', arg:'In May 1940, when every rational calculation said to negotiate with Hitler, one man refused. Churchill\'s defiance held Britain together, kept democracy alive in Europe, and bought time for America to enter the war. Judge him by the standards of his time, and he was a titan. Judge him by ours, and he still saved civilization. His flaws were real; his indispensability was greater.', voices:['Niall Ferguson','Ben Shapiro','David French'] },
+    alt:{ label:'The Balanced View', arg:'Churchill was both: a visionary war leader and a brutal imperialist. Holding both truths simultaneously isn\'t weakness; it\'s historical maturity. The cult of Churchill sanitizes empire; the critique of Churchill minimizes the actual stakes of 1940. The honest assessment is that flawed people can do indispensable things, and gratitude doesn\'t require hagiography.', voices:['Andrew Sullivan','Ian Bremmer','Steven Pinker'] }}
+];
+var currentSteelTopic = null;
+
+// Expanded deep-dive content for each topic/side
+var steelManExpanded = {
+  'tariffs': {
+    left: "The economic evidence is overwhelming: tariffs function as a regressive consumption tax. When the Trump administration imposed tariffs on Chinese goods in 2018-2019, the Federal Reserve Bank of New York estimated American consumers and businesses bore nearly 100% of the cost — approximately $831 per household annually.<p>The mechanism is straightforward: when a 25% tariff hits imported steel, domestic producers raise their prices to just below the tariff-inflated import price, pocketing the difference. The Peterson Institute found steel tariffs saved approximately 1,800 jobs but cost consumers $900,000 per job saved through higher prices on everything from cars to appliances.</p><p>Historically, protectionism has a dismal track record. The Smoot-Hawley Tariff Act of 1930 triggered retaliatory tariffs worldwide and deepened the Great Depression — global trade volume collapsed 66%. More recently, EU retaliatory tariffs on bourbon, Harley-Davidsons, and agricultural products hurt the very rural communities tariff advocates claim to protect.</p><p>The deeper problem: tariffs treat symptoms while ignoring the disease. Manufacturing job losses are driven primarily by automation, not trade. The U.S. produces more manufactured goods than ever — with fewer workers. A welder displaced by a robot gains nothing from a tariff on Chinese steel. The progressive solution is investing in workers: robust retraining, portable benefits, and a modernized safety net that treats economic disruption as a shared cost.</p>",
+    right: "Free trade theory works in textbooks — and fails in practice when trading partners don't play by the same rules. China's rise wasn't built on comparative advantage; it was built on currency manipulation, IP theft estimated at $225-600 billion annually by the IP Commission, forced technology transfers, and massive state subsidies to strategic industries.<p>The human cost of 'free trade' is not abstract. Between 1999 and 2011, the 'China Shock' — documented by MIT economist David Autor — eliminated approximately 2.4 million American manufacturing jobs. Entire Rust Belt communities were hollowed out, driving spikes in opioid addiction, family breakdown, and deaths of despair. Economists who promised smooth transitions to 'knowledge economy' jobs were catastrophically wrong.</p><p>Tariffs are not ideal — no serious advocate claims otherwise. They're a second-best instrument in a world where genuine free trade with reciprocal rules doesn't exist. When the EU imposes a 10% tariff on American cars while we charge 2.5% on theirs, that's not free trade — it's a subsidy to European automakers.</p><p>The national security dimension is critical. America's dependence on China for rare earth minerals (80% of supply), pharmaceutical ingredients (40%+ of generic drug inputs), and advanced components represents a strategic vulnerability no amount of economic efficiency justifies. As COVID demonstrated, a country that can't make its own masks has outsourced too much.</p>",
+    alt: "The honest assessment: both sides are partially right and largely talking past each other. Standard models show tariffs reduce aggregate welfare — but 'aggregate welfare' is cold comfort to the factory worker in Youngstown whose job moved to Shenzhen while coastal elites got cheaper iPhones.<p>The pragmatist position: America's trade policy failure isn't that we traded too much, but that we traded without adequate domestic policy to share the gains and cushion the losses. Denmark trades more freely than the U.S. but has 'flexicurity' — easy hiring/firing with generous unemployment insurance and retraining. Result: high trade, low inequality, broad public support for globalization.</p><p>Targeted tariffs can be justified in narrow circumstances: when partners violate WTO rules, when industries are genuinely critical for national security (not the claim that Canadian aluminum threatens defense), or as temporary negotiating leverage. Broad-based tariffs are economic self-harm dressed as toughness.</p><p>The real agenda: (1) aggressive enforcement through multilateral institutions, (2) strategic industrial policy for genuinely critical sectors like semiconductors, (3) radical overhaul of Trade Adjustment Assistance into a genuine second-chance system, and (4) tax policy ensuring gains from trade don't concentrate exclusively at the top.</p>"
+  },
+  'domestic-policy': {
+    left: "The periods of greatest American prosperity coincided with active government intervention. The GI Bill created the suburban middle class. The Interstate Highway System built the infrastructure of modern commerce. Medicare cut elderly poverty from 35% to under 10%. Social Security remains the most effective anti-poverty program in American history.<p>The New Deal didn't just rescue America from the Depression — it built the institutional infrastructure (FDIC, SEC, minimum wage, labor protections) that made the postwar boom possible. Countries that consistently rank highest in quality of life — Norway, Denmark, Sweden, Canada — all have substantially larger government sectors than the United States.</p><p>Markets are extraordinary engines of innovation but systematically fail at providing public goods (roads, research, defense), correcting externalities (pollution, financial contagion), and ensuring equitable access to necessities (healthcare, education). The question isn't whether government should intervene — it's whether we design interventions intelligently.</p><p>The American economy currently features the highest income inequality among developed nations, a shrinking middle class, declining life expectancy, and infrastructure rated D+ by the American Society of Civil Engineers. The 'small government' experiment of the last 40 years — deregulation, tax cuts, austerity — produced spectacular wealth at the top and stagnation everywhere else.</p>",
+    right: "The federal government now spends $6.1 trillion annually — roughly $46,000 per household. Federal debt exceeds $35 trillion, larger than the entire U.S. GDP. Interest payments alone now exceed the defense budget. This is not governance; it's generational theft.<p>Every government program starts with noble intentions and ends with institutional self-preservation. The Department of Education, created in 1979, has seen its budget grow from $14 billion to over $80 billion while students' test scores have flatlined or declined. The War on Poverty, launched in 1964 with $22 trillion spent to date, has barely moved poverty rates once you account for programs themselves as income.</p><p>The founders' insight wasn't naive — it was empirical. Concentrated power corrupts regardless of motives. The IRS targeting conservative nonprofits, the FBI's FISA abuse, COVID-era school closures imposed against scientific evidence — these aren't aberrations. They're the predictable consequence of giving fallible humans enormous power with minimal accountability.</p><p>States gaining population — Texas, Florida, Tennessee — are low-tax, light-regulation states. States hemorrhaging residents — California, New York, Illinois — are high-tax, heavy-regulation. Americans are voting with their feet, and they're voting for less government.</p>",
+    alt: "The tired debate between 'big government' and 'small government' obscures the only question that matters: does this specific intervention, for this specific problem, work? The answer varies enormously, and ideological priors are a terrible substitute for evidence.<p>Singapore's government owns 80% of the land and provides universal healthcare, yet ranks among the most economically free nations. Sweden combines one of the world's highest tax burdens with one of the most business-friendly regulatory environments. The ideological categories simply don't map onto reality.</p><p>The evidence-based approach asks three questions: (1) Is there a genuine market failure government can plausibly address? (2) Is the intervention well-designed based on best evidence? (3) Are there accountability mechanisms to measure outcomes? Programs passing all three — the EITC, GPS (a government invention), DARPA — are spectacularly successful. Programs that skip them — farm subsidies, occupational licensing cartels — persist through inertia.</p><p>The pragmatist isn't anti-government or pro-government. They're pro-competence and anti-dogma. The most dangerous words in policy aren't 'I'm from the government' — they're 'we've always done it this way.'</p>"
+  },
+  'foreign-policy': {
+    left: "The track record speaks for itself: Vietnam (58,000 American dead, 2 million Vietnamese dead, ultimate Communist victory), Iraq (4,500 American dead, 200,000+ Iraqi civilian dead, rise of ISIS, Iran empowered), Libya (regime change followed by failed state and open slave markets), Afghanistan (20 years, $2.3 trillion, Taliban back in power within weeks).<p>The pattern is consistent: America excels at toppling governments and fails catastrophically at building nations. The reasons are structural — military force can destroy institutions but cannot create legitimacy. Foreign occupation generates resistance. And domestic political pressure for quick results is incompatible with the decades-long timeline state-building requires.</p><p>The opportunity cost is staggering. The $8 trillion spent on post-9/11 wars could have rebuilt every bridge, tunnel, and water system in America — twice. It could have funded universal pre-K for 50 years or eliminated student debt entirely.</p><p>The alternative isn't isolationism — it's strategic restraint combined with genuine diplomacy, development assistance, and multilateral cooperation. America's greatest foreign policy successes (Marshall Plan, NATO's founding, normalization with China, the Iran nuclear deal) were diplomatic achievements, not military ones.</p>",
+    right: "Restraint advocates fail to account for the costs of non-intervention. The 1990s 'peace dividend' produced the Rwandan genocide (800,000 dead while America watched), Srebrenica, al-Qaeda's unchecked growth, and North Korea's nuclear advance.<p>The $800 billion defense budget sounds enormous — until you realize it's 3.4% of GDP, lower than the Cold War average of 7-10%. The post-WWII architecture's return: 80 years without great power war, the longest such period in modern history. Global trade increased 40-fold under American security guarantees.</p><p>The argument that America can withdraw and let regional powers fill the vacuum ignores who those powers are: China building military bases across the Pacific, Russia invading Ukraine, Iran funding Hezbollah and Hamas. American retreat doesn't create peace; it creates a more dangerous multipolar world where nuclear proliferation becomes inevitable.</p><p>Global supply chains depend on freedom of navigation through the South China Sea, Strait of Hormuz, and Suez Canal — all secured by the U.S. Navy. Remove that guarantee and watch what happens to your grocery bill.</p>",
+    alt: "The post-WWII order was designed by hard-nosed realists like Kennan and Acheson who understood the alternative to managed cooperation was the cycle of great-power war that had killed 80 million in 30 years.<p>That order is under genuine stress. China is building alternative institutions (Belt and Road, AIIB, BRICS). Russia has demonstrated willingness to revise borders by force. The global South increasingly sees Western institutions as rigged.</p><p>The smart internationalist agenda: (1) strengthen alliances but demand genuine burden-sharing (rallying 50 nations against Russia was textbook), (2) compete with China economically while avoiding unnecessary escalation, (3) reform international institutions to give rising powers a real seat rather than driving them into Chinese-led alternatives, (4) reserve military force for vital interests while investing far more in diplomacy.</p><p>The fundamental insight: in an interconnected world, most threats (pandemics, climate, nuclear proliferation, AI risks) cannot be solved by any one nation. Unilateralism isn't strength — it's the illusion of strength that guarantees failure on the problems that matter most.</p>"
+  },
+  'immigration': {
+    left: "The data rarely penetrates cable news: undocumented immigrants commit crimes at lower rates than native-born citizens (Cato Institute, multiple studies). Immigrants start businesses at twice the rate of native-born Americans. 40% of Fortune 500 companies were founded by immigrants or their children. Immigrants are net contributors to Social Security, paying in billions they'll never collect.<p>America's legal immigration system is catastrophically broken. An Indian-born engineer applying today faces a 195-year wait for a green card. Seasonal agricultural workers have no viable legal pathway despite farms needing their labor. Asylum seekers wait years in a system with 3 million pending cases.</p><p>The CBO estimated the 2013 bipartisan reform bill would have increased GDP by 3.3% over a decade and reduced the deficit by $197 billion. It passed the Senate 68-32 and was killed by the House for purely political reasons.</p><p>The human cost: children in detention, families separated, DACA recipients in permanent limbo, and 11 million people who can't report wage theft or abuse because they fear deportation. This isn't policy — it's cruelty masquerading as enforcement.</p>",
+    right: "The distinction between legal and illegal immigration is foundational. When 2.5 million people crossed the southern border illegally in FY2023, that's not immigration — it's a sovereignty failure.<p>The wage effects are real. Harvard economist George Borjas estimates immigration between 1980-2000 reduced wages for Americans without a high school diploma by 7.4%. These aren't affluent knowledge workers — they're the working-class Americans progressive rhetoric claims to champion.</p><p>Public services in border communities are genuinely overwhelmed. Schools in Eagle Pass, Texas didn't choose to educate thousands more students overnight. Hospitals providing uncompensated emergency care didn't budget for a surge. These costs fall on local taxpayers, disproportionately in communities that are themselves largely Hispanic and working-class.</p><p>Every other developed nation enforces its immigration laws. Canada and Australia use points-based systems far more selective than America's. Japan, South Korea, and most of Europe have significantly stricter policies. The idea that border enforcement is uniquely cruel is empirically false — it's standard practice in every functioning democracy.</p>",
+    alt: "America simultaneously has an immigration problem and an anti-immigration problem — conflating the two guarantees bad policy. The U.S. has 8.1 million job openings and a fertility rate (1.62) well below replacement (2.1). Without immigration, the working-age population shrinks, Social Security becomes insolvent faster, and growth slows.<p>The most successful models (Canada, Australia) use points-based systems matching immigrants to labor needs while maintaining public support through orderly processes.</p><p>Pragmatic reform: (1) points-based economic immigration responding to actual shortages, (2) realistic pathway for 11 million already here — most for over a decade, paying taxes, with American children, (3) mandatory E-Verify with real employer penalties (far more effective than walls), (4) adequately funded asylum courts processing claims in weeks, not years.</p><p>This has majority support in every credible poll. It doesn't pass because both parties benefit from the fight: Democrats from energizing Latino voters with fear, Republicans from energizing their base with outrage. Immigration is the clearest case where political incentives and good policy point in opposite directions.</p>"
+  },
+  'ai-tech': {
+    left: "OpenAI's original charter committed to ensuring AI 'benefits all of humanity.' It then restructured into a capped-profit corporation, removed safety-focused board members, and partnered with the Pentagon. The mission lasted exactly as long as it was profitable.<p>The displacement numbers: Goldman Sachs estimates AI could automate 300 million full-time jobs globally. McKinsey projects 12 million Americans changing occupations by 2030. Unlike previous transitions that displaced manual labor while creating white-collar jobs, AI targets both — writing, coding, analysis, legal research, medical diagnosis.</p><p>Three companies (Microsoft, Google, Amazon) control over 65% of cloud computing — the substrate on which all AI runs. Five companies control the frontier models. The barrier to entry is billions in compute costs. This isn't a competitive market — it's an oligopoly with more power over information than any entity in history.</p><p>The surveillance implications: facial recognition, predictive policing, workplace monitoring, social media manipulation — AI makes authoritarianism scalable. China already uses it for exactly that. Without regulation, the question isn't whether these tools will be abused, but when.</p>",
+    right: "Every transformative technology was greeted with moral panic, and the panickers were always wrong. The printing press, radio, the internet — AI will be disruptive and overwhelmingly beneficial.<p>America leads in AI for the same reasons it leads in biotech and aerospace: bold risk-taking, deep capital markets, top universities, and a regulatory environment that allows innovation before asking permission. Europe chose the precautionary principle with its AI Act — and has zero frontier AI companies.</p><p>Beijing's 'New Generation AI Development Plan' explicitly targets AI supremacy by 2030. China deploys AI for military, surveillance, and espionage with no ethical constraints. Every regulation America imposes that China doesn't creates a compounding asymmetry. In a world where AI determines military advantage and economic productivity, second place isn't silver — it's subordination.</p><p>Job displacement fears are historically myopic. Agriculture eliminated 90% of farming jobs. The industrial revolution eliminated most craft labor. Each time, the economy created more jobs at higher wages. AI will do the same — if we let it.</p>",
+    alt: "The people building frontier AI are themselves the most alarmed about the risks. Anthropic's CEO, OpenAI's researchers, and DeepMind's Hassabis have all warned about scenarios from mass manipulation to loss of human control. These aren't Luddites — they're the world's leading experts.<p>The nuclear analogy is precise: same technology, two radically different outcomes. Nuclear power (regulated, contained) provides clean energy to millions. Nuclear weapons (uncontrolled) nearly ended civilization. The difference wasn't the technology — it was the governance architecture.</p><p>The pragmatic agenda: (1) mandatory safety testing for frontier models above a compute threshold (analogous to FDA trials), (2) liability frameworks making companies accountable for foreseeable harms, (3) massive public investment in safety research so the field keeps pace with capabilities, (4) international coordination, because AI is a global coordination problem no single nation can solve.</p><p>Responsible development isn't anti-progress — it's the difference between harnessing a technology and being consumed by it.</p>"
+  },
+  'healthcare': {
+    left: "The U.S. spends $4.5 trillion annually — 17.3% of GDP, nearly double the OECD average. For that: lower life expectancy than any peer nation, the highest maternal mortality in the developed world, and 66.5% of bankruptcies caused by medical debt (American Journal of Public Health).<p>Administrative costs consume 34% of health spending in the U.S. vs. 12% in Canada. Insurance companies employ armies to deny claims. Hospitals employ armies to fight denials. Neither treats patients. Pharma spends more on marketing ($30B/year) than research ($29B).</p><p>Every other wealthy democracy achieves better outcomes at lower cost through some form of universal coverage. The UK, Canada, Germany, France — they all work. The argument that 'government healthcare doesn't work' is contradicted by literally every country that has tried it.</p><p>The ACA expanded coverage to 20 million Americans and remains popular despite a decade of political attacks. Medicare has lower administrative costs (2%) than private insurance (12-18%). The evidence points one direction.</p>",
+    right: "America's system isn't a market — it's a heavily regulated third-party-payer bureaucracy combining the worst of both worlds. Patients don't know prices. Providers don't compete on cost. Insurance is tied to employment for bizarre WWII-era reasons.<p>The VA scandal — 40 veterans dying waiting for care in Phoenix, administrators falsifying records — isn't an aberration. Britain's NHS has 7.6 million on waiting lists. Canada's average wait: 27.7 weeks from GP referral to treatment. These aren't acceptable tradeoffs.</p><p>Market reforms that would actually reduce costs: price transparency (now being enforced), cross-state insurance purchasing, expanded HSAs, tort reform to reduce defensive medicine ($55-200 billion annually), and removing certificate-of-need laws that make it illegal to build hospitals without government permission in many states.</p><p>The countries with the best hybrid systems — Switzerland, Singapore — rely on competition and consumer choice more than advocates of single-payer acknowledge.</p>",
+    alt: "Healthcare violates every assumption of efficient markets: you can't comparison-shop during a heart attack, demand is inelastic, information asymmetry is extreme, and the product is non-optional. But government-only systems have real weaknesses: political resource allocation, innovation stagnation, and difficulty adapting to preferences.<p>The most successful systems are hybrids. Switzerland mandates private insurance with government subsidies and strict price regulation. Singapore uses mandatory savings accounts plus catastrophic government insurance. Germany has competing non-profit 'sickness funds.' Each outperforms the U.S.</p><p>The pragmatic American reform: mandatory catastrophic coverage for everyone (via Medicare expansion or public option), competitive private markets for supplemental coverage, aggressive price transparency and anti-trust enforcement, and serious investment in primary care and prevention.</p><p>This isn't politically easy — but it's what evidence supports. The American system isn't broken because of too much government or too little. It's broken because it's designed around extracting revenue, not producing health.</p>"
+  },
+  'culture': {
+    left: "For centuries, 'neutral' institutions reflected the biases of those who built them — overwhelmingly white, male, and affluent. What critics call 'wokeness' is marginalized groups finally having a voice.<p>The evidence supports structural reform. Black Americans with identical resumes to white Americans receive 36% fewer callbacks (NBER). Women earn 82 cents on the dollar even controlling for occupation and hours. LGBTQ+ people face documented discrimination in housing, employment, and healthcare. These aren't feelings — they're measurements.</p><p>Every expansion of rights was resisted as 'going too far': abolition, women's suffrage, civil rights, marriage equality. The backlash follows the same script every time: the comfortable claim neutrality while defending the status quo that benefits them.</p><p>Inclusion isn't zero-sum. Diverse teams produce better outcomes (McKinsey, repeatedly). Universities with diverse student bodies produce more innovative research. Companies with diverse leadership outperform. Inclusion isn't ideology — it's competitive advantage.</p>",
+    right: "Institutions aren't becoming more inclusive — they're becoming more conformist. When 80% of Harvard faculty identify as liberal and zero percent as conservative, that's not diversity — it's a monoculture with a diversity label.<p>The chilling effect is measurable. A 2022 FIRE survey found 63% of college students self-censor on campus. Heterodox Academy documents cases of professors fired or sanctioned for questioning DEI orthodoxy. The Foundation for Individual Rights reports record-high attempts to disinvite campus speakers.</p><p>DEI programs have a troubled evidence base. A Harvard meta-analysis of diversity training found no evidence it reduces bias or changes behavior — and mandatory training may actually increase resentment. The gap between DEI's stated goals and measured outcomes deserves scrutiny, not faith.</p><p>Diversity of demographics without diversity of thought isn't progress. When a university's racial diversity increases while its ideological diversity collapses, the institution becomes more uniform, not less.</p>",
+    alt: "Both sides catastrophize. Yes, some institutions have overcorrected — mandatory training that insults participants' intelligence, loyalty oaths dressed as DEI statements, punishment for good-faith disagreement. Yes, historical injustices are real and ongoing — documented discrimination in hiring, lending, policing, and healthcare.<p>The answer isn't to dismiss all reform as 'woke' or all criticism as 'racist.' It's to insist that inclusion and free inquiry are both non-negotiable — and any movement that sacrifices one for the other loses both.</p><p>Practically: judge DEI programs by outcomes, not intentions. Fund rigorous research. Protect genuine academic freedom. Make institutional cultures welcoming to people of all backgrounds AND all viewpoints. Fire administrators who punish good-faith dissent. Fire managers who discriminate.</p><p>The culture war framing benefits activists on both sides who need an enemy. Most Americans hold the boring, reasonable middle position: treat everyone with dignity, evaluate people as individuals, and don't force anyone to profess beliefs they don't hold.</p>"
+  },
+  'free-speech': {
+    left: "The legal right to speak is meaningless without practical ability to be heard. In 2025, a handful of private platforms mediate virtually all public discourse. When one person can amplify or suppress any voice with algorithmic adjustments invisible to users, the 'marketplace of ideas' is neither free nor a marketplace.<p>MIT research found false stories spread six times faster than true ones on social media. The January 6th insurrection was organized largely on platforms that algorithmically boosted inflammatory content because outrage drives engagement.</p><p>The 'more speech' response assumes symmetry that no longer exists. When state-sponsored troll farms generate millions of posts, when AI creates photorealistic deepfakes, when algorithms selectively radicalize users, one citizen's 'more speech' is a whisper against a hurricane.</p><p>Historical First Amendment doctrine was designed for printing presses and town squares — not algorithmic amplification at scale. The framework needs updating, not abandonment.</p>",
+    right: "Every censorship regime in history has been captured by the powerful. The Sedition Act of 1798 jailed journalists who criticized the president. Obscenity laws suppressed information about birth control. 'Hate speech' laws in Europe prosecute comedians and feminist activists.<p>The corporate censorship argument cuts both ways. Tech platforms have enormous power — which is precisely why we should be terrified of empowering those same corporations or government to decide what constitutes 'misinformation.'</p><p>The Twitter Files revealed the FBI routinely flagged content for removal, intelligence agencies influenced moderation, and legitimate debate (COVID lab leak theory, Hunter Biden laptop) was suppressed as 'disinformation' before being validated. The misinformation label is a weapon — and the people wielding it aren't neutral.</p><p>The ACLU defended Nazis in Skokie not because Nazism had merit, but because the power to ban one group's speech is the power to ban anyone's. That principle has survived every moral panic in American history.</p>",
+    alt: "The loudest voices on both sides mischaracterize the other. Progressives aren't advocating government censorship of political opinions. Absolutists aren't defending harassment and death threats. The actual disagreement is narrower than the rhetoric suggests.<p>Free speech is a culture, not just a law. The First Amendment constrains government, but discourse health depends on norms: good-faith engagement, willingness to hear uncomfortable ideas, intellectual humility. Those norms are deteriorating because the attention economy rewards certainty and punishes nuance.</p><p>Practical agenda: platform transparency (publish algorithms, let researchers audit), liability reform creating incentives for good moderation without mandating outcomes, media literacy education at scale, and support for independent journalism.</p><p>The goal isn't controlling speech — it's rebuilding the epistemic infrastructure that makes free speech valuable. A world where everyone can speak but no one can distinguish truth from fabrication isn't free — it's chaos.</p>"
+  },
+  'abortion': {
+    left: "Bodily autonomy has a legal pedigree stretching to English common law — no person can be compelled to use their body to sustain another. We don't force parents to donate kidneys to dying children. We don't harvest organs from corpses without consent.<p>Abortion bans don't reduce abortions. The Guttmacher Institute found rates are nearly identical where legal and banned — the difference is safety. WHO estimates 45,000 women die annually from unsafe abortions. Post-Dobbs, Texas's maternal mortality rate increased 56% in two years following SB8.</p><p>The class dimension: wealthy women will always have access — they'll fly to legal states. Bans exclusively affect women without resources: disproportionately young, poor, and women of color.</p><p>Public support is overwhelming: 63% of Americans believe abortion should be legal in all or most cases (Pew, 2024). Every single ballot measure on abortion access since Dobbs — including in deep-red Kansas, Kentucky, and Montana — has gone in favor of protecting access.</p>",
+    right: "At fertilization, a new organism with unique human DNA begins development. By six weeks: detectable heartbeat. By eight weeks: all major organs forming, responds to touch. By twelve weeks: fingerprints. By twenty weeks: neurological apparatus for pain. Where does legal personhood begin?<p>The viability standard was always arbitrary — viability depends on technology, not humanity. A premature baby at 22 weeks has 50%+ survival in a top NICU, near zero in a rural hospital. Personhood shouldn't depend on proximity to medical technology.</p><p>Polling is more nuanced than either side acknowledges. While majorities support early abortion access, majorities also support second/third trimester restrictions. Europe — which progressives model — generally restricts elective abortion after 12-15 weeks, far earlier than America's pre-Dobbs status quo.</p><p>The pro-life position doesn't require religious premises. The philosophical argument that human rights begin at the beginning of a human organism's existence is logically coherent — and the burden should be on those who would draw an arbitrary later line to justify it.</p>",
+    alt: "Roe found abortion rights in 'penumbras and emanations' — a stretch even sympathetic scholars found problematic. Ginsburg herself argued Roe went 'too far, too fast' and that incrementalism would have built more durable support.<p>Dobbs didn't ban abortion — it returned the question to democracy. Since the decision, voters have consistently protected access: Kansas, Montana, Ohio, and multiple other states passed protective measures. Democracy working as designed.</p><p>This issue involves genuine moral conflict between two important values — bodily autonomy and protection of developing life — and reasonable people weigh them differently. A federal system letting Mississippi and Massachusetts reach different conclusions isn't a failure of justice; it's acknowledgment that on the hardest questions, democratic pluralism beats judicial imposition.</p><p>The pragmatic center that most Americans occupy: legal in early pregnancy, restricted in later stages except for health/rape/incest, with genuine support (healthcare, childcare, adoption reform) for women who carry to term.</p>"
+  },
+  'gender-identity': {
+    left: "Trans identity is documented across cultures for millennia: two-spirit people, hijras, fa'afafine. The APA, AMA, and WHO all recognize gender dysphoria as a legitimate medical condition with evidence-based treatments.<p>The data: a 2022 NEJM study found gender-affirming surgery associated with 42% decreased psychological distress and 35% reduced suicidal ideation. A 2023 Nature Medicine study following 3,500 trans youth found hormone access associated with 40% lower odds of depression and 56% lower suicidal ideation.</p><p>What actually happens clinically: pre-puberty treatment is exclusively social (names, pronouns). Puberty blockers — used safely for precocious puberty since the 1980s — are fully reversible and buy time. Cross-sex hormones aren't prescribed until mid-adolescence, with extensive evaluation. Surgery on minors is exceptionally rare.</p><p>The reality bears no resemblance to the caricature presented in political media.</p>",
+    right: "Biological sex is determined by chromosomes, gonads, and gamete production. It is binary in 99.98%+ of humans, medically relevant in diagnosis and treatment. Redefining 'sex' as 'gender identity' has real consequences beyond pronouns.<p>In women's sports, male-puberty advantages — bone density, lung capacity, muscle mass — don't disappear with hormone therapy. Lia Thomas went from ranking 462nd among men to 1st among women. The female athletes displaced aren't abstractions.</p><p>The international trend: Sweden, Finland, Norway, Denmark, and the UK's NHS have all pulled back from the 'affirmative model.' The Cass Review — the most comprehensive review of pediatric gender medicine ever — found the evidence base 'remarkably weak' and recommended extreme caution. When Europe's most progressive healthcare systems apply the brakes, America's rush forward deserves scrutiny.</p><p>Compassion for gender dysphoria doesn't require abandoning material reality or medical caution for minors.</p>",
+    alt: "Both sides have legitimate concerns the other dismisses. Trans people face genuine discrimination — higher violence, employment discrimination, housing instability. This demands legal protection. Simultaneously, questions about competitive fairness, protocols for minors, and sex-based protections are legitimate policy questions, not bigotry.<p>Polling shows Americans hold this complex middle: 64% favor trans anti-discrimination laws; 58% believe trans athletes should compete as birth sex in competitive sports. Not contradictory — the product of taking both rights and practical concerns seriously.</p><p>Distinguish easy cases (adults deserve autonomy; discrimination is wrong; no one deserves violence) from genuinely hard ones (elite competitive sports, pre-adolescent interventions, sex-segregated prisons). Treating every case as easy — in either direction — is moral unseriousness.</p><p>Good policy: protect civil rights, ensure adult autonomy, apply medical caution for minors based on the best evolving evidence, and handle competitive sports case-by-case.</p>"
+  },
+  'climate': {
+    left: "The science: 97% of actively publishing climate scientists agree warming is primarily human-caused. The last nine years are the nine hottest on record. Arctic ice has declined 40% since 1979. These aren't models — they're measurements.<p>The costs: Hurricane damage increased from $10B/year (1980s average) to $50B/year (2020s). The 2023 Canadian wildfire season burned 45 million acres. The Colorado River, supplying 40 million Americans, is at historic lows. Crop failures cost farmers $21 billion in 2022.</p><p>The economics now favor action. Solar is the cheapest new electricity in history. The IRA catalyzed $370 billion in clean energy investment and 330,000+ jobs, overwhelmingly in red states. The transition isn't sacrifice — it's the largest economic opportunity of the century.</p><p>Delay is the most expensive option. Every year of inaction increases the eventual cost exponentially. The fossil fuel industry spent decades manufacturing doubt — the same playbook tobacco used. We can't afford to fall for it again.</p>",
+    right: "Distinguish between two claims: (1) climate is warming due to human activity — largely accepted — and (2) this requires immediate radical economic transformation — highly debatable. The IPCC's scenarios span manageable to catastrophic; policy should target realistic projections, not worst cases.<p>Cost-benefit: Lomborg's Copenhagen Consensus estimates Paris Agreement goals cost $1-2 trillion annually while preventing ~$100-200B in damages. That same money could provide clean water to every human, eliminate malaria, and fund universal primary education.</p><p>A billion people lack reliable electricity. Demanding they leapfrog to renewables — requiring storage that doesn't exist at scale — rather than using natural gas to industrialize is green colonialism. China and India won't sacrifice development for Western goals, meaning unilateral American decarbonization just shifts production to dirtier countries.</p><p>Innovation, not austerity, is how rich societies solve problems. Invest in R&D, deploy nuclear, and let the market find the cheapest clean energy — don't pick winners or mandate consumer behavior.</p>",
+    alt: "The trendlines are more encouraging than either side admits. Solar costs fell 99% since 1976. Wind is competitive without subsidies. Battery costs dropped 97% since 1991. EV adoption follows the smartphone S-curve.<p>The path to net-zero runs through technologies both sides dislike: nuclear (which environmentalists oppose but provides zero-carbon baseload) and carbon capture (which activists dismiss but the IPCC says is necessary in virtually every scenario). Advanced geothermal and SMRs could transform the equation further.</p><p>The policy approach should be technology-agnostic: price carbon (let markets find cheapest decarbonization), invest heavily in R&D, deploy proven technologies at scale, and stop the culture war over consumer choices that are rounding errors compared to industrial emissions.</p><p>The biggest obstacle isn't technology or economics — it's that climate has become identity politics. Your position on carbon correlates with your position on guns, abortion, and immigration. That's a political failure, not a scientific one.</p>"
+  },
+  'israel': {
+    left: "The ICJ has ruled the occupation illegal. Every major human rights organization — including Israeli groups B'Tselem and Yesh Din — has documented systematic violations. 700,000+ settlers in the West Bank violate the Fourth Geneva Convention.<p>The power asymmetry is the defining feature. Israel has one of the world's most sophisticated militaries, nuclear weapons, and $3.8B in annual U.S. aid. Palestinians have no army, no air force, no control over borders or airspace. Framing this as a conflict between equals requires ignoring the basic power structure.</p><p>57 years of occupation have not produced security — they've produced radicalization and violence with no end in sight. Each settlement expansion makes a viable Palestinian state more physically impossible, which is the point.</p><p>Unconditional U.S. support isn't just morally problematic — it's strategically counterproductive. It enables the worst impulses of Israeli policy, fuels anti-American sentiment across the Muslim world, and undermines American credibility on human rights globally.</p>",
+    right: "What would any democracy do facing threats on seven borders from groups committed to its destruction? Israel withdrew from Gaza in 2005 — Hamas took over, built tunnels, launched rockets. Israel withdrew from Lebanon — Hezbollah filled the vacuum with 150,000 missiles. The 'end the occupation' prescription has been tested and produced more violence.<p>Israel's Arab citizens (21%) vote, serve in parliament, sit on the Supreme Court — more political rights than Arabs in any neighboring country. This is the 'apartheid state'? Meanwhile, the PA pays lifetime salaries to families of terrorists ('pay for slay').</p><p>'Disproportionate response' applies a standard that exists nowhere else in the laws of armed conflict. Proportionality means military advantage must not be excessive relative to civilian harm — not equal casualties. When Hamas embeds in hospitals and schools, civilian casualties are Hamas's strategic objective.</p><p>Israel has accepted multiple peace offers (Camp David 2000, Olmert 2008) that the Palestinian leadership rejected. The obstacle to peace isn't occupation — it's the refusal to accept Israel's existence.</p>",
+    alt: "Both narratives contain genuine truths. Palestinians have legitimate grievances: dispossession, statelessness, military occupation, daily humiliations. Israelis have legitimate fears: surrounded by hostility, targeted by terrorism, facing adversaries whose stated goal is elimination.<p>The two-state solution is in critical condition. Settlements have fragmented the West Bank. Palestinian institutions are divided between a corrupt PA and Hamas. Israeli politics has shifted rightward with coalition parties advocating annexation.</p><p>Peace requires both sides to accept things they consider unjust. Israel: dismantle settlements, divide Jerusalem, accept Palestinian sovereignty. Palestinians: accept symbolic rather than literal right of return, recognize Israel's legitimacy — not just its power.</p><p>External actors can facilitate but cannot impose these concessions. The international community's role is to prevent irreversible facts on the ground (settlements, annexation) that foreclose the possibility of future agreement — and to support civil society on both sides working toward coexistence.</p>"
+  },
+  'taiwan': {
+    left: "A war over Taiwan would be the most catastrophic since WWII — potentially nuclear, devastating to the global economy, fought 6,000 miles from American shores. War games consistently show massive U.S. naval losses and no guarantee of success.<p>The economic consequences alone: Taiwan Semiconductor (TSMC) produces 90% of advanced chips, but a military conflict would destroy those fabs. We'd be fighting to defend infrastructure that wouldn't survive the fight.</p><p>The diplomatic track record works. Strategic ambiguity has preserved peace across the Taiwan Strait for 75 years. The framework isn't elegant — it's effective. Abandoning it for explicit defense commitments risks the provocation it's designed to prevent.</p><p>The better investment: massive semiconductor reshoring (already underway with the CHIPS Act), diplomatic engagement, and helping Taiwan build asymmetric defenses that make invasion prohibitively costly without requiring American military involvement.</p>",
+    right: "Taiwan produces 90% of the world's advanced semiconductors. Chinese control would give Beijing a chokehold on the entire global technology supply chain — your phone, your car, your defense systems. This isn't abstract geopolitics; it's the most strategically important island on earth.<p>Credible deterrence is the only thing preventing invasion. China's military buildup — the largest peacetime expansion since WWII — isn't defensive. Xi Jinping has explicitly stated reunification 'cannot be passed on from generation to generation.' Ambiguity increasingly reads as weakness.</p><p>The lessons of Ukraine apply: deterrence that isn't credible invites aggression. Putin invaded because he calculated the West wouldn't respond. If China calculates similarly about Taiwan, the consequences would be orders of magnitude worse.</p><p>Defending Taiwan isn't altruism — it's self-interest. A world where China controls advanced chip production, dominates the Pacific, and has demonstrated that force works is a world where American security and prosperity are permanently diminished.</p>",
+    alt: "The smartest move isn't choosing between war and surrender — it's making invasion so costly China never attempts it. That means: (1) arm Taiwan asymmetrically (sea mines, mobile missiles, not fighter jets), (2) diversify semiconductor production aggressively, (3) maintain strategic ambiguity, (4) deepen Taiwan's international economic integration.<p>The CHIPS Act is the most important piece of this — reducing dependence on Taiwanese fabs means China's strategic calculus changes even if they could take the island. TSMC's Arizona plants, Samsung's Texas fab, and Intel's Ohio expansion are all strategic hedges.</p><p>Cross-strait stability has held for 75 years through a combination of ambiguity, deterrence, and economic interdependence. All three need strengthening, but the framework works.</p><p>The goal: make the status quo more attractive than any alternative — for Beijing, Taipei, and Washington. That's not a stirring bumper sticker, but it's kept the peace longer than any grand strategy in the region.</p>"
+  },
+  'maha': {
+    left: "The movement correctly identifies real problems: ultra-processed foods constitute 58% of American caloric intake. Childhood obesity has tripled since the 1970s. American life expectancy is declining while peer nations improve. The food industry spends $14 billion annually on marketing, much targeting children.<p>But MAHA's solutions are frequently unscientific. RFK Jr.'s well-documented vaccine skepticism has been linked to measles outbreaks. His promotion of raw milk ignores established pasteurization science. The movement's hostility to fluoridation contradicts decades of dental health research.</p><p>The policy landscape: MAHA correctly targets food industry lobbying power, but its proposed solutions often bypass regulatory science in favor of ideology. FDA reform should strengthen evidence-based regulation, not weaken it by politicizing the appointment process.</p><p>The risk: legitimate concerns about food quality and corporate influence get discredited when bundled with conspiracy theories about vaccines, fluoride, and 5G. Good public health policy requires rigorous science, not populist intuition.</p>",
+    right: "Mainstream medicine said eggs were deadly, then fine, then deadly, then fine. It promoted a food pyramid that made America obese. It prescribed opioids that killed hundreds of thousands. The institutional credibility gap isn't imagined — it's earned.<p>MAHA's core thesis — that chronic disease is driven by diet, environmental toxins, and corrupted regulatory agencies — aligns with significant peer-reviewed evidence. Ultra-processed food is linked to 32 health conditions (BMJ, 2024). Endocrine disruptors are measurably reducing fertility. Regulatory agencies routinely approve substances banned in Europe.</p><p>The revolving door between food/pharma companies and the FDA, USDA, and CDC is documented, not conspiratorial. 55% of FDA advisors have financial ties to the industries they regulate. Congressional lobbying by food and pharmaceutical industries exceeds $600 million annually.</p><p>Questioning institutions isn't anti-science — it's what science demands. The replication crisis showed 60%+ of psychology findings and 50%+ of medical findings can't be reproduced. Healthy skepticism is the immune system of knowledge.</p>",
+    alt: "MAHA is a coalition held together by real grievance and real pseudoscience in equal measure. Separating the two is the essential task.<p>Legitimate: American food quality regulation lags Europe's. The FDA is underfunded and captured. Chronic disease is the leading driver of healthcare costs ($3.7T annually). Childhood nutrition programs deserve more funding, not less.</p><p>Illegitimate: vaccine skepticism, which has been responsible for entirely preventable disease outbreaks. Raw milk advocacy, which ignores 100+ years of pasteurization science. Conspiracy theories about intentional population poisoning, which have no evidence base.</p><p>The pragmatist approach: aggressively reform food labeling and marketing (especially to children), increase FDA funding and independence, invest in nutrition research, and ban regulatory revolving doors — while maintaining evidence-based vaccine policy, fluoridation, and pharmaceutical regulation. The goal is making institutions trustworthy, not dismantling them.</p>"
+  },
+  'college-value': {
+    left: "The data still favors college: median lifetime earnings for bachelor's degree holders are $1.2 million higher than high school graduates (Georgetown CEW). Unemployment rates for degree holders are consistently half those without. During recessions, the gap widens.<p>The cost crisis is real but it's a policy failure, not an education failure. State funding for public universities fell 30% per student since 2000 (inflation-adjusted), forcing tuition increases. The solution is public reinvestment, not abandoning higher education.</p><p>The 'learn to code' alternative oversimplifies. Bootcamps and trade programs serve some students well, but they don't provide the broad analytical, communication, and critical thinking skills that employers consistently rank as most valuable. The wage premium for college graduates has been rising, not falling.</p><p>Elite university criticism confuses a real access problem with a value problem. The issue isn't that college isn't worth it — it's that too many Americans can't afford it or access it.</p>",
+    right: "Student loan debt: $1.77 trillion. Average graduate debt: $37,000. Nearly half of graduates work jobs that don't require a degree. One-third of college students don't finish within six years, leaving them with debt and no credential.<p>The university system has become a credentialing cartel. Requiring a bachelor's degree for entry-level office work is arbitrary gatekeeping that enriches universities while burdening young people. Google, Apple, and IBM have dropped degree requirements — the market is signaling that the emperor has no clothes.</p><p>Administrative bloat is staggering: since 1975, university administrators have grown 221% while faculty grew 61%. Students are paying for DEI offices, climbing walls, and luxury dorms — not better education. Meanwhile, grade inflation has made the degree itself less meaningful (average GPA has risen from 2.52 in 1950 to 3.17).</p><p>The trades offer a path to middle-class income without debt. Electricians, plumbers, and welders earn $60-90K with zero student loans and strong job security in an aging workforce that can't be outsourced or automated.</p>",
+    alt: "The debate's framing is wrong. The question isn't 'is college worth it?' — it's 'which college, for which student, studying what, at what price?' A computer science degree from a state university with in-state tuition is one of the best investments available. A fine arts degree from a private school at $80K/year... is not.<p>The ROI varies enormously: engineering and nursing graduates see strong returns at almost any price. Humanities and social science graduates see positive returns only at lower-cost institutions. For-profit colleges are almost uniformly a bad deal.</p><p>Better policy: (1) dramatically expand community colleges and technical education, (2) make ROI data transparent and mandatory before enrollment, (3) allow student debt discharge in bankruptcy (like every other form of debt), (4) invest in high-quality alternatives — apprenticeships, stackable credentials, employer-sponsored training.</p><p>The goal isn't universal college or no college — it's matching people to the best path for their goals, with honest information and manageable costs.</p>"
+  },
+  'wealth-inequality': {
+    left: "Three Americans (Bezos, Musk, Zuckerberg) hold more wealth than the bottom 50% of the country — 165 million people. The top 1% owns more than the entire middle class. CEO-to-worker pay ratio: 344:1 (vs. 21:1 in 1965).<p>This isn't merit — it's structural. Wealth compounds through asset ownership, tax advantages, and political influence. Capital gains (taxed at 20%) vs. income (taxed up to 37%) means the ultra-wealthy pay lower effective rates than their employees. Warren Buffett famously pays a lower tax rate than his secretary.</p><p>The political consequences are existential for democracy. The Princeton study by Gilens and Page found that policy outcomes correlate with preferences of the wealthy and essentially zero correlation with average citizens' preferences. This isn't a democracy — it's an oligarchy with elections.</p><p>FDR's New Deal, progressive taxation, and strong unions created the most prosperous middle class in history. Since their erosion began in the 1980s, all income growth has flowed to the top. The solution isn't radical — it's restoration.</p>",
+    right: "Wealth inequality measures are misleading. They compare a 22-year-old with student debt (negative net worth) to a 55-year-old with retirement savings. Income mobility is the relevant metric, and America still has substantial mobility: 73% of Americans will spend at least one year in the top 20% of income distribution.<p>Billionaire wealth isn't hoarded cash — it's ownership stakes in companies that employ millions. Bezos's wealth reflects Amazon's value: $1.5 trillion in market cap, 1.5 million employees, $500 billion in revenue enabling next-day delivery for 200 million Americans. Taxing that wealth means taxing productive investment.</p><p>Every society that has attempted forced wealth redistribution — from the USSR to Venezuela to Cuba — has produced poverty, not equality. The countries with the highest living standards (U.S., Switzerland, Singapore) embrace markets and protect property rights. Inequality is the price of dynamism.</p><p>The real scandal isn't that billionaires exist — it's that government barriers (occupational licensing, zoning, regulatory capture) prevent more people from building wealth. Remove the barriers; don't cap the outcomes.</p>",
+    alt: "Extreme inequality is neither inevitable nor desirable — but the solutions matter more than the diagnosis. Confiscatory taxes, wealth caps, and redistribution schemes have poor track records. Smart policy can reduce inequality while maintaining growth.<p>The evidence-based toolkit: (1) fix the tax code so capital and labor income are taxed equally, (2) expand the EITC (the most effective anti-poverty program with bipartisan support), (3) invest in public goods that compound — early childhood education, infrastructure, R&D, (4) break up monopolies that extract rather than create value.</p><p>The real inequality story is about opportunity, not outcomes. Geographic mobility has collapsed — moving to where the jobs are has become prohibitively expensive due to housing costs. Fixing zoning laws (allowing more housing construction in productive cities) would do more to reduce inequality than any tax policy.</p><p>Both extremes are wrong: wealth isn't proof the system works, and it isn't proof the system is rigged. It depends entirely on how the wealth was created — and whether the rules of creation are fair.</p>"
+  },
+  'policing': {
+    left: "The data: Black Americans are 2.5x more likely to be killed by police than white Americans (Mapping Police Violence). A Stanford study of 100 million traffic stops found systematic racial disparities in search rates. The DOJ's Ferguson investigation found a pattern of unconstitutional policing targeting Black residents as a revenue source.<p>Police kill approximately 1,100 Americans annually — more than any other developed nation. Officers are convicted in fewer than 2% of on-duty killings. Qualified immunity effectively bars most civil rights lawsuits against officers.</p><p>The 'few bad apples' argument ignores systemic design: warrior training culture, powerful police unions that block accountability, inadequate de-escalation training, and a criminal justice system that treats officers as above the law. Reform isn't anti-police — it's pro-accountability.</p><p>Countries with reformed policing (UK, Germany, Scandinavia) have dramatically lower rates of police violence without higher crime. Better training, external oversight, and accountability structures work everywhere they're tried.</p>",
+    right: "Police officers make approximately 10 million arrests annually. The vast majority involve no use of force. In a nation of 330 million with 400 million firearms, officers face life-threatening decisions daily. The 2020-2022 spike in violent crime — 30% increase in homicides — followed directly from the 'defund' movement and its chilling effect on proactive policing.<p>The 'racial disparity' in police encounters reflects disparities in criminal victimization. Black Americans are disproportionately victims of violent crime, and communities with the highest crime rates have the most police interactions — at the request of those communities' residents.</p><p>Cities that cut police budgets saw immediate consequences: Portland (50% rise in homicides), Minneapolis (increase in carjackings and shootings), San Francisco (shoplifting epidemic). The communities harmed most were low-income and minority neighborhoods that progressives claim to champion.</p><p>Officer recruitment is in crisis: departments nationwide face 20-30% vacancy rates. The combination of demonization, prosecution risk, and inadequate pay makes it increasingly difficult to attract qualified candidates. Less policing doesn't produce justice — it produces more victims.</p>",
+    alt: "Both 'defund' and 'back the blue' are slogans masquerading as policy. Defunding failed everywhere it was tried. Reflexive defense of the status quo ignores documented problems that erode public trust and make policing less effective.<p>The evidence-based agenda: (1) dramatically increase training (U.S. average: 21 weeks vs. 2-3 years in European countries), (2) establish independent oversight boards with subpoena power, (3) reform qualified immunity to allow accountability for clear violations, (4) invest in co-responder models pairing officers with mental health professionals for crisis calls.</p><p>Camden, New Jersey dissolved its police department and rebuilt from scratch with community-oriented policing, body cameras, and accountability mechanisms. Result: crime dropped 42% while complaints against officers fell 95%. This model works — it requires investment, not defunding.</p><p>Most Americans want the same thing: effective policing that keeps communities safe, treats everyone with dignity, and holds officers accountable when they fail. That's not a radical position — it's the basic social contract.</p>"
+  },
+  'glp1': {
+    left: "GLP-1 drugs work — that's not disputed. Ozempic and Wegovy produce 15-20% body weight loss, with emerging cardiovascular benefits. But at $1,000+/month without insurance, they're creating a two-tier health system: thin for the rich, obese for the poor.<p>The underlying causes of obesity — ultra-processed food designed to be addictive, food deserts in low-income neighborhoods, agricultural subsidies favoring corn syrup over vegetables, and sedentary work environments — remain unaddressed. GLP-1s treat the symptom while the disease-generating machine runs full speed.</p><p>Pharmaceutical companies have every incentive to create lifetime customers rather than address root causes. Novo Nordisk's revenue from Ozempic and Wegovy: $18 billion in 2023. When you stop taking GLP-1s, the weight returns. That's not a cure — it's a subscription.</p><p>The public health dollar is finite. Spending it on expensive drugs for individuals rather than systemic prevention (school nutrition, food regulation, walkable communities) is choosing the most expensive, least scalable solution.</p>",
+    right: "Personal responsibility still matters. The obesity epidemic is driven by individual choices enabled by abundance — the first crisis of plenty in human history. GLP-1 drugs help motivated individuals take control, but medicalizing every lifestyle condition creates dependency on pharmaceutical solutions.<p>The cost concern is valid but the market is working: competition between Novo Nordisk and Eli Lilly is driving prices down, and compounding pharmacies are creating generic alternatives. Insurance coverage is expanding. The trajectory is toward accessibility, not exclusivity.</p><p>More fundamentally: if individual willpower and better choices could solve obesity, they would have by now. The 'eat less, move more' prescription has a 95% long-term failure rate. GLP-1 drugs work because they address the neurological mechanisms of hunger — something diet culture has failed to do for decades. Denying effective treatment because it comes from pharma isn't progressive — it's puritanical.</p><p>The alternative — government food regulation, marketing bans, and mandated dietary guidelines — has been tried for 50 years and produced the most obese population in history.</p>",
+    alt: "GLP-1 drugs are genuinely revolutionary medicine — and they're being deployed in a broken system that will limit their impact. Both the celebration and the criticism miss the bigger picture.<p>The drugs should be covered by insurance and Medicare — the cost-effectiveness argument is overwhelming when you factor in reduced diabetes, heart disease, and joint replacement costs. But coverage alone doesn't address the systemic food environment that produces the problem.</p><p>Smart policy pairs treatment with prevention: cover GLP-1s AND reform food labeling, restrict marketing to children, invest in school nutrition, and redesign subsidies to favor whole foods over processed ingredients. This isn't either/or.</p><p>The deeper question: what does it mean when the most effective treatment for a civilization-wide health crisis is a weekly injection? It means our food system, built environment, and social structures are making us sick by design. GLP-1s buy time — but they don't fix the machine.</p>"
+  },
+  'nuclear': {
+    left: "The humanitarian case against nuclear weapons needs no embellishment: a single modern warhead can kill more people than all conventional weapons in all of WWII combined. A 'limited' nuclear exchange between India and Pakistan would produce a nuclear winter affecting global agriculture for a decade, causing up to 2 billion deaths from famine.<p>Nonproliferation is possible. South Africa, Ukraine, Belarus, and Kazakhstan all voluntarily gave up nuclear weapons. Libya abandoned its program through diplomacy. The Iran nuclear deal (JCPOA) successfully froze Iran's enrichment — until the U.S. withdrew unilaterally.</p><p>The greatest proliferation risk isn't rogue states — it's normalization. Every time a nuclear power threatens use (Russia in Ukraine, Trump's 'fire and fury'), it erodes the taboo that has prevented use since 1945. That taboo is arguably the most important norm in human history.</p><p>Investment in diplomacy, arms control treaties, and multilateral verification regimes is orders of magnitude cheaper than the alternative — and unlike military solutions, it has an actual track record of working.</p>",
+    right: "Nuclear deterrence has prevented great-power war for 80 years — the longest peace between major powers in modern history. The doctrine of mutually assured destruction is horrifying in theory and spectacularly effective in practice.<p>Unilateral disarmament is suicide. China is building its arsenal from 300 to an estimated 1,000+ warheads. Russia has 5,580 warheads and a doctrine of escalate-to-de-escalate. North Korea has 40-50 warheads aimed at American cities. In this environment, reducing American nuclear capability invites aggression.</p><p>Nonproliferation treaties only work when backed by credible deterrence. Nations like Japan, South Korea, and Saudi Arabia don't build nuclear weapons because the U.S. nuclear umbrella makes them unnecessary. Weaken that umbrella and watch proliferation cascade across East Asia and the Middle East.</p><p>The arms control framework has collapsed: Russia suspended New START, the INF Treaty is dead, the CTBT was never ratified. The path forward is modernizing the arsenal to maintain deterrence while pursuing arms control from a position of strength — not weakness.</p>",
+    alt: "Full containment is impossible — the knowledge exists and can't be un-invented. But managed proliferation through a combination of deterrence, diplomacy, and norm enforcement has prevented use for 80 years, which is far better than any alternative.<p>The greatest risk isn't deliberate use but accidental escalation. There have been at least a dozen documented near-misses during the nuclear era — from Able Archer 83 to the 1995 Norwegian rocket incident. As arsenals modernize with hypersonic delivery systems and AI-enabled command and control, the window for human decision-making shrinks.</p><p>Pragmatic priorities: (1) restore arms control communication channels between the U.S., Russia, and China (the absence of which is historically unprecedented and terrifying), (2) extend nuclear security cooperation to prevent theft or terrorist acquisition, (3) invest in detection and verification technology, (4) maintain the use taboo at all costs.</p><p>The bomb exists. The question is whether humanity can maintain the imperfect but essential architecture of restraint that has kept it in the silo. The answer requires constant vigilance, not complacency.</p>"
+  },
+  'hiroshima': {
+    left: "The revisionist case draws on declassified documents that fundamentally challenge the standard narrative. Eisenhower wrote that Japan was 'already defeated' and bombing was 'completely unnecessary.' MacArthur privately called it 'militarily unjustifiable.' Admiral Leahy called it barbarism 'common to the Dark Ages.'<p>Historian Tsuyoshi Hasegawa's research demonstrates that Japan's Supreme War Council was moved to surrender primarily by the Soviet declaration of war on August 8 — between the two bombings — not by the bombs themselves. The Soviet invasion eliminated Japan's last hope of negotiated peace.</p><p>The targeting of Hiroshima and Nagasaki — both overwhelmingly civilian — violated the principle of distinction that the U.S. had championed in international law. 140,000 dead in Hiroshima, 70,000 in Nagasaki, overwhelmingly non-combatants.</p><p>The uncomfortable question: if the bombs were truly necessary, why did Truman's top military advisors oppose them? The answer may involve demonstrating the weapon to the Soviet Union — making Hiroshima the first act of the Cold War rather than the last act of WWII.</p>",
+    right: "The planned invasion of Japan — Operation Downfall — projected 500,000 to 1 million American casualties based on the experience of Iwo Jima and Okinawa, where Japanese forces fought to the last man. Japanese civilian casualties would have been multiples higher, given the militarization of the population.<p>Japan's military leadership was not seeking surrender. Even after both bombings AND the Soviet invasion, the Supreme War Council deadlocked 3-3 on surrender. Emperor Hirohito's unprecedented personal intervention was required to break the tie — and a military coup was attempted to prevent the surrender broadcast.</p><p>The humanitarian calculus: the conventional firebombing of Tokyo killed more people than Hiroshima in a single night. The blockade and starvation strategy would have killed millions of Japanese civilians over months. Every alternative to the bombs involved greater total casualties. Choosing the option that ended the war fastest was the least terrible choice available.</p><p>Judging 1945 decisions by 2025 moral standards, with complete information, is the definition of hindsight bias. Truman had imperfect intelligence, a war-weary nation, and Soviet expansion to consider. He chose what he believed would save the most lives, including Japanese lives.</p>",
+    alt: "Both narratives contain truth and both involve motivated reasoning. The bombs probably weren't necessary (the weight of military opinion at the time suggests this). They probably did accelerate surrender (the Emperor explicitly cited them). Both things can be true.<p>The honest assessment: it was a morally catastrophic act that may also have been strategically consequential. Holding that tension is harder than either the 'war crime' or 'necessary evil' narrative, but it's more historically accurate.</p><p>The more important legacy is forward-looking: Hiroshima and Nagasaki created the nuclear taboo that has prevented use for 80 years. The horror of those images — the shadows burned into walls, the keloid scars, the radiation sickness — made nuclear war unthinkable in a way that abstract deterrence theory never could.</p><p>Whatever one concludes about August 1945, the lesson is clear: weapons of mass destruction must never be used again. That conviction has held for eight decades. Maintaining it is more important than settling the historical debate.</p>"
+  },
+  'churchill': {
+    left: "Churchill's own words convict him. 'I hate Indians. They are a beastly people with a beastly religion.' His response to the 1943 Bengal Famine — which killed 3 million — was to redirect food shipments away from India while blaming the victims: 'They breed like rabbits.'<p>His record includes authorizing chemical weapons against Iraqi Kurds (1920), crushing the Mau Mau uprising in Kenya (11,000 killed, 150,000 in detention camps), and opposing Indian self-governance with rhetoric indistinguishable from modern white nationalism.</p><p>The 'man of his time' defense fails: Churchill's views were extreme even by contemporary standards. Clement Attlee, Leo Amery (his own Secretary of State for India), and many contemporaries were appalled by his racism. He wasn't reflecting his era — he was on its reactionary fringe.</p><p>Being right about Hitler doesn't grant absolution for the Bengal Famine, just as Lincoln's emancipation doesn't erase the scale of Native American displacement. Great leaders can do terrible things. Acknowledging both isn't revisionism — it's completeness.</p>",
+    right: "In May 1940, when France fell, the entire rational calculation said negotiate. Halifax, Chamberlain, and most of the Cabinet favored terms. One man refused. That refusal held Britain together through the Blitz, kept democracy alive in Europe, and bought the 18 months needed for America to enter the war.<p>The counterfactual is devastating: without Churchill, Britain likely sues for peace in summer 1940. Hitler consolidates Europe. The Holocaust proceeds without opposition. The Soviet Union faces Germany alone and may fall. The postwar world is unrecognizable — and incomparably worse.</p><p>Churchill's wartime leadership wasn't just inspirational rhetoric — it was strategic brilliance: preserving the Mediterranean, organizing Lend-Lease, managing the alliance with Stalin and Roosevelt, and championing D-Day over peripheral strategies that would have prolonged the war.</p><p>His imperial views were wrong. His wartime leadership was irreplaceable. History requires holding both truths without collapsing one into the other.</p>",
+    alt: "Churchill was both a visionary war leader and a brutal imperialist. The cult of Churchill sanitizes empire; the critique minimizes the actual stakes of 1940. Honest assessment holds both simultaneously.<p>The Bengal Famine was a genuine atrocity to which Churchill's indifference was criminal — but the causal chain is complex, involving Japanese occupation of Burma, wartime shipping constraints, and local British administration failures alongside Churchill's callousness.</p><p>The resolution: celebrate the specific achievements (wartime leadership against fascism) without canonizing the whole person. Name the failures honestly (imperial racism, Bengal, Kenya) without erasing the genuine heroism. This is how mature societies handle complicated legacies.</p><p>The broader lesson: the 'hero or villain' framework is inadequate for historical figures who operated at scale. Flawed people can do indispensable things, and gratitude doesn't require hagiography. That's not moral relativism — it's moral seriousness.</p>"
+  }
+};
+
+function toggleSteelExpand(id) {
+  var el = document.getElementById(id);
+  var btn = document.getElementById('btn-' + id);
+  if (!el || !btn) return;
+  if (el.classList.contains('show')) {
+    el.classList.remove('show');
+    btn.innerHTML = '▸ Read the full case';
+  } else {
+    el.classList.add('show');
+    btn.innerHTML = '▾ Collapse';
+  }
+}
+
+function renderSteelCentral(topicKey) {
+  if (!topicKey && !currentSteelTopic) topicKey = steelManTopics[0].key;
+  if (topicKey) currentSteelTopic = topicKey;
+  else topicKey = currentSteelTopic;
+
+  // Render topic buttons
+  var topicsEl = document.getElementById('steelcentral-topics');
+  var html = '';
+  steelManTopics.forEach(function(t) {
+    html += '<button class="steelcentral-topic-btn' + (t.key === topicKey ? ' active' : '') + '" onclick="renderSteelCentral(\'' + t.key + '\')">' + t.title + '</button>';
+  });
+  topicsEl.innerHTML = html;
+
+  // Find topic data
+  var topic = steelManTopics.find(function(t) { return t.key === topicKey; });
+  if (!topic) return;
+
+  // Get expanded content if available
+  var expanded = steelManExpanded[topicKey] || {};
+
+  // Render content
+  var contentEl = document.getElementById('steelcentral-content');
+  var ch = '<div class="steelcentral-question"><h2>' + topic.question + '</h2></div>';
+  ch += '<div class="steelcentral-grid">';
+
+  var sides = [
+    { data: topic.left, cls: 'left-card', sideKey: 'left' },
+    { data: topic.right, cls: 'right-card', sideKey: 'right' },
+    { data: topic.alt, cls: 'alt-card', sideKey: 'alt' }
+  ];
+
+  sides.forEach(function(s, idx) {
+    var expandId = 'steel-expand-' + topicKey + '-' + idx;
+    ch += '<div class="steelcentral-card ' + s.cls + '">';
+    ch += '<div class="steelcentral-card-label">' + s.data.label + '</div>';
+    ch += '<div class="steelcentral-card-arg">"' + s.data.arg + '"</div>';
+    // Expand button + expanded content
+    if (expanded[s.sideKey]) {
+      ch += '<button class="steelcentral-expand-btn" id="btn-' + expandId + '" onclick="toggleSteelExpand(\'' + expandId + '\')">▸ Read the full case</button>';
+      ch += '<div class="steelcentral-expanded" id="' + expandId + '">' + expanded[s.sideKey] + '</div>';
+    }
+    ch += '<div class="steelcentral-card-voices">';
+    ch += '<div class="steelcentral-card-voices-label">Voices who\'d agree</div>';
+    ch += '<div class="steelcentral-card-voices-list">';
+    s.data.voices.forEach(function(v) {
+      ch += '<span class="steelcentral-voice-chip" onclick="openCommentatorModal(\'' + v.replace(/'/g, "\\'") + '\')">' + v + '</span>';
+    });
+    ch += '</div></div></div>';
+  });
+
+  ch += '</div>';
+  contentEl.innerHTML = ch;
+  document.getElementById('steelcentral-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Track this topic as read
+  if (typeof trackTopicRead === 'function') trackTopicRead(topicKey);
 }
 
 // Initial render
