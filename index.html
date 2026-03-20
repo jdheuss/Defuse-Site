@@ -624,6 +624,7 @@ footer {
 
 /* Event button colors */
 .event-btn.active[data-key="iran"] { background: #C0392B; }
+.event-btn.active[data-key="joekent"] { background: #B8860B; }
 .event-btn.active[data-key="anthropic"] { background: #D4A012; }
 .event-btn.active[data-key="scotus"] { background: #1B3A5C; }
 .event-btn.active[data-key="ukraine"] { background: #2E6BC0; }
@@ -1892,7 +1893,8 @@ function showPage(page) {
     <div class="section-label" style="margin-bottom:6px;">Today's Hot Topics</div>
   </div>
   <div class="topic-selector" id="event-filters">
-    <button class="topic-btn event-btn active" data-key="iran" onclick="selectEvent(this, 'iran')">🔴 Iran Military Strike</button>
+    <button class="topic-btn event-btn active" data-key="joekent" onclick="selectEvent(this, 'joekent')">🔥 Joe Kent Resignation</button>
+    <button class="topic-btn event-btn" data-key="iran" onclick="selectEvent(this, 'iran')">🔴 Iran Military Strike</button>
     <button class="topic-btn event-btn" data-key="anthropic" onclick="selectEvent(this, 'anthropic')">Anthropic vs. Trump Admin</button>
     <button class="topic-btn event-btn" data-key="scotus" onclick="selectEvent(this, 'scotus')">SCOTUS Strikes Down Tariffs</button>
     <button class="topic-btn event-btn" data-key="ukraine" onclick="selectEvent(this, 'ukraine')">Ukraine War</button>
@@ -2594,7 +2596,15 @@ var commentators = [
         source: "All In with Chris Hayes, MSNBC, consistent position on historical topics",
         url: "https://en.wikipedia.org/wiki/Chris_Hayes",
         steelman: "Hayes draws on the work of historians like Gar Alperovitz and Tsuyoshi Hasegawa, who argue Japan's surrender was primarily driven by the Soviet invasion of Manchuria, not the bombs. Newly declassified documents show that many top U.S. military leaders — including Eisenhower, MacArthur, and Leahy — opposed the bombings as militarily unnecessary."
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "The Iraq playbook is repeating — and this time a Trump insider is saying it",
+        text: "What makes Kent's resignation extraordinary isn't the substance — progressives have been saying this for months. It's that a Trump-appointed, MAGA-aligned, Special Forces veteran is saying it from inside the administration. He's not Rachel Maddow. He's not a Democrat. He's the president's own counterterrorism chief saying there was no imminent threat and Israel drove the decision. When the establishment attacks the messenger, pay attention to the message they're trying to bury.",
+        source: "All In with Chris Hayes, MSNBC, March 18, 2026",
+        url: "https://www.msnbc.com/all-in",
+        steelman: "Hayes's framing is strategically effective: by emphasizing Kent's MAGA credentials, he makes the anti-war argument harder for Republicans to dismiss as partisan. The Iraq War parallel is historically grounded — disputed intelligence, media pressure, and claims of imminent threat preceded both conflicts. Hayes's point that the messenger's identity matters more than the message itself is a shrewd observation about American political epistemology."
       }
+    
     ]
   },
   {
@@ -2787,7 +2797,15 @@ var commentators = [
         source: "The Ben Shapiro Show, Daily Wire, February 20, 2026",
         url: "https://www.dailywire.com/show/the-ben-shapiro-show",
         steelman: "Shapiro separates the policy question from the legal one — a distinction many commentators on both sides refuse to make. His argument that the remedy is congressional action, not executive fiat, is a genuinely conservative position that puts him at odds with Trump while remaining intellectually consistent with limited-government principles."
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "Kent crossed the line from policy dissent into conspiracy theory",
+        text: "There's a legitimate debate about the Iran war. Reasonable people can disagree about whether the threat was imminent enough to justify strikes. But that's not what Kent did. Kent said his wife died 'in a war manufactured by Israel.' He blamed the Iraq War on Israel. He went on Tucker's show and insinuated Israel may have been behind Charlie Kirk's assassination. That's not foreign policy realism — that's InfoWars with a security clearance.",
+        source: "The Ben Shapiro Show, Daily Wire, March 18-19, 2026",
+        url: "https://www.dailywire.com/show/the-ben-shapiro-show",
+        steelman: "Shapiro draws a useful distinction between legitimate policy disagreement (was Iran an imminent threat?) and conspiratorial thinking (Israel manufactured every Middle East war and possibly killed Charlie Kirk). This line-drawing matters: collapsing all criticism of the war into antisemitism silences legitimate debate, but collapsing all claims about Israeli influence into legitimate criticism normalizes conspiracy theories. Shapiro's framing asks where that line is."
       }
+    
     ]
   },
   {
@@ -2835,7 +2853,15 @@ var commentators = [
         source: "Tucker Carlson Show, consistent position 2022-2026",
         url: "https://tuckercarlson.com",
         steelman: "Carlson's populist argument resonates with a genuine democratic deficit: Ukraine funding was authorized through omnibus spending bills, not standalone votes where members had to take a clear position. His border comparison reflects real public frustration — polling consistently shows voters rank immigration above foreign aid."
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "Joe Kent is the bravest man I know — and he can't be dismissed as a nut",
+        text: "Joe is the bravest man I know, and he can't be dismissed as a nut. He's a Green Beret, a CIA paramilitary officer, and a Gold Star husband whose wife died in Syria. He's saying what everyone in the intelligence community knows: the Israelis drove the decision to take this action. Israel's lobbying in the United States pressured the president into a war that 77 million people voted against.",
+        source: "Tucker Carlson Show interview with Joe Kent, March 18, 2026; New York Times interview, March 18, 2026",
+        url: "https://www.nytimes.com/2026/03/18/us/politics/tucker-carlson-joe-kent-iran.html",
+        steelman: "Carlson's defense of Kent carries weight precisely because Kent is not a fringe figure — he ran Trump's counterterrorism apparatus. The 'credentials matter' framing is strategically effective: dismissing Kent as weak on security requires ignoring 11 combat deployments and a CIA career. Carlson's broader argument — that the non-interventionist right was promised 'no new wars' and got a Middle Eastern conflict — reflects genuine betrayal felt by a significant MAGA faction."
       }
+    
     ]
   },
   {
@@ -3070,7 +3096,15 @@ var commentators = [
         source: "Zeteo News, consistent position 2024-2025",
         url: "https://en.wikipedia.org/wiki/Mehdi_Hasan",
         steelman: "Hasan's skepticism about strategic ambiguity has support from foreign policy realists who argue that credible deterrence requires explicit commitments. His 'will we actually fight' challenge forces a reckoning with the gap between U.S. declaratory policy and the political reality of public support for a direct war with China."
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "Questioning Israeli influence is journalism — but Kent is a problematic messenger",
+        text: "Two things can be true: AIPAC is the most powerful foreign policy lobby in Washington and spends more than any other lobby on congressional campaigns — that's not antisemitism, that's OpenSecrets data. AND Joe Kent has documented ties to white nationalists, promoted January 6 conspiracy theories, and is now insinuating Israel killed Charlie Kirk. The right messenger with the wrong baggage. The substance deserves serious investigation. Kent himself deserves serious scrutiny.",
+        source: "Zeteo, March 18-19, 2026",
+        url: "https://zeteo.com",
+        steelman: "Hasan threads a needle that most commentators avoid: validating the policy critique while scrutinizing the person making it. His distinction between documented lobbying influence (which is measurable and legal) and conspiratorial claims (which are unfalsifiable and dangerous) provides a framework for discussing Israeli influence on U.S. policy without descending into antisemitism — or avoiding the topic entirely out of fear of the accusation."
       }
+    
     ]
   },
   {
@@ -3145,7 +3179,15 @@ var commentators = [
         source: "System Update, February 28, 2026",
         url: "https://rumble.com/c/GGreenwald",
         steelman: "Greenwald\'s framing cuts to the civil liberties core of the dispute. His decades of reporting on NSA surveillance — from the Snowden disclosures onward — give him unique credibility on mass surveillance. His argument that the controversy itself is revealing has force: if the Pentagon says it has no interest in mass surveillance, why refuse to put that in the contract?"
-      }]
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "Kent's resignation exposes the gap between 'America First' rhetoric and reality",
+        text: "Joe Kent's resignation is the clearest proof yet that 'America First' was always a slogan, never a policy. The same president who promised to end forever wars launched one against a country his own counterterrorism chief says posed no imminent threat. Kent isn't an outsider — he was inside the machine and saw who was actually driving decisions. That's why they're trying to destroy him.",
+        source: "System Update, Rumble, March 18, 2026",
+        url: "https://rumble.com/c/GlennGreenwald",
+        steelman: "Greenwald's framing connects Kent's resignation to his long-running thesis about the gap between populist rhetoric and establishment foreign policy. His point that Kent's insider status makes the claims more credible — not less — is logically sound: whistleblowers from within an administration carry more weight than external critics precisely because they had access to the information."
+      }
+    ]
   },
   {
     name: "Thomas Sowell", handle: "@ThomasSowell", category: "right-establishment",
@@ -3820,7 +3862,15 @@ var commentators = [
         source: "The Chris Cuomo Project / NewsNation, consistent position 2024-2025",
         url: "https://www.newsnat.com/shows/cuomo/",
         steelman: "Cuomo\'s post-CNN repositioning toward independence mirrors a broader trend. His argument that the center is underserved reflects polling showing more Americans identify as independent than with either party."
-      }]
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "If Israel really tricked Trump, he'd be saying it himself",
+        text: "I'll tell you one thing — we know this president well enough: if it were true that Israel tricked him into a war, he'd be saying it right now. He'd be saying 'I shouldn't have listened to Bibi.' He's not slow to throw people under the bus if they lead him into a bad position. Boy, did Kent have this wrong. I can't get anyone around Trump, other than the guy who just resigned, who gives any credence to this narrative.",
+        source: "The Chris Cuomo Project, NewsNation, March 18, 2026",
+        url: "https://townhall.com/tipsheet/dmitri-bolt/2026/03/18/chris-cuomo-blasts-joe-kent-n2673020",
+        steelman: "Cuomo's argument is disarmingly simple and hard to refute: Trump doesn't hesitate to blame others when things go wrong. If he felt manipulated by Israel, he would say so — publicly and repeatedly. The fact that Trump is defending the war and attacking Kent, rather than blaming Netanyahu, suggests Trump owns this decision. Cuomo's framing strips away the conspiracy layer and applies basic Trump-pattern-recognition that both supporters and critics can verify from experience."
+      }
+    ]
   },
   {
     name: "Jessica Tarlov", handle: "@JessicaTarlov", category: "center-left",
@@ -4170,7 +4220,15 @@ var commentators = [
         source: "The Megyn Kelly Show, SiriusXM, consistent position 2020-2025",
         url: "https://en.wikipedia.org/wiki/Megyn_Kelly",
         steelman: "Kelly's 'Ferguson effect' argument — that anti-police sentiment leads to depolicing and rising crime — is supported by research. A 2021 study in the Journal of Criminal Justice found that cities with sustained anti-police protests saw significant increases in homicides, consistent with the hypothesis that reduced proactive policing increases violent crime."
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "This war was sold by Israel firsters like Mark Levin",
+        text: "This war was sold to the American people by Israel firsters, like Mark Levin. I've supported Israel my entire career, but when your position is that America must fight every war Israel wants, regardless of American interests, you've lost the plot. Joe Kent sacrificed his wife in one of these wars. He's earned the right to question the next one.",
+        source: "The Megyn Kelly Show, March 18-19, 2026",
+        url: "https://www.pbs.org/newshour/politics/joe-kents-resignation-over-iran-war-reignites-antisemitism-fears-and-debate-over-israeli-influence",
+        steelman: "Kelly's framing is notable because she's historically been a strong Israel supporter, making her criticism harder to dismiss as ideological. Her distinction between supporting Israel's existence and supporting every Israeli policy preference maps onto a position held by many Americans. The 'Gold Star spouse' framing gives Kent moral authority that political credentials alone wouldn't provide."
       }
+    
     ]
   },
   {
@@ -4236,7 +4294,15 @@ var commentators = [
         source: "Fox News Hannity broadcast and radio show, February 27-28, 2026",
         url: "https://www.mediamatters.org/us-iran-relations/final-case-us-strikes-iran-mark-levin-and-sean-hannity",
         steelman: "Hannity frames the Iran strikes through a deterrence-and-technology lens: the threat is existential (nuclear capability), and modern precision warfare can neutralize it without the ground-war quagmire of Iraq. The Hitler analogy, while hyperbolic, reflects genuine concern about a theocratic regime pursuing nuclear weapons while funding proxy armies across the Middle East."
-      }]
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "Kent was weak on security and Trump was right to fire him",
+        text: "When the president says Iran is a threat and your own counterterrorism director disagrees, you don't go on Tucker Carlson — you hand in your badge. Which is exactly what happened. Iran has been the number one state sponsor of terrorism for 40 years. They've killed American soldiers. They were enriching uranium. The idea that they posed 'no imminent threat' is delusional, and the president was right to call Kent weak on security.",
+        source: "Hannity, Fox News, March 18, 2026",
+        url: "https://www.foxnews.com/shows/hannity",
+        steelman: "Hannity's framing reflects the mainstream Republican position backed by polling: 77% of Republicans and 90% of self-described MAGA Republicans support the strikes on Iran. His argument that subordinates who fundamentally disagree with a president's decision should resign rather than undermine it from within reflects a coherent theory of executive authority, even if critics find it authoritarian."
+      }
+    ]
   },
   {
     name: "Mark Levin", handle: "@marklevinshow", category: "right-establishment",
@@ -4248,7 +4314,15 @@ var commentators = [
         source: "The Mark Levin Show radio broadcast and Life, Liberty & Levin, February 27-28, 2026",
         url: "https://www.foxnews.com/shows/life-liberty-levin",
         steelman: "Levin's argument rests on a genuine historical record of failed diplomacy: the 2015 JCPOA sunset clauses were approaching, Iran enriched uranium beyond agreed limits multiple times, and the January 2026 massacre demonstrated the regime's willingness to kill its own citizens at scale. His constitutional argument — that Article II war powers extend to imminent threats without requiring a congressional declaration — has precedent in prior military actions from Kosovo to Libya, though critics dispute the 'imminent threat' characterization."
-      }]
+      },
+      {
+        topics: ["foreign-policy", "israel"], events: ["joekent"], title: "Kent's letter is antisemitic garbage and Kelly is an unhinged wreck",
+        text: "Joe Kent's resignation letter is dripping with the same antisemitic tropes that have gotten Jews killed for centuries — the shadowy lobby, the dual loyalty, the puppet masters pulling strings. And Megyn Kelly calling me an 'Israel firster'? I'm an America firster who understands that Iran — the world's leading state sponsor of terrorism — is a direct threat to American lives. Kent was weak on security and Trump was right to say so.",
+        source: "The Mark Levin Show, Fox News appearances, March 18-19, 2026; social media posts",
+        url: "https://www.foxnews.com/politics/mcconnell-claims-joe-kents-resignation-letter-contained-virulent-anti-semitism",
+        steelman: "Levin's antisemitism critique has historical grounding: the 'Israel lobby controls foreign policy' narrative does echo centuries-old conspiracy theories about Jewish power. His substantive argument — that Iran funds Hezbollah, Hamas, and the Houthis, has attacked U.S. forces, and was enriching uranium — presents a genuine national security case independent of Israeli interests. The accusation that Kent's framing lets Iran off the hook while scapegoating an ally is a serious rebuttal."
+      }
+    ]
   },
   {
     name: "Michael Knowles", handle: "@michaeljknowles", category: "right-establishment",
@@ -4640,7 +4714,7 @@ var commentators = [
 
 let currentTopic = 'all';
 let currentCategory = 'all';
-let currentEvent = 'iran';
+let currentEvent = 'joekent';
 
 const topicQuestions = {
   // The Big Questions
@@ -4666,6 +4740,7 @@ const topicQuestions = {
   'wealth-inequality': 'Are billionaires immoral — or proof the system works?',
   'policing': 'Does American policing need fundamental reform — or more support and resources?',
   // Today's Hot Topics
+  'joekent': 'Trump\'s counterterrorism chief Joe Kent resigned over the Iran war, saying it was driven by Israeli pressure — sparking a firestorm over foreign policy, antisemitism, and loyalty. What are commentators saying?',
   'iran': 'The U.S. and Israel launched joint strikes on Iran targeting military and nuclear sites. Iran retaliated against U.S. bases and Israel. What are commentators saying?',
   'anthropic': 'Trump banned federal use of Anthropic\'s AI after it refused to remove safeguards on autonomous weapons. Hours later, OpenAI struck a Pentagon deal. What are commentators saying?',
   'ukraine': 'The Trump administration is pushing U.S.-Russia talks on Ukraine\'s future — with Kyiv largely sidelined. What are commentators saying?',
@@ -4697,6 +4772,7 @@ const topicColors = {
   'wealth-inequality': { border: '#15803D', bg: 'rgba(21,128,61,0.06)' },
   'policing': { border: '#1E40AF', bg: 'rgba(30,64,175,0.06)' },
   // Events
+  'joekent': { border: '#B8860B', bg: 'rgba(184,134,11,0.06)' },
   'iran': { border: '#C0392B', bg: 'rgba(192,57,43,0.06)' },
   'anthropic': { border: '#D4A012', bg: 'rgba(212,160,18,0.06)' },
   'scotus': { border: '#1B3A5C', bg: 'rgba(27,58,92,0.06)' },
@@ -5012,6 +5088,12 @@ function trumpPillStyle(val) {
 // e.g. Tucker Carlson (right) and Chris Hayes (left) can both land on the anti-strikes
 // side of Iran, while Mark Levin (right) lands on the pro-strikes side.
 const precomputedStances = {
+  "event:joekent": {
+    _sideA: "Kent was right", _sideB: "Kent was wrong",
+    "Tucker Carlson": 1, "Megyn Kelly": 2, "Glenn Greenwald": 2.5,
+    "Mehdi Hasan": 3, "Chris Hayes": 3.5,
+    "Chris Cuomo": 6, "Ben Shapiro": 8, "Mark Levin": 9.5, "Tom Cotton": 9
+  },
   "event:iran": {
     _sideA: "Anti-strikes", _sideB: "Pro-strikes",
     "Sean Hannity": 10, "Mark Levin": 9.5, "Ben Shapiro": 9, "Douglas Murray": 8.5,
@@ -5212,6 +5294,7 @@ const dimensionFallbackMap = {
   'topic:maha': { dim: 'cultural', invert: true },
   'topic:policing': { dim: 'cultural', invert: true },
   'event:iran': { dim: 'foreign', invert: true },             // high foreign = dovish = anti-strikes (left arm)
+  'event:joekent': { dim: 'foreign', invert: true },           // high foreign = dovish = pro-Kent's position
   'event:anthropic': { dim: 'cultural', invert: true },        // progressive = pro-Anthropic's refusal
   'event:epstein': { dim: 'orthodoxy', invert: false },        // high orthodoxy = institutional trust
   'event:scotus': { dim: 'trade', invert: true },              // high trade = protectionist = anti-SCOTUS
