@@ -1342,7 +1342,7 @@ footer {
   .mobile-hamburger { display: none !important; }
 
   /* LANDING PAGE */
-  .hero { padding: 70px 16px 40px; min-height: auto; }
+  .hero { padding: 130px 16px 40px; min-height: auto; }
   .hero-tagline { font-size: 0.65rem !important; }
   .hero h1 { font-size: 1.7rem !important; line-height: 1.2 !important; }
   .hero-sub { font-size: 0.82rem !important; padding: 0 4px; }
@@ -1369,7 +1369,7 @@ footer {
   .compare-card p, .compare-card li { font-size: 0.75rem; }
 
   /* SPECTRUM / CONVERSATION PAGE */
-  .spectrum-page { padding-top: 45px; }
+  .spectrum-page { padding-top: 115px; }
   .topic-selector { padding: 4px 8px; gap: 4px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .topic-selector::-webkit-scrollbar { display: none; }
   .topic-btn { font-size: 0.58rem; padding: 5px 9px; white-space: nowrap; flex-shrink: 0; }
@@ -1413,7 +1413,7 @@ footer {
   .mobile-swipe-view .score-pill { font-size: 0.45rem; padding: 1px 4px; }
 
   /* COMMENTARIAT PAGE */
-  .commentariat-page { padding-top: 45px; }
+  .commentariat-page { padding-top: 115px; }
   .commentariat-grid { padding: 0 8px 30px; grid-template-columns: 1fr; gap: 8px; }
   .commentariat-filters { padding: 4px 8px; gap: 4px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .commentariat-filters::-webkit-scrollbar { display: none; }
@@ -1433,7 +1433,7 @@ footer {
   .spider-chart-container:hover { transform: scale(2.2); }
 
   /* LISTEN & LEARN PAGE */
-  .listen-page { padding-top: 45px; }
+  .listen-page { padding-top: 115px; }
   .listen-grid { grid-template-columns: 1fr; gap: 10px; padding: 0 10px; }
   .listen-col-header { font-size: 0.8rem; }
   .listen-card { padding: 10px; }
@@ -1445,7 +1445,7 @@ footer {
   .listen-ep-link { font-size: 0.65rem; }
 
   /* METHOD PAGE */
-  .method-page { padding-top: 45px; }
+  .method-page { padding-top: 115px; }
   .method-page h2 { font-size: 1.1rem; }
   .method-page h3 { font-size: 0.9rem; }
   .method-page p, .method-page li { font-size: 0.75rem; line-height: 1.55; }
@@ -1453,10 +1453,10 @@ footer {
   .method-page th, .method-page td { padding: 4px 6px; }
 
   /* ABOUT PAGE */
-  .about-page { padding-top: 45px; }
+  .about-page { padding-top: 115px; }
   .about-page h2 { font-size: 1.2rem; }
   .about-page p { font-size: 0.78rem; line-height: 1.55; }
-  .fingerprint-page { padding-top: 45px; }
+  .fingerprint-page { padding-top: 115px; }
   .quiz-header h2 { font-size: 1.3rem; }
   .quiz-question { font-size: 1.05rem; }
   .quiz-card { padding: 20px; }
@@ -8528,7 +8528,8 @@ showPage('landing');
 .ml-intro-btn:hover { background: var(--mid-blue); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,125,216,0.3); }
 
 @media (max-width: 700px) {
-  .ml-header { padding: 32px 20px 16px; }
+  .medialiteracy-page { padding-top: 115px; }
+  .ml-header { padding: 12px 20px 16px; }
   .ml-header h1 { font-size: 1.7rem; }
   .ml-game { padding: 0 14px 40px; }
   .ml-stances { grid-template-columns: 1fr; }
@@ -8858,22 +8859,28 @@ async function mlStartRound() {
 
   var summaries = null;
   try {
+    var controller = new AbortController();
+    var timeout = setTimeout(function() { controller.abort(); }, 8000);
     var resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 2000,
         messages: [{ role: 'user', content: prompt }]
       })
     });
+    clearTimeout(timeout);
     var data = await resp.json();
+    if (!data.content || !data.content.length) throw new Error('No content');
     var raw = (data.content || []).map(function(b){ return b.text || ''; }).join('');
     raw = raw.replace(/```json|```/g,'').trim();
     summaries = JSON.parse(raw);
   } catch(e) {
-    // Fallback: use original take text directly (untruncated)
+    // Fallback: use original take text directly
     summaries = {
+      topicLabel: topicDisplay,
       summaryA: leftPick.take.text,
       summaryB: centerPick.take.text,
       summaryC: rightPick.take.text,
