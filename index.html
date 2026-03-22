@@ -9143,4 +9143,16 @@ function mlShowReveal(results) {
           ? '<a class="ml-comm-source-link" href="' + take.url + '" target="_blank" rel="noopener">View source ↗</a>'
           : '') +
       '</div>';
-    cardsEl.appen
+    cardsEl.appendChild(card);
+  });
+
+  reveal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function mlNextRound() {
+  document.getElementById('ml-reveal').style.display = 'none';
+  mlStartRound();
+}
+</script>
+</body>
+</html>
