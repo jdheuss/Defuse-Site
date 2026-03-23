@@ -1626,7 +1626,7 @@ footer {
 .commonground-trigger { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; cursor: pointer; user-select: none; transition: background 0.15s; }
 .commonground-trigger:hover { background: rgba(120,110,80,0.06); }
 .commonground-trigger-left { display: flex; align-items: center; gap: 10px; }
-.commonground-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.commonground-icon { width: 26px; height: 18px; flex-shrink: 0; }
 .commonground-label { font-family: var(--mono); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6040; }
 .commonground-sublabel { font-family: var(--sans); font-size: 0.74rem; color: var(--text-muted); margin-top: 1px; }
 .commonground-chevron { width: 16px; height: 16px; color: #8a7d4a; flex-shrink: 0; transition: transform 0.25s ease; }
@@ -4777,6 +4777,7 @@ const topicQuestions = {
   'churchill': 'Was Churchill the indispensable hero of WW2 — or a deeply flawed imperialist who happened to be right about Hitler?',
   'wealth-inequality': 'Are billionaires immoral — or proof the system works?',
   'policing': 'Does American policing need fundamental reform — or more support and resources?',
+  'voter-id': 'Do voter ID laws protect election integrity — or suppress legitimate votes?',
   // Today's Hot Topics
   'joekent': 'Trump\'s counterterrorism chief Joe Kent resigned over the Iran war, saying it was driven by Israeli pressure — sparking a firestorm over foreign policy, antisemitism, and loyalty. What are commentators saying?',
   'iran': 'The U.S. and Israel launched joint strikes on Iran targeting military and nuclear sites. Iran retaliated against U.S. bases and Israel. What are commentators saying?',
@@ -4809,6 +4810,7 @@ const topicColors = {
   'churchill': { border: '#4B5563', bg: 'rgba(75,85,99,0.06)' },
   'wealth-inequality': { border: '#15803D', bg: 'rgba(21,128,61,0.06)' },
   'policing': { border: '#1E40AF', bg: 'rgba(30,64,175,0.06)' },
+  'voter-id': { border: '#6D28D9', bg: 'rgba(109,40,217,0.06)' },
   // Events
   'joekent': { border: '#B8860B', bg: 'rgba(184,134,11,0.06)' },
   'iran': { border: '#C0392B', bg: 'rgba(192,57,43,0.06)' },
@@ -7603,7 +7605,11 @@ var steelManTopics = [
   { key:'churchill', title:'Churchill in WW2', question:'Was Churchill the indispensable hero of WW2 — or a deeply flawed imperialist who happened to be right about Hitler?',
     left:{ label:'The Critical Case', arg:'Churchill was a lifelong white supremacist who called Indians "a beastly people with a beastly religion" while overseeing a famine that killed 3 million Bengalis. He used chemical weapons on Iraqi villagers, opposed Indian independence until forced, and championed empire at every turn. Being right about Hitler doesn\'t erase being wrong about everything else — it just makes the mythology more convenient.', voices:['Mehdi Hasan','Ta-Nehisi Coates','Chris Hayes'] },
     right:{ label:'The Heroic Case', arg:'In May 1940, when every rational calculation said to negotiate with Hitler, one man refused. Churchill\'s defiance held Britain together, kept democracy alive in Europe, and bought time for America to enter the war. Judge him by the standards of his time, and he was a titan. Judge him by ours, and he still saved civilization. His flaws were real; his indispensability was greater.', voices:['Niall Ferguson','Ben Shapiro','David French'] },
-    alt:{ label:'The Balanced View', arg:'Churchill was both: a visionary war leader and a brutal imperialist. Holding both truths simultaneously isn\'t weakness; it\'s historical maturity. The cult of Churchill sanitizes empire; the critique of Churchill minimizes the actual stakes of 1940. The honest assessment is that flawed people can do indispensable things, and gratitude doesn\'t require hagiography.', voices:['Andrew Sullivan','Ian Bremmer','Steven Pinker'] }}
+    alt:{ label:'The Balanced View', arg:'Churchill was both: a visionary war leader and a brutal imperialist. Holding both truths simultaneously isn\'t weakness; it\'s historical maturity. The cult of Churchill sanitizes empire; the critique of Churchill minimizes the actual stakes of 1940. The honest assessment is that flawed people can do indispensable things, and gratitude doesn\'t require hagiography.', voices:['Andrew Sullivan','Ian Bremmer','Steven Pinker'] }},
+  { key:'voter-id', title:'Voter ID', question:'Do voter ID laws protect election integrity — or suppress legitimate votes?',
+    left:{ label:'The Voting Rights Case', arg:'Voter ID laws are a solution in search of a problem. In-person voter fraud is vanishingly rare — studies consistently find rates below 0.0001%. Meanwhile, 21 million Americans lack government-issued photo ID, disproportionately Black, elderly, low-income, and rural voters. These laws don\'t protect elections — they shrink the electorate in ways that reliably benefit one party. That\'s not election security; it\'s voter suppression with a procedural mask.', voices:['Chris Hayes','Bakari Sellers','Jon Stewart'] },
+    right:{ label:'The Election Integrity Case', arg:'Every other democracy requires ID to vote. Mexico, India, Canada, France, Germany — nobody calls them racist for it. You need an ID to buy alcohol, board a plane, open a bank account, and pick up a prescription. Asking someone to prove they are who they say they are before casting a ballot isn\'t suppression — it\'s common sense. The real insult is suggesting that minority voters are somehow less capable of obtaining a free ID than anyone else.', voices:['Ben Shapiro','Scott Jennings','Megyn Kelly'] },
+    alt:{ label:'The Pragmatist View', arg:'Both sides are arguing past each other. Most Americans — including majorities of Black and Hispanic voters in every poll — support voter ID requirements. The question isn\'t whether to require ID, but how to implement it without disenfranchising anyone. The answer is straightforward: require ID, make it free, make it easy to obtain, automatically register voters, and expand the types of acceptable identification. Pair every ID requirement with a funded access program and the debate evaporates.', voices:['Nate Silver','Coleman Hughes','Bari Weiss'] }}
 ];
 var currentSteelTopic = null;
 
@@ -7734,6 +7740,12 @@ var commonGroundData = {
     "<strong>Everyone accepts that Churchill held views on race and empire that caused real harm to real people.</strong> The heroic case doesn't deny his imperialism — it argues it's outweighed by his war leadership.",
     "<strong>All positions implicitly agree that opposing Hitler in 1940 was the right call.</strong> Even the harshest Churchill critics don't argue that capitulation to Nazism would have been better.",
     "<strong>Everyone is wrestling with the same underlying question:</strong> how do we hold simultaneously true that flawed people can do indispensable things, and that their flaws still caused real suffering? The positions just resolve it differently."
+  ],
+  'voter-id': [
+    "<strong>All sides agree that every eligible citizen should be able to vote without obstruction.</strong> The disagreement is about whether ID requirements constitute an obstruction or a safeguard — not about whether voting should be accessible.",
+    "<strong>Everyone accepts that election integrity matters.</strong> The left doesn't argue that fraud is fine; the right doesn't argue that suppression is fine. Both claim to be protecting the legitimacy of the process.",
+    "<strong>All positions agree that government-issued ID should be free and easy to obtain.</strong> Even the strongest voter ID proponents accept that charging for an ID required to vote would function as a poll tax.",
+    "<strong>Polling shows large bipartisan majorities — including among Black and Hispanic voters — support some form of voter ID,</strong> suggesting the public consensus is ahead of the political debate on this issue."
   ]
 };
 
@@ -7745,7 +7757,7 @@ function toggleCommonGround(topicKey) {
 function renderCommonGround(topicKey) {
   var items = commonGroundData[topicKey];
   if (!items) return '';
-  var svgIcon = '<svg class="commonground-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="10" stroke="#8a7d4a" stroke-width="1.4" fill="rgba(138,125,74,0.07)"/><path d="M7 12c0 0 1-1.8 2.5-1.8s1.8 1.1 3.5 1.1 2.5-1.8 2.5-1.8" stroke="#8a7d4a" stroke-width="1.3" stroke-linecap="round"/><path d="M8.5 9l1 1M13.5 9l-1 1" stroke="#8a7d4a" stroke-width="1.3" stroke-linecap="round"/></svg>';
+  var svgIcon = '<svg class="commonground-icon" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="9" r="7" fill="rgba(138,125,74,0.12)" stroke="#8a7d4a" stroke-width="1.3"/><circle cx="16" cy="9" r="7" fill="rgba(138,125,74,0.12)" stroke="#8a7d4a" stroke-width="1.3"/><path d="M12 2.8 C14.2 4.4 15.2 6.6 15.2 9 C15.2 11.4 14.2 13.6 12 15.2 C9.8 13.6 8.8 11.4 8.8 9 C8.8 6.6 9.8 4.4 12 2.8 Z" fill="#D4A012" opacity="0.75"/></svg>';
   var chevron = '<svg class="commonground-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var html = '<div class="commonground-wrap">';
   html += '<div class="commonground-box" id="cg-box-' + topicKey + '">';
@@ -7867,6 +7879,11 @@ var steelManExpanded = {
     left: "Churchill's own words convict him. 'I hate Indians. They are a beastly people with a beastly religion.' His response to the 1943 Bengal Famine — which killed 3 million — was to redirect food shipments away from India while blaming the victims: 'They breed like rabbits.'<p>His record includes authorizing chemical weapons against Iraqi Kurds (1920), crushing the Mau Mau uprising in Kenya (11,000 killed, 150,000 in detention camps), and opposing Indian self-governance with rhetoric indistinguishable from modern white nationalism.</p><p>The 'man of his time' defense fails: Churchill's views were extreme even by contemporary standards. Clement Attlee, Leo Amery (his own Secretary of State for India), and many contemporaries were appalled by his racism. He wasn't reflecting his era — he was on its reactionary fringe.</p><p>Being right about Hitler doesn't grant absolution for the Bengal Famine, just as Lincoln's emancipation doesn't erase the scale of Native American displacement. Great leaders can do terrible things. Acknowledging both isn't revisionism — it's completeness.</p>",
     right: "In May 1940, when France fell, the entire rational calculation said negotiate. Halifax, Chamberlain, and most of the Cabinet favored terms. One man refused. That refusal held Britain together through the Blitz, kept democracy alive in Europe, and bought the 18 months needed for America to enter the war.<p>The counterfactual is devastating: without Churchill, Britain likely sues for peace in summer 1940. Hitler consolidates Europe. The Holocaust proceeds without opposition. The Soviet Union faces Germany alone and may fall. The postwar world is unrecognizable — and incomparably worse.</p><p>Churchill's wartime leadership wasn't just inspirational rhetoric — it was strategic brilliance: preserving the Mediterranean, organizing Lend-Lease, managing the alliance with Stalin and Roosevelt, and championing D-Day over peripheral strategies that would have prolonged the war.</p><p>His imperial views were wrong. His wartime leadership was irreplaceable. History requires holding both truths without collapsing one into the other.</p>",
     alt: "Churchill was both a visionary war leader and a brutal imperialist. The cult of Churchill sanitizes empire; the critique minimizes the actual stakes of 1940. Honest assessment holds both simultaneously.<p>The Bengal Famine was a genuine atrocity to which Churchill's indifference was criminal — but the causal chain is complex, involving Japanese occupation of Burma, wartime shipping constraints, and local British administration failures alongside Churchill's callousness.</p><p>The resolution: celebrate the specific achievements (wartime leadership against fascism) without canonizing the whole person. Name the failures honestly (imperial racism, Bengal, Kenya) without erasing the genuine heroism. This is how mature societies handle complicated legacies.</p><p>The broader lesson: the 'hero or villain' framework is inadequate for historical figures who operated at scale. Flawed people can do indispensable things, and gratitude doesn't require hagiography. That's not moral relativism — it's moral seriousness.</p>"
+  },
+  'voter-id': {
+    left: "The empirical case against voter ID laws starts with a basic question: what problem are they solving? The Brennan Center for Justice reviewed over a billion votes cast between 2000 and 2014 and found 31 credible incidents of in-person voter impersonation. That's a rate of 0.0000031%. You are more likely to be struck by lightning than to encounter voter fraud that ID requirements would prevent.<p>The impact on eligible voters, however, is measurable and significant. A 2017 study in the Journal of Politics found that strict ID laws reduced turnout by 2-3 percentage points, with the effect concentrated among Black, Hispanic, and low-income voters. The Government Accountability Office found similar disparate impact.</p><p>The 'everyone has an ID' assumption is empirically false. 21 million voting-age Americans lack government-issued photo ID. Obtaining one requires underlying documents (birth certificate, proof of address) that cost money and time — effectively functioning as a poll tax for the poorest citizens. In Texas, some voters must travel 170 miles to the nearest ID-issuing office.</p><p>The timing tells the story: voter ID laws proliferated after 2010 in states controlled by one party, often alongside gerrymandering and polling place closures in minority neighborhoods. The intent is not difficult to infer from the pattern.</p>",
+    right: "The international comparison is devastating to the anti-ID position. Voter ID is required in Canada, Mexico, France, Germany, the Netherlands, Sweden, Switzerland, India, Brazil, and virtually every functioning democracy on earth. The European Commission explicitly recommends it. The notion that requiring identification to vote is inherently racist or suppressive is an American invention unsupported by global practice.<p>Polling consistently shows overwhelming support for voter ID across all demographics. A 2023 Monmouth poll found 80% of Americans support requiring photo ID to vote — including 62% of Democrats and 77% of non-white voters. The claim that this is a partisan issue doesn't survive contact with public opinion data.</p><p>The 'fraud doesn't exist' argument confuses absence of prosecution with absence of occurrence. In-person fraud is nearly impossible to detect after the fact — if someone votes under another's name and isn't caught at the polling place, there's no evidence trail. The argument is circular: we don't find fraud because we don't look, and we don't look because we claim there's nothing to find.</p><p>Election integrity is not solely about preventing fraud — it's about maintaining public confidence in the democratic process. When 68% of Republicans and 33% of Americans overall express doubts about election integrity (Gallup, 2023), ID requirements are the simplest, cheapest way to rebuild trust.</p>",
+    alt: "The pragmatist position starts with an observation: the voter ID debate is one of the clearest examples of a policy question with an obvious compromise that both sides refuse to take because the fight itself is politically useful.<p>The data: 80% of Americans support voter ID. Simultaneously, 21 million Americans lack government-issued photo ID, with disparate impact on minority and low-income voters. Both facts are true. The policy implication is straightforward: require ID and make it universally accessible.</p><p>Several states have demonstrated this works. Georgia's voter ID law, paired with a free state ID program and expanded early voting, saw record turnout among Black voters in 2022. The predicted suppression didn't materialize — because the access provisions worked. North Carolina's law, struck down by courts for targeting Black voters 'with almost surgical precision,' lacked those provisions. The implementation matters more than the concept.</p><p>The pragmatic package: (1) require photo ID at the polls, (2) issue free IDs automatically to all registered voters, (3) accept a broad range of identification (student IDs, tribal IDs, Medicare cards), (4) implement automatic voter registration, (5) expand early voting and mail voting. This gives the right the ID requirement they want and the left the access guarantees they need. The reason it doesn't happen is that both parties benefit from the unresolved fight more than from the resolution.</p>"
   }
 };
 
@@ -7874,7 +7891,7 @@ var steelManExpanded = {
 // Each side has peaks: [{c: center 0-10 (left-to-right), h: height 0-1, s: spread}]
 // bp: bipartisan index 0-100
 var opinionDistributions = {
-  'tariffs':          { dem: [{c:6.5,h:0.7,s:1.8},{c:3,h:0.3,s:1.2}], rep: [{c:2.5,h:0.6,s:1.5},{c:7,h:0.35,s:1.3}], bp:62, note:'Unusual cross-partisan support — populists on both sides favor tariffs' },
+  'tariffs':          { dem: [{c:3,h:0.7,s:1.8},{c:7,h:0.25,s:1.2}], rep: [{c:7.5,h:0.65,s:1.5},{c:3,h:0.3,s:1.3}], bp:55, note:'Unusual cross-partisan overlap — populists on both sides favor tariffs, free-traders on both sides oppose' },
   'domestic-policy':  { dem: [{c:2.5,h:0.9,s:1.6}], rep: [{c:7.5,h:0.85,s:1.5}], bp:22, note:'Deep ideological divide on the role of government' },
   'foreign-policy':   { dem: [{c:3,h:0.7,s:2}], rep: [{c:6,h:0.5,s:1.5},{c:2,h:0.4,s:1.3}], bp:38, note:'Right is split between hawks and restraint populists' },
   'immigration':      { dem: [{c:3,h:0.8,s:1.8}], rep: [{c:8,h:0.9,s:1.3}], bp:18, note:'One of the most polarized issues in American politics' },
@@ -7894,7 +7911,8 @@ var opinionDistributions = {
   'glp1':             { dem: [{c:4,h:0.6,s:2}], rep: [{c:5,h:0.6,s:2}], bp:60, note:'Largely non-partisan — debate is medical/cultural, not political' },
   'nuclear':          { dem: [{c:3,h:0.65,s:2}], rep: [{c:6,h:0.6,s:2}], bp:50, note:'Moderate consensus on non-proliferation, disagreement on deterrence strategy' },
   'hiroshima':        { dem: [{c:3,h:0.6,s:2.2}], rep: [{c:7,h:0.75,s:1.8}], bp:35, note:'Generational divide as much as partisan — younger voters more critical' },
-  'churchill':        { dem: [{c:3.5,h:0.6,s:2.2}], rep: [{c:7,h:0.8,s:1.5}], bp:40, note:'Less partisan than cultural — historians more critical than general public' }
+  'churchill':        { dem: [{c:3.5,h:0.6,s:2.2}], rep: [{c:7,h:0.8,s:1.5}], bp:40, note:'Less partisan than cultural — historians more critical than general public' },
+  'voter-id':         { dem: [{c:3.5,h:0.5,s:1.8},{c:6.5,h:0.45,s:1.5}], rep: [{c:8,h:0.9,s:1.3}], bp:58, note:'80% of Americans support voter ID — the fight is over implementation, not the concept' }
 };
 
 function drawOpinionChart(canvasId, topicKey) {
@@ -8198,8 +8216,56 @@ showPage('landing');
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
-  flex: 1;
 }
+.ml-topic-subtitle {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+.ml-topic-text-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Explainer accordion */
+.ml-explainer {
+  margin-bottom: 16px;
+}
+.ml-explainer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.ml-explainer-toggle:hover { color: var(--text-secondary); }
+.ml-explainer-arrow {
+  font-size: 0.6rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.ml-explainer-toggle.open .ml-explainer-arrow { transform: rotate(90deg); }
+.ml-explainer-body {
+  display: none;
+  margin-top: 8px;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.ml-explainer-body.open { display: block; }
 
 /* Drop zones */
 .ml-drop-zones {
@@ -8597,7 +8663,19 @@ showPage('landing');
       <!-- Topic bar -->
       <div class="ml-topic-bar">
         <span class="ml-topic-label">Topic</span>
-        <span class="ml-topic-text" id="ml-topic-display"></span>
+        <div class="ml-topic-text-wrap">
+          <span class="ml-topic-text" id="ml-topic-display"></span>
+          <span class="ml-topic-subtitle" id="ml-topic-subtitle"></span>
+        </div>
+      </div>
+
+      <!-- Explainer accordion -->
+      <div class="ml-explainer" id="ml-explainer" style="display:none;">
+        <button class="ml-explainer-toggle" id="ml-explainer-toggle" onclick="mlToggleExplainer()">
+          <span class="ml-explainer-arrow">▶</span>
+          <span id="ml-explainer-label"></span>
+        </button>
+        <div class="ml-explainer-body" id="ml-explainer-body"></div>
       </div>
 
       <!-- Drop zones -->
@@ -8660,6 +8738,7 @@ showPage('landing');
         <div class="ml-round-score" id="ml-round-score"></div>
       </div>
       <div class="ml-reveal-cards" id="ml-reveal-cards"></div>
+      <div id="ml-common-ground-wrap" style="margin: 0 0 18px;"></div>
       <button class="ml-next-btn" onclick="mlNextRound()">Next Round →</button>
     </div>
 
@@ -8762,7 +8841,211 @@ function mlBuildTopicMap(lanes) {
   return { map: topicMap, valid: valid };
 }
 
-async function mlStartRound() {
+var ML_STATIC_ROUNDS = [
+  {
+    topic: "Iran Strikes",
+    subtitle: "Should the U.S. have struck Iran's nuclear sites?",
+    commonGround: [
+      "Iran should not be allowed to develop nuclear weapons — virtually everyone agrees on that goal.",
+      "Military action has serious risks and costs that need to be weighed honestly, whatever your view on the strikes.",
+      "The U.S. cannot sustain long-term military engagements without a clear diplomatic strategy to follow."
+    ],
+    stances: [
+      { lane: "left",   summary: "The Iran strikes were wrong. They were launched without congressional approval and risk dragging the U.S. into a wider war that no one voted for.", why: "Opposes unilateral executive war-making and prioritizes congressional authorization.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "The Iran strikes may have been justified, but military action alone is not a strategy. Whether they work depends entirely on what diplomatic follow-through comes next.", why: "Conditionally supports the action while demanding a broader strategic framework — a centrist position.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "right",  summary: "The Iran strikes were the right call. Iran was building toward a nuclear weapon, and striking its facilities was a necessary and justified use of American power.", why: "Supports assertive military deterrence against states the U.S. considers adversaries.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "Nuclear Deterrence",
+    subtitle: "Is nuclear deterrence worth the risk?",
+    commonGround: [
+      "Nuclear war would be catastrophic — no one is arguing otherwise.",
+      "Reducing the number of nuclear weapons in the world would make everyone safer.",
+      "The current situation, where multiple countries hold enough weapons to end civilization, is not stable indefinitely."
+    ],
+    explainer: { label: "What is nuclear deterrence?", text: "Nuclear deterrence is the idea that countries won't attack each other because both sides could respond with nuclear weapons, making any attack suicidal." },
+    stances: [
+      { lane: "left",   summary: "Nuclear deterrence only works by threatening to kill millions of civilians. That threat does not become safer just because it has not been carried out yet.", why: "Emphasizes the moral cost and long-run fragility of relying on nuclear threats.", commentator: { name: "Joe Rogan", role: "Host, The Joe Rogan Experience" }, take: { url: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk" } },
+      { lane: "center", summary: "Nuclear weapons are a bigger threat than most people treat them. A small annual risk of catastrophe compounds over decades into something near-inevitable — and every new nuclear state makes that worse.", why: "Applies probabilistic risk thinking rather than ideological framing.", commentator: { name: "Sam Harris", role: "Host, Making Sense Podcast" }, take: { url: "https://www.samharris.org/podcasts" } },
+      { lane: "right",  summary: "Nuclear deterrence is worth maintaining, but only if we are disciplined about when we invoke it. Using it as a backstop for every foreign policy dispute is how it eventually stops working.", why: "Prioritizes national interest and restraint over alliance commitments — a non-interventionist right position.", commentator: { name: "Tucker Carlson", role: "Host, Tucker Carlson Network" }, take: { url: "https://tuckercarlson.com" } }
+    ]
+  },
+  {
+    topic: "Healthcare System",
+    subtitle: "Why is U.S. healthcare so expensive — and who's to blame?",
+    commonGround: [
+      "U.S. healthcare costs are too high — every side agrees on that.",
+      "People should not go bankrupt or die because they cannot afford medical care.",
+      "The current system has serious failures that neither pure market nor pure government solutions have fixed."
+    ],
+    stances: [
+      { lane: "left",   summary: "The U.S. healthcare system is broken, and profit is the reason. No other comparable country spends this much and gets results this poor.", why: "Attributes the system's failures to market incentives and advocates for government-guaranteed coverage.", commentator: { name: "Robert Reich", role: "Former U.S. Secretary of Labor; Professor, UC Berkeley" }, take: { url: "https://robertreich.substack.com" } },
+      { lane: "center", summary: "U.S. healthcare is expensive because of a combination of bad market incentives and bad regulation — not just one or the other. Targeted fixes to those specific problems would do more good than a full system overhaul.", why: "Acknowledges failures on both sides rather than attributing cause to markets or government alone.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "right",  summary: "U.S. healthcare is so expensive because of government mandates and insurance middlemen, not because of the free market. More competition would bring prices down and give patients more options.", why: "Attributes cost problems to government intervention and favors market-based remedies.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "Tariffs and Trade Policy",
+    subtitle: "Are tariffs good for America?",
+    commonGround: [
+      "American manufacturing communities suffered real harm from globalization and deserve real policy responses.",
+      "Trade policy should be stable and predictable enough for businesses to plan around.",
+      "Unfair trade practices by other countries — like subsidies and IP theft — are a legitimate problem worth addressing."
+    ],
+    stances: [
+      { lane: "left",   summary: "Tariffs are bad policy. They function as a tax on everyday consumers, hit lower-income households hardest, and have not actually brought manufacturing jobs back.", why: "Frames tariffs as regressive policy that harms working people rather than protecting them.", commentator: { name: "Robert Reich", role: "Former U.S. Secretary of Labor; Professor, UC Berkeley" }, take: { url: "https://robertreich.substack.com" } },
+      { lane: "center", summary: "Whatever you think of tariffs in theory, this implementation is indefensible. Changing the rules every few weeks makes rational business planning impossible — the chaos is doing as much damage as the tariffs themselves.", why: "Critiques execution and institutional credibility rather than taking a side on the underlying trade debate.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "right",  summary: "Tariffs are a legitimate policy tool, not an extremist idea. American manufacturing collapsed because of decades of one-sided free trade deals, and rebalancing those relationships is long overdue.", why: "Supports economic nationalism and trade protection as a remedy for deindustrialization.", commentator: { name: "Tucker Carlson", role: "Host, Tucker Carlson Network" }, take: { url: "https://tuckercarlson.com" } }
+    ]
+  },
+  {
+    topic: "Immigration Enforcement",
+    subtitle: "How far should immigration enforcement go?",
+    commonGround: [
+      "Immigration law should be enforced — the disagreement is about how and against whom.",
+      "People who pose a genuine public safety risk should be a priority for enforcement.",
+      "A workable immigration system needs clear, consistent rules that are actually enforced."
+    ],
+    stances: [
+      { lane: "left",   summary: "Mass deportation of people with no criminal record is cruel and counterproductive. It tears apart families and communities without making the country any safer.", why: "Prioritizes humanitarian impact and questions the public safety rationale for broad enforcement.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "Immigration enforcement should go far enough to be credible, but no further. There is a real difference between deporting people with criminal records and deporting people who have broken no other law.", why: "Accepts the legitimacy of enforcement while drawing a distinction on who should be targeted.", commentator: { name: "Joe Rogan", role: "Host, The Joe Rogan Experience" }, take: { url: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk" } },
+      { lane: "right",  summary: "Immigration enforcement should be total and consistent — anything less is not really enforcement. Individual hardship cases cannot be the standard for deciding who the rules apply to.", why: "Frames enforcement as a rule-of-law issue that supersedes case-by-case humanitarian considerations.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "Climate Policy",
+    subtitle: "How urgently should the U.S. act on climate?",
+    commonGround: [
+      "Climate change is real and human-caused — the scientific consensus on that is not seriously disputed.",
+      "Energy policy affects ordinary households directly, and affordability matters.",
+      "Nuclear energy deserves serious consideration as part of a low-carbon energy mix."
+    ],
+    stances: [
+      { lane: "left",   summary: "Climate change is a genuine emergency and the U.S. is not treating it like one. Small market incentives will not cut it — solving this requires the scale of government investment we used in wartime.", why: "Argues that market mechanisms are insufficient and demands large-scale state intervention.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "The U.S. needs to act on climate urgently, but the activist approach is making that harder, not easier. Apocalyptic framing produces symbolic gestures instead of real solutions — and blocking nuclear energy, the most obvious fix, is indefensible.", why: "Accepts the scientific consensus while criticizing activist strategy — a centrist heterodox position.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "right",  summary: "U.S. climate policy is moving too fast and costing too much. Ordinary households are being asked to pay more now for uncertain benefits decades away — and reliable, affordable energy is not something we can afford to sacrifice.", why: "Prioritizes energy affordability and economic certainty over precautionary climate policy.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "AI and the Military",
+    subtitle: "Should the U.S. military have free rein to use AI?",
+    commonGround: [
+      "AI used in military contexts raises serious questions that deserve public debate.",
+      "Neither tech companies nor the Pentagon should be making these decisions entirely on their own.",
+      "Clear legal frameworks for AI in national security are urgently needed and do not yet exist."
+    ],
+    explainer: { label: "What does AI have to do with the military?", text: "The U.S. military wants to use AI for weapons targeting, surveillance, and battlefield decisions. The debate is whether that should have limits — and who sets them." },
+    stances: [
+      { lane: "left",   summary: "The military should face strict limits on how it uses AI — especially for weapons and surveillance. Delegating life-and-death decisions to algorithms without human accountability is dangerous and wrong.", why: "Prioritizes democratic oversight and ethical constraints on military AI use.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "center", summary: "AI in warfare needs clear rules, but those rules should come from Congress — not from tech companies deciding unilaterally what the military is allowed to buy. Both sides are overstepping.", why: "Accepts military AI use in principle while demanding democratic rather than corporate governance.", commentator: { name: "Sam Harris", role: "Host, Making Sense Podcast" }, take: { url: "https://www.samharris.org/podcasts" } },
+      { lane: "right",  summary: "The U.S. military should be able to use every legal tool available, including AI. Falling behind China on military AI because of squeamish tech companies would be a serious national security failure.", why: "Prioritizes military competitiveness and rejects corporate veto power over defense decisions.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "Free Speech and Media",
+    subtitle: "Is free speech under threat in America?",
+    commonGround: [
+      "A healthy democracy requires that people can express unpopular opinions without being silenced.",
+      "Media concentration — whether corporate or governmental — is a legitimate concern for press freedom.",
+      "The line between harmful speech and protected speech is genuinely hard to draw, and reasonable people disagree."
+    ],
+    stances: [
+      { lane: "left",   summary: "Yes, free speech is under threat — but the threat is corporate, not government. A handful of billionaires now control what most people see and hear, and that is a more serious problem than anything the government is doing.", why: "Locates the free speech threat in corporate power rather than government — a characteristic progressive reframe.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "Free speech is worth protecting not because it is a right, but because experts are often wrong — and you need dissent to find out. Shutting down unpopular views removes the only error-correction mechanism we have.", why: "Defends free speech on epistemological grounds rather than political identity or party affiliation.", commentator: { name: "Coleman Hughes", role: "Host, Conversations with Coleman" }, take: { url: "https://www.colemanhughes.org" } },
+      { lane: "right",  summary: "Free speech in America is under real pressure — not from government, but from a narrow ideological consensus that controls newsrooms, platforms, and universities all at once. That informal enforcement is just as silencing as a law.", why: "Locates the free speech threat in left-coded institutional conformity rather than government censorship.", commentator: { name: "Bari Weiss", role: "Founder, The Free Press" }, take: { url: "https://www.thefp.com" } }
+    ]
+  },
+  {
+    topic: "Israel and the Middle East",
+    subtitle: "Is Israel's military response in Gaza justified?",
+    commonGround: [
+      "The October 7th attacks were horrific and unjustifiable.",
+      "Civilian casualties in Gaza are a tragedy regardless of how you assign political blame.",
+      "A lasting resolution requires a political framework, not just military operations."
+    ],
+    explainer: { label: "What happened on October 7th?", text: "On October 7th, 2023, Hamas launched a surprise attack on Israel, killing around 1,200 people. Israel responded with a large military campaign in Gaza." },
+    stances: [
+      { lane: "left",   summary: "Israel's military campaign in Gaza has killed far too many civilians to be justified as self-defense. October 7th was horrific, but it does not make the scale of this response acceptable.", why: "Applies proportionality standards to evaluate Israeli military conduct — a characteristic progressive framing.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "Israel had every right to respond to October 7th. But the scale of civilian casualties in Gaza has gone further than self-defense requires — and both of those things can be true at the same time.", why: "Holds competing claims in tension without collapsing into either partisan position.", commentator: { name: "Sam Harris", role: "Host, Making Sense Podcast" }, take: { url: "https://www.samharris.org/podcasts" } },
+      { lane: "right",  summary: "Yes, Israel's response is justified. After October 7th, any country would have the right to defend itself — and the international condemnation directed at Israel compared to its neighbors is a glaring double standard.", why: "Defends Israel's democratic character and frames international criticism as a double standard.", commentator: { name: "Bari Weiss", role: "Founder, The Free Press" }, take: { url: "https://www.thefp.com" } }
+    ]
+  },
+  {
+    topic: "Taiwan and U.S. Foreign Policy",
+    subtitle: "Should the U.S. defend Taiwan if China invades?",
+    commonGround: [
+      "A Chinese military takeover of Taiwan would be a serious problem for the region and the world.",
+      "The U.S. should not enter a war with China without a clear public mandate and defined objectives.",
+      "Taiwan's semiconductor industry makes it strategically important to virtually every country."
+    ],
+    explainer: { label: "Why does Taiwan matter to the U.S.?", text: "Taiwan is a self-governing democracy that China considers its own territory. It also makes most of the world's advanced computer chips, making it strategically critical." },
+    stances: [
+      { lane: "left",   summary: "The U.S. should not be making open-ended military commitments to defend Taiwan. Promising to go to war with China — a nuclear power — over this is reckless and was never put to a public vote.", why: "Favors diplomatic resolution and expresses skepticism about open-ended military commitments.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "Taiwan is worth defending — it is a democracy and produces most of the world's advanced chips. But the U.S. has never been honest about what that commitment would actually cost in a real war.", why: "Conditionally supports defending Taiwan while demanding a clear-eyed cost assessment — a centrist position.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "right",  summary: "Taiwan's defense is not a core American interest. No one voted to commit U.S. soldiers to a war with China over it.", why: "Applies an America-first, non-interventionist framework — characteristic of populist right foreign policy.", commentator: { name: "Tucker Carlson", role: "Host, Tucker Carlson Network" }, take: { url: "https://tuckercarlson.com" } }
+    ]
+  },
+  {
+    topic: "MAHA and Public Health",
+    subtitle: "Are U.S. health agencies trustworthy?",
+    commonGround: [
+      "Chronic disease rates in the U.S. are too high, and the food environment plays a role.",
+      "Public health agencies should follow the best available science, free from industry influence.",
+      "Transparency about what we know — and don't know — about diet and health is overdue."
+    ],
+    explainer: { label: "What is MAHA?", text: "MAHA stands for 'Make America Healthy Again,' a movement led by RFK Jr. that argues U.S. health agencies have been corrupted by food and drug industry money." },
+    stances: [
+      { lane: "left",   summary: "U.S. health agencies cannot be fully trusted — but that is because corporations have spent decades shaping the rules those agencies enforce. The fix is stricter regulation, not less government.", why: "Attributes institutional failures to corporate capture — a left-coded structural critique that still favors government solutions.", commentator: { name: "Robert Reich", role: "Former U.S. Secretary of Labor; Professor, UC Berkeley" }, take: { url: "https://robertreich.substack.com" } },
+      { lane: "center", summary: "U.S. health agencies are not fully trustworthy — but the answer is better science, not dismantling institutions. The research on diet and chronic disease is real enough that agencies should have acted on it years ago.", why: "Evaluates health claims on scientific merits, separated from the political identity of advocates.", commentator: { name: "Sam Harris", role: "Host, Making Sense Podcast" }, take: { url: "https://www.samharris.org/podcasts" } },
+      { lane: "right",  summary: "U.S. health agencies have been captured by the industries they regulate. Dismantling and rebuilding those institutions is not extreme — it is the only way to restore public trust.", why: "Frames MAHA as necessary anti-establishment institutional reform — characteristic of the populist right.", commentator: { name: "Tucker Carlson", role: "Host, Tucker Carlson Network" }, take: { url: "https://tuckercarlson.com" } }
+    ]
+  },
+  {
+    topic: "Wealth Inequality",
+    subtitle: "Is wealth inequality a policy failure?",
+    commonGround: [
+      "Extreme poverty in a wealthy country is a moral and policy failure.",
+      "Everyone benefits when economic growth is broadly shared rather than concentrated at the top.",
+      "The rules governing taxation, wages, and market competition shape inequality — they are not natural laws."
+    ],
+    stances: [
+      { lane: "left",   summary: "Wealth inequality in America is a policy failure, not an accident. Workers produce far more than they used to, but typical pay has barely moved — because the rules were written to benefit those at the top.", why: "Attributes inequality to political decisions rather than neutral economic forces — a structural left critique.", commentator: { name: "Robert Reich", role: "Former U.S. Secretary of Labor; Professor, UC Berkeley" }, take: { url: "https://robertreich.substack.com" } },
+      { lane: "center", summary: "Extreme wealth concentration is a threat to democracy, not just fairness. When this much money sits at the top, government stops reflecting what most people want and starts reflecting what a handful of billionaires want.", why: "Frames inequality as a governance problem rather than purely a moral or economic one.", commentator: { name: "Ezra Klein", role: "Host, The Ezra Klein Show, NYT" }, take: { url: "https://www.nytimes.com/ezra-klein-podcast" } },
+      { lane: "right",  summary: "Wealth at the top is largely a result of investment and innovation creating value. Heavy redistribution through taxation can weaken the incentives and capital needed for broader economic growth.", why: "Defends capital accumulation as economically productive and frames redistribution as counterproductive.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "Policing in the United States",
+    subtitle: "Is American policing in need of reform?",
+    commonGround: [
+      "Police should be effective at reducing crime and treating everyone they encounter fairly.",
+      "Communities with high crime rates need more public safety resources, not fewer.",
+      "Officers who abuse their authority should face real accountability."
+    ],
+    stances: [
+      { lane: "left",   summary: "American policing needs serious reform. Black Americans are stopped, searched, and subjected to force at higher rates than white Americans even after accounting for where police are deployed — and that does not happen by accident.", why: "Attributes disparate outcomes to structural bias in policing rather than individual officer conduct.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "Policing reform is necessary, but defunding is the wrong answer. The problem is bad policing in some places and not enough policing in others — and any serious reform has to fix both.", why: "Holds two competing critiques in tension rather than adopting one side's frame.", commentator: { name: "Coleman Hughes", role: "Host, Conversations with Coleman" }, take: { url: "https://www.colemanhughes.org" } },
+      { lane: "right",  summary: "American policing does not need to be defunded — it needs to be better. Every city that cut its police budget saw violent crime rise, and the communities that suffered most were the ones that needed protection most.", why: "Emphasizes public safety outcomes and frames policing reduction as counterproductive.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  },
+  {
+    topic: "Gender Identity",
+    subtitle: "Should gender identity have legal recognition?",
+    commonGround: [
+      "Trans people deserve dignity and protection from discrimination.",
+      "Medical decisions — especially for minors — should be made carefully, with full information.",
+      "The law should be clear and consistent about what protections apply and in what contexts."
+    ],
+    stances: [
+      { lane: "left",   summary: "Trans people deserve full legal recognition. The medical consensus supports it, and basic equal treatment under the law requires it.", why: "Grounds transgender recognition in institutional authority — medical and constitutional — characteristic of progressive framing.", commentator: { name: "Chris Hayes", role: "Host, All In with Chris Hayes, MSNBC" }, take: { url: "https://www.msnbc.com/all-in" } },
+      { lane: "center", summary: "Gender identity deserves legal recognition for adults — that is a matter of basic autonomy. For minors, though, the evidence on long-term outcomes is limited enough that more caution is warranted before locking in irreversible decisions.", why: "Splits the question by age — supporting adult autonomy while applying a higher evidentiary bar for minors.", commentator: { name: "Sam Harris", role: "Host, Making Sense Podcast" }, take: { url: "https://www.samharris.org/podcasts" } },
+      { lane: "right",  summary: "Gender identity should not have the same legal status as biological sex. Treating them as equivalent creates real, practical conflicts in spaces like sports and prisons that were built around a distinction that is real and fixed.", why: "Rejects legal gender self-identification and prioritizes sex-based frameworks — a characteristic conservative position.", commentator: { name: "Ben Shapiro", role: "Host, The Ben Shapiro Show; Daily Wire" }, take: { url: "https://www.dailywire.com" } }
+    ]
+  }
+];
+
+function mlStartRound() {
   document.getElementById('ml-intro').style.display = 'none';
   document.getElementById('ml-reveal').style.display = 'none';
   document.getElementById('ml-round').style.display = 'none';
@@ -8771,146 +9054,55 @@ async function mlStartRound() {
   mlState.assignments = {};
   mlState.selectedStanceId = null;
 
-  var lanes = mlGetCommentatorsByLane();
-  if (!lanes.left.length || !lanes.center.length || !lanes.right.length) {
-    document.getElementById('ml-loading').style.display = 'none';
-    document.getElementById('ml-round').style.display = 'block';
-    document.getElementById('ml-stances-grid').innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem; text-align:center; padding:40px;">Could not load commentator data. Please try reloading.</p>';
-    return;
-  }
+  if (!mlState.usedIndices) mlState.usedIndices = [];
+  if (mlState.usedIndices.length >= ML_STATIC_ROUNDS.length) mlState.usedIndices = [];
 
-  // Build event map first (tightest coherence), fall back to topic map
-  var eventBuilt = mlBuildEventMap(lanes);
-  var topicBuilt = mlBuildTopicMap(lanes);
+  var remaining = ML_STATIC_ROUNDS.map(function(_, i) { return i; })
+    .filter(function(i) { return mlState.usedIndices.indexOf(i) === -1; });
+  var idx = remaining[Math.floor(Math.random() * remaining.length)];
+  mlState.usedIndices.push(idx);
 
-  if (eventBuilt.valid.length === 0 && topicBuilt.valid.length === 0) {
-    document.getElementById('ml-loading').style.display = 'none';
-    document.getElementById('ml-stances-grid').innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem; text-align:center; padding:40px;">No matching topics found.</p>';
-    document.getElementById('ml-round').style.display = 'block';
-    return;
-  }
-
-  // Merge valid keys, events preferred
-  if (!mlState.usedTopics) mlState.usedTopics = [];
-  var eventRemaining = eventBuilt.valid.filter(function(t) { return mlState.usedTopics.indexOf('event:'+t) === -1; });
-  var topicRemaining = topicBuilt.valid.filter(function(t) { return mlState.usedTopics.indexOf('topic:'+t) === -1; });
-
-  // Reset used list if exhausted
-  if (eventRemaining.length === 0 && topicRemaining.length === 0) {
-    mlState.usedTopics = [];
-    eventRemaining = eventBuilt.valid.slice();
-    topicRemaining = topicBuilt.valid.slice();
-  }
-
-  var useEvent = eventRemaining.length > 0;
-  var chosenKey, chosenMap;
-  if (useEvent) {
-    chosenKey = mlPickRandom(eventRemaining);
-    chosenMap = eventBuilt.map[chosenKey];
-    mlState.usedTopics.push('event:' + chosenKey);
-  } else {
-    chosenKey = mlPickRandom(topicRemaining);
-    chosenMap = topicBuilt.map[chosenKey];
-    mlState.usedTopics.push('topic:' + chosenKey);
-  }
-
-  var topicDisplay = chosenKey.replace(/-/g,' ').replace(/\b\w/g, function(c){return c.toUpperCase();});
-
-  // Pick one entry per lane
-  var leftPick  = mlPickRandom(chosenMap.left);
-  var centerPick = mlPickRandom(chosenMap.center);
-  var rightPick  = mlPickRandom(chosenMap.right);
-
-  // Build prompt — ask for short summaries to stay well within token budget
-  var prompt = [
-    'You are rewriting political opinions for a media literacy game where the player must guess which view is Left, Center, or Right. Your rewrites should make this genuinely difficult.',
-    '',
-    'You will be given three views on a general topic area. First, identify what specific subject ALL THREE views actually share — this becomes the topic label. Then rewrite each view to address that specific shared subject.',
-    '',
-    'Rules for the topic label:',
-    '- 4-8 words, neutral and descriptive',
-    '- Must reflect what all three views are actually arguing about — not just the broad category',
-    '- If the views are about different sub-events, find the common thread (e.g. if one is about a court ruling on tariffs and another is about tariff economics, the topic is "tariff policy and its consequences")',
-    '',
-    'Rules for the stances:',
-    '- First person, assertive tone ("I think...", "We need...", "This is...")',
-    '- 1-2 sentences only',
-    '- Every stance must clearly address the topic label — if a view is about a sub-event not shared by the others, extract the underlying argument about the broader topic instead',
-    '- Do NOT mention the commentator\'s name, outlet, or affiliation',
-    '- Avoid tribal vocabulary that immediately signals a side: systemic, marginalized, equity, woke, radical, socialist, freedom-loving, patriot, elites, working families, privilege, oppression, corporate greed, big government',
-    '- The goal is that a thoughtful reader cannot immediately tell which side said it',
-    '',
-    'Topic area: ' + topicDisplay,
-    '',
-    'View A title: "' + (leftPick.take.title || '') + '"',
-    'View A: "' + leftPick.take.text + '"',
-    '',
-    'View B title: "' + (centerPick.take.title || '') + '"',
-    'View B: "' + centerPick.take.text + '"',
-    '',
-    'View C title: "' + (rightPick.take.title || '') + '"',
-    'View C: "' + rightPick.take.text + '"',
-    '',
-    'Also write one sentence (max 15 words) for each view explaining what signals its place on the political spectrum — shown only after the player guesses.',
-    '',
-    'Respond ONLY with valid JSON. No markdown, no backticks, no preamble:',
-    '{"topicLabel":"...","summaryA":"...","summaryB":"...","summaryC":"...","whyA":"...","whyB":"...","whyC":"..."}'
-  ].join('\n');
-
-  var summaries = null;
-  try {
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 8000);
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: controller.signal,
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 2000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    clearTimeout(timeout);
-    var data = await resp.json();
-    if (!data.content || !data.content.length) throw new Error('No content');
-    var raw = (data.content || []).map(function(b){ return b.text || ''; }).join('');
-    raw = raw.replace(/```json|```/g,'').trim();
-    summaries = JSON.parse(raw);
-  } catch(e) {
-    // Fallback: use original take text directly
-    summaries = {
-      topicLabel: topicDisplay,
-      summaryA: leftPick.take.text,
-      summaryB: centerPick.take.text,
-      summaryC: rightPick.take.text,
-      whyA: 'This perspective reflects progressive/left priorities.',
-      whyB: 'This perspective reflects centrist or cross-partisan reasoning.',
-      whyC: 'This perspective reflects conservative/right priorities.'
-    };
-  }
-
-  // Build round data — shuffle display order
-  var displayTopic = (summaries && summaries.topicLabel) ? summaries.topicLabel : topicDisplay;
-  var rawStances = [
-    { id: 'A', lane: 'left', summary: summaries.summaryA, why: summaries.whyA, commentator: leftPick.commentator, take: leftPick.take },
-    { id: 'B', lane: 'center', summary: summaries.summaryB, why: summaries.whyB, commentator: centerPick.commentator, take: centerPick.take },
-    { id: 'C', lane: 'right', summary: summaries.summaryC, why: summaries.whyC, commentator: rightPick.commentator, take: rightPick.take }
-  ];
-  var shuffled = mlShuffleArray(rawStances);
-  // Renumber display
+  var round = ML_STATIC_ROUNDS[idx];
+  var shuffled = mlShuffleArray(round.stances.map(function(s, i) {
+    return { id: String.fromCharCode(65 + i), lane: s.lane, summary: s.summary, why: s.why, commentator: s.commentator, take: s.take };
+  }));
   shuffled.forEach(function(s, i) { s.displayNum = i + 1; });
 
-  mlState.currentRound = { topic: displayTopic, stances: shuffled };
+  mlState.currentRound = { topic: round.topic, subtitle: round.subtitle || '', explainer: round.explainer || null, commonGround: round.commonGround || [], stances: shuffled };
   mlState.round++;
 
   document.getElementById('ml-loading').style.display = 'none';
   mlRenderRound();
 }
 
+function mlToggleMLCommonGround() {
+  var box = document.getElementById('ml-cg-box');
+  if (box) box.classList.toggle('open');
+}
+
+function mlToggleExplainer() {
+  var toggle = document.getElementById('ml-explainer-toggle');
+  var body = document.getElementById('ml-explainer-body');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
 function mlRenderRound() {
   var round = mlState.currentRound;
   document.getElementById('ml-topic-display').textContent = round.topic;
+  document.getElementById('ml-topic-subtitle').textContent = round.subtitle || '';
+  var explainerEl = document.getElementById('ml-explainer');
+  var explainerToggle = document.getElementById('ml-explainer-toggle');
+  var explainerBody = document.getElementById('ml-explainer-body');
+  if (round.explainer) {
+    document.getElementById('ml-explainer-label').textContent = round.explainer.label;
+    explainerBody.textContent = round.explainer.text;
+    explainerEl.style.display = 'block';
+    explainerToggle.classList.remove('open');
+    explainerBody.classList.remove('open');
+  } else {
+    explainerEl.style.display = 'none';
+  }
 
   // Reset drop zones
   ['left','center','right'].forEach(function(zone) {
@@ -9145,6 +9337,29 @@ function mlShowReveal(results) {
       '</div>';
     cardsEl.appendChild(card);
   });
+
+  // Render common ground
+  var cgWrap = document.getElementById('ml-common-ground-wrap');
+  var cgItems = mlState.currentRound.commonGround || [];
+  if (cgItems.length) {
+    var svgIcon = '<svg class="commonground-icon" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="9" r="7" fill="rgba(138,125,74,0.12)" stroke="#8a7d4a" stroke-width="1.3"/><circle cx="16" cy="9" r="7" fill="rgba(138,125,74,0.12)" stroke="#8a7d4a" stroke-width="1.3"/><path d="M12 2.8 C14.2 4.4 15.2 6.6 15.2 9 C15.2 11.4 14.2 13.6 12 15.2 C9.8 13.6 8.8 11.4 8.8 9 C8.8 6.6 9.8 4.4 12 2.8 Z" fill="#D4A012" opacity="0.75"/></svg>';
+    var chevron = '<svg class="commonground-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var cgHtml = '<div class="commonground-box" id="ml-cg-box">';
+    cgHtml += '<div class="commonground-trigger" onclick="mlToggleMLCommonGround()">';
+    cgHtml += '<div class="commonground-trigger-left">' + svgIcon;
+    cgHtml += '<div><div class="commonground-label">Common Ground</div><div class="commonground-sublabel">Shared ideas across all positions</div></div>';
+    cgHtml += '</div>' + chevron + '</div>';
+    cgHtml += '<div class="commonground-body"><ul class="commonground-list">';
+    cgItems.forEach(function(item) {
+      cgHtml += '<li class="commonground-item"><div class="commonground-item-dot"></div><div class="commonground-item-text">' + item + '</div></li>';
+    });
+    cgHtml += '</ul></div></div>';
+    cgWrap.innerHTML = cgHtml;
+    cgWrap.style.display = 'block';
+  } else {
+    cgWrap.innerHTML = '';
+    cgWrap.style.display = 'none';
+  }
 
   reveal.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
