@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>Defuse — Less Polarization, More Conversation</title>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -43,6 +44,26 @@ body {
 .landing { min-height: 100vh; }
 
 /* --- Spectrum Bar --- */
+/* --- Beta Wall --- */
+#beta-wall {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 10000;
+  background: #f8f6f0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+#beta-wall.hidden { display: none; }
+.beta-inner { text-align: center; max-width: 380px; padding: 2rem; width: 100%; }
+.beta-inner .beta-logo-mark { margin-bottom: 12px; }
+.beta-inner .beta-wordmark { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.5px; margin-bottom: 24px; }
+.beta-inner .beta-desc { font-size: 15px; color: #6b7280; line-height: 1.6; margin: 0 0 28px; }
+.beta-input { width: 100%; padding: 14px 18px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 10px; font-size: 15px; font-family: inherit; background: white; outline: none; box-sizing: border-box; margin-bottom: 12px; transition: border-color 0.2s; }
+.beta-input:focus { border-color: #7B4EA0; }
+.beta-btn { width: 100%; padding: 14px; background: #1a1a1a; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background 0.2s; }
+.beta-btn:hover { background: #333; }
+.beta-error { color: #D83B3B; font-size: 13px; margin-top: 10px; display: none; }
+.beta-footer { font-size: 12px; color: #9ca3af; margin-top: 20px; line-height: 1.5; }
+.beta-footer a { color: #7B4EA0; text-decoration: none; }
+
 .spectrum-bar {
   height: 6px;
   background: linear-gradient(to right, 
@@ -88,9 +109,8 @@ nav {
   display: flex;
   gap: 32px;
   align-items: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
+  padding-left: 40px;
 }
 .nav-links a {
   font-size: 0.9rem;
@@ -973,6 +993,7 @@ footer {
 
 /* ===== COMMENTARIAT PAGE ===== */
 .commentariat-page { display: none; min-height: 100vh; padding-top: 80px; }
+.commentariat-page.ml-banner-active { padding-top: 144px; }
 
 .commentariat-header {
   text-align: center;
@@ -1705,6 +1726,56 @@ footer {
 </head>
 <body>
 
+<div id="beta-wall">
+  <div class="beta-inner">
+    <svg class="beta-logo-mark" width="48" height="72" viewBox="0 0 20 30">
+      <defs>
+        <linearGradient id="bw1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="50%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient>
+        <linearGradient id="bw2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="50%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient>
+      </defs>
+      <path d="M3 12 C3 1.5, 3 0, 10 0 C17 0, 17 1.5, 17 12" fill="none" stroke="url(#bw2)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M3 18 C3 28.5, 3 30, 10 30 C17 30, 17 28.5, 17 18" fill="none" stroke="url(#bw1)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div class="beta-wordmark">DEFUSE</div>
+    <p class="beta-desc">We're building something new. Defuse is in private beta &mdash; enter the access code to continue.</p>
+    <input type="password" class="beta-input" id="beta-code" placeholder="Access code" autocomplete="off" />
+    <button class="beta-btn" id="beta-submit" onclick="checkBetaCode()">Enter</button>
+    <div class="beta-error" id="beta-error">Incorrect access code. Please try again.</div>
+    <p class="beta-footer">Interested in early access? Reach out at<br/><a href="mailto:hello@defuse.us">hello@defuse.us</a></p>
+  </div>
+</div>
+
+<script>
+var BETA_HASH = '5e85df6a5ea6283d5c2878fc0c85681b23e5b48b71fb2c108620f67520f0093f';
+async function sha256(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+}
+function checkBetaAccess() {
+  if (localStorage.getItem('defuse_beta_access') === 'granted') {
+    document.getElementById('beta-wall').classList.add('hidden');
+  }
+}
+async function checkBetaCode() {
+  var code = document.getElementById('beta-code').value.trim().toLowerCase();
+  var hash = await sha256(code);
+  if (hash === BETA_HASH) {
+    localStorage.setItem('defuse_beta_access', 'granted');
+    document.getElementById('beta-wall').classList.add('hidden');
+  } else {
+    document.getElementById('beta-error').style.display = 'block';
+    document.getElementById('beta-code').value = '';
+    document.getElementById('beta-code').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded', checkBetaAccess);
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('beta-code').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkBetaCode();
+  });
+});
+</script>
+
 <script>
 // Early-load navigation function so it's available immediately on mobile
 function showPage(page) {
@@ -1715,6 +1786,14 @@ function showPage(page) {
   for (var i = 0; i < pages.length; i++) {
     var el = document.getElementById(pages[i] + '-page');
     if (el) el.style.display = (pages[i] === page) ? 'block' : 'none';
+  }
+  if (page !== 'commentariat' && window.__mlFromQuiz) {
+    window.__mlFromQuiz = false;
+    var banner = document.getElementById('ml-quiz-back-banner');
+    if (banner) banner.style.display = 'none';
+    var cp3 = document.getElementById('commentariat-page'); if (cp3) cp3.classList.remove('ml-banner-active');
+    var ctx = document.getElementById('ml-comm-context');
+    if (ctx) { ctx.style.display = 'none'; ctx.textContent = ''; }
   }
   if (page === 'spectrum' && typeof renderCards === 'function') renderCards();
   if (page === 'commentariat' && typeof renderCommentariat === 'function') renderCommentariat();
@@ -2031,6 +2110,7 @@ function showPage(page) {
   </div>
 
   <div class="comm-count" id="comm-count"></div>
+  <div id="ml-comm-context" style="display:none; margin:0 24px 0; padding:12px 16px; background:#2A5425; color:white; font-family:var(--sans); font-size:0.82rem; font-weight:500; border-radius:8px; font-style:normal;"></div>
   <div class="commentariat-grid" id="commentariat-grid"></div>
 
   <footer>
@@ -2571,6 +2651,15 @@ function showPage(page) {
     var cp = document.getElementById('commentariat-page');
     if (cp) cp.classList.add('page-transition');
     if (typeof renderCommentariat === 'function') renderCommentariat();
+  }
+  if (page !== 'commentariat' && window.__mlFromQuiz) {
+    window.__mlFromQuiz = false;
+    var mlBanner = document.getElementById('ml-quiz-back-banner');
+    if (mlBanner) mlBanner.style.display = 'none';
+    var mlCp = document.getElementById('commentariat-page');
+    if (mlCp) { mlCp.classList.remove('ml-banner-active'); mlCp.style.paddingTop = ''; }
+    var mlCtx = document.getElementById('ml-comm-context');
+    if (mlCtx) { mlCtx.style.display = 'none'; mlCtx.textContent = ''; }
   }
   window.scrollTo(0, 0);
 }
@@ -3123,7 +3212,29 @@ var commentators = [
         source: "The Rachel Maddow Show, MSNBC, February 28, 2026",
         url: "https://www.ms.now/ms-now/watch/trump-s-iran-attack-made-perilous-by-weak-justifications-poor-planning-2489866307620",
         steelman: "Rhodes draws on his direct experience negotiating the Iran nuclear deal to argue that military action without diplomatic follow-through creates failed states. The Libya and Iraq precedents — where regime change produced years of civil war — support his warning that destroying a government is far easier than building a stable replacement."
-      }]
+      },
+{
+        topics: ["foreign-policy", "israel"], events: ["iran", "joekent"], title: "If you vote for the funding of this war, you should be primaried",
+        text: "If you vote for the funding of this war, you should be primaried. I don't want you in the Democratic Party. I helped negotiate the Iran nuclear deal. I watched it work. Iran was complying. Trump ripped it up for no reason other than to undo Obama's legacy, and now we're bombing the country we had a deal with. This is the Iraq War sequel — same lies, same playbook, same people getting rich while other people's kids die.",
+        source: "Jewish Insider report on Pod Save the World, March 2026; Pod Save the World episodes March 4-18, 2026",
+        url: "https://jewishinsider.com/2026/03/ben-rhodes-democrats-iran-war-support-primaries/",
+        steelman: "Rhodes's position carries weight because he personally negotiated the JCPOA and watched it function. His call to primary pro-war Democrats is a concrete political threat, not just rhetoric — and it reflects a genuine faction within the party that views the Iran war as a repeat of the Iraq authorization vote that haunted Democratic careers for a generation."
+      },
+{
+        topics: ["foreign-policy"], events: ["ukraine"], title: "We abandoned Ukraine the moment it became politically inconvenient",
+        text: "The lesson of Ukraine is that American security guarantees are only as durable as the next election cycle. We encouraged Ukraine to give up its nuclear weapons. We promised to defend its sovereignty. Then we slow-walked aid, turned it into a partisan football, and eventually abandoned them to negotiate under duress. Every ally in the world is watching and drawing the obvious conclusion.",
+        source: "Pod Save the World, consistent position 2023-2026; After the Fall, Substack",
+        url: "https://crooked.com/podcast-series/pod-save-the-world/",
+        steelman: "Rhodes's credibility critique is grounded in the 1994 Budapest Memorandum, where the U.S. pledged to respect Ukraine's sovereignty in exchange for its nuclear arsenal. The argument that abandoned commitments undermine the entire alliance structure is a standard realist concern shared across the political spectrum."
+      },
+{
+        topics: ["ai-tech", "foreign-policy"], events: ["anthropic"], title: "AI companies may be the last check on military overreach",
+        text: "When an AI company tells the Pentagon 'no, we won't build your autonomous weapons system,' that might be the only meaningful resistance left in the system. Congress won't do oversight. The courts won't intervene. The press is cheerleading. The last people standing between us and fully automated warfare might be a handful of tech companies with ethics policies — and that should terrify everyone.",
+        source: "Pod Save the World discussion of Anthropic-Pentagon dispute, February 2026",
+        url: "https://crooked.com/podcast-series/pod-save-the-world/",
+        steelman: "Rhodes's framing highlights a genuine institutional failure: if the traditional checks on military power (Congress, courts, media) have abdicated their roles, private companies become de facto gatekeepers by default. Whether that's appropriate is debatable, but the observation that it's happening is accurate."
+      }
+    ]
   },
   {
     name: "Matthew Yglesias", handle: "@mattyglesias", category: "center-left",
@@ -3331,7 +3442,29 @@ var commentators = [
         source: "New Discourses, consistent position 2024-2025",
         url: "https://newdiscourses.com/",
         steelman: "Lindsay\'s detailed analysis of DEI training materials provides specific evidence for the claim that these programs go beyond anti-discrimination into ideological conformity. His Grievance Studies affair demonstrated how ideology can compromise academic standards."
-      }]
+      },
+{
+        topics: ["culture", "domestic-policy"], events: [], title: "DEI is not about diversity — it's about installing a political monoculture",
+        text: "Diversity, equity, and inclusion sounds like motherhood and apple pie until you realize what it means in practice: diversity of skin color, not thought. Equity of outcome, not opportunity. Inclusion of approved identities, not dissenting views. DEI offices function as political commissariats that enforce ideological conformity under the guise of fairness. The question isn't whether you support diversity — it's whether you support the specific power structure that has hijacked the word.",
+        source: "New Discourses; Race Marxism (2022); public lectures 2021-2025",
+        url: "https://newdiscourses.com",
+        steelman: "Lindsay's semantic critique has analytical value: the gap between the ordinary-language meaning of 'diversity' and its institutional implementation is documented. Studies of DEI training programs show mixed results on actual inclusion outcomes, and some evidence of backlash effects — supporting his claim that the institutional practice diverges from the stated goal."
+      },
+{
+        topics: ["culture", "free-speech"], events: [], title: "The 'Grievance Studies' hoax proved that ideological journals will publish anything that confirms the narrative",
+        text: "We submitted 20 deliberately absurd papers to leading academic journals in gender studies, queer studies, and critical race theory. Seven were accepted, including one that rewrote a chapter of Mein Kampf in feminist terminology. If a field's peer review process can't distinguish satire from scholarship, the field has no quality control. These aren't fringe journals — they're the ones producing the theories that end up in corporate DEI training and school curricula.",
+        source: "The Grievance Studies Affair, 2018; New Discourses",
+        url: "https://en.wikipedia.org/wiki/Grievance_studies_affair",
+        steelman: "The Grievance Studies hoax produced verifiable results: seven papers accepted or published in peer-reviewed journals, including one based on Mein Kampf. The hoax was covered by the New York Times, Wall Street Journal, and major outlets. While critics argue it cherry-picked vulnerable journals, the scale of success raised legitimate questions about methodological rigor in certain academic subfields."
+      },
+{
+        topics: ["culture"], events: [], title: "Critical theory is not scholarship — it is activism wearing an academic costume",
+        text: "Critical race theory, queer theory, postcolonial theory — these are not neutral analytical frameworks. They are explicitly activist projects designed to produce predetermined conclusions. When the theory says that all disparities are caused by oppression, and any evidence to the contrary is just more proof of how deep the oppression goes, you don't have a theory — you have a religion. A theory that can't be falsified isn't science. It's theology.",
+        source: "New Discourses; Cynical Theories (2020, co-authored with Helen Pluckrose)",
+        url: "https://newdiscourses.com",
+        steelman: "Lindsay's unfalsifiability critique echoes Popper's foundational work on the demarcation problem in philosophy of science. His observation that some critical theory frameworks are designed so that counter-evidence reinforces rather than challenges the theory is a specific, testable claim that philosophy of science scholars have engaged with seriously."
+      }
+    ]
   },
   {
     name: "Peter Boghossian", handle: "@peterboghossian", category: "out-of-box",
@@ -3442,7 +3575,29 @@ var commentators = [
         source: "The Rubin Report, consistent position 2020-2025",
         url: "https://www.youtube.com/@RubinReport",
         steelman: "Rubin\'s political journey from progressive to conservative, driven primarily by free speech concerns, mirrors a broader realignment of voters who feel politically homeless."
-      }]
+      },
+{
+        topics: ["free-speech", "culture"], events: [], title: "I didn't leave the left — the left left me",
+        text: "I was a progressive. I worked for The Young Turks. I believed in free speech, individual rights, and judging people by the content of their character. Then progressivism decided those were conservative values. When the left started demanding ideological conformity, policing language, and canceling people for asking questions, I didn't move right — the ground shifted under my feet. Classical liberalism is now a right-wing position, and that tells you everything about where the left has gone.",
+        source: "The Rubin Report, consistent theme 2016-2025; Don't Burn This Book (2020)",
+        url: "https://rubinreport.com",
+        steelman: "Rubin's 'political realignment' narrative resonates with a significant cohort of former liberals who feel the progressive movement moved past them. Polling data on free speech attitudes supports his directional claim: younger progressives are significantly more likely than older liberals to support speech restrictions, suggesting a genuine generational shift."
+      },
+{
+        topics: ["free-speech"], events: [], title: "Big Tech censorship is the free speech crisis of our generation",
+        text: "The First Amendment protects you from the government. It doesn't protect you from Google, YouTube, Facebook, and Apple acting as a coordinated censorship cartel. When five companies control how 90% of information reaches the public and they all share the same ideological bias, 'build your own platform' isn't a real answer — it's a dodge. We need either antitrust action or platform neutrality requirements. The status quo is untenable.",
+        source: "The Rubin Report, consistent position 2019-2025",
+        url: "https://rubinreport.com",
+        steelman: "Rubin's argument about concentrated private power over speech echoes concerns raised by both left-wing media critics and conservative legal scholars. The observation that a handful of platforms control most information distribution is factually correct and raises genuine First Amendment-adjacent questions about the public square in a digital age."
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "The anti-war right is proving that principle matters more than party loyalty",
+        text: "Tucker Carlson, Joe Kent, Megyn Kelly, Dave Smith — these are all people who supported Trump, campaigned for Trump, voted for Trump. And they're standing up and saying this war is wrong. That takes more courage than anything the left is doing right now, because they're risking their audience, their relationships, and their access. When your own side holds you accountable, that's how democracy is supposed to work.",
+        source: "The Rubin Report, March 2026",
+        url: "https://rubinreport.com",
+        steelman: "Rubin's framing highlights a genuine political phenomenon: intra-coalition dissent is historically rarer and more politically costly than cross-party criticism. The anti-war MAGA figures he cites are indeed risking significant social and professional capital by opposing a popular president within their own movement."
+      }
+    ]
   },
   {
     name: "Dave Smith", handle: "@ComicDaveSmith", category: "right-populist",
@@ -3453,7 +3608,29 @@ var commentators = [
         source: "Part of the Problem podcast, consistent position 2024-2025",
         url: "https://gasdigital.com/part-of-the-problem/",
         steelman: "Smith\'s consistent anti-interventionism applies to both parties. His argument that America\'s post-9/11 wars produced the very instability they claimed to prevent is supported by evidence from Iraq, Libya, and Syria."
-      }]
+      },
+{
+        topics: ["foreign-policy", "israel"], events: ["iran"], title: "I voted for Trump and now I'm calling for his impeachment over Iran",
+        text: "I voted for this man. I told my audience to vote for him. He looked us in the eye and said 'no new wars.' Now he's bombing a country that every intelligence agency agrees was not building a nuclear weapon, in violation of the Constitution and the UN Charter, because Israel wanted it. I was wrong about Trump. But the bigger issue is that the anti-war right needs to stop making excuses and hold him accountable — including impeachment.",
+        source: "Zeteo interview with Mehdi Hasan, June 2025; Part of the Problem, consistent position February-March 2026",
+        url: "https://zeteo.com/p/libertarian-comedian-and-ex-trump-supporter-says-maga-will-turn-on-trump",
+        steelman: "Smith's call for impeachment from the pro-Trump right is politically significant precisely because of his credibility with libertarian and MAGA audiences. His argument that the strikes violated Article I of the Constitution (Congress's war power) is a straightforward legal claim that constitutional conservatives should take seriously regardless of partisan loyalty."
+      },
+{
+        topics: ["foreign-policy", "israel"], events: ["iran"], title: "Iran was not seeking nuclear weapons — that's the CIA, Mossad, DNI and IAEA consensus",
+        text: "No one said you should trust Iran. I'm not relying on a single Iranian source to conclude that they are not seeking nuclear weapons. It is the unanimous conclusion of the Mossad, the CIA, the DNI and the IAEA. 'The largest state sponsor of terrorism' — care to show your work on that claim? Give me an objective definition of terrorism and demonstrate that Iran funds it most. What terrorism does Iran fund? Al Qaeda and ISIS? They fight wars against them.",
+        source: "Dave Smith, X/Twitter post, March 2026; Part of the Problem podcast",
+        url: "https://x.com/ComicDaveSmith/status/1936091890882887890",
+        steelman: "Smith's argument is grounded in publicly available intelligence assessments: the 2007 and 2011 U.S. National Intelligence Estimates both concluded Iran had halted its nuclear weapons program. The IAEA has consistently reported compliance with the JCPOA. His challenge to define 'terrorism' objectively highlights how the term is applied selectively in U.S. foreign policy discourse."
+      },
+{
+        topics: ["domestic-policy"], events: [], title: "The libertarian case against the two-party system is that both parties agree on everything that matters",
+        text: "Republicans and Democrats disagree about pronouns and tax rates. They agree on endless war, mass surveillance, corporate bailouts, the Federal Reserve, the drug war, and the national security state. The things they fight about on cable news are the things that don't threaten the power structure. The things they quietly agree on are the things that keep it in place. That's not a coincidence — it's the system working as designed.",
+        source: "Part of the Problem, consistent libertarian framework 2018-2026; Joe Rogan appearances",
+        url: "https://partoftheproblem.com",
+        steelman: "Smith's structural critique has empirical support: bipartisan consensus on military spending, surveillance authorities (FISA reauthorizations), and financial system bailouts has persisted across administrations. His framing that partisan conflict serves as a distraction from shared elite interests echoes both left-wing (Chomsky) and right-wing (Ron Paul) critiques of the political establishment."
+      }
+    ]
   },
   {
     name: "John Stossel", handle: "@JohnStossel", category: "center-right",
@@ -3542,7 +3719,29 @@ var commentators = [
         source: "Quillette, consistent editorial position 2024-2025",
         url: "https://quillette.com/",
         steelman: "Lehmann built Quillette to publish heterodox research mainstream outlets wouldn\'t touch. Its track record of platforming viewpoints later vindicated by evidence validates her case for empirical centrism."
-      }]
+      },
+{
+        topics: ["free-speech", "culture"], events: [], title: "The marketplace of ideas only works if all ideas can actually enter the market",
+        text: "I founded Quillette because there were ideas that couldn't get published anywhere else — not because they were wrong, but because they were unfashionable. When academics can't publish findings about sex differences in cognition, or journalists can't question progressive orthodoxy on gender or race without losing their jobs, the marketplace of ideas has a supply-side problem.",
+        source: "Quillette founding philosophy; Claire Lehmann interviews 2018-2025",
+        url: "https://quillette.com",
+        steelman: "Lehmann's observation that heterodox ideas face institutional barriers, not just counter-arguments, is supported by survey data showing self-censorship rates above 60% among academics. The distinction between ideas being 'wrong' and 'unfashionable' is epistemologically important — scientific progress often requires publishing unfashionable findings."
+      },
+{
+        topics: ["gender-identity", "culture"], events: [], title: "Denying biological sex differences isn't progressive — it's anti-scientific",
+        text: "The science on sex differences is not controversial among researchers — it's controversial among activists. Males are on average stronger, more physically aggressive, and have different hormonal profiles. Females have on average stronger verbal skills and emotional recognition. Acknowledging this doesn't make you a sexist. Denying it makes you anti-science. You can believe in equal rights and equal dignity while accepting that men and women are not biologically identical.",
+        source: "Quillette editorial positions; Claire Lehmann, consistent position 2018-2025",
+        url: "https://quillette.com",
+        steelman: "Lehmann's position aligns with the scientific consensus on sexual dimorphism while explicitly decoupling biological observations from normative claims about rights or worth. The distinction between 'equal' and 'identical' is philosophically rigorous and reflects mainstream evolutionary psychology."
+      },
+{
+        topics: ["ai-tech"], events: [], title: "AI safety panic is the new climate alarmism — real risk, hysterical response",
+        text: "There are real risks from AI — job displacement, deepfakes, algorithmic bias. But the existential risk narrative — that AI will destroy humanity within a decade — functions more like a religious prophecy than a scientific assessment. It's being used to justify regulatory capture by a handful of large companies who want to pull the ladder up behind them. The biggest short-term AI risk isn't superintelligence — it's incumbents using safety rhetoric to kill competition.",
+        source: "Quillette coverage of AI safety debate; Claire Lehmann commentary, 2023-2025",
+        url: "https://quillette.com",
+        steelman: "Lehmann's regulatory capture argument echoes concerns from open-source AI advocates and smaller companies. The observation that safety regulation tends to benefit incumbents who can afford compliance costs is well-documented in other industries (banking, pharmaceuticals) and represents a genuine tension in AI governance."
+      }
+    ]
   },
   {
     name: "Rachel Maddow", handle: "@maddow", category: "left-sj",
@@ -3782,7 +3981,29 @@ var commentators = [
         source: "Pod Save America / Offline podcast, consistent position 2024-2025",
         url: "https://crooked.com/podcast-series/pod-save-america/",
         steelman: "Pfeiffer\'s argument that 2024 was a communication failure, not a policy failure, draws on his experience as Obama\'s communications director."
-      }]
+      },
+{
+        topics: ["domestic-policy", "culture"], events: [], title: "Democrats failed to win the messaging war because they stopped fighting it",
+        text: "The Democratic Party has a communications problem that no amount of policy papers will fix. Republicans have Fox News, talk radio, podcasts, YouTube, and a president who dominates social media. Democrats have... a really well-researched white paper that no one reads. We keep bringing binders to a knife fight. Until Democrats build a media ecosystem that matches the right's, we will keep losing winnable arguments.",
+        source: "Pod Save America, consistent theme 2020-2026; Battling the Big Lie (book)",
+        url: "https://crooked.com/podcast-series/pod-save-america/",
+        steelman: "Pfeiffer's diagnosis is supported by media consumption data: conservative media reaches far more Americans through far more platforms than progressive media. His argument that institutional advantages in communication infrastructure matter more than policy substance reflects real asymmetries in how political information reaches voters."
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "Democrats need to oppose this war loudly — not whisper about it",
+        text: "The lesson of the Iraq War authorization vote is that Democratic politicians who go along with a Republican president's war to avoid looking weak end up looking worse. Every Democrat who voted for Iraq spent the next decade apologizing. This is that vote again. The party needs to be unified, loud, and unambiguous: this war is illegal, unnecessary, and a betrayal of the voters who chose Trump because he promised no new wars.",
+        source: "Pod Save America, March 2026",
+        url: "https://crooked.com/podcast-series/pod-save-america/",
+        steelman: "Pfeiffer's Iraq analogy is historically grounded: the 2002 authorization vote haunted Hillary Clinton's 2008 campaign and numerous Senate Democrats for years. His political calculation — that opposing the war is both morally right and electorally smart — reflects polling showing majority opposition to the Iran conflict among Democrats and independents."
+      },
+{
+        topics: ["ai-tech", "culture"], events: [], title: "Democrats are sleepwalking into irrelevance on AI and tech policy",
+        text: "While Republicans are courting Silicon Valley and rolling back regulation, Democrats are still arguing about whether tech companies are too big or too powerful — without offering any coherent vision for what the AI economy should look like. We're about to have the most consequential technology shift since the internet and the Democratic Party's position is basically 'we'll get back to you.' That's not good enough.",
+        source: "Pod Save America, tech policy discussions 2024-2025",
+        url: "https://crooked.com/podcast-series/pod-save-america/",
+        steelman: "Pfeiffer identifies a genuine strategic gap: the Trump administration's deregulatory approach to AI has attracted significant tech industry support, while Democrats have not articulated a compelling alternative vision that balances innovation with worker protection. The party's internal divide between tech-skeptical progressives and tech-friendly moderates has produced policy paralysis."
+      }
+    ]
   },
   {
     name: "Jon Lovett", handle: "@jonlovett", category: "left-prog",
@@ -4647,7 +4868,29 @@ var commentators = [
         source: "The Parasitic Mind (2020) and The Saad Truth podcast, consistent position through 2025",
         url: "https://en.wikipedia.org/wiki/Gad_Saad",
         steelman: "Saad's evolutionary psychology framework offers a scientific lens for cultural critique: he argues that many progressive positions contradict well-established findings in biology and psychology, and that the social pressure to accept them despite the evidence mirrors the mechanism by which parasites override host behavior. His concept of 'idea pathogens' gives a name to what many academics privately acknowledge — that ideological conformity in universities has reached levels that compromise intellectual honesty."
-      }]
+      },
+{
+        topics: ["culture", "free-speech"], events: [], title: "Idea pathogens spread because universities have lost their immune system",
+        text: "Universities used to have an immune system — it was called the scientific method, peer review, and intellectual humility. That immune system has been compromised by idea pathogens: unfalsifiable theories that spread by social contagion and punish anyone who questions them. When 'lived experience' trumps data, when feelings override facts, and when questioning orthodoxy is treated as violence, the university has an autoimmune disorder. It's attacking its own healthy cells.",
+        source: "The Parasitic Mind (2020); The Saad Truth podcast, consistent theme",
+        url: "https://www.youtube.com/c/GadSaad",
+        steelman: "Saad's 'parasitic mind' framework applies evolutionary biology to cultural analysis in a novel way. His observation that certain ideological frameworks are unfalsifiable — designed so that any counter-evidence confirms rather than challenges the theory — echoes Karl Popper's demarcation problem and represents a legitimate critique of some academic trends."
+      },
+{
+        topics: ["gender-identity", "culture"], events: [], title: "Evolutionary psychology explains sex differences — denying this is science denial",
+        text: "Men and women have evolved under different selection pressures for millions of years. This has produced measurable, replicable differences in cognition, risk-taking, mate preferences, and physical capacity. These findings have been replicated across hundreds of cultures and thousands of studies. They don't determine individual destiny, but they explain population-level patterns. Denying evolutionary sex differences to be politically correct is no different than denying climate science to be politically convenient.",
+        source: "The Parasitic Mind; The Saad Truth podcast; academic publications at Concordia University",
+        url: "https://www.youtube.com/c/GadSaad",
+        steelman: "Saad's parallel between evolution denial and climate denial is rhetorically effective because it forces both sides to confront their own selective relationship with science. His academic credentials (full professor, hundreds of peer-reviewed publications in evolutionary behavioral sciences) give the argument institutional credibility that pure commentators lack."
+      },
+{
+        topics: ["immigration", "culture"], events: [], title: "Immigration without assimilation is colonization by another name",
+        text: "I'm a Lebanese Jew who fled civil war. I'm an immigrant. I love immigration. What I don't love is the idea that host cultures have no right to expect newcomers to adopt shared values — freedom of speech, gender equality, separation of church and state, rule of law. When you import large numbers of people from cultures that reject these principles and then call any expectation of assimilation 'racist,' you're not being tolerant. You're dismantling the liberal society that made tolerance possible in the first place.",
+        source: "The Parasitic Mind; Gad Saad, consistent position on immigration and Western values",
+        url: "https://www.youtube.com/c/GadSaad",
+        steelman: "Saad's immigrant background insulates him from the accusation of nativism that typically accompanies assimilation arguments. His distinction between welcoming immigrants and requiring adoption of liberal democratic values reflects a position held by many European liberals (particularly in France and the Netherlands) and represents a genuine philosophical tension within liberalism."
+      }
+    ]
   },
   {
     name: "Christopher Rufo", handle: "@realchrisrufo", category: "right-establishment",
@@ -4658,7 +4901,29 @@ var commentators = [
         source: "Manhattan Institute research and City Journal, consistent position 2021-2025",
         url: "https://www.city-journal.org/person/christopher-f-rufo",
         steelman: "Rufo's effectiveness comes from a simple method: he reads primary source documents — training materials, curricula, DEI handbooks — and publishes them verbatim. His critics call this 'decontextualization,' but the documents often speak for themselves. His campaign against CRT in Virginia schools contributed to Youngkin's 2021 gubernatorial victory, demonstrating that the issue has genuine electoral salience beyond right-wing media."
-      }]
+      },
+{
+        topics: ["culture", "domestic-policy"], events: [], title: "Trump's DEI executive order is the biggest win in the colorblind equality movement",
+        text: "President Trump has signed the death warrant for DEI within the federal government. We started this campaign at a tiny public college in Florida, and the left said we'd never succeed. Two years later, every federal agency is dismantling its DEI bureaucracy. This isn't about being anti-diversity — it's about ending a system that replaced merit with racial preferences and called it 'equity.'",
+        source: "Christopher Rufo Substack, City Journal, January 2025; Manhattan Institute publications",
+        url: "https://christopherrufo.com/p/center-right-critics-are-missing",
+        steelman: "Rufo's campaign has been remarkably effective at the policy level — moving from a single college board to a presidential executive order in two years. His framing of DEI as antithetical to colorblind equality, rather than as pro-white, appeals to a broader coalition including Asian-American groups that have challenged race-conscious admissions."
+      },
+{
+        topics: ["culture"], events: [], title: "Public schools are undergoing ideological capture — parents have the right to opt out",
+        text: "To get to universal school choice, you really need to operate from a premise of universal public school distrust. When schools are teaching kids that America is systemically racist, that gender is a spectrum disconnected from biology, and that parents who object are bigots — you don't reform the system. You give parents the power to leave it. School choice isn't abandoning public education; it's forcing it to compete.",
+        source: "Christopher Rufo, public statements and Substack, 2023-2025; Manhattan Institute reports",
+        url: "https://christopherrufo.com/about",
+        steelman: "Rufo's school choice argument taps into genuine parental frustration that transcends party lines. Polling shows majorities of Black and Hispanic parents support school choice. The competitive-market framing — that monopoly providers improve when customers can leave — applies standard economic logic to education."
+      },
+{
+        topics: ["free-speech", "culture"], events: [], title: "We decodified critical race theory and recodified it to win the public debate",
+        text: "The goal was to have the public read something crazy in the newspaper and immediately think 'critical race theory.' We decodified the term and recodified it to annex the entire range of cultural constructions that are unpopular with Americans. This is how you win a political and cultural battle — not by being defensive, but by defining the terrain.",
+        source: "Christopher Rufo, Twitter/X, March 2021; widely cited in media profiles",
+        url: "https://en.wikipedia.org/wiki/Christopher_Rufo",
+        steelman: "Whatever one thinks of the ethics, Rufo's candor about his communication strategy is remarkably rare in politics. His approach — deliberately broadening a term to capture public frustration — mirrors how the left successfully deployed terms like 'systemic racism.' Understanding this tactic is essential for media literacy regardless of your politics."
+      }
+    ]
   },
   {
     name: "Lex Fridman", handle: "@lexfridman", category: "out-of-box",
@@ -5851,7 +6116,8 @@ function renderCards() {
     filtered.sort((a, b) => a.orthodoxy - b.orthodoxy);
     ordered = filtered.map(c => ({ ...c, _column: getBucket(c) }));
   } else if (sortBy === 'name') {
-    filtered.sort((a, b) => a.name.localeCompare(b.name));
+    function lastName(n){var p=n.trim().split(/\s+/);return p[p.length-1];}
+    filtered.sort((a, b) => lastName(a.name).localeCompare(lastName(b.name)));
     ordered = filtered.map(c => ({ ...c, _column: getBucket(c) }));
   }
 
@@ -6513,14 +6779,29 @@ function renderCommentariat() {
   const search = document.getElementById('comm-search').value.toLowerCase();
 
   let filtered = allCommentators.filter(c => {
-    const matchCat = commFilter === 'all' || c.category === commFilter;
+    var laneCats = (commFilter && commFilter.startsWith('__ml_')) ? (window.__mlLaneCats || []) : null;
+    const matchCat = commFilter === 'all' || (laneCats ? laneCats.includes(c.category) : c.category === commFilter);
     const matchSearch = !search || c.name.toLowerCase().includes(search) || c.handle.toLowerCase().includes(search);
     return matchCat && matchSearch;
   });
 
   const sortBy = document.getElementById('comm-sort-select')?.value || 'name';
+  var mlSlug = window.__mlFromQuiz ? (window.__mlEventSlug || null) : null;
+  // Build a takes lookup from the full commentators array (allCommentators lacks takes)
+  var takesMap = {};
+  if (mlSlug && typeof commentators !== 'undefined') {
+    commentators.forEach(function(c) { takesMap[c.name] = c.takes || []; });
+  }
   filtered.sort((a, b) => {
-    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    if (mlSlug) {
+      var aTakes = takesMap[a.name] || [];
+      var bTakes = takesMap[b.name] || [];
+      var aHas = aTakes.some(t => (t.events || []).includes(mlSlug));
+      var bHas = bTakes.some(t => (t.events || []).includes(mlSlug));
+      if (aHas && !bHas) return -1;
+      if (bHas && !aHas) return 1;
+    }
+    if (sortBy === 'name') { function ln(n){var p=n.trim().split(/\s+/);return p[p.length-1];} return ln(a.name).localeCompare(ln(b.name)); }
     if (sortBy === 'domestic') return (b.domestic || 5) - (a.domestic || 5);
     if (sortBy === 'foreign') return (a.foreign || 5) - (b.foreign || 5);
     if (sortBy === 'trade') return (a.trade || 5) - (b.trade || 5);
@@ -8017,7 +8298,7 @@ function toggleSteelExpand(id) {
   }
 }
 
-function renderSteelCentral(topicKey) {
+function renderSteelCentral(topicKey, scrollToContent) {
   if (!topicKey && !currentSteelTopic) topicKey = steelManTopics[0].key;
   if (topicKey) currentSteelTopic = topicKey;
   else topicKey = currentSteelTopic;
@@ -8026,7 +8307,7 @@ function renderSteelCentral(topicKey) {
   var topicsEl = document.getElementById('steelcentral-topics');
   var html = '';
   steelManTopics.forEach(function(t) {
-    html += '<button class="steelcentral-topic-btn' + (t.key === topicKey ? ' active' : '') + '" onclick="renderSteelCentral(\'' + t.key + '\')">' + t.title + '</button>';
+    html += '<button class="steelcentral-topic-btn' + (t.key === topicKey ? ' active' : '') + '" onclick="renderSteelCentral(\'' + t.key + '\', true)">' + t.title + '</button>';
   });
   topicsEl.innerHTML = html;
 
@@ -8094,7 +8375,7 @@ function renderSteelCentral(topicKey) {
 
   ch += '</div>';
   contentEl.innerHTML = ch;
-  document.getElementById('steelcentral-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (scrollToContent) document.getElementById('steelcentral-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
   // Draw opinion chart
   requestAnimationFrame(function() {
     drawOpinionChart('opinion-chart-' + topicKey, topicKey);
@@ -8416,7 +8697,7 @@ showPage('landing');
   margin-bottom: 32px;
 }
 .ml-btn-submit {
-  background: var(--deep-blue);
+  background: #2A5425;
   color: white;
   border: none;
   border-radius: 10px;
@@ -8427,7 +8708,7 @@ showPage('landing');
   cursor: pointer;
   transition: all 0.18s;
 }
-.ml-btn-submit:hover:not(:disabled) { background: var(--mid-blue); transform: translateY(-1px); }
+.ml-btn-submit:hover:not(:disabled) { background: #1E3D1B; transform: translateY(-1px); }
 .ml-btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 .ml-btn-skip {
   background: transparent;
@@ -8518,16 +8799,7 @@ showPage('landing');
   flex-direction: column;
   gap: 3px;
 }
-.ml-comm-name {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.ml-comm-role {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-.ml-comm-source-link {
+.ml-explore-link {
   font-size: 0.72rem;
   color: var(--mid-blue);
   text-decoration: none;
@@ -8536,13 +8808,14 @@ showPage('landing');
   align-items: center;
   gap: 4px;
   margin-top: 6px;
+  cursor: pointer;
 }
-.ml-comm-source-link:hover { text-decoration: underline; }
+.ml-explore-link:hover { text-decoration: underline; }
 .ml-next-btn {
   display: block;
   width: calc(100% - 56px);
   margin: 20px 28px;
-  background: var(--deep-blue);
+  background: #2A5425;
   color: white;
   border: none;
   border-radius: 10px;
@@ -8554,7 +8827,7 @@ showPage('landing');
   transition: all 0.18s;
   text-align: center;
 }
-.ml-next-btn:hover { background: var(--mid-blue); }
+.ml-next-btn:hover { background: #1E3D1B; }
 
 /* Loading state */
 .ml-loading {
@@ -8567,7 +8840,7 @@ showPage('landing');
   width: 32px;
   height: 32px;
   border: 3px solid rgba(0,0,0,0.08);
-  border-top-color: var(--mid-blue);
+  border-top-color: #2A5425;
   border-radius: 50%;
   animation: ml-spin 0.8s linear infinite;
   margin: 0 auto 16px;
@@ -8580,7 +8853,7 @@ showPage('landing');
   padding: 40px 20px;
 }
 .ml-intro-btn {
-  background: var(--deep-blue);
+  background: #2A5425;
   color: white;
   border: none;
   border-radius: 12px;
@@ -8591,7 +8864,7 @@ showPage('landing');
   cursor: pointer;
   transition: all 0.18s;
 }
-.ml-intro-btn:hover { background: var(--mid-blue); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,125,216,0.3); }
+.ml-intro-btn:hover { background: #1E3D1B; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(42,84,37,0.35); }
 
 @media (max-width: 700px) {
   .medialiteracy-page { padding-top: 115px; }
@@ -8734,11 +9007,14 @@ showPage('landing');
     <!-- Reveal panel -->
     <div class="ml-reveal" id="ml-reveal">
       <div class="ml-reveal-header">
-        <div style="font-family:var(--serif); font-size:1.1rem; font-weight:600;">Results</div>
+        <div>
+          <div style="font-family:var(--serif); font-size:1.1rem; font-weight:600;" id="ml-reveal-topic"></div>
+          <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;" id="ml-reveal-subtitle"></div>
+        </div>
         <div class="ml-round-score" id="ml-round-score"></div>
       </div>
-      <div class="ml-reveal-cards" id="ml-reveal-cards"></div>
       <div id="ml-common-ground-wrap" style="margin: 0 0 18px;"></div>
+      <div class="ml-reveal-cards" id="ml-reveal-cards"></div>
       <button class="ml-next-btn" onclick="mlNextRound()">Next Round →</button>
     </div>
 
@@ -8843,7 +9119,7 @@ function mlBuildTopicMap(lanes) {
 
 var ML_STATIC_ROUNDS = [
   {
-    topic: "Iran Strikes",
+    topic: "Iran Strikes", eventSlug: "iran",
     subtitle: "Should the U.S. have struck Iran's nuclear sites?",
     commonGround: [
       "Iran should not be allowed to develop nuclear weapons — virtually everyone agrees on that goal.",
@@ -8857,7 +9133,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Nuclear Deterrence",
+    topic: "Nuclear Deterrence", eventSlug: "nuclear-deterrence",
     subtitle: "Is nuclear deterrence worth the risk?",
     commonGround: [
       "Nuclear war would be catastrophic — no one is arguing otherwise.",
@@ -8872,7 +9148,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Healthcare System",
+    topic: "Healthcare System", eventSlug: "healthcare-system",
     subtitle: "Why is U.S. healthcare so expensive — and who's to blame?",
     commonGround: [
       "U.S. healthcare costs are too high — every side agrees on that.",
@@ -8886,7 +9162,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Tariffs and Trade Policy",
+    topic: "Tariffs and Trade Policy", eventSlug: "scotus",
     subtitle: "Are tariffs good for America?",
     commonGround: [
       "American manufacturing communities suffered real harm from globalization and deserve real policy responses.",
@@ -8900,7 +9176,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Immigration Enforcement",
+    topic: "Immigration Enforcement", eventSlug: "immigration-policy",
     subtitle: "How far should immigration enforcement go?",
     commonGround: [
       "Immigration law should be enforced — the disagreement is about how and against whom.",
@@ -8914,7 +9190,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Climate Policy",
+    topic: "Climate Policy", eventSlug: "climate-policy",
     subtitle: "How urgently should the U.S. act on climate?",
     commonGround: [
       "Climate change is real and human-caused — the scientific consensus on that is not seriously disputed.",
@@ -8928,7 +9204,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "AI and the Military",
+    topic: "AI and the Military", eventSlug: "anthropic",
     subtitle: "Should the U.S. military have free rein to use AI?",
     commonGround: [
       "AI used in military contexts raises serious questions that deserve public debate.",
@@ -8943,7 +9219,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Free Speech and Media",
+    topic: "Free Speech and Media", eventSlug: "free-speech-media",
     subtitle: "Is free speech under threat in America?",
     commonGround: [
       "A healthy democracy requires that people can express unpopular opinions without being silenced.",
@@ -8957,7 +9233,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Israel and the Middle East",
+    topic: "Israel and the Middle East", eventSlug: "iran",
     subtitle: "Is Israel's military response in Gaza justified?",
     commonGround: [
       "The October 7th attacks were horrific and unjustifiable.",
@@ -8972,7 +9248,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Taiwan and U.S. Foreign Policy",
+    topic: "Taiwan and U.S. Foreign Policy", eventSlug: "taiwan-policy",
     subtitle: "Should the U.S. defend Taiwan if China invades?",
     commonGround: [
       "A Chinese military takeover of Taiwan would be a serious problem for the region and the world.",
@@ -8987,7 +9263,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "MAHA and Public Health",
+    topic: "MAHA and Public Health", eventSlug: "healthcare-system",
     subtitle: "Are U.S. health agencies trustworthy?",
     commonGround: [
       "Chronic disease rates in the U.S. are too high, and the food environment plays a role.",
@@ -9002,7 +9278,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Wealth Inequality",
+    topic: "Wealth Inequality", eventSlug: null,
     subtitle: "Is wealth inequality a policy failure?",
     commonGround: [
       "Extreme poverty in a wealthy country is a moral and policy failure.",
@@ -9016,7 +9292,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Policing in the United States",
+    topic: "Policing in the United States", eventSlug: null,
     subtitle: "Is American policing in need of reform?",
     commonGround: [
       "Police should be effective at reducing crime and treating everyone they encounter fairly.",
@@ -9030,7 +9306,7 @@ var ML_STATIC_ROUNDS = [
     ]
   },
   {
-    topic: "Gender Identity",
+    topic: "Gender Identity", eventSlug: "gender-debate",
     subtitle: "Should gender identity have legal recognition?",
     commonGround: [
       "Trans people deserve dignity and protection from discrimination.",
@@ -9068,7 +9344,7 @@ function mlStartRound() {
   }));
   shuffled.forEach(function(s, i) { s.displayNum = i + 1; });
 
-  mlState.currentRound = { topic: round.topic, subtitle: round.subtitle || '', explainer: round.explainer || null, commonGround: round.commonGround || [], stances: shuffled };
+  mlState.currentRound = { topic: round.topic, subtitle: round.subtitle || '', explainer: round.explainer || null, commonGround: round.commonGround || [], eventSlug: round.eventSlug || null, stances: shuffled };
   mlState.round++;
 
   document.getElementById('ml-loading').style.display = 'none';
@@ -9287,10 +9563,88 @@ function mlUpdateScoreboard() {
   });
 }
 
+function showCommentariatFiltered(lane, eventSlug, why, laneLabel) {
+  var catMap = {
+    left:   ['left-sj', 'left-prog'],
+    center: ['center-left', 'out-of-box', 'center-right'],
+    right:  ['right-establishment', 'right-populist']
+  };
+  var cats = catMap[lane] || [];
+  commFilter = cats.length === 1 ? cats[0] : '__ml_' + lane;
+  window.__mlLaneCats = cats;
+  window.__mlEventSlug = eventSlug || null;
+  window.__mlFromQuiz = true;
+  window.__mlWhyText = why || null;
+  window.__mlLaneLabel = laneLabel || lane;
+  showPage('commentariat');
+  setTimeout(function() {
+    document.querySelectorAll('.commentariat-filters .topic-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    renderCommentariat();
+    mlShowQuizBackBanner();
+    // Populate context line
+    var ctx = document.getElementById('ml-comm-context');
+    if (ctx && why) {
+      var label = laneLabel ? (laneLabel.charAt(0).toUpperCase() + laneLabel.slice(1)) : lane;
+      var topic = (mlState.currentRound && mlState.currentRound.topic) ? mlState.currentRound.topic : null;
+      var topicLabel = topic ? topic + ' · ' + label : label;
+      ctx.innerHTML = '<div style="font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; opacity:0.7; margin-bottom:4px;">' + topicLabel + '</div>' +
+        '<div style="font-size:0.85rem; font-weight:500;">' + why + '</div>';
+      ctx.style.display = 'block';
+    }
+  }, 50);
+}
+
+function mlShowQuizBackBanner() {
+  var existing = document.getElementById('ml-quiz-back-banner');
+  // Calculate position below nav using offsetTop + offsetHeight (not affected by scroll)
+  var nav = document.querySelector('nav');
+  var bannerTop = nav ? (nav.offsetTop + nav.offsetHeight) : 60;
+  if (existing) {
+    existing.style.top = bannerTop + 'px';
+    existing.style.display = 'flex';
+    return;
+  }
+  var banner = document.createElement('div');
+  banner.id = 'ml-quiz-back-banner';
+  banner.style.cssText = 'display:flex; align-items:center; gap:10px; background:#2A5425; color:white; padding:10px 20px; font-family:var(--sans); font-size:0.82rem; font-weight:600; cursor:pointer; position:fixed; left:0; right:0; z-index:998; border-bottom:1px solid rgba(255,255,255,0.15);';
+  banner.style.top = bannerTop + 'px';
+  banner.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Back to Media Literacy quiz';
+  banner.onclick = function() {
+    window.__mlFromQuiz = false;
+    window.__mlEventSlug = null;
+    banner.style.display = 'none';
+    var cp2 = document.getElementById('commentariat-page');
+    if (cp2) cp2.classList.remove('ml-banner-active');
+    var ctx = document.getElementById('ml-comm-context');
+    if (ctx) { ctx.style.display = 'none'; ctx.textContent = ''; }
+    showPage('medialiteracy');
+  };
+  document.body.appendChild(banner);
+  // Push commentariat content down by banner height
+  requestAnimationFrame(function() {
+    var cp = document.getElementById('commentariat-page');
+    if (cp) {
+      var basepadding = parseInt(getComputedStyle(cp).paddingTop) || 80;
+      cp.style.paddingTop = (basepadding + banner.offsetHeight) + 'px';
+      cp.classList.add('ml-banner-active');
+    }
+  });
+}
+function mlHideQuizBackBanner() {
+  var banner = document.getElementById('ml-quiz-back-banner');
+  if (banner) banner.style.display = 'none';
+}
+
 function mlShowReveal(results) {
   document.getElementById('ml-round').style.display = 'none';
   var reveal = document.getElementById('ml-reveal');
   reveal.style.display = 'block';
+
+  // Topic header
+  document.getElementById('ml-reveal-topic').textContent = mlState.currentRound.topic || '';
+  document.getElementById('ml-reveal-subtitle').textContent = mlState.currentRound.subtitle || '';
 
   // Round score pips
   var scoreEl = document.getElementById('ml-round-score');
@@ -9317,6 +9671,9 @@ function mlShowReveal(results) {
       ? (r.guessed.charAt(0).toUpperCase() + r.guessed.slice(1))
       : 'Unassigned';
 
+    var laneLabel = lane === 'left' ? 'left-wing' : lane === 'center' ? 'centrist' : 'right-wing';
+    var eventSlug = mlState.currentRound.eventSlug || null;
+
     var card = document.createElement('div');
     card.className = 'ml-reveal-card';
     card.innerHTML =
@@ -9329,12 +9686,10 @@ function mlShowReveal(results) {
       '<div class="ml-reveal-summary">' + r.stance.summary + '</div>' +
       '<div class="ml-reveal-why">' + r.stance.why + '</div>' +
       '<div class="ml-reveal-commentator">' +
-        '<div class="ml-comm-name">' + c.name + '</div>' +
-        '<div class="ml-comm-role">' + (c.role || '') + '</div>' +
-        (take.url
-          ? '<a class="ml-comm-source-link" href="' + take.url + '" target="_blank" rel="noopener">View source ↗</a>'
-          : '') +
+        '<span class="ml-explore-link">See the ' + laneLabel + ' commentators whose views formed this stance →</span>' +
       '</div>';
+    var link = card.querySelector('.ml-explore-link');
+    (function(l, s, w, ll){ link.addEventListener('click', function(){ showCommentariatFiltered(l, s, w, ll); }); })(lane, eventSlug, r.stance.why, laneLabel);
     cardsEl.appendChild(card);
   });
 
