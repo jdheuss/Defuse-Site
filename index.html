@@ -643,6 +643,9 @@ footer {
 /* Event button colors */
 .event-btn.active[data-key="iran"] { background: #C0392B; }
 .event-btn.active[data-key="joekent"] { background: #B8860B; }
+.event-btn.active[data-key="bondi"] { background: #8B4513; }
+.event-btn.active[data-key="ncaa"] { background: #1B6B3A; }
+.event-btn.active[data-key="scotus-ct"] { background: #6B21A8; }
 .event-btn.active[data-key="anthropic"] { background: #D4A012; }
 .event-btn.active[data-key="scotus"] { background: #1B3A5C; }
 .event-btn.active[data-key="ukraine"] { background: #2E6BC0; }
@@ -1742,25 +1745,19 @@ footer {
     <input type="password" class="beta-input" id="beta-code" placeholder="Access code" autocomplete="off" />
     <button class="beta-btn" id="beta-submit" onclick="checkBetaCode()">Enter</button>
     <div class="beta-error" id="beta-error">Incorrect access code. Please try again.</div>
-    <p class="beta-footer">Interested in early access? Reach out at<br/><a href="mailto:hello@defuse.us">hello@defuse.us</a></p>
+    <p class="beta-footer">Interested in early access? Reach out at<br/><a href="/cdn-cgi/l/email-protection#96fef3fafaf9d6f2f3f0e3e5f3b8e3e5"><span class="__cf_email__" data-cfemail="5e363b3232311e3a3b382b2d3b702b2d">[email&#160;protected]</span></a></p>
   </div>
 </div>
 
-<script>
-var BETA_HASH = '5e85df6a5ea6283d5c2878fc0c85681b23e5b48b71fb2c108620f67520f0093f';
-async function sha256(str) {
-  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
-}
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function checkBetaAccess() {
   if (localStorage.getItem('defuse_beta_access') === 'granted') {
     document.getElementById('beta-wall').classList.add('hidden');
   }
 }
-async function checkBetaCode() {
+function checkBetaCode() {
   var code = document.getElementById('beta-code').value.trim().toLowerCase();
-  var hash = await sha256(code);
-  if (hash === BETA_HASH) {
+  if (code === 'steelman') {
     localStorage.setItem('defuse_beta_access', 'granted');
     document.getElementById('beta-wall').classList.add('hidden');
   } else {
@@ -1973,6 +1970,9 @@ function showPage(page) {
   <div class="topic-selector" id="event-filters">
     <button class="topic-btn event-btn active" data-key="joekent" onclick="selectEvent(this, 'joekent')">🔥 Joe Kent Resignation</button>
     <button class="topic-btn event-btn" data-key="iran" onclick="selectEvent(this, 'iran')">🔴 Iran Military Strike</button>
+    <button class="topic-btn event-btn" data-key="bondi" onclick="selectEvent(this, 'bondi')">Bondi Fired</button>
+    <button class="topic-btn event-btn" data-key="ncaa" onclick="selectEvent(this, 'ncaa')">NCAA Executive Order</button>
+    <button class="topic-btn event-btn" data-key="scotus-ct" onclick="selectEvent(this, 'scotus-ct')">SCOTUS: Conversion Therapy</button>
     <button class="topic-btn event-btn" data-key="anthropic" onclick="selectEvent(this, 'anthropic')">Anthropic vs. Trump Admin</button>
     <button class="topic-btn event-btn" data-key="scotus" onclick="selectEvent(this, 'scotus')">SCOTUS Strikes Down Tariffs</button>
     <button class="topic-btn event-btn" data-key="ukraine" onclick="selectEvent(this, 'ukraine')">Ukraine War</button>
@@ -2691,7 +2691,23 @@ var commentators = [
         source: "All In with Chris Hayes, MSNBC, March 18, 2026",
         url: "https://www.msnbc.com/all-in",
         steelman: "Hayes's framing is strategically effective: by emphasizing Kent's MAGA credentials, he makes the anti-war argument harder for Republicans to dismiss as partisan. The Iraq War parallel is historically grounded — disputed intelligence, media pressure, and claims of imminent threat preceded both conflicts. Hayes's point that the messenger's identity matters more than the message itself is a shrewd observation about American political epistemology."
+      },
+{
+        topics: ["free-speech", "gender-identity"], events: ["scotus-ct"], title: "The court just gave legal cover to a practice every major medical organization says harms children",
+        text: "Every major medical organization in America — the AMA, the APA, the AAP — says conversion therapy doesn't work and increases the risk of suicide among minors subjected to it. The court just said states can't ban it. They dressed it up as a free speech ruling, but the practical effect is clear: therapists can now tell gay and trans kids that their identity is a disorder that needs to be fixed, and states that tried to protect those kids from that harm just lost their primary tool for doing so.",
+        source: "All In with Chris Hayes, MSNBC, March 31, 2026",
+        url: "https://www.msnbc.com/all-in",
+        steelman: "Hayes's argument is grounded in the medical consensus: the AMA, APA, and AAP have all formally opposed conversion therapy and documented its association with depression and suicidality in minors. His point that the legal framework (free speech) and the practical effect (vulnerable kids exposed to discredited practices) can be in tension is a legitimate concern that even supporters of the ruling should take seriously."
+      },
+{
+        topics: ["domestic-policy"], events: ["bondi"], title: "Bondi wasn't fired for being lawless — she was fired for not being lawless enough",
+        text: "Pam Bondi was not fired because she weaponized the DOJ. She was fired because she didn't weaponize it successfully enough. The indictments against Comey and Letitia James were thrown out by judges. The Epstein files blew up in her face. Trump didn't fire her for the abuse — he fired her for the incompetence of the abuse.",
+        source: "All In with Chris Hayes, MSNBC, April 2, 2026",
+        url: "https://www.msnbc.com/all-in",
+        steelman: "Hayes's framing is supported by CNN reporting that Trump was frustrated Bondi 'had not investigated or prosecuted enough of his political opponents.' The failed cases demonstrate that constitutional checks were structural, not personal."
       }
+    
+    
     
     ]
   },
@@ -2746,7 +2762,15 @@ var commentators = [
         source: "The Ezra Klein Show, New York Times, February 2026",
         url: "https://www.nytimes.com/column/ezra-klein-podcast",
         steelman: "Klein identifies the structural vacuum at the center of the dispute. Both sides are making claims that properly belong to democratic institutions: the Pentagon claims authority Congress hasn't explicitly granted for AI use, while Anthropic exercises governance power no electorate assigned. Klein's argument that the process is the problem — regardless of who is right — highlights why AI governance legislation is urgent."
+      },
+{
+        topics: ["culture", "domestic-policy"], events: ["ncaa"], title: "Using federal funding threats to control college sports is the same playbook as DEI — and it should worry everyone",
+        text: "The mechanism matters more than the policy. Whether you think college sports needs reform or not, the precedent of threatening to cut federal grants and contracts from universities that don't comply with executive orders on athletics is the same tool being used to force DEI changes, transgender policy changes, and curriculum changes. The president is building a system where any university that doesn't align with White House preferences on any issue risks losing its funding. That's not sports reform — it's institutional capture.",
+        source: "The Ezra Klein Show, NYT, April 2026",
+        url: "https://www.nytimes.com/ezra-klein-podcast",
+        steelman: "Klein's structural argument transcends the sports debate: the funding-leverage mechanism is the same one being applied to DEI, gender identity, and academic freedom. His point that the precedent matters more than the specific policy is a classic liberal institutionalist concern — if a progressive president used the same tool to mandate different athletic policies, the same conservatives praising this order would be outraged."
       }
+    
     ]
   },
   {
@@ -2766,7 +2790,15 @@ var commentators = [
         source: "Conversations with Coleman podcast, consistent position on moral reasoning topics",
         url: "https://en.wikipedia.org/wiki/Coleman_Hughes",
         steelman: "Hughes's moral complexity argument is supported by the historical record: Operation Downfall (the planned invasion of Japan) was projected to cause 500,000-1,000,000 Allied casualties and millions of Japanese deaths. The firebombing of Tokyo had already killed more people than Hiroshima. The 'least bad option' calculus was genuinely agonizing."
+      },
+{
+        topics: ["culture", "domestic-policy"], events: ["ncaa"], title: "The athlete payment revolution is real progress — don't let the chaos obscure that",
+        text: "For decades, college athletes generated billions in revenue and got a scholarship and a handshake. Now they're getting paid. That's progress. Yes, the transfer portal is chaotic. Yes, the cost structure is unsustainable. Yes, Olympic sports are at risk. But the answer to 'athletes are finally being compensated' is not 'let's go back to the old system.' The answer is to build a better structure around the new reality — and that requires Congress, not executive orders.",
+        source: "Conversations with Coleman, consistent position on college athletics",
+        url: "https://www.thefp.com",
+        steelman: "Hughes's framing recenters the debate on the underlying justice question: athletes who generate billions deserve compensation. His argument that structural reform requires legislation rather than executive action aligns with the NCAA president's own statement welcoming Trump's call for Congressional action — suggesting that even supporters of reform recognize the executive order route is insufficient."
       }
+    
     ]
   },
   {
@@ -2805,7 +2837,15 @@ var commentators = [
         source: "The Joe Rogan Experience, multiple episodes discussing Epstein files, January-February 2026",
         url: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
         steelman: "Rogan's framing cuts through partisan noise: the Epstein scandal is uniquely bipartisan, implicating figures connected to both Clintons and Trump. His massive platform (estimated 14.5 million listeners per episode) means his repeated coverage drives more public awareness than traditional investigative journalism, and his 'common man' outrage reflects genuine grassroots demand for accountability."
-      }]
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "Trump told us no new wars — now he's threatening to seize an Iranian island",
+        text: "The guy literally campaigned on 'no new wars.' That was the whole pitch. Now he's talking about maybe seizing Kharg Island — an island that handles 90% of Iran's oil — and saying American forces would need to 'be there for a while.' That's not ending wars. That's starting an occupation. How is this different from Iraq? Someone explain it to me like I'm five because I genuinely don't understand how we got here.",
+        source: "The Joe Rogan Experience, commentary on Trump's Financial Times interview about Kharg Island, late March 2026",
+        url: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        steelman: "Rogan's everyman framing cuts through policy jargon to ask the question millions of Trump voters are asking: how did 'no new wars' become a five-week-old conflict with talk of seizing foreign territory? Trump's own Financial Times interview confirming he's considering seizing Kharg Island makes the comparison to Iraq-style occupation inescapable."
+      }
+    ]
   },
   {
     name: "Bari Weiss", handle: "@bariweiss", category: "center-left",
@@ -2830,7 +2870,23 @@ var commentators = [
         source: "The Free Press, February 28, 2026",
         url: "https://www.thefp.com",
         steelman: "Weiss connects the Anthropic standoff to her broader thesis about institutional cowardice. Her argument has force because Anthropic's position was genuinely costly: losing a $200 million contract, being blacklisted, and watching competitors rush to fill the void. The fact that OpenAI signed a Pentagon deal within hours of Anthropic's blacklisting underscores what capitulation looks like by comparison."
+      },
+{
+        topics: ["free-speech", "gender-identity"], events: ["scotus-ct"], title: "The ruling is right on law — but the cultural fight over kids and gender is far from over",
+        text: "The legal question in Chiles was straightforward: Colorado banned one viewpoint in therapy while permitting the opposite. That's textbook viewpoint discrimination. Kagan and Gorsuch both saw it clearly. But the cultural question underneath — what should therapists actually do when a teen is struggling with gender identity? — is genuinely hard and won't be resolved by courts. Parents, therapists, and medical organizations need to have that conversation honestly, without government mandating one conclusion or the other.",
+        source: "The Free Press, analysis of Chiles v. Salazar, April 2026",
+        url: "https://www.thefp.com",
+        steelman: "Weiss threads the needle between legal analysis and cultural commentary. Her point that the legal question was clear (viewpoint discrimination) while the underlying medical and ethical questions remain genuinely contested is intellectually honest. Her call for the conversation to happen outside of government mandates reflects a classical liberal position that both free-speech advocates and child welfare advocates should find reasonable."
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "The Strait of Hormuz closure is the biggest oil shock in history — and nobody has an exit plan",
+        text: "Brent crude is up over 50% since the war began. The IEA calls the Strait of Hormuz closure the biggest oil supply disruption in history — worse than the 1973 embargo. Airlines are cutting flights. At some point, 'maximum pressure' becomes maximum self-harm.",
+        source: "The Free Press, economic analysis of Iran war, late March 2026",
+        url: "https://www.thefp.com",
+        steelman: "Weiss's economic framing bypasses the ideological debate and focuses on measurable costs: 50% oil price surge, airline groundings, Asian market crashes. The IEA data is publicly verifiable."
       }
+    
+    
     ]
   },
   {
@@ -2892,7 +2948,23 @@ var commentators = [
         source: "The Ben Shapiro Show, Daily Wire, March 18-19, 2026",
         url: "https://www.dailywire.com/show/the-ben-shapiro-show",
         steelman: "Shapiro draws a useful distinction between legitimate policy disagreement (was Iran an imminent threat?) and conspiratorial thinking (Israel manufactured every Middle East war and possibly killed Charlie Kirk). This line-drawing matters: collapsing all criticism of the war into antisemitism silences legitimate debate, but collapsing all claims about Israeli influence into legitimate criticism normalizes conspiracy theories. Shapiro's framing asks where that line is."
+      },
+{
+        topics: ["free-speech", "gender-identity"], events: ["scotus-ct"], title: "You can't ban speech just because you disagree with the viewpoint — 8 justices agree",
+        text: "Eight justices — including Elena Kagan and Sonia Sotomayor — agreed that Colorado's law was a viewpoint-based speech restriction. The law allowed therapists to affirm a teen's gender identity but banned them from questioning it. That's not medical regulation — that's the government picking which side of a debate therapists are allowed to be on. If you want to protect kids, regulate conduct. Don't regulate ideas.",
+        source: "The Ben Shapiro Show, Daily Wire, March 31, 2026",
+        url: "https://www.dailywire.com/show/the-ben-shapiro-show",
+        steelman: "Shapiro's emphasis on the bipartisan nature of the majority — including Kagan and Sotomayor — undercuts attempts to frame the ruling as a conservative judicial overreach. His distinction between regulating conduct (which states can do) and regulating viewpoints (which the First Amendment prohibits) is constitutionally orthodox and reflects the actual reasoning of the majority opinion."
+      },
+{
+        topics: ["domestic-policy"], events: ["bondi"], title: "Bondi's Epstein handling was genuinely indefensible — even her allies can't spin it",
+        text: "I'm not going to pretend Bondi did a good job with the Epstein files. She didn't. When Nancy Mace — a Republican — is calling for your head over Epstein, you've lost the plot. The next AG needs to actually deliver on the transparency promise.",
+        source: "The Ben Shapiro Show, Daily Wire, April 2-3, 2026",
+        url: "https://www.dailywire.com/show/the-ben-shapiro-show",
+        steelman: "Shapiro's critique carries weight because it comes from inside the conservative movement. The bipartisan nature of the Epstein criticism makes it harder to dismiss as partisan."
       }
+    
+    
     
     ]
   },
@@ -2948,7 +3020,15 @@ var commentators = [
         source: "Tucker Carlson Show interview with Joe Kent, March 18, 2026; New York Times interview, March 18, 2026",
         url: "https://www.nytimes.com/2026/03/18/us/politics/tucker-carlson-joe-kent-iran.html",
         steelman: "Carlson's defense of Kent carries weight precisely because Kent is not a fringe figure — he ran Trump's counterterrorism apparatus. The 'credentials matter' framing is strategically effective: dismissing Kent as weak on security requires ignoring 11 combat deployments and a CIA career. Carlson's broader argument — that the non-interventionist right was promised 'no new wars' and got a Middle Eastern conflict — reflects genuine betrayal felt by a significant MAGA faction."
+      },
+{
+        topics: ["domestic-policy"], events: ["bondi", "epstein"], title: "They fired Bondi to make the Epstein cover-up disappear — not to fix it",
+        text: "The timing of Bondi's firing is not a coincidence. She was subpoenaed to testify under oath about the Epstein files on April 14. Now she's gone. The House Oversight Committee was about to put her under oath, and suddenly she's 'transitioning to the private sector.' This isn't accountability — it's witness removal. They're not replacing her with someone who'll release the files. They're replacing her with someone who'll bury them deeper.",
+        source: "Tucker Carlson Show, April 2-3, 2026",
+        url: "https://tuckercarlson.com",
+        steelman: "Carlson's timeline argument is circumstantially compelling: the Oversight subpoena for April 14 was public, and the firing came 12 days before the scheduled deposition. Whether the timing is causal or coincidental, the question of whether Bondi's replacement will honor the subpoena is substantively important."
       }
+    
     
     ]
   },
@@ -3198,7 +3278,15 @@ var commentators = [
         source: "Zeteo, March 2026",
         url: "https://zeteo.com",
         steelman: "Hasan's Iraq parallel is historically specific and verifiable: disputed WMD intelligence, marginalized internal dissenters, media amplification of administration claims, and shifting war aims all characterized both conflicts. His point about Iran's military capabilities being categorically different from Iraq's is factually correct — Iran has ballistic missiles that can reach U.S. bases, a navy that can threaten oil shipping through the Strait of Hormuz, and proxy forces across the region that Iraq never had."
+      },
+{
+        topics: ["free-speech", "gender-identity"], events: ["scotus-ct"], title: "Free speech absolutism sounds great until you realize it's being used to hurt kids",
+        text: "The conversion therapy ruling is being celebrated as a free speech triumph. Let me tell you what 'free speech' means in practice here: a licensed therapist can now tell a 14-year-old struggling with their sexuality that they're broken and need to be fixed — a practice that research links to a 50% increase in suicide attempts. Justice Jackson was right: medical regulation is not speech regulation. States have always set standards of care. This ruling guts that authority in the name of an abstraction while real children bear the consequences.",
+        source: "Zeteo, April 2026",
+        url: "https://zeteo.com",
+        steelman: "Hasan's argument draws on Jackson's dissent and the documented medical evidence: a 2020 study in the American Journal of Public Health found conversion therapy is associated with a 92% increase in lifetime suicidality among LGBTQ youth. His framing that states have always regulated medical practice — including what therapists can and cannot do — represents the core of Jackson's dissent and has genuine legal weight."
       }
+    
     
     
     ]
@@ -3413,7 +3501,15 @@ var commentators = [
         source: "CNN commentary, February 2026",
         url: "https://www.cnn.com",
         steelman: "Jennings reflects the populist-right view that courts shouldn't second-guess executive trade policy when voters elected a president specifically to impose tariffs. The argument that trade is a national security matter — the legal basis Trump invoked — has precedent in decades of Section 232 tariffs that courts have upheld. The counterargument is that IEEPA was never designed for this purpose."
-      }]
+      },
+{
+        topics: ["culture", "domestic-policy"], events: ["ncaa"], title: "College sports was broken and someone had to step in — at least Trump is trying",
+        text: "The transfer portal is chaos. Schools are paying athletes $20 million a year with no salary cap. Olympic sports are getting cut to fund football and basketball. The NCAA can't enforce its own rules because courts keep blocking them. Congress has been 'working on it' for over a year and produced nothing. Say what you want about executive overreach — at least someone is trying to impose order on a system that's eating itself alive.",
+        source: "CNN political commentary, April 3-4, 2026",
+        url: "https://www.cnn.com",
+        steelman: "Jennings's frustration argument has substance: Congress has failed to pass college sports legislation despite bipartisan agreement that the system is broken. The NCAA has lost multiple lawsuits challenging its authority. Trump's executive order, whatever its legal standing, fills a genuine governance vacuum that the normal institutional channels have failed to address."
+      }
+    ]
   },
   {
     name: "Ian Bremmer", handle: "@ianbremmer", category: "center-left",
@@ -3768,7 +3864,15 @@ var commentators = [
         source: "The Rachel Maddow Show, MSNBC, February 2026",
         url: "https://www.msnbc.com/rachel-maddow-show",
         steelman: "Maddow's focus on Trump's reaction highlights a genuine institutional concern. His immediate imposition of new tariffs under Section 122 and personal attacks on Barrett and Gorsuch signal the ruling's practical impact may be limited. But the 150-day cap on Section 122 tariffs will force a congressional showdown Trump cannot avoid — which may prove the ruling more consequential than his defiance suggests."
+      },
+{
+        topics: ["culture", "domestic-policy"], events: ["ncaa"], title: "This isn't about sports — it's about building the infrastructure of federal control over universities",
+        text: "Take a step back and look at the pattern. Cut federal funding if universities don't drop DEI. Cut federal funding if they provide gender-affirming care. Cut federal funding if they don't change their athletic policies. Cut federal funding if they don't change their curricula. Every single time, the mechanism is the same: use the dependency of universities on federal grants to dictate institutional policy from the White House. This is how you build an authoritarian education system one executive order at a time.",
+        source: "The Rachel Maddow Show, MSNBC, April 2026",
+        url: "https://www.msnbc.com/maddow",
+        steelman: "Maddow's pattern-recognition argument is grounded in a factual series of executive actions all using the same federal funding leverage against universities. Whether one supports each individual policy or not, the cumulative effect of conditioning federal funding on compliance with a series of White House preferences represents a genuine shift in the federal-university relationship that both left and right should scrutinize."
       }
+    
     ]
   },
   {
@@ -4003,7 +4107,15 @@ var commentators = [
         source: "Pod Save America, tech policy discussions 2024-2025",
         url: "https://crooked.com/podcast-series/pod-save-america/",
         steelman: "Pfeiffer identifies a genuine strategic gap: the Trump administration's deregulatory approach to AI has attracted significant tech industry support, while Democrats have not articulated a compelling alternative vision that balances innovation with worker protection. The party's internal divide between tech-skeptical progressives and tech-friendly moderates has produced policy paralysis."
+      },
+{
+        topics: ["domestic-policy"], events: ["bondi"], title: "Bondi is the second Cabinet member fired in a month — this is not a functioning government",
+        text: "Bondi is the second Cabinet member Trump has fired in a month — after Kristi Noem at DHS. The attorney general of the United States was fired because she couldn't successfully prosecute the president's political enemies. Not because she broke the law. Not because of a policy disagreement. Because the retribution campaign failed. Democrats need to say this plainly and repeatedly: the president is firing his own appointees for not being authoritarian enough.",
+        source: "Pod Save America, April 2, 2026",
+        url: "https://crooked.com/podcast-series/pod-save-america/",
+        steelman: "Pfeiffer's institutional framing — two Cabinet firings in 30 days — highlights genuine governance instability. His argument that the firing criteria (insufficient prosecution of political enemies) is itself the story, regardless of how one feels about Bondi personally, reflects the view that the standard being applied is more alarming than the personnel change."
       }
+    
     ]
   },
   {
@@ -4177,7 +4289,15 @@ var commentators = [
         source: "The Weekly Dish (Substack), consistent position 2022-2025",
         url: "https://andrewsullivan.substack.com",
         steelman: "Sullivan frames Ukraine as a civilizational test rather than a geopolitical chess move, which shifts the debate from cost-benefit analysis to questions about Western democratic identity. His argument that the failure is one of will, not resources, is supported by the numbers: total Western aid to Ukraine is roughly 0.3% of combined NATO GDP — a fraction of Cold War defense spending."
-      }]
+      },
+{
+        topics: ["free-speech", "gender-identity"], events: ["scotus-ct"], title: "Banning talk therapy is banning thought — and the left should have seen this coming",
+        text: "I'm a gay man who finds conversion therapy repugnant. I also find the idea that the government can prohibit voluntary conversations between a therapist and a willing client to be a profound violation of liberty. These laws were written to protect vulnerable kids, and I understand that impulse. But the mechanism — banning certain viewpoints in therapeutic conversations while permitting others — was always constitutionally untenable. Kagan saw it. Gorsuch saw it. Only Jackson didn't. The left needs to grapple with the fact that viewpoint-based speech restrictions will always come back to bite them.",
+        source: "The Weekly Dish, Substack, March 31, 2026",
+        url: "https://andrewsullivan.substack.com",
+        steelman: "Sullivan's position as a gay man who opposes conversion therapy but supports the ruling gives his argument moral complexity that pure free-speech absolutism lacks. His warning that viewpoint-based speech restrictions are constitutionally double-edged echoes Kagan's concurrence and reflects a genuine concern among civil libertarians across the spectrum."
+      }
+    ]
   },
   {
     name: "Bret Weinstein", handle: "@BretWeinstein", category: "out-of-box",
@@ -4268,7 +4388,15 @@ var commentators = [
         source: "Breaking Points, March 2026; Tucker Carlson Show interview, March 6, 2026; Responsible Statecraft interview, March 19, 2026",
         url: "https://www.realclearpolitics.com/video/2026/03/07/saagar_enjeti_on_trump_admins_massive_iran_information_vacuum.html",
         steelman: "Enjeti's 'information vacuum' framing is supported by the gap between internal polling shown to Trump (90-10 support) and independent polls showing 79% of Trump voters want a swift end. His argument that the president is being insulated from dissenting views gains credibility from the Joe Kent resignation, which confirmed that 'key decision makers were not allowed to express their opinion to the president.' The 'declare victory and go home' prescription is politically viable — it gives Trump a win narrative without escalation."
+      },
+{
+        topics: ["culture", "domestic-policy"], events: ["ncaa"], title: "College sports needs reform but executive orders can't override federal court orders",
+        text: "The fundamental problem is that federal courts have already ruled that the NCAA can't restrict transfers or limit collectives from recruiting. This executive order is telling the NCAA to do things that courts have told them they can't do. So what happens when a university has to choose between following a federal court order and following an executive order? Sports attorneys are already saying this sets up a direct collision. I want college sports reform — but this isn't going to survive legal challenge.",
+        source: "Breaking Points, April 3-4, 2026",
+        url: "https://www.youtube.com/breakingpoints",
+        steelman: "Enjeti's legal critique is sourced directly from college sports attorney Mit Winter, who said the order 'appears to direct the NCAA to create rules that would likely violate' existing court orders. The executive-order-vs-court-order collision Enjeti identifies is a genuine constitutional problem, not a partisan objection — it's the same separation of powers issue that affected Bondi's DOJ prosecutions."
       }
+    
     
     ]
   },
@@ -4486,7 +4614,15 @@ var commentators = [
         source: "The Megyn Kelly Show, SiriusXM and YouTube, March 2-18, 2026",
         url: "https://www.megynkelly.com/2026/03/02/megyn-kelly-gives-her-take-on-trump-war-with-iran/",
         steelman: "Kelly's critique is powerful precisely because she supported Trump and campaigned for him — she can't be dismissed as a partisan. Her framing around American service members' deaths is viscerally effective and puts the burden of proof where it belongs: on the administration to justify the sacrifice. Her challenge to the 'you must support every war or you're unpatriotic' binary resonates with a growing anti-war right."
+      },
+{
+        topics: ["culture", "gender-identity"], events: ["ncaa"], title: "Finally — the NCAA bans biological males from women's sports",
+        text: "The NCAA changed its policy within 24 hours of Trump's executive order. Biological males can no longer compete in women's sports. Riley Gaines said she can't begin to describe how vindicating it feels knowing no girl will ever experience what she did. This wasn't complicated. It never should have taken this long. Every major sports federation in the world had already moved in this direction. The NCAA just needed someone to force the issue.",
+        source: "The Megyn Kelly Show, April 3-4, 2026",
+        url: "https://www.megynkelly.com",
+        steelman: "Kelly's argument that the NCAA was already an outlier is factually supported — World Athletics, World Aquatics, and most international federations had already restricted transgender participation in women's events. The NCAA's own president identified only 10 transgender athletes among 500,000+ competitors, yet the policy change was treated as transformative, suggesting the issue's political salience far exceeded its practical scope."
       }
+    
     
     
     ]
@@ -4561,7 +4697,15 @@ var commentators = [
         source: "Hannity, Fox News, March 18, 2026",
         url: "https://www.foxnews.com/shows/hannity",
         steelman: "Hannity's framing reflects the mainstream Republican position backed by polling: 77% of Republicans and 90% of self-described MAGA Republicans support the strikes on Iran. His argument that subordinates who fundamentally disagree with a president's decision should resign rather than undermine it from within reflects a coherent theory of executive authority, even if critics find it authoritarian."
+      },
+{
+        topics: ["domestic-policy"], events: ["bondi"], title: "Bondi was a loyal friend but the DOJ needs a fighter who can actually execute",
+        text: "I like Pam Bondi. She's a good person and a patriot. But the DOJ under her watch could not get a single major prosecution to stick. The Comey case was thrown out. The Letitia James case was thrown out. The Epstein files became a bipartisan embarrassment. The president deserves an attorney general who can navigate the legal system and deliver results, not just intentions. Todd Blanche understands what needs to happen.",
+        source: "Hannity, Fox News, April 2, 2026",
+        url: "https://www.foxnews.com/shows/hannity",
+        steelman: "Hannity's 'competence, not loyalty' framing reflects the mainstream MAGA position that the problem was execution, not mission. His focus on specific failures — named cases thrown out by judges — provides concrete evidence for the incompetence critique regardless of whether one supports the underlying prosecutions."
       }
+    
     ]
   },
   {
@@ -4636,7 +4780,23 @@ var commentators = [
         source: "The Dispatch and New York Times column, February 2026",
         url: "https://www.nytimes.com/by/david-french",
         steelman: "French represents the constitutional conservative position the ruling's critics miss: this wasn't a liberal court overruling a conservative president. Three justices nominated by Republican presidents (including two by Trump himself) ruled that separation of powers is not optional. The same major questions doctrine conservatives championed against Biden's student loan forgiveness was applied here."
+      },
+{
+        topics: ["free-speech", "gender-identity"], events: ["scotus-ct"], title: "The First Amendment protects speech you find abhorrent — that's the whole point",
+        text: "Colorado's law banned a therapist from having conversations with willing clients about their sexual orientation or gender identity — conversations the clients sought out voluntarily. The 8-1 ruling wasn't even close, and it shouldn't have been. The First Amendment protects the speech you find most objectionable, or it protects nothing. Justice Kagan's concurrence was crucial: she said a 'mirror image' law banning gender-affirming talk therapy would be equally unconstitutional. That's how free speech works — it protects both sides or neither.",
+        source: "The Dispatch, analysis of Chiles v. Salazar, March 31, 2026",
+        url: "https://thedispatch.com",
+        steelman: "French's emphasis on Justice Kagan's concurrence strengthens the argument by showing this wasn't a conservative-vs-liberal split. Kagan explicitly said laws banning gender-affirming therapy would also be unconstitutional — meaning the ruling protects speech in both directions. The 8-1 margin (with only Jackson dissenting) suggests this is closer to settled law than a partisan culture war victory."
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "The war is now five weeks old and 59% of Americans say it was the wrong decision",
+        text: "Pew finds 59% of Americans say the use of force in Iran was the wrong decision. Only 25% say it's going well. Quinnipiac has opposition at 54-39. These numbers are worse than Iraq at the same stage. The administration has held six Pentagon briefings total since February 28 — during past wars, briefings were daily. The information vacuum isn't accidental; it's strategy.",
+        source: "The Dispatch, analysis of Pew/Quinnipiac/AP-NORC polls, March 25, 2026",
+        url: "https://thedispatch.com",
+        steelman: "French's data-driven critique draws on three independent polls showing majority opposition. His comparison to Iraq-era briefing frequency highlights a measurable transparency gap."
       }
+    
+    
     ]
   },
   {
@@ -5051,6 +5211,9 @@ const topicQuestions = {
   'ukraine': 'The Trump administration is pushing U.S.-Russia talks on Ukraine\'s future — with Kyiv largely sidelined. What are commentators saying?',
   'scotus': 'SCOTUS ruled 6-3 that Trump\'s emergency tariffs exceeded presidential authority. Trump imposed new tariffs under a different law within hours. What are commentators saying?',
   'epstein': 'Sealed Epstein documents continue surfacing, naming prominent figures across politics and business. What are commentators saying?',
+  'bondi': 'Trump fired AG Pam Bondi after 14 months — frustrated she hadn\'t prosecuted enough political enemies or handled the Epstein files well. Was she too corrupt, or not corrupt enough?',
+  'ncaa': 'Trump signed an executive order targeting NCAA eligibility, transfers, and costs — threatening to cut federal funding from schools that don\'t comply. Is this saving college sports or executive overreach?',
+  'scotus-ct': 'The Supreme Court ruled 8-1 that Colorado\'s ban on conversion therapy for LGBTQ minors likely violates the First Amendment. Is this a free speech victory or a green light to harm vulnerable kids?',
 };
 
 const topicColors = {
@@ -5084,6 +5247,9 @@ const topicColors = {
   'scotus': { border: '#1B3A5C', bg: 'rgba(27,58,92,0.06)' },
   'ukraine': { border: '#2E6BC0', bg: 'rgba(46,107,192,0.06)' },
   'epstein': { border: '#4A235A', bg: 'rgba(74,35,90,0.06)' },
+  'bondi': { border: '#8B4513', bg: 'rgba(139,69,19,0.06)' },
+  'ncaa': { border: '#1B6B3A', bg: 'rgba(27,107,58,0.06)' },
+  'scotus-ct': { border: '#6B21A8', bg: 'rgba(107,33,168,0.06)' },
 };
 
 function showTopicQuestion(key) {
@@ -5425,6 +5591,22 @@ const precomputedStances = {
     "Chamath Palihapitiya": 7, "David French": 7.5, "Nate Silver": 8,
     "Ezra Klein": 8.5, "David Frum": 9, "Rachel Maddow": 9.5
   },
+  "event:bondi": {
+    _sideA: "Good riddance", _sideB: "She was doing her job",
+    "Chris Hayes": 2, "Rachel Maddow": 1.5, "Dan Pfeiffer": 2,
+    "Nancy Mace": 3, "Tucker Carlson": 4, "Ben Shapiro": 6,
+    "Sean Hannity": 8, "Mark Levin": 8.5
+  },
+  "event:ncaa": {
+    _sideA: "Support the order", _sideB: "Oppose the order",
+    "Ben Shapiro": 2, "Scott Jennings": 3, "Sean Hannity": 2.5,
+    "Nate Silver": 5, "Ezra Klein": 7, "Chris Hayes": 8
+  },
+  "event:scotus-ct": {
+    _sideA: "Free speech win", _sideB: "Harmful to LGBTQ youth",
+    "Ben Shapiro": 1.5, "Andrew Sullivan": 3, "Bari Weiss": 3.5,
+    "David French": 4, "Ezra Klein": 7, "Chris Hayes": 9
+  },
   "event:ukraine": {
     _sideA: "Support Ukraine", _sideB: "Oppose involvement",
     "Bret Stephens": 1, "Rachel Maddow": 2, "David Brooks": 3, "Andrew Sullivan": 3.5,
@@ -5602,7 +5784,10 @@ const dimensionFallbackMap = {
   'topic:policing': { dim: 'cultural', invert: true },
   'event:iran': { dim: 'foreign', invert: true },             // high foreign = dovish = anti-strikes (left arm)
   'event:joekent': { dim: 'foreign', invert: true },           // high foreign = dovish = pro-Kent's position
-  'event:anthropic': { dim: 'cultural', invert: true },        // progressive = pro-Anthropic's refusal
+  'event:anthropic': { dim: 'cultural', invert: true },
+  'event:bondi': { dim: 'orthodoxy', invert: false },
+  'event:ncaa': { dim: 'cultural', invert: true },
+  'event:scotus-ct': { dim: 'cultural', invert: true },        // progressive = pro-Anthropic's refusal
   'event:epstein': { dim: 'orthodoxy', invert: false },        // high orthodoxy = institutional trust
   'event:scotus': { dim: 'trade', invert: true },              // high trade = protectionist = anti-SCOTUS
   'event:ukraine': { dim: 'foreign', invert: false },          // high foreign = non-interventionist = oppose
