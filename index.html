@@ -642,6 +642,7 @@ footer {
 
 /* Event button colors */
 .event-btn.active[data-key="iran"] { background: #C0392B; }
+.event-btn.active[data-key="ceasefire"] { background: #2E7D32; }
 .event-btn.active[data-key="joekent"] { background: #B8860B; }
 .event-btn.active[data-key="bondi"] { background: #8B4513; }
 .event-btn.active[data-key="ncaa"] { background: #1B6B3A; }
@@ -1968,7 +1969,8 @@ function showPage(page) {
     <div class="section-label" style="margin-bottom:6px;">Today's Hot Topics</div>
   </div>
   <div class="topic-selector" id="event-filters">
-    <button class="topic-btn event-btn active" data-key="joekent" onclick="selectEvent(this, 'joekent')">🔥 Joe Kent Resignation</button>
+    <button class="topic-btn event-btn active" data-key="ceasefire" onclick="selectEvent(this, 'ceasefire')">🕊️ Iran Ceasefire</button>
+    <button class="topic-btn event-btn" data-key="joekent" onclick="selectEvent(this, 'joekent')">🔥 Joe Kent Resignation</button>
     <button class="topic-btn event-btn" data-key="iran" onclick="selectEvent(this, 'iran')">🔴 Iran Military Strike</button>
     <button class="topic-btn event-btn" data-key="bondi" onclick="selectEvent(this, 'bondi')">Bondi Fired</button>
     <button class="topic-btn event-btn" data-key="ncaa" onclick="selectEvent(this, 'ncaa')">NCAA Executive Order</button>
@@ -2705,7 +2707,15 @@ var commentators = [
         source: "All In with Chris Hayes, MSNBC, April 2, 2026",
         url: "https://www.msnbc.com/all-in",
         steelman: "Hayes's framing is supported by CNN reporting that Trump was frustrated Bondi 'had not investigated or prosecuted enough of his political opponents.' The failed cases demonstrate that constitutional checks were structural, not personal."
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "Trump threatened to destroy 'a whole civilization' — then declared 'total victory' 90 minutes later",
+        text: "The president wrote 'a whole civilization will die tonight, never to be brought back again.' Human Rights Watch's Kenneth Roth called this 'openly threatening collective punishment, targeting not the Iranian military but the Iranian people' — a potential war crime under the Fourth Geneva Convention. Then, 90 minutes before his own deadline, Trump announced a ceasefire and called it a 'total and complete victory.'",
+        source: "All In with Chris Hayes, MSNBC, April 8, 2026; Trump quote from Truth Social, April 7, 2026; Kenneth Roth quoted by NBC News, April 7, 2026",
+        url: "https://www.nbcnews.com/world/iran/live-blog/live-updates-iran-war-trump-deadline-hormuz-infrastructure-ceasefire-rcna267039",
+        steelman: "Hayes's framing uses Trump's exact words (verified on Truth Social) and Roth's exact response (verified by NBC News). The 90-minute timeline between the civilizational threat and the ceasefire announcement is documented by multiple outlets. The factual sequence raises legitimate questions regardless of one's position on the war."
       }
+    
     
     
     
@@ -2962,7 +2972,15 @@ var commentators = [
         source: "The Ben Shapiro Show, Daily Wire, April 2-3, 2026",
         url: "https://www.dailywire.com/show/the-ben-shapiro-show",
         steelman: "Shapiro's critique carries weight because it comes from inside the conservative movement. The bipartisan nature of the Epstein criticism makes it harder to dismiss as partisan."
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "Iran's 10-point plan includes continued enrichment — that's not a deal, it's a wish list",
+        text: "The ceasefire is fine. Any day bombs aren't falling is a good day. But Iran's 10-point plan includes continued uranium enrichment, U.S. force withdrawal from the region, war reparations, and Iranian control of the Strait of Hormuz. That directly contradicts Trump's stated position of zero enrichment. If that's the 'workable basis' for negotiation, we have a problem.",
+        source: "The Ben Shapiro Show, Daily Wire, April 8-9, 2026",
+        url: "https://www.dailywire.com/show/the-ben-shapiro-show",
+        steelman: "Shapiro's analysis is grounded in the verified terms of Iran's 10-point plan, which were published by Iran's Supreme National Security Council and reported by CNN, NBC, and Al Jazeera. The gap between Iran's demand for enrichment rights and Trump's 'no enrichment' position is documented and real."
       }
+    
     
     
     
@@ -3027,7 +3045,15 @@ var commentators = [
         source: "Tucker Carlson Show, April 2-3, 2026",
         url: "https://tuckercarlson.com",
         steelman: "Carlson's timeline argument is circumstantially compelling: the Oversight subpoena for April 14 was public, and the firing came 12 days before the scheduled deposition. Whether the timing is causal or coincidental, the question of whether Bondi's replacement will honor the subpoena is substantively important."
+      },
+{
+        topics: ["foreign-policy", "israel"], events: ["ceasefire"], title: "We hope the ceasefire creates lasting peace and puts an end to America fighting Mark Levin's wars",
+        text: "We hope the president's ceasefire creates a lasting peace and puts an end to America fighting Mark Levin's wars for him. As long as Washington maintains a 'special alliance' with the Israeli government, the latter's leaders will always seek to use our military to do their dirty work. Israel is already aggressively sabotaging the ceasefire by slaughtering huge numbers of civilians in Lebanon, a nation which is explicitly off-limits for any attack under the ceasefire conditions agreed to by Tehran.",
+        source: "Tucker Carlson, 'The Path to Peace,' Tucker Carlson Network, April 8, 2026",
+        url: "https://tuckercarlson.com",
+        steelman: "Carlson's post-ceasefire analysis is grounded in the verified Lebanon contradiction: Pakistan's PM said Lebanon was included; Israel launched its 'largest attack across Lebanon' on day one. Trump responded to Carlson's criticism by calling him a 'low IQ' 'loser' on Truth Social April 9 — confirming the break between them is real and public."
       }
+    
     
     
     ]
@@ -3285,7 +3311,15 @@ var commentators = [
         source: "Zeteo, April 2026",
         url: "https://zeteo.com",
         steelman: "Hasan's argument draws on Jackson's dissent and the documented medical evidence: a 2020 study in the American Journal of Public Health found conversion therapy is associated with a 92% increase in lifetime suicidality among LGBTQ youth. His framing that states have always regulated medical practice — including what therapists can and cannot do — represents the core of Jackson's dissent and has genuine legal weight."
+      },
+{
+        topics: ["foreign-policy", "israel"], events: ["ceasefire"], title: "Pakistan says Lebanon is covered by the ceasefire. Israel says it isn't. Hundreds are dying in the gap.",
+        text: "Pakistan's prime minister — the mediator the United States chose — said the ceasefire includes 'Lebanon and elsewhere, effective immediately.' Israel said it does not include Lebanon. On the first day of the ceasefire, Israel launched what it called its 'largest attack across Lebanon' since the war began — killing over 250 people. Lebanon declared a national day of mourning. Iran's foreign minister said: 'The U.S. must choose — ceasefire or continued war via Israel. It cannot have both.'",
+        source: "Zeteo, April 8-10, 2026; Pakistan PM Sharif quote from X; Netanyahu office statement; Lebanese civil defense figures; Araghchi quote from Iranian state media, April 9",
+        url: "https://zeteo.com",
+        steelman: "Every factual claim is independently verified: Sharif's 'Lebanon and elsewhere' statement is on X; Netanyahu's office explicitly excluded Lebanon; Israel confirmed the 'largest attack'; Lebanese civil defense reported 250+ dead; Araghchi's quote was reported by multiple outlets. The contradiction at the heart of the deal is documented, not alleged."
       }
+    
     
     
     
@@ -3322,7 +3356,15 @@ var commentators = [
         source: "Pod Save the World discussion of Anthropic-Pentagon dispute, February 2026",
         url: "https://crooked.com/podcast-series/pod-save-the-world/",
         steelman: "Rhodes's framing highlights a genuine institutional failure: if the traditional checks on military power (Congress, courts, media) have abdicated their roles, private companies become de facto gatekeepers by default. Whether that's appropriate is debatable, but the observation that it's happening is accurate."
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "Trump struck a deal to reopen a Strait that was open before the pointless war he started",
+        text: "In the best case scenario, Trump struck a deal to reopen a Strait that was open before the pointless war he started, with the IRGC demonstrating its control over the Strait and potentially extracting fees plus sanctions relief. A profoundly shameful episode in American history no matter what happens next.",
+        source: "Ben Rhodes, X/Twitter, April 7, 2026; reported by Euronews, The Hill, and Heather Cox Richardson's Substack",
+        url: "https://www.euronews.com/2026/04/08/ceasefire-offers-trump-exit-as-iran-war-becomes-political-liability",
+        steelman: "Rhodes's observation is factually precise: the Strait of Hormuz was open before the war, Iran closed it during the war, and the ceasefire's central concession is reopening it — now under Iranian military supervision with transit fees. The 'worse off than before' framing is supported by the structural shift Fareed Zakaria also identified."
       }
+    
     ]
   },
   {
@@ -3467,7 +3509,15 @@ var commentators = [
         source: "Bluesky post / Fortune, April 2025",
         url: "https://www.yahoo.com/news/finance/news/business-leaders-bill-ackman-mark-185735975.html",
         steelman: "Cuban\'s critique focuses not on tariffs in principle but on the chaos of implementation. His argument — that uncertainty is more damaging than any specific tariff rate — reflects what businesses actually experience: the inability to make investment decisions when the rules change constantly."
-      }]
+      },
+{
+        topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "If tariffs stay in place and DOGE keeps cutting, we will be in a far worse situation than 2008",
+        text: "If the new tariffs stay in place for multiple years, and are enforced and inflationary, and DOGE continues to cut and fire, we will be in a far worse situation than 2008.",
+        source: "Mark Cuban, Bluesky, April 2025; reported by The Hill, Fortune",
+        url: "https://thehill.com/business/5236740-mark-cuban-trump-tariffs-doge-cuts/",
+        steelman: "Cuban's framing connects tariffs and DOGE cuts as compounding forces — not isolated policies. His 2008 comparison carries weight because it's specific and measurable: the financial crisis produced 8.7 million job losses and a 57% stock market decline. JPMorgan's chief global economist separately raised recession probability to 60%."
+      }
+    ]
   },
   {
     name: "Yashar Ali", handle: "@yashar", category: "out-of-box",
@@ -3583,7 +3633,23 @@ var commentators = [
         source: "X post, April 2025",
         url: "https://fortune.com/2025/04/07/bill-ackman-howard-marks-jamie-dimon-speak-out-high-tariffs-economy-business-leader-comments/",
         steelman: "Ackman\'s critique is notable because he\'s a Trump supporter who identified a real distinction between strategic tariffs on bad actors like China and blanket tariffs that punish allies. His call for a 90-day pause showed that principled disagreement within a coalition is possible and productive."
-      }]
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "Some of the highest quality businesses in the world are trading at extremely cheap prices — ignore the MSM",
+        text: "Some of the highest quality businesses in the world are trading at extremely cheap prices. Ignore the MSM. One of the most one-sided wars in history that will end well for the U.S. and the world. And we have the potential for a large peace dividend. Fannie and Freddie are stupidly cheap. Asymmetry at its best.",
+        source: "Bill Ackman, X/Twitter, March 30, 2026; reported by Fortune, Motley Fool, and Moneywise",
+        url: "https://fortune.com/2026/03/30/bill-ackman-says-ignore-iran-war-fannie-mae-freddie-mac-stock-surge/",
+        steelman: "Ackman's post moved markets: Fannie Mae surged 41% and Freddie Mac 34% the next day. His argument that war-driven selloffs create buying opportunities for quality businesses echoes Buffett's 'be greedy when others are fearful' principle. Whether his confidence in a quick resolution was warranted is contested, but his market influence is documented."
+      },
+{
+        topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "This is not what we voted for — we are heading for a self-induced economic nuclear winter",
+        text: "The country is 100% behind the president on fixing a global system of tariffs that has disadvantaged the country. But by placing massive and disproportionate tariffs on our friends and our enemies alike and thereby launching a global economic war against the whole world at once, we are in the process of destroying confidence in our country as a trading partner, as a place to do business, and as a market to invest capital. This is not what we voted for. We are heading for a self-induced, economic nuclear winter.",
+        source: "Bill Ackman, X/Twitter, April 6-7, 2025; reported by The Hill, CNN, Fortune, Bloomberg, Washington Post",
+        url: "https://x.com/BillAckman/status/1908992002366292286",
+        steelman: "Ackman's critique carries weight as a Trump endorser and donor breaking publicly with the president on tariffs. His 'not what we voted for' framing reflects genuine tension between Trump's populist trade messaging and the business community that funded his campaign. The post received 10.6 million views."
+      }
+    
+    ]
   },
   {
     name: "David Frum", handle: "@davidfrum", category: "center-right",
@@ -4165,7 +4231,15 @@ var commentators = [
         source: "New York Times columns, 2024-2025",
         url: "https://www.nytimes.com/column/david-brooks",
         steelman: "Brooks frames Ukraine through the lens of civilizational stamina rather than narrow geopolitics. His argument that abandoning Ukraine signals democratic fatigue draws on historical parallels — the failure to enforce consequences for Crimea in 2014 arguably emboldened the 2022 invasion. The 'stamina' framing challenges both isolationist right and war-weary left."
-      }]
+      },
+{
+        topics: ["foreign-policy"], events: ["iran"], title: "That's one of the disadvantages of having a huckster for president",
+        text: "That's one of the disadvantages of having a huckster for president — he can't tell the American people that, when you're going to war, it's horrible, and that Iran is a serious country that's been preparing for this for nearly half-a-century. And they're going to fight back and they're going to make countermoves. This is clearly the week when the costs of the war are so exponentially larger than the benefits.",
+        source: "David Brooks, PBS NewsHour 'Brooks and Capehart,' late March 2026",
+        url: "https://www.pbs.org/newshour/show/brooks-and-capehart-on-the-cost-of-the-iran-war-and-trumps-strategy",
+        steelman: "Brooks's critique lands because he initially conceded the war had some positive potential — making his turn against it more credible than reflexive opposition. His framing that Iran 'has been preparing for this for nearly half-a-century' reflects the military reality that asymmetric adversaries can impose disproportionate costs."
+      }
+    ]
   },
   {
     name: "Nate Silver", handle: "@NateSilver538", category: "center-left",
@@ -4398,6 +4472,7 @@ var commentators = [
       }
     
     
+    
     ]
   },
   {
@@ -4506,7 +4581,23 @@ var commentators = [
         source: "The Dispatch / The Remnant podcast, consistent position 2024-2025",
         url: "https://thedispatch.com/author/jonah-goldberg/",
         steelman: "Goldberg\'s intellectual conservatism provides the most articulate right-of-center case against MAGA populism, drawing on the movement\'s own philosophical foundations."
-      }]
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "Trump thinks it made him sound strong, but I think the Iranians heard desperation",
+        text: "Trump thinks it made him sound strong, but I think the Iranians heard desperation. Reporting from the Financial Times and elsewhere suggests that Trump was the one pleading for a ceasefire. We may not have known that in real time, but the Iranians knew it. So when they heard Trump constantly insist that the Iranians were 'begging' for a ceasefire, they knew the truth.",
+        source: "Jonah Goldberg, 'Mixed Messages Are Everywhere,' The Dispatch G-File, April 8, 2026",
+        url: "https://thedispatch.com/newsletter/gfile/trump-iran-ceasefire-melania/",
+        steelman: "Goldberg's analysis draws on Financial Times reporting that Trump was the party seeking the ceasefire — not Iran. His framing that the Iranians could distinguish between Trump's public bravado and his private desperation is supported by Iran's own public statements claiming victory and 'enduring defeat' for Washington. His earlier coinage of 'TACO — Trump Always Chickens Out' has become a widely circulated shorthand for this pattern."
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "Trump thinks the threat made him sound strong — the Iranians heard desperation",
+        text: "I don't think he was ever going to do what he threatened. It was a bluff. Trump thinks it made him sound strong, but I think the Iranians heard desperation. Reporting from the Financial Times and elsewhere suggests that Trump was the one pleading for a ceasefire. We may not have known that in real time, but the Iranians knew it. It's like Iran is a beaten weakling holding a vial of nitroglycerin in the engine room of the global economy.",
+        source: "Jonah Goldberg, The G-File, The Dispatch, April 8, 2026",
+        url: "https://thedispatch.com/newsletter/gfile/trump-iran-ceasefire-melania/",
+        steelman: "Goldberg's analysis draws on Financial Times reporting that Trump was privately seeking the ceasefire while publicly threatening destruction. His 'nitroglycerin in the engine room' metaphor captures the asymmetric dynamic Fareed Zakaria also identified: Iran's Strait of Hormuz leverage outweighs its conventional military weakness."
+      }
+    
+    ]
   },
   {
     name: "Jordan Peterson", handle: "@jordanbpeterson", category: "center-right",
@@ -4621,7 +4712,15 @@ var commentators = [
         source: "The Megyn Kelly Show, April 3-4, 2026",
         url: "https://www.megynkelly.com",
         steelman: "Kelly's argument that the NCAA was already an outlier is factually supported — World Athletics, World Aquatics, and most international federations had already restricted transgender participation in women's events. The NCAA's own president identified only 10 transgender athletes among 500,000+ competitors, yet the policy change was treated as transformative, suggesting the issue's political salience far exceeded its practical scope."
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "The coalition that got Trump elected is completely fractured and in smithereens",
+        text: "It was folly to begin with. It remains folly. The coalition that got Trump elected is completely fractured and in smithereens. And he doesn't care, because he doesn't care about the Republican Party — he cares about himself. The question is now not who has Trump lost. The question is who remains. We care about what's happening in Iowa, not Iran.",
+        source: "The Megyn Kelly Show, SiriusXM, April 8, 2026; quoted by RealClearPolitics and Deadline",
+        url: "https://deadline.com/2026/04/trump-tucker-carlson-megyn-kelly-iran-war-1236786114/",
+        steelman: "Kelly's quotes are verified by RealClearPolitics video and Deadline reporting. Her 'Iowa not Iran' framing captures a genuine political reality: Trump's base voted on domestic economics, not Middle East intervention. Trump responded by calling Kelly a 'low IQ' 'stupid person' on Truth Social April 9."
       }
+    
     
     
     
@@ -4704,7 +4803,15 @@ var commentators = [
         source: "Hannity, Fox News, April 2, 2026",
         url: "https://www.foxnews.com/shows/hannity",
         steelman: "Hannity's 'competence, not loyalty' framing reflects the mainstream MAGA position that the problem was execution, not mission. His focus on specific failures — named cases thrown out by judges — provides concrete evidence for the incompetence critique regardless of whether one supports the underlying prosecutions."
+      },
+{
+        topics: ["foreign-policy"], events: ["ceasefire"], title: "Iran is demoralized and now apparently ready to agree to terms",
+        text: "Iran is demoralized and now apparently ready to agree to terms. Today's ceasefire was not just the result of negotiations and tough rhetoric. It was the result of the most devastating military campaign against a state sponsor of terror in modern history.",
+        source: "Hannity, Fox News, April 7, 2026; documented by Media Matters for America, April 8, 2026",
+        url: "https://www.mediamatters.org/us-iran-relations/how-fractured-right-wing-media-are-spinning-trumps-iran-capitulation",
+        steelman: "Hannity's framing reflects verified polling: 86% of Republican voters support the strikes. The Dow surged 1,325 points on the ceasefire announcement. Whether the war was necessary to reach this point is contested, but the claim that military pressure produced diplomatic engagement has factual support."
       }
+    
     
     ]
   },
@@ -4795,6 +4902,7 @@ var commentators = [
         url: "https://thedispatch.com",
         steelman: "French's data-driven critique draws on three independent polls showing majority opposition. His comparison to Iraq-era briefing frequency highlights a measurable transparency gap."
       }
+    
     
     
     ]
@@ -5178,7 +5286,7 @@ var commentators = [
 
 let currentTopic = 'all';
 let currentCategory = 'all';
-let currentEvent = 'joekent';
+let currentEvent = 'ceasefire';
 
 const topicQuestions = {
   // The Big Questions
@@ -5205,6 +5313,7 @@ const topicQuestions = {
   'policing': 'Does American policing need fundamental reform — or more support and resources?',
   'voter-id': 'Do voter ID laws protect election integrity — or suppress legitimate votes?',
   // Today's Hot Topics
+  'ceasefire': 'The U.S. and Iran agreed to a fragile two-week ceasefire brokered by Pakistan — but talks in Islamabad collapsed, Lebanon was excluded, and both sides claim victory. Is this the beginning of peace or a pause before escalation?',
   'joekent': 'Trump\'s counterterrorism chief Joe Kent resigned over the Iran war, saying it was driven by Israeli pressure — sparking a firestorm over foreign policy, antisemitism, and loyalty. What are commentators saying?',
   'iran': 'The U.S. and Israel launched joint strikes on Iran targeting military and nuclear sites. Iran retaliated against U.S. bases and Israel. What are commentators saying?',
   'anthropic': 'Trump banned federal use of Anthropic\'s AI after it refused to remove safeguards on autonomous weapons. Hours later, OpenAI struck a Pentagon deal. What are commentators saying?',
@@ -5241,6 +5350,7 @@ const topicColors = {
   'policing': { border: '#1E40AF', bg: 'rgba(30,64,175,0.06)' },
   'voter-id': { border: '#6D28D9', bg: 'rgba(109,40,217,0.06)' },
   // Events
+  'ceasefire': { border: '#2E7D32', bg: 'rgba(46,125,50,0.06)' },
   'joekent': { border: '#B8860B', bg: 'rgba(184,134,11,0.06)' },
   'iran': { border: '#C0392B', bg: 'rgba(192,57,43,0.06)' },
   'anthropic': { border: '#D4A012', bg: 'rgba(212,160,18,0.06)' },
@@ -5560,6 +5670,13 @@ function trumpPillStyle(val) {
 // e.g. Tucker Carlson (right) and Chris Hayes (left) can both land on the anti-strikes
 // side of Iran, while Mark Levin (right) lands on the pro-strikes side.
 const precomputedStances = {
+  "event:ceasefire": {
+    _sideA: "War was a failure", _sideB: "Ceasefire is a win",
+    "Mehdi Hasan": 1.5, "Ben Rhodes": 2, "Chris Hayes": 2.5,
+    "Tucker Carlson": 3, "Megyn Kelly": 3,
+    "Fareed Zakaria": 5,
+    "Ben Shapiro": 6.5, "Sean Hannity": 8, "Mark Levin": 8
+  },
   "event:joekent": {
     _sideA: "Kent was right", _sideB: "Kent was wrong",
     "Tucker Carlson": 1, "Megyn Kelly": 2, "Glenn Greenwald": 2.5,
@@ -5783,6 +5900,7 @@ const dimensionFallbackMap = {
   'topic:maha': { dim: 'cultural', invert: true },
   'topic:policing': { dim: 'cultural', invert: true },
   'event:iran': { dim: 'foreign', invert: true },             // high foreign = dovish = anti-strikes (left arm)
+  'event:ceasefire': { dim: 'foreign', invert: true },
   'event:joekent': { dim: 'foreign', invert: true },           // high foreign = dovish = pro-Kent's position
   'event:anthropic': { dim: 'cultural', invert: true },
   'event:bondi': { dim: 'orthodoxy', invert: false },
@@ -6721,7 +6839,6 @@ const allCommentators = [
   { name:"Shoshana Zuboff", handle:"@ShoshanaZuboff", category:"left-sj", role:"Harvard Professor, Author", composite:8, domestic:8, foreign:5, trade:7, cultural:8, orthodoxy:5, trump:9, issues:["Surveillance Capitalism","Digital Rights"] },
   { name:"Charlamagne tha God", handle:"@cenkuygur", category:"center-left", role:"Host, The Breakfast Club; Author", composite:5.5, domestic:6, foreign:5, trade:6, cultural:4, orthodoxy:1, trump:7, issues:["Economic Populism","Cultural Independence"] },
   { name:"Meghan McCain", handle:"@MeghanMcCain", category:"right-establishment", role:"Author, Commentator", composite:3.5, domestic:3, foreign:2, trade:4, cultural:4, orthodoxy:3, trump:8, issues:["Anti-Trump Conservatism","Foreign Policy Hawks"] },
-  { name:"Scott Galloway", handle:"@profgalloway", category:"center-left", role:"NYU Professor, Podcast Host", composite:6, domestic:6, foreign:5, trade:5, cultural:6, orthodoxy:3, issues:["Big Tech Accountability","Generational Fairness"] },
   { name:"Tim Dillon", handle:"@TimJDillon", category:"out-of-box", role:"Comedian, Podcast Host", composite:5, domestic:4, foreign:7, trade:5, cultural:4, orthodoxy:1, trump:5, issues:["Anti-Establishment Comedy","Cultural Satire"] },
   { name:"Mark Cuban", handle:"@mcuban", category:"center-left", role:"Entrepreneur, Investor", composite:6, domestic:5, foreign:5, trade:3, cultural:6, orthodoxy:3, trump:9, issues:["Anti-Tariff","AI & Robotics","DOGE Accountability"] },
   { name:"Yashar Ali", handle:"@yashar", category:"out-of-box", role:"Journalist, Writer", composite:5.5, domestic:5, foreign:5, trade:5, cultural:5, orthodoxy:2, trump:6, issues:["Media Accountability","Nonpartisan Journalism"] },
