@@ -145,6 +145,76 @@ nav {
 }
 .mobile-hamburger { display: none; }
 
+/* Nav dropdown for Media Literacy tools */
+.nav-dropdown-wrap {
+  position: relative;
+}
+.nav-dropdown-wrap > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-dropdown-wrap > a .nav-dd-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  opacity: 0.5;
+  transition: transform 0.18s;
+  flex-shrink: 0;
+}
+.nav-dropdown-wrap:hover > a .nav-dd-caret { transform: rotate(180deg); opacity: 0.8; }
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1.5px solid rgba(0,0,0,0.09);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  min-width: 180px;
+  z-index: 2000;
+  padding: 14px 0 4px;
+  margin-top: -4px;
+  text-align: center;
+}
+.nav-dropdown::before {
+  content: '';
+  display: block;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.nav-dropdown-wrap:hover .nav-dropdown { display: block; }
+.nav-dropdown a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary) !important;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 0;
+  -webkit-text-fill-color: unset !important;
+}
+.nav-dropdown a:hover {
+  background: var(--warm-bg);
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: unset !important;
+}
+.nav-dropdown .nav-dd-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.06);
+  margin: 3px 0;
+}
+
 /* Visible scrollbar for dropdowns */
 .scrollable-dropdown::-webkit-scrollbar {
   width: 6px;
@@ -1781,7 +1851,7 @@ function showPage(page) {
   // Close mobile nav if open
   var nl = document.querySelector('.nav-links'); if (nl) nl.classList.remove('mobile-open');
   var hb = document.querySelector('.mobile-hamburger'); if (hb) hb.textContent = '☰';
-  var pages = ['landing', 'spectrum', 'commentariat', 'about', 'listen', 'method', 'fingerprint', 'steelcentral', 'medialiteracy'];
+  var pages = ['landing', 'spectrum', 'commentariat', 'about', 'listen', 'method', 'fingerprint', 'steelcentral', 'medialiteracy', 'labelthetake', 'spotbias'];
   for (var i = 0; i < pages.length; i++) {
     var el = document.getElementById(pages[i] + '-page');
     if (el) el.style.display = (pages[i] === page) ? 'block' : 'none';
@@ -1812,7 +1882,14 @@ function showPage(page) {
     <a href="javascript:void(0)" onclick="showPage('steelcentral')">Steel Man Central</a>
     <a href="javascript:void(0)" onclick="showPage('commentariat')">The Commentariat</a>
     <a href="javascript:void(0)" onclick="showPage('method')">The Method</a>
-    <a href="javascript:void(0)" onclick="showPage('medialiteracy')">Media Literacy</a>
+    <div class="nav-dropdown-wrap">
+      <a href="javascript:void(0)" onclick="showPage('medialiteracy')">Media Literacy <span class="nav-dd-caret"></span></a>
+      <div class="nav-dropdown">
+        <a href="javascript:void(0)" onclick="showPage('labelthetake')">Label the Take</a>
+        <div class="nav-dd-divider"></div>
+        <a href="javascript:void(0)" onclick="showPage('spotbias')">Spot the Bias</a>
+      </div>
+    </div>
     <a href="javascript:void(0)" onclick="showPage('fingerprint')">Your Fingerprint</a>
     <a href="javascript:void(0)" onclick="showPage('about')">About</a>
     <a href="javascript:void(0)" class="cta-btn" onclick="showPage('spectrum')">Explore →</a>
@@ -2014,6 +2091,42 @@ function showPage(page) {
       <div id="horseshoe-label-right" style="position:absolute; bottom:2px; right:8%; font-family:var(--sans); font-size:0.6rem; font-weight:600; color:var(--text-muted);">Side B</div>
     </div>
     <div id="coalition-insight" style="text-align:center; margin-top:4px; font-family:var(--sans); font-size:0.7rem; color:var(--text-secondary); line-height:1.5;"></div>
+    <div style="text-align:center; margin-top:10px; padding-bottom:2px;">
+      <button id="voice-map-btn" onclick="openVoiceMap()" style="display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:100px; border:1.5px solid rgba(0,0,0,0.15); background:white; font-family:var(--sans); font-size:0.72rem; font-weight:600; color:var(--text-secondary); cursor:pointer; transition:all 0.2s; letter-spacing:0.01em;">
+        <span style="font-size:0.9rem;">🫧</span> Voice Map
+      </button>
+    </div>
+  </div>
+
+  <!-- Voice Map Modal -->
+  <div id="voice-map-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:16px;">
+    <div style="background:white; border-radius:16px; width:100%; max-width:680px; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 24px 80px rgba(0,0,0,0.25);">
+      <div style="padding:20px 24px 12px; border-bottom:1px solid rgba(0,0,0,0.08); display:flex; align-items:flex-start; justify-content:space-between; flex-shrink:0;">
+        <div>
+          <div style="font-family:var(--sans); font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:3px;">🫧 Voice Map</div>
+          <div id="voice-map-subtitle" style="font-family:var(--sans); font-size:0.75rem; color:var(--text-muted);">Who's talking — and how big their megaphone is</div>
+        </div>
+        <button onclick="closeVoiceMap()" style="background:none; border:none; cursor:pointer; font-size:1.4rem; color:var(--text-muted); line-height:1; padding:0; margin-top:2px;">×</button>
+      </div>
+      <div style="padding:12px 20px 8px; flex-shrink:0; display:flex; gap:16px; font-family:var(--sans); font-size:0.68rem; color:var(--text-muted); align-items:center; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#1B3A5C;display:inline-block;"></span> Left / SJ</div>
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#3B7DD8;display:inline-block;"></span> Left / Prog</div>
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#6BA3D6;display:inline-block;"></span> Center-Left</div>
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#7B4EA0;display:inline-block;"></span> Out of the Box</div>
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#D67A6B;display:inline-block;"></span> Center-Right</div>
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#D83B3B;display:inline-block;"></span> Right / Estab</div>
+        <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#8B1A1A;display:inline-block;"></span> Right / Pop</div>
+        <div style="display:flex; align-items:center; gap:5px; margin-left:auto; font-style:italic;">Bubble size = reach</div>
+      </div>
+      <div id="voice-map-canvas-wrap" style="flex:1; overflow:hidden; min-height:320px; position:relative;">
+        <svg id="voice-map-svg" style="width:100%;height:100%;display:block;"></svg>
+        <div id="voice-map-empty" style="display:none; position:absolute; inset:0; align-items:center; justify-content:center; font-family:var(--sans); font-size:0.85rem; color:var(--text-muted); flex-direction:column; gap:8px;">
+          <span style="font-size:2rem;">🔇</span>
+          <span>No voices mapped for this topic yet</span>
+        </div>
+      </div>
+      <div style="padding:10px 20px 16px; flex-shrink:0; text-align:center; font-family:var(--sans); font-size:0.65rem; color:var(--text-muted); border-top:1px solid rgba(0,0,0,0.06);">Reach scores reflect X followers, podcast/YouTube audience, and media citation index — updated periodically</div>
+    </div>
   </div>
 
   <div style="text-align:center; padding: 6px 40px 0;">
@@ -2637,7 +2750,7 @@ function showPage(page) {
   // Close mobile nav if open
   var nl = document.querySelector('.nav-links'); if (nl) nl.classList.remove('mobile-open');
   var hb = document.querySelector('.mobile-hamburger'); if (hb) hb.textContent = '☰';
-  var allPages = ['landing', 'spectrum', 'commentariat', 'about', 'listen', 'method', 'fingerprint', 'steelcentral', 'medialiteracy'];
+  var allPages = ['landing', 'spectrum', 'commentariat', 'about', 'listen', 'method', 'fingerprint', 'steelcentral', 'medialiteracy', 'labelthetake', 'spotbias'];
   for (var i = 0; i < allPages.length; i++) {
     var el = document.getElementById(allPages[i] + '-page');
     if (el) el.style.display = (allPages[i] === page) ? 'block' : 'none';
@@ -2645,6 +2758,8 @@ function showPage(page) {
   if (page === 'method' && typeof renderArchetypes === 'function') renderArchetypes();
   if (page === 'fingerprint' && typeof initQuiz === 'function') initQuiz();
   if (page === 'steelcentral' && typeof renderSteelCentral === 'function') renderSteelCentral();
+  if (page === 'spotbias' && typeof sbInit === 'function') sbInit();
+  if (page === 'labelthetake' && typeof mlInit === 'function') mlInit();
   if (page === 'spectrum') {
     var sp = document.getElementById('spectrum-page');
     if (sp) sp.classList.add('page-transition');
@@ -2670,7 +2785,7 @@ function showPage(page) {
 // ===== COMMENTATOR DATA =====
 var commentators = [
   {
-    name: "Chris Hayes", handle: "@chrislhayes", category: "left-sj",
+    name: "Chris Hayes", handle: "@chrislhayes", category: "left-sj", reach: 7,
     role: "Host, All In (MS NOW)", composite: 8.5, domestic: 8, foreign: 7, trade: 6, cultural: 9, orthodoxy: 7, trump: 10,
     takes: [
       {
@@ -2722,7 +2837,7 @@ var commentators = [
     ]
   },
   {
-    name: "Robert Reich", handle: "@RBReich", category: "left-sj",
+    name: "Robert Reich", handle: "@RBReich", category: "left-sj", reach: 6,
     role: "Former Labor Secretary, Author", composite: 8.5, domestic: 9, foreign: 5, trade: 7, cultural: 8, orthodoxy: 7, trump: 10,
     takes: [
       {
@@ -2742,7 +2857,7 @@ var commentators = [
     ]
   },
   {
-    name: "Ezra Klein", handle: "@ezraklein", category: "center-left",
+    name: "Ezra Klein", handle: "@ezraklein", category: "center-left", reach: 7,
     role: "NYT Columnist, Podcast Host", composite: 7, domestic: 7, foreign: 5, trade: 4, cultural: 7, orthodoxy: 5, trump: 8,
     takes: [
       {
@@ -2784,7 +2899,7 @@ var commentators = [
     ]
   },
   {
-    name: "Coleman Hughes", handle: "@ColemanHughes", category: "out-of-box",
+    name: "Coleman Hughes", handle: "@ColemanHughes", category: "out-of-box", reach: 6,
     role: "Author, Conversations with Coleman", composite: 5, domestic: 4, foreign: 5, trade: 4, cultural: 5, orthodoxy: 2, trump: 5,
     takes: [
       {
@@ -2812,7 +2927,7 @@ var commentators = [
     ]
   },
   {
-    name: "Sam Harris", handle: "@SamHarrisOrg", category: "center-left",
+    name: "Sam Harris", handle: "@SamHarrisOrg", category: "center-left", reach: 6,
     role: "Author, Making Sense Podcast", composite: 5, domestic: 4, foreign: 6, trade: 4, cultural: 6, orthodoxy: 1, trump: 8,
     takes: [
       {
@@ -2832,7 +2947,7 @@ var commentators = [
     ]
   },
   {
-    name: "Joe Rogan", handle: "@joerogan", category: "out-of-box",
+    name: "Joe Rogan", handle: "@joerogan", category: "out-of-box", reach: 10,
     role: "Host, The Joe Rogan Experience", composite: 5, domestic: 4, foreign: 7, trade: 6, cultural: 5, orthodoxy: 1, trump: 4,
     takes: [{
         topics: ["immigration"], events: ["immigration-policy"], title: "The Trump administration's mass deportation campaign is cruel",
@@ -2858,7 +2973,7 @@ var commentators = [
     ]
   },
   {
-    name: "Bari Weiss", handle: "@bariweiss", category: "center-left",
+    name: "Bari Weiss", handle: "@bariweiss", category: "center-left", reach: 6,
     role: "Editor, The Free Press", composite: 5, domestic: 4, foreign: 6, trade: 4, cultural: 5, orthodoxy: 2, trump: 5,
     takes: [{
         topics: ["free-speech", "culture"], events: ["free-speech-media"], title: "Redrawing the boundaries of acceptable debate at CBS News",
@@ -2900,7 +3015,7 @@ var commentators = [
     ]
   },
   {
-    name: "Ben Shapiro", handle: "@benshapiro", category: "right-establishment",
+    name: "Ben Shapiro", handle: "@benshapiro", category: "right-establishment", reach: 9,
     role: "Host, The Ben Shapiro Show; Daily Wire", composite: 2.5, domestic: 2, foreign: 2, trade: 3, cultural: 2, orthodoxy: 5, trump: 4,
     takes: [
       {
@@ -2987,7 +3102,7 @@ var commentators = [
     ]
   },
   {
-    name: "Tucker Carlson", handle: "@TuckerCarlson", category: "right-populist",
+    name: "Tucker Carlson", handle: "@TuckerCarlson", category: "right-populist", reach: 9,
     role: "Host, Tucker Carlson Network", composite: 2, domestic: 4, foreign: 10, trade: 9, cultural: 2, orthodoxy: 5, trump: 4,
     takes: [
       {
@@ -3059,7 +3174,7 @@ var commentators = [
     ]
   },
   {
-    name: "Matt Walsh", handle: "@MattWalshBlog", category: "right-populist",
+    name: "Matt Walsh", handle: "@MattWalshBlog", category: "right-populist", reach: 8,
     role: "Host, The Matt Walsh Show; Daily Wire", composite: 2, domestic: 3, foreign: 4, trade: 7, cultural: 1, orthodoxy: 7, trump: 2,
     takes: [{
         topics: ["foreign-policy", "domestic-policy"], title: "Cut all U.S. foreign aid — including to Israel",
@@ -3078,7 +3193,7 @@ var commentators = [
     ]
   },
   {
-    name: "Laura Ingraham", handle: "@IngrahamAngle", category: "right-populist",
+    name: "Laura Ingraham", handle: "@IngrahamAngle", category: "right-populist", reach: 7,
     role: "Host, The Ingraham Angle, Fox News", composite: 2, domestic: 3, foreign: 4, trade: 8, cultural: 1, orthodoxy: 8, trump: 2,
     takes: [
       {
@@ -3097,7 +3212,7 @@ var commentators = [
       }]
   },
   {
-    name: "Elon Musk", handle: "@elonmusk", category: "out-of-box",
+    name: "Elon Musk", handle: "@elonmusk", category: "out-of-box", reach: 10,
     role: "CEO, Tesla & SpaceX; Owner, X", composite: 3.5, domestic: 2, foreign: 3, trade: 3, cultural: 3, orthodoxy: 1, trump: 2,
     takes: [{
         topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "Tariffs and government efficiency are not what they seem",
@@ -3108,7 +3223,7 @@ var commentators = [
       }]
   },
   {
-    name: "Peter Thiel", handle: "@peterthiel", category: "right-establishment",
+    name: "Peter Thiel", handle: "@peterthiel", category: "right-establishment", reach: 4,
     role: "Co-founder, PayPal & Palantir", composite: 2.5, domestic: 1, foreign: 4, trade: 5, cultural: 3, orthodoxy: 2, trump: 2,
     takes: [{
         topics: ["ai-tech", "foreign-policy"], events: ["ai-regulation"], title: "AI is a geopolitical weapon and China trade is manufacturing musical chairs",
@@ -3119,7 +3234,7 @@ var commentators = [
       }]
   },
   {
-    name: "Marc Andreessen", handle: "@pmarca", category: "center-right",
+    name: "Marc Andreessen", handle: "@pmarca", category: "center-right", reach: 4,
     role: "Co-founder, Andreessen Horowitz", composite: 3, domestic: 1, foreign: 5, trade: 3, cultural: 4, orthodoxy: 2, trump: 2,
     takes: [
       {
@@ -3139,7 +3254,7 @@ var commentators = [
     ]
   },
   {
-    name: "Dario Amodei", handle: "@DarioAmodei", category: "out-of-box",
+    name: "Dario Amodei", handle: "@DarioAmodei", category: "out-of-box", reach: 3,
     role: "CEO, Anthropic", composite: 6, domestic: 5, foreign: 5, trade: 4, cultural: 7, orthodoxy: 3, trump: 6,
     takes: [
       {
@@ -3151,7 +3266,7 @@ var commentators = [
       }]
   },
   {
-    name: "Sam Altman", handle: "@sama", category: "center-left",
+    name: "Sam Altman", handle: "@sama", category: "center-left", reach: 4,
     role: "CEO, OpenAI", composite: 6, domestic: 6, foreign: 5, trade: 3, cultural: 7, orthodoxy: 3, trump: 5,
     takes: [
       {
@@ -3163,7 +3278,7 @@ var commentators = [
       }]
   },
   {
-    name: "Shoshana Zuboff", handle: "@ShoshanaZuboff", category: "left-sj",
+    name: "Shoshana Zuboff", handle: "@ShoshanaZuboff", category: "left-sj", reach: 3,
     role: "Harvard Professor, Author", composite: 8, domestic: 8, foreign: 5, trade: 7, cultural: 8, orthodoxy: 5, trump: 9,
     takes: [{
         topics: ["ai-tech"], events: ["ai-regulation"], title: "Surveillance capitalism is merging corporate and state power",
@@ -3174,7 +3289,7 @@ var commentators = [
       }]
   },
   {
-    name: "Charlamagne tha God", handle: "@cthagod", category: "center-left",
+    name: "Charlamagne tha God", handle: "@cthagod", category: "center-left", reach: 6,
     role: "Host, The Breakfast Club; Author", composite: 5.5, domestic: 6, foreign: 5, trade: 6, cultural: 4, orthodoxy: 1, trump: 7,
     takes: [{
         topics: ["domestic-policy", "culture"], title: "Democrats are losing the government shutdown messaging battle",
@@ -3185,7 +3300,7 @@ var commentators = [
       }]
   },
   {
-    name: "Scott Galloway", handle: "@profgalloway", category: "center-left",
+    name: "Scott Galloway", handle: "@profgalloway", category: "center-left", reach: 6,
     role: "NYU Professor, Podcast Host", composite: 6, domestic: 6, foreign: 5, trade: 5, cultural: 6, orthodoxy: 3, trump: 8,
     takes: [
       {
@@ -3205,7 +3320,7 @@ var commentators = [
     ]
   },
   {
-    name: "Meghan McCain", handle: "@MeghanMcCain", category: "right-establishment",
+    name: "Meghan McCain", handle: "@MeghanMcCain", category: "right-establishment", reach: 3,
     role: "Author, Commentator", composite: 3.5, domestic: 3, foreign: 2, trade: 4, cultural: 4, orthodoxy: 3, trump: 8,
     takes: [{
         topics: ["foreign-policy"], title: "Defending her father's Ukraine legacy while warming to Trump",
@@ -3216,7 +3331,7 @@ var commentators = [
       }]
   },
   {
-    name: "Tim Dillon", handle: "@TimJDillon", category: "out-of-box",
+    name: "Tim Dillon", handle: "@TimJDillon", category: "out-of-box", reach: 4,
     role: "Comedian, Podcast Host", composite: 5, domestic: 4, foreign: 7, trade: 5, cultural: 4, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["culture"], title: "American political and cultural discourse has become absurd",
@@ -3227,7 +3342,7 @@ var commentators = [
       }]
   },
   {
-    name: "Cenk Uygur", handle: "@cenkuygur", category: "left-prog",
+    name: "Cenk Uygur", handle: "@cenkuygur", category: "left-prog", reach: 7,
     role: "Host, The Young Turks", composite: 8.5, domestic: 9, foreign: 7, trade: 7, cultural: 8, orthodoxy: 6, trump: 9,
     takes: [
       {
@@ -3239,7 +3354,7 @@ var commentators = [
       }]
   },
   {
-    name: "Tommy Vietor", handle: "@TVietor08", category: "left-prog",
+    name: "Tommy Vietor", handle: "@TVietor08", category: "left-prog", reach: 3,
     role: "Co-host, Pod Save America", composite: 7.5, domestic: 7, foreign: 5, trade: 5, cultural: 7, orthodoxy: 6, trump: 9,
     takes: [{
         topics: ["foreign-policy"], title: "Trump's foreign policy approach to Iran is reckless",
@@ -3250,7 +3365,7 @@ var commentators = [
       }]
   },
   {
-    name: "Jon Favreau", handle: "@jonfavs", category: "left-prog",
+    name: "Jon Favreau", handle: "@jonfavs", category: "left-prog", reach: 3,
     role: "Co-host, Pod Save America", composite: 7.5, domestic: 7, foreign: 5, trade: 5, cultural: 7, orthodoxy: 6, trump: 9,
     takes: [{
         topics: ["domestic-policy"], title: "Democrats' messaging failed — they need economic populism",
@@ -3261,7 +3376,7 @@ var commentators = [
       }]
   },
   {
-    name: "Mehdi Hasan", handle: "@mehdirhasan", category: "left-sj",
+    name: "Mehdi Hasan", handle: "@mehdirhasan", category: "left-sj", reach: 7,
     role: "Founder, Zeteo; Author", composite: 8, domestic: 8, foreign: 8, trade: 6, cultural: 8, orthodoxy: 6, trump: 10,
     takes: [{
         topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "Trump is using tariffs as unchecked executive power",
@@ -3326,7 +3441,7 @@ var commentators = [
     ]
   },
   {
-    name: "Ben Rhodes", handle: "@brhodes", category: "left-prog",
+    name: "Ben Rhodes", handle: "@brhodes", category: "left-prog", reach: 3,
     role: "Former Deputy NSA; Pod Save the World Host", composite: 7.5, domestic: 7, foreign: 4, trade: 5, cultural: 7, orthodoxy: 6, trump: 9,
     takes: [
       {
@@ -3368,7 +3483,7 @@ var commentators = [
     ]
   },
   {
-    name: "Matthew Yglesias", handle: "@mattyglesias", category: "center-left",
+    name: "Matthew Yglesias", handle: "@mattyglesias", category: "center-left", reach: 5,
     role: "Author, Slow Boring Newsletter", composite: 6.5, domestic: 6, foreign: 5, trade: 3, cultural: 6, orthodoxy: 3, trump: 8,
     takes: [{
         topics: ["tariffs", "immigration"], events: ["tariffs-policy"], title: "Democrats' embrace of populist economics is misguided",
@@ -3379,7 +3494,7 @@ var commentators = [
       }]
   },
   {
-    name: "Fareed Zakaria", handle: "@FareedZakaria", category: "center-left",
+    name: "Fareed Zakaria", handle: "@FareedZakaria", category: "center-left", reach: 6,
     role: "Host, Fareed Zakaria GPS (CNN)", composite: 6, domestic: 5, foreign: 6, trade: 3, cultural: 5, orthodoxy: 4, trump: 8,
     takes: [{
         topics: ["tariffs", "foreign-policy"], events: ["tariffs-policy"], title: "Trump's tariffs are a cruel, false promise to bring back manufacturing",
@@ -3405,7 +3520,7 @@ var commentators = [
     ]
   },
   {
-    name: "Glenn Greenwald", handle: "@ggreenwald", category: "out-of-box",
+    name: "Glenn Greenwald", handle: "@ggreenwald", category: "out-of-box", reach: 8,
     role: "Journalist, Author", composite: 5, domestic: 5, foreign: 9, trade: 5, cultural: 4, orthodoxy: 1, trump: 4,
     takes: [{
         topics: ["ai-tech", "free-speech"], title: "Selling AI-powered surveillance to the government is insane",
@@ -3446,7 +3561,7 @@ var commentators = [
     ]
   },
   {
-    name: "Thomas Sowell", handle: "@ThomasSowell", category: "right-establishment",
+    name: "Thomas Sowell", handle: "@ThomasSowell", category: "right-establishment", reach: 4,
     role: "Economist, Senior Fellow at Hoover Institution", composite: 2, domestic: 1, foreign: 5, trade: 2, cultural: 2, orthodoxy: 4, trump: 4,
     takes: [{
         topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "Trump's tariffs painfully repeat 1920s trade-war history",
@@ -3457,7 +3572,7 @@ var commentators = [
       }]
   },
   {
-    name: "Clay Travis", handle: "@ClayTravis", category: "right-populist",
+    name: "Clay Travis", handle: "@ClayTravis", category: "right-populist", reach: 5,
     role: "Founder, OutKick; Fox Sports Host", composite: 2.5, domestic: 3, foreign: 5, trade: 6, cultural: 2, orthodoxy: 7, trump: 2,
     takes: [{
         topics: ["culture"], title: "Sports media has been politicized beyond recognition",
@@ -3468,7 +3583,7 @@ var commentators = [
       }]
   },
   {
-    name: "Niall Ferguson", handle: "@niallferguson", category: "center-right",
+    name: "Niall Ferguson", handle: "@niallferguson", category: "center-right", reach: 5,
     role: "Historian, Hoover Institution Fellow", composite: 3, domestic: 3, foreign: 3, trade: 3, cultural: 3, orthodoxy: 3, trump: 5,
     takes: [{
         topics: ["tariffs", "foreign-policy"], events: ["tariffs-policy"], title: "Trump's tariffs are accelerating the breakup of the American empire",
@@ -3501,7 +3616,7 @@ var commentators = [
     ]
   },
   {
-    name: "Mark Cuban", handle: "@mcuban", category: "center-left",
+    name: "Mark Cuban", handle: "@mcuban", category: "center-left", reach: 6,
     role: "Entrepreneur, Investor", composite: 6, domestic: 5, foreign: 5, trade: 3, cultural: 6, orthodoxy: 3, trump: 9,
     takes: [{
         topics: ["tariffs"], events: ["tariffs-policy"], title: "Trump's tariff chaos is hammering businesses",
@@ -3520,7 +3635,7 @@ var commentators = [
     ]
   },
   {
-    name: "Yashar Ali", handle: "@yashar", category: "out-of-box",
+    name: "Yashar Ali", handle: "@yashar", category: "out-of-box", reach: 4,
     role: "Journalist, Writer", composite: 5.5, domestic: 5, foreign: 5, trade: 5, cultural: 5, orthodoxy: 2, trump: 6,
     takes: [{
         topics: ["culture", "free-speech"], events: ["free-speech-media"], title: "Media corruption has destroyed journalistic standards",
@@ -3531,7 +3646,7 @@ var commentators = [
       }]
   },
   {
-    name: "Steven Pinker", handle: "@sapinker", category: "out-of-box",
+    name: "Steven Pinker", handle: "@sapinker", category: "out-of-box", reach: 5,
     role: "Cognitive Scientist, Author", composite: 5, domestic: 4, foreign: 5, trade: 3, cultural: 5, orthodoxy: 3, trump: 7,
     takes: [{
         topics: ["ai-tech"], title: "AI existential risk is overblown compared to concrete near-term challenges",
@@ -3542,7 +3657,7 @@ var commentators = [
       }]
   },
   {
-    name: "Scott Jennings", handle: "@ScottJenningsKY", category: "right-establishment",
+    name: "Scott Jennings", handle: "@ScottJenningsKY", category: "right-establishment", reach: 5,
     role: "CNN Contributor, GOP Strategist", composite: 3, domestic: 3, foreign: 4, trade: 5, cultural: 3, orthodoxy: 5, trump: 3,
     takes: [
       {
@@ -3562,7 +3677,7 @@ var commentators = [
     ]
   },
   {
-    name: "Ian Bremmer", handle: "@ianbremmer", category: "center-left",
+    name: "Ian Bremmer", handle: "@ianbremmer", category: "center-left", reach: 5,
     role: "President, Eurasia Group; Author", composite: 5, domestic: 5, foreign: 6, trade: 4, cultural: 5, orthodoxy: 3, trump: 7,
     takes: [{
         topics: ["foreign-policy"], title: "The G-Zero world order is emerging as America retreats",
@@ -3581,7 +3696,7 @@ var commentators = [
     ]
   },
   {
-    name: "James Lindsay", handle: "@ConceptualJames", category: "right-establishment",
+    name: "James Lindsay", handle: "@ConceptualJames", category: "right-establishment", reach: 4,
     role: "Author, New Discourses", composite: 2.5, domestic: 3, foreign: 5, trade: 5, cultural: 2, orthodoxy: 4, trump: 3,
     takes: [{
         topics: ["culture"], title: "DEI is ideological capture of institutions",
@@ -3614,7 +3729,7 @@ var commentators = [
     ]
   },
   {
-    name: "Peter Boghossian", handle: "@peterboghossian", category: "out-of-box",
+    name: "Peter Boghossian", handle: "@peterboghossian", category: "out-of-box", reach: 4,
     role: "Philosopher, Author", composite: 4.5, domestic: 5, foreign: 5, trade: 5, cultural: 3, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["free-speech", "culture"], title: "Shared epistemology and open inquiry are collapsing",
@@ -3625,7 +3740,7 @@ var commentators = [
       }]
   },
   {
-    name: "Bill Ackman", handle: "@BillAckman", category: "center-right",
+    name: "Bill Ackman", handle: "@BillAckman", category: "center-right", reach: 6,
     role: "CEO, Pershing Square Capital", composite: 4, domestic: 3, foreign: 5, trade: 4, cultural: 3, orthodoxy: 2, trump: 4,
     takes: [{
         topics: ["tariffs"], events: ["tariffs-policy"], title: "Trump's tariff escalation is dangerous and needs a pause",
@@ -3652,7 +3767,7 @@ var commentators = [
     ]
   },
   {
-    name: "David Frum", handle: "@davidfrum", category: "center-right",
+    name: "David Frum", handle: "@davidfrum", category: "center-right", reach: 5,
     role: "Staff Writer, The Atlantic; Former Bush Speechwriter", composite: 4.5, domestic: 4, foreign: 3, trade: 3, cultural: 5, orthodoxy: 3, trump: 9,
     takes: [
       {
@@ -3678,7 +3793,7 @@ var commentators = [
       }]
   },
   {
-    name: "Tom Nichols", handle: "@RadioFreeTom", category: "center-left",
+    name: "Tom Nichols", handle: "@RadioFreeTom", category: "center-left", reach: 4,
     role: "Staff Writer, The Atlantic; Author", composite: 4.5, domestic: 4, foreign: 3, trade: 4, cultural: 5, orthodoxy: 3, trump: 9,
     takes: [{
         topics: ["domestic-policy"], title: "Expertise is dying and anti-institutionalism is rising",
@@ -3697,7 +3812,7 @@ var commentators = [
     ]
   },
   {
-    name: "Stephen A. Smith", handle: "@stephenasmith", category: "center-left",
+    name: "Stephen A. Smith", handle: "@stephenasmith", category: "center-left", reach: 6,
     role: "Sports Commentator, Political Voice", composite: 6, domestic: 5, foreign: 5, trade: 5, cultural: 6, orthodoxy: 2, trump: 6,
     takes: [{
         topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "Democrats failed to address economic concerns before the election",
@@ -3708,7 +3823,7 @@ var commentators = [
       }]
   },
   {
-    name: "Jason Whitlock", handle: "@WhitlockJason", category: "right-populist",
+    name: "Jason Whitlock", handle: "@WhitlockJason", category: "right-populist", reach: 4,
     role: "Sports Commentator, Fearless Host", composite: 2.5, domestic: 2, foreign: 5, trade: 5, cultural: 1, orthodoxy: 3, trump: 3,
     takes: [{
         topics: ["culture"], title: "The racial grievance industry undermines Black cultural self-determination",
@@ -3719,7 +3834,7 @@ var commentators = [
       }]
   },
   {
-    name: "Ayaan Hirsi Ali", handle: "@Ayaan", category: "out-of-box",
+    name: "Ayaan Hirsi Ali", handle: "@Ayaan", category: "out-of-box", reach: 5,
     role: "Author, Human Rights Activist", composite: 4.5, domestic: 4, foreign: 4, trade: 4, cultural: 4, orthodoxy: 2, trump: 5,
     takes: [{
         topics: ["culture", "immigration"], title: "Western self-doubt is failing to defend liberal values",
@@ -3730,7 +3845,7 @@ var commentators = [
       }]
   },
   {
-    name: "Dave Rubin", handle: "@RubinReport", category: "center-right",
+    name: "Dave Rubin", handle: "@RubinReport", category: "center-right", reach: 5,
     role: "Host, The Rubin Report", composite: 3, domestic: 3, foreign: 5, trade: 5, cultural: 3, orthodoxy: 3, trump: 3,
     takes: [{
         topics: ["free-speech"], title: "Free speech is realigning as the left abandons liberal values",
@@ -3763,7 +3878,7 @@ var commentators = [
     ]
   },
   {
-    name: "Dave Smith", handle: "@ComicDaveSmith", category: "right-populist",
+    name: "Dave Smith", handle: "@ComicDaveSmith", category: "right-populist", reach: 5,
     role: "Comedian, Libertarian Commentator", composite: 2.5, domestic: 1, foreign: 10, trade: 2, cultural: 3, orthodoxy: 2, trump: 4,
     takes: [{
         topics: ["foreign-policy"], title: "The libertarian case against American military intervention",
@@ -3796,7 +3911,7 @@ var commentators = [
     ]
   },
   {
-    name: "John Stossel", handle: "@JohnStossel", category: "center-right",
+    name: "John Stossel", handle: "@JohnStossel", category: "center-right", reach: 4,
     role: "Journalist, Libertarian Commentator", composite: 3, domestic: 1, foreign: 7, trade: 1, cultural: 4, orthodoxy: 3, trump: 5,
     takes: [{
         topics: ["domestic-policy"], title: "Government waste proves the case for smaller government",
@@ -3807,7 +3922,7 @@ var commentators = [
       }]
   },
   {
-    name: "Joel Berry", handle: "@JoelWBerry", category: "center-right",
+    name: "Joel Berry", handle: "@JoelWBerry", category: "center-right", reach: 4,
     role: "Managing Editor, The Babylon Bee", composite: 2.5, domestic: 3, foreign: 5, trade: 5, cultural: 1, orthodoxy: 4, trump: 3,
     takes: [{
         topics: ["culture"], title: "Reality has outpaced parody — political satire can barely keep up",
@@ -3818,7 +3933,7 @@ var commentators = [
       }]
   },
   {
-    name: "Noah Rothman", handle: "@NoahCRothman", category: "center-right",
+    name: "Noah Rothman", handle: "@NoahCRothman", category: "center-right", reach: 4,
     role: "Editor, National Review", composite: 3, domestic: 3, foreign: 3, trade: 4, cultural: 3, orthodoxy: 5, trump: 5,
     takes: [{
         topics: ["foreign-policy"], title: "Conservatives should champion American global leadership",
@@ -3829,7 +3944,7 @@ var commentators = [
       }]
   },
   {
-    name: "Dave Portnoy", handle: "@stoolpresidente", category: "out-of-box",
+    name: "Dave Portnoy", handle: "@stoolpresidente", category: "out-of-box", reach: 7,
     role: "Founder, Barstool Sports", composite: 4.5, domestic: 3, foreign: 5, trade: 5, cultural: 4, orthodoxy: 1, trump: 3,
     takes: [
       {
@@ -3841,7 +3956,7 @@ var commentators = [
       }]
   },
   {
-    name: "Tim Pool", handle: "@Timcast", category: "out-of-box",
+    name: "Tim Pool", handle: "@Timcast", category: "out-of-box", reach: 7,
     role: "Host, Timcast", composite: 2.5, domestic: 3, foreign: 7, trade: 7, cultural: 2, orthodoxy: 3, trump: 2,
     takes: [{
         topics: ["free-speech", "culture"], title: "Independent media is a check on institutional corruption",
@@ -3852,7 +3967,7 @@ var commentators = [
       }]
   },
   {
-    name: "Rick Wilson", handle: "@TheRickWilson", category: "center-left",
+    name: "Rick Wilson", handle: "@TheRickWilson", category: "center-left", reach: 4,
     role: "Co-Founder, Lincoln Project", composite: 5, domestic: 4, foreign: 3, trade: 4, cultural: 6, orthodoxy: 4, trump: 10,
     takes: [{
         topics: ["domestic-policy"], title: "The Republican Party has become a personality cult",
@@ -3863,7 +3978,7 @@ var commentators = [
       }]
   },
   {
-    name: "George Conway", handle: "@gtconway3d", category: "center-left",
+    name: "George Conway", handle: "@gtconway3d", category: "center-left", reach: 4,
     role: "Attorney, Anti-Trump Conservative", composite: 4.5, domestic: 4, foreign: 4, trade: 4, cultural: 3, orthodoxy: 3, trump: 10,
     takes: [{
         topics: ["domestic-policy"], title: "Executive overreach is creating a constitutional crisis",
@@ -3874,7 +3989,7 @@ var commentators = [
       }]
   },
   {
-    name: "Claire Lehmann", handle: "@clairlemon", category: "out-of-box",
+    name: "Claire Lehmann", handle: "@clairlemon", category: "out-of-box", reach: 4,
     role: "Founder, Quillette", composite: 4.5, domestic: 3, foreign: 5, trade: 4, cultural: 4, orthodoxy: 2, trump: 5,
     takes: [{
         topics: ["culture"], title: "Empirical centrism can counter the ideological capture of institutions",
@@ -3907,7 +4022,7 @@ var commentators = [
     ]
   },
   {
-    name: "Rachel Maddow", handle: "@maddow", category: "left-sj",
+    name: "Rachel Maddow", handle: "@maddow", category: "left-sj", reach: 8,
     role: "Host, MSNBC", composite: 8.5, domestic: 7, foreign: 7, trade: 5, cultural: 9, orthodoxy: 8, trump: 10,
     takes: [
       {
@@ -3942,7 +4057,7 @@ var commentators = [
     ]
   },
   {
-    name: "Joy Reid", handle: "@JoyAnnReid", category: "left-sj",
+    name: "Joy Reid", handle: "@JoyAnnReid", category: "left-sj", reach: 6,
     role: "Host, MSNBC", composite: 8.5, domestic: 7, foreign: 6, trade: 5, cultural: 10, orthodoxy: 9, trump: 10,
     takes: [
       {
@@ -3962,7 +4077,7 @@ var commentators = [
     ]
   },
   {
-    name: "Hasan Piker", handle: "@hasanabi", category: "left-sj",
+    name: "Hasan Piker", handle: "@hasanabi", category: "left-sj", reach: 7,
     role: "Twitch Streamer", composite: 9, domestic: 9, foreign: 9, trade: 8, cultural: 9, orthodoxy: 6, trump: 10,
     takes: [{
         topics: ["healthcare", "domestic-policy"], events: ["healthcare-system"], title: "Medicaid cuts are funding tax breaks for the wealthy",
@@ -3981,7 +4096,7 @@ var commentators = [
     ]
   },
   {
-    name: "Ibram X. Kendi", handle: "@DrIbram", category: "left-sj",
+    name: "Ibram X. Kendi", handle: "@DrIbram", category: "left-sj", reach: 6,
     role: "Author, Academic", composite: 9.5, domestic: 9, foreign: 5, trade: 7, cultural: 10, orthodoxy: 7, trump: 10,
     takes: [{
         topics: ["culture"], title: "Rolling back DEI threatens racial equity",
@@ -3992,7 +4107,7 @@ var commentators = [
       }]
   },
   {
-    name: "Ta-Nehisi Coates", handle: "@tanehisicoates", category: "left-sj",
+    name: "Ta-Nehisi Coates", handle: "@tanehisicoates", category: "left-sj", reach: 6,
     role: "Author, Journalist", composite: 9, domestic: 8, foreign: 4, trade: 6, cultural: 10, orthodoxy: 5, trump: 10,
     takes: [{
         topics: ["culture", "foreign-policy"], title: "Domestic racial injustice is connected to American foreign policy",
@@ -4011,7 +4126,7 @@ var commentators = [
     ]
   },
   {
-    name: "Jemele Hill", handle: "@jemelehill", category: "left-sj",
+    name: "Jemele Hill", handle: "@jemelehill", category: "left-sj", reach: 5,
     role: "Journalist, Commentator", composite: 8.5, domestic: 7, foreign: 5, trade: 6, cultural: 10, orthodoxy: 7, trump: 10,
     takes: [{
         topics: ["culture"], title: "Free speech is applied selectively with racial double standards",
@@ -4022,7 +4137,7 @@ var commentators = [
       }]
   },
   {
-    name: "Cornel West", handle: "@CornelWest", category: "left-sj",
+    name: "Cornel West", handle: "@CornelWest", category: "left-sj", reach: 5,
     role: "Academic, Author", composite: 9.5, domestic: 9, foreign: 8, trade: 8, cultural: 9, orthodoxy: 4, trump: 10,
     takes: [{
         topics: ["domestic-policy", "healthcare"], events: ["healthcare-system"], title: "Both parties are failing on poverty and healthcare",
@@ -4041,7 +4156,7 @@ var commentators = [
     ]
   },
   {
-    name: "Jon Stewart", handle: "@jonstewart", category: "left-prog",
+    name: "Jon Stewart", handle: "@jonstewart", category: "left-prog", reach: 8,
     role: "Host, The Daily Show", composite: 7.5, domestic: 7, foreign: 4, trade: 6, cultural: 8, orthodoxy: 4, trump: 9,
     takes: [
       {
@@ -4053,7 +4168,7 @@ var commentators = [
       }]
   },
   {
-    name: "John Oliver", handle: "@iamjohnoliver", category: "left-prog",
+    name: "John Oliver", handle: "@iamjohnoliver", category: "left-prog", reach: 8,
     role: "Host, Last Week Tonight", composite: 8, domestic: 7, foreign: 5, trade: 5, cultural: 9, orthodoxy: 6, trump: 10,
     takes: [{
         topics: ["tariffs"], events: ["tariffs-policy"], title: "Trump's tariff regime is causing chaos and real consequences",
@@ -4064,7 +4179,7 @@ var commentators = [
       }]
   },
   {
-    name: "Paul Krugman", handle: "@paulkrugman", category: "left-prog",
+    name: "Paul Krugman", handle: "@paulkrugman", category: "left-prog", reach: 6,
     role: "NYT Columnist, Nobel Economist", composite: 8, domestic: 8, foreign: 6, trade: 3, cultural: 8, orthodoxy: 7, trump: 10,
     takes: [
       {
@@ -4084,7 +4199,7 @@ var commentators = [
     ]
   },
   {
-    name: "Stephen Colbert", handle: "@StephenAtHome", category: "left-prog",
+    name: "Stephen Colbert", handle: "@StephenAtHome", category: "left-prog", reach: 8,
     role: "Host, Late Show (CBS)", composite: 8, domestic: 7, foreign: 5, trade: 5, cultural: 9, orthodoxy: 7, trump: 10,
     takes: [{
         topics: ["domestic-policy"], title: "Comedy has become accountability in an era of institutional failure",
@@ -4095,7 +4210,7 @@ var commentators = [
       }]
   },
   {
-    name: "Krystal Ball", handle: "@krystalball", category: "left-prog",
+    name: "Krystal Ball", handle: "@krystalball", category: "left-prog", reach: 6,
     role: "Co-host, Breaking Points", composite: 7, domestic: 7, foreign: 8, trade: 7, cultural: 7, orthodoxy: 2, trump: 8,
     takes: [{
         topics: ["domestic-policy"], title: "The American economic system is a bipartisan failure",
@@ -4114,7 +4229,7 @@ var commentators = [
     ]
   },
   {
-    name: "Van Jones", handle: "@VanJones68", category: "left-prog",
+    name: "Van Jones", handle: "@VanJones68", category: "left-prog", reach: 6,
     role: "CNN Commentator, Author", composite: 7, domestic: 7, foreign: 5, trade: 5, cultural: 7, orthodoxy: 5, trump: 7,
     takes: [{
         topics: ["domestic-policy"], title: "Democrats failed to listen — cross-partisan dialogue is needed",
@@ -4133,7 +4248,7 @@ var commentators = [
     ]
   },
   {
-    name: "Bakari Sellers", handle: "@Bakari_Sellers", category: "left-prog",
+    name: "Bakari Sellers", handle: "@Bakari_Sellers", category: "left-prog", reach: 5,
     role: "CNN Analyst, Author", composite: 8, domestic: 7, foreign: 5, trade: 5, cultural: 8, orthodoxy: 7, trump: 9,
     takes: [{
         topics: ["domestic-policy", "healthcare"], events: ["healthcare-system"], title: "Medicaid cuts threaten Black and rural communities most",
@@ -4144,7 +4259,7 @@ var commentators = [
       }]
   },
   {
-    name: "Dan Pfeiffer", handle: "@danpfeiffer", category: "left-prog",
+    name: "Dan Pfeiffer", handle: "@danpfeiffer", category: "left-prog", reach: 3,
     role: "Co-host, Pod Save America", composite: 8, domestic: 7, foreign: 5, trade: 5, cultural: 8, orthodoxy: 7, trump: 9,
     takes: [{
         topics: ["domestic-policy"], title: "Democrats failed to win the economic messaging war",
@@ -4185,7 +4300,7 @@ var commentators = [
     ]
   },
   {
-    name: "Jon Lovett", handle: "@jonlovett", category: "left-prog",
+    name: "Jon Lovett", handle: "@jonlovett", category: "left-prog", reach: 3,
     role: "Co-host, Pod Save America; Lovett or Leave It", composite: 8, domestic: 7, foreign: 5, trade: 5, cultural: 8, orthodoxy: 6, trump: 9,
     takes: [{
         topics: ["domestic-policy"], title: "Outrage fatigue is eroding democratic accountability",
@@ -4196,7 +4311,7 @@ var commentators = [
       }]
   },
   {
-    name: "Bill Maher", handle: "@billmaher", category: "center-left",
+    name: "Bill Maher", handle: "@billmaher", category: "center-left", reach: 8,
     role: "Host, Real Time (HBO)", composite: 5, domestic: 4, foreign: 6, trade: 4, cultural: 5, orthodoxy: 1, trump: 6,
     takes: [{
         topics: ["tariffs"], events: ["tariffs-policy"], title: "He was wrong about Trump's tariffs crashing the economy",
@@ -4222,7 +4337,7 @@ var commentators = [
     ]
   },
   {
-    name: "David Brooks", handle: "@nytdavidbrooks", category: "center-left",
+    name: "David Brooks", handle: "@nytdavidbrooks", category: "center-left", reach: 6,
     role: "NYT Columnist", composite: 4.5, domestic: 4, foreign: 3, trade: 3, cultural: 5, orthodoxy: 4, trump: 8,
     takes: [
       {
@@ -4242,7 +4357,7 @@ var commentators = [
     ]
   },
   {
-    name: "Nate Silver", handle: "@NateSilver538", category: "center-left",
+    name: "Nate Silver", handle: "@NateSilver538", category: "center-left", reach: 6,
     role: "Statistician, Author", composite: 5, domestic: 4, foreign: 5, trade: 4, cultural: 6, orthodoxy: 1, trump: 6,
     takes: [
       {
@@ -4262,7 +4377,7 @@ var commentators = [
     ]
   },
   {
-    name: "George Will", handle: "@GeorgeWill", category: "center-left",
+    name: "George Will", handle: "@GeorgeWill", category: "center-left", reach: 4,
     role: "Columnist, Washington Post", composite: 2.5, domestic: 1, foreign: 3, trade: 2, cultural: 4, orthodoxy: 3, trump: 9,
     takes: [{
         topics: ["tariffs", "domestic-policy"], title: "The Supreme Court tariff case is a constitutional crisis",
@@ -4273,7 +4388,7 @@ var commentators = [
       }]
   },
   {
-    name: "Christina Hoff Sommers", handle: "@CHSommers", category: "center-right",
+    name: "Christina Hoff Sommers", handle: "@CHSommers", category: "center-right", reach: 4,
     role: "Philosopher, AEI Senior Fellow Emeritus", composite: 4, domestic: 3, foreign: 5, trade: 3, cultural: 4, orthodoxy: 2, trump: 5,
     takes: [{
         topics: ["gender-identity", "culture"], events: ["gender-debate"], title: "Gender feminism has hijacked the women's movement from equity feminism",
@@ -4284,7 +4399,7 @@ var commentators = [
       }]
   },
   {
-    name: "Chris Cuomo", handle: "@ChrisCuomo", category: "center-left",
+    name: "Chris Cuomo", handle: "@ChrisCuomo", category: "center-left", reach: 5,
     role: "NewsNation Host", composite: 5.5, domestic: 5, foreign: 6, trade: 5, cultural: 6, orthodoxy: 3, trump: 7,
     takes: [{
         topics: ["domestic-policy"], title: "The political center exists — both parties are failing it",
@@ -4303,7 +4418,7 @@ var commentators = [
     ]
   },
   {
-    name: "Jessica Tarlov", handle: "@JessicaTarlov", category: "center-left",
+    name: "Jessica Tarlov", handle: "@JessicaTarlov", category: "center-left", reach: 5,
     role: "Co-host, The Five (Fox News)", composite: 6, domestic: 6, foreign: 6, trade: 4, cultural: 7, orthodoxy: 7, trump: 7,
     takes: [{
         topics: ["domestic-policy"], title: "Making the progressive case in conservative media spaces",
@@ -4314,7 +4429,7 @@ var commentators = [
       }]
   },
   {
-    name: "Kara Swisher", handle: "@karaswisher", category: "center-left",
+    name: "Kara Swisher", handle: "@karaswisher", category: "center-left", reach: 6,
     role: "Tech Journalist, Podcast Host", composite: 7, domestic: 6, foreign: 5, trade: 4, cultural: 8, orthodoxy: 4, trump: 8,
     takes: [
       {
@@ -4326,7 +4441,7 @@ var commentators = [
       }]
   },
   {
-    name: "Cass Sunstein", handle: "@CassSunstein", category: "center-left",
+    name: "Cass Sunstein", handle: "@CassSunstein", category: "center-left", reach: 4,
     role: "Harvard Law, Author", composite: 6.5, domestic: 6, foreign: 6, trade: 4, cultural: 7, orthodoxy: 5, trump: 8,
     takes: [{
         topics: ["ai-tech", "domestic-policy"], events: ["ai-regulation"], title: "Technology needs targeted, evidence-based regulation",
@@ -4337,7 +4452,7 @@ var commentators = [
       }]
   },
   {
-    name: "Destiny (Steven Bonnell)", handle: "@TheOmniLiberal", category: "center-left",
+    name: "Destiny (Steven Bonnell)", handle: "@TheOmniLiberal", category: "center-left", reach: 5,
     role: "Political Streamer, Debater", composite: 6, domestic: 6, foreign: 6, trade: 3, cultural: 7, orthodoxy: 1, trump: 8,
     takes: [{
         topics: ["culture", "free-speech"], title: "Online debate culture is killing honest political engagement",
@@ -4348,7 +4463,7 @@ var commentators = [
       }]
   },
   {
-    name: "Andrew Sullivan", handle: "@andrewsullivan", category: "out-of-box",
+    name: "Andrew Sullivan", handle: "@andrewsullivan", category: "out-of-box", reach: 6,
     role: "The Weekly Dish (Substack)", composite: 4.5, domestic: 4, foreign: 6, trade: 4, cultural: 5, orthodoxy: 2, trump: 7,
     takes: [{
         topics: ["culture"], title: "The LGBTQ rights movement has betrayed liberal principles",
@@ -4374,7 +4489,7 @@ var commentators = [
     ]
   },
   {
-    name: "Bret Weinstein", handle: "@BretWeinstein", category: "out-of-box",
+    name: "Bret Weinstein", handle: "@BretWeinstein", category: "out-of-box", reach: 6,
     role: "Biologist, DarkHorse Podcast", composite: 4.5, domestic: 4, foreign: 7, trade: 7, cultural: 4, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["ai-tech", "culture"], title: "Outsourcing human cognition to AI systems is dangerous",
@@ -4392,7 +4507,7 @@ var commentators = [
       }]
   },
   {
-    name: "Eric Weinstein", handle: "@EricRWeinstein", category: "out-of-box",
+    name: "Eric Weinstein", handle: "@EricRWeinstein", category: "out-of-box", reach: 6,
     role: "Mathematician, Podcast Host", composite: 4.5, domestic: 4, foreign: 4, trade: 6, cultural: 4, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["ai-tech", "domestic-policy"], title: "Institutions are failing — new knowledge infrastructure is needed",
@@ -4410,7 +4525,7 @@ var commentators = [
       }]
   },
   {
-    name: "Batya Ungar-Sargon", handle: "@BUngarSargon", category: "out-of-box",
+    name: "Batya Ungar-Sargon", handle: "@BUngarSargon", category: "out-of-box", reach: 5,
     role: "Deputy Opinion Ed, Newsweek", composite: 4, domestic: 5, foreign: 4, trade: 8, cultural: 4, orthodoxy: 3, trump: 3,
     takes: [{
         topics: ["domestic-policy", "culture"], title: "Class is the real divide in American politics",
@@ -4428,7 +4543,7 @@ var commentators = [
       }]
   },
   {
-    name: "Matt Taibbi", handle: "@mtaibbi", category: "out-of-box",
+    name: "Matt Taibbi", handle: "@mtaibbi", category: "out-of-box", reach: 6,
     role: "Racket News (Substack)", composite: 5, domestic: 5, foreign: 8, trade: 6, cultural: 5, orthodoxy: 1, trump: 5,
     takes: [
       {
@@ -4440,7 +4555,7 @@ var commentators = [
       }]
   },
   {
-    name: "Saagar Enjeti", handle: "@esaagar", category: "out-of-box",
+    name: "Saagar Enjeti", handle: "@esaagar", category: "out-of-box", reach: 6,
     role: "Co-host, Breaking Points", composite: 3.5, domestic: 4, foreign: 7, trade: 8, cultural: 3, orthodoxy: 2, trump: 4,
     takes: [{
         topics: ["domestic-policy", "tariffs"], events: ["tariffs-policy"], title: "Right-wing populism makes the case for economic nationalism",
@@ -4476,7 +4591,7 @@ var commentators = [
     ]
   },
   {
-    name: "Jonathan Haidt", handle: "@JonHaidt", category: "out-of-box",
+    name: "Jonathan Haidt", handle: "@JonHaidt", category: "out-of-box", reach: 6,
     role: "NYU Professor, Author", composite: 5, domestic: 4, foreign: 5, trade: 4, cultural: 5, orthodoxy: 2, trump: 7,
     takes: [
       {
@@ -4496,7 +4611,7 @@ var commentators = [
     ]
   },
   {
-    name: "Theo Von", handle: "@TheoVon", category: "out-of-box",
+    name: "Theo Von", handle: "@TheoVon", category: "out-of-box", reach: 7,
     role: "Comedian, Podcast Host", composite: 5, domestic: 4, foreign: 7, trade: 6, cultural: 5, orthodoxy: 1, trump: 4,
     takes: [{
         topics: ["immigration"], title: "Immigration rhetoric is disconnected from human reality",
@@ -4507,7 +4622,7 @@ var commentators = [
       }]
   },
   {
-    name: "Russell Brand", handle: "@rustyrockets", category: "out-of-box",
+    name: "Russell Brand", handle: "@rustyrockets", category: "out-of-box", reach: 7,
     role: "Comedian, Podcaster", composite: 4, domestic: 3, foreign: 8, trade: 7, cultural: 2, orthodoxy: 1, trump: 4,
     takes: [{
         topics: ["culture", "free-speech"], title: "Institutional power has weaponized media narratives",
@@ -4518,7 +4633,7 @@ var commentators = [
       }]
   },
   {
-    name: "Michael Shermer", handle: "@michaelshermer", category: "out-of-box",
+    name: "Michael Shermer", handle: "@michaelshermer", category: "out-of-box", reach: 4,
     role: "Publisher, Skeptic Magazine", composite: 5, domestic: 4, foreign: 5, trade: 4, cultural: 6, orthodoxy: 2, trump: 6,
     takes: [{
         topics: ["ai-tech", "culture"], title: "Scientific skepticism should apply to AI panic and ideological certainty",
@@ -4529,7 +4644,7 @@ var commentators = [
       }]
   },
   {
-    name: "Kmele Foster", handle: "@kmele", category: "out-of-box",
+    name: "Kmele Foster", handle: "@kmele", category: "out-of-box", reach: 4,
     role: "Co-host, The Fifth Column", composite: 4, domestic: 2, foreign: 7, trade: 3, cultural: 6, orthodoxy: 1, trump: 6,
     takes: [{
         topics: ["culture"], title: "Radical individualism is the antidote to racial essentialism",
@@ -4540,7 +4655,7 @@ var commentators = [
       }]
   },
   {
-    name: "Thomas Chatterton Williams", handle: "@thomaschattwill", category: "out-of-box",
+    name: "Thomas Chatterton Williams", handle: "@thomaschattwill", category: "out-of-box", reach: 4,
     role: "Author, Contributing Writer", composite: 5, domestic: 4, foreign: 5, trade: 4, cultural: 5, orthodoxy: 2, trump: 7,
     takes: [{
         topics: ["culture"], title: "Racial essentialism is regressing from both left and right",
@@ -4551,7 +4666,7 @@ var commentators = [
       }]
   },
   {
-    name: "Glenn Loury", handle: "@GlennLoury", category: "out-of-box",
+    name: "Glenn Loury", handle: "@GlennLoury", category: "out-of-box", reach: 5,
     role: "Brown University Economist, Podcast Host", composite: 4, domestic: 3, foreign: 5, trade: 4, cultural: 4, orthodoxy: 2, trump: 5,
     takes: [{
         topics: ["culture"], title: "The soft bigotry of low expectations undermines Black intellectual independence",
@@ -4562,7 +4677,7 @@ var commentators = [
       }]
   },
   {
-    name: "Yascha Mounk", handle: "@Yascha_Mounk", category: "out-of-box",
+    name: "Yascha Mounk", handle: "@Yascha_Mounk", category: "out-of-box", reach: 5,
     role: "Johns Hopkins, Persuasion", composite: 5, domestic: 4, foreign: 6, trade: 4, cultural: 6, orthodoxy: 2, trump: 8,
     takes: [{
         topics: ["culture", "domestic-policy"], title: "Diverse democracy can work without identity politics",
@@ -4573,7 +4688,7 @@ var commentators = [
       }]
   },
   {
-    name: "Jonah Goldberg", handle: "@JonahDispatch", category: "center-right",
+    name: "Jonah Goldberg", handle: "@JonahDispatch", category: "center-right", reach: 4,
     role: "The Dispatch, Podcast", composite: 4, domestic: 3, foreign: 3, trade: 3, cultural: 4, orthodoxy: 3, trump: 8,
     takes: [{
         topics: ["domestic-policy"], title: "Conservatives should reject populist authoritarianism",
@@ -4600,7 +4715,7 @@ var commentators = [
     ]
   },
   {
-    name: "Jordan Peterson", handle: "@jordanbpeterson", category: "center-right",
+    name: "Jordan Peterson", handle: "@jordanbpeterson", category: "center-right", reach: 9,
     role: "Psychologist, Author", composite: 3, domestic: 3, foreign: 4, trade: 6, cultural: 2, orthodoxy: 2, trump: 3,
     takes: [
       {
@@ -4627,7 +4742,7 @@ var commentators = [
     ]
   },
   {
-    name: "Frank Luntz", handle: "@FrankLuntz", category: "center-right",
+    name: "Frank Luntz", handle: "@FrankLuntz", category: "center-right", reach: 4,
     role: "Pollster, Communications Strategist", composite: 4.5, domestic: 4, foreign: 6, trade: 4, cultural: 4, orthodoxy: 3, trump: 5,
     takes: [{
         topics: ["domestic-policy"], title: "Political language has power — and the messaging gap is real",
@@ -4638,7 +4753,7 @@ var commentators = [
       }]
   },
   {
-    name: "John Podhoretz", handle: "@jpodhoretz", category: "center-right",
+    name: "John Podhoretz", handle: "@jpodhoretz", category: "center-right", reach: 4,
     role: "Editor, Commentary Magazine", composite: 3, domestic: 2, foreign: 2, trade: 3, cultural: 3, orthodoxy: 5, trump: 5,
     takes: [{
         topics: ["foreign-policy"], title: "The neoconservative case for American strength still holds",
@@ -4649,7 +4764,7 @@ var commentators = [
       }]
   },
   {
-    name: "Dennis Prager", handle: "@DennisPrager", category: "center-right",
+    name: "Dennis Prager", handle: "@DennisPrager", category: "center-right", reach: 7,
     role: "Host, PragerU Founder", composite: 2, domestic: 2, foreign: 3, trade: 4, cultural: 1, orthodoxy: 7, trump: 2,
     takes: [
       {
@@ -4676,7 +4791,7 @@ var commentators = [
     ]
   },
   {
-    name: "Megyn Kelly", handle: "@megynkelly", category: "center-right",
+    name: "Megyn Kelly", handle: "@megynkelly", category: "center-right", reach: 7,
     role: "Host, The Megyn Kelly Show", composite: 3.5, domestic: 3, foreign: 4, trade: 4, cultural: 3, orthodoxy: 2, trump: 3,
     takes: [{
         topics: ["tariffs"], events: ["tariffs-policy"], title: "Give Trump's tariff strategy a chance — but hold him accountable",
@@ -4727,7 +4842,7 @@ var commentators = [
     ]
   },
   {
-    name: "Erick Erickson", handle: "@EWErickson", category: "center-right",
+    name: "Erick Erickson", handle: "@EWErickson", category: "center-right", reach: 4,
     role: "Radio Host, The Resurgent", composite: 2.5, domestic: 2, foreign: 6, trade: 4, cultural: 2, orthodoxy: 6, trump: 3,
     takes: [{
         topics: ["domestic-policy"], title: "Christian values are in tension with political loyalty",
@@ -4738,7 +4853,7 @@ var commentators = [
       }]
   },
   {
-    name: "Guy Benson", handle: "@guypbenson", category: "center-right",
+    name: "Guy Benson", handle: "@guypbenson", category: "center-right", reach: 4,
     role: "Fox News Contributor, Townhall Editor", composite: 3, domestic: 2, foreign: 3, trade: 3, cultural: 3, orthodoxy: 5, trump: 3,
     takes: [{
         topics: ["domestic-policy"], title: "Finding common ground while maintaining conservative principles",
@@ -4749,7 +4864,7 @@ var commentators = [
       }]
   },
   {
-    name: "Tyler Cowen", handle: "@tylercowen", category: "center-right",
+    name: "Tyler Cowen", handle: "@tylercowen", category: "center-right", reach: 5,
     role: "GMU Economist, Marginal Revolution", composite: 4, domestic: 2, foreign: 5, trade: 2, cultural: 6, orthodoxy: 1, trump: 6,
     takes: [
       {
@@ -4769,7 +4884,7 @@ var commentators = [
     ]
   },
   {
-    name: "Buck Sexton", handle: "@BuckSexton", category: "center-right",
+    name: "Buck Sexton", handle: "@BuckSexton", category: "center-right", reach: 5,
     role: "Host, The Clay Travis & Buck Sexton Show", composite: 2, domestic: 2, foreign: 6, trade: 6, cultural: 2, orthodoxy: 8, trump: 2,
     takes: [{
         topics: ["foreign-policy"], title: "The expert class has a terrible record on foreign policy",
@@ -4780,7 +4895,7 @@ var commentators = [
       }]
   },
   {
-    name: "Sean Hannity", handle: "@seanhannity", category: "right-establishment",
+    name: "Sean Hannity", handle: "@seanhannity", category: "right-establishment", reach: 9,
     role: "Host, Fox News", composite: 1.5, domestic: 2, foreign: 2, trade: 7, cultural: 1, orthodoxy: 9, trump: 1,
     takes: [
       {
@@ -4816,7 +4931,7 @@ var commentators = [
     ]
   },
   {
-    name: "Mark Levin", handle: "@marklevinshow", category: "right-establishment",
+    name: "Mark Levin", handle: "@marklevinshow", category: "right-establishment", reach: 8,
     role: "Host, LevinTV, Fox News", composite: 1.5, domestic: 1, foreign: 3, trade: 6, cultural: 1, orthodoxy: 8, trump: 2,
     takes: [
       {
@@ -4836,7 +4951,7 @@ var commentators = [
     ]
   },
   {
-    name: "Michael Knowles", handle: "@michaeljknowles", category: "right-establishment",
+    name: "Michael Knowles", handle: "@michaeljknowles", category: "right-establishment", reach: 5,
     role: "Host, Daily Wire", composite: 2, domestic: 3, foreign: 5, trade: 6, cultural: 2, orthodoxy: 7, trump: 2,
     takes: [{
         topics: ["culture"], title: "Conservatives should choose cultural engagement over libertarian neutrality",
@@ -4847,7 +4962,7 @@ var commentators = [
       }]
   },
   {
-    name: "Glenn Beck", handle: "@glennbeck", category: "right-establishment",
+    name: "Glenn Beck", handle: "@glennbeck", category: "right-establishment", reach: 8,
     role: "Host, TheBlaze", composite: 2, domestic: 1, foreign: 5, trade: 5, cultural: 2, orthodoxy: 6, trump: 3,
     takes: [{
         topics: ["domestic-policy"], title: "The national debt is America's greatest existential threat",
@@ -4858,7 +4973,7 @@ var commentators = [
       }]
   },
   {
-    name: "David French", handle: "@DavidAFrench", category: "right-establishment",
+    name: "David French", handle: "@DavidAFrench", category: "right-establishment", reach: 5,
     role: "NYT Columnist, Author", composite: 3.5, domestic: 3, foreign: 3, trade: 3, cultural: 4, orthodoxy: 3, trump: 8,
     takes: [{
         topics: ["domestic-policy", "culture"], title: "Liberal democratic norms need defending from both left and right populism",
@@ -4908,7 +5023,7 @@ var commentators = [
     ]
   },
   {
-    name: "Rich Lowry", handle: "@RichLowry", category: "right-establishment",
+    name: "Rich Lowry", handle: "@RichLowry", category: "right-establishment", reach: 4,
     role: "Editor, National Review", composite: 2.5, domestic: 2, foreign: 3, trade: 4, cultural: 2, orthodoxy: 6, trump: 3,
     takes: [{
         topics: ["immigration"], events: ["immigration-policy"], title: "National sovereignty demands border enforcement",
@@ -4919,7 +5034,7 @@ var commentators = [
       }]
   },
   {
-    name: "Ross Douthat", handle: "@DouthatNYT", category: "right-establishment",
+    name: "Ross Douthat", handle: "@DouthatNYT", category: "right-establishment", reach: 5,
     role: "NYT Columnist", composite: 3, domestic: 4, foreign: 5, trade: 5, cultural: 2, orthodoxy: 3, trump: 6,
     takes: [{
         topics: ["tariffs", "domestic-policy"], events: ["tariffs-policy"], title: "Trumpism 2.0 is full of intellectual contradictions",
@@ -4930,7 +5045,7 @@ var commentators = [
       }]
   },
   {
-    name: "Ben Sasse", handle: "@BenSasse", category: "right-establishment",
+    name: "Ben Sasse", handle: "@BenSasse", category: "right-establishment", reach: 4,
     role: "Former Senator, UF President", composite: 3, domestic: 2, foreign: 3, trade: 3, cultural: 4, orthodoxy: 4, trump: 6,
     takes: [{
         topics: ["culture", "domestic-policy"], title: "Community is in crisis — civic renewal is needed",
@@ -4941,7 +5056,7 @@ var commentators = [
       }]
   },
   {
-    name: "Bret Baier", handle: "@BretBaier", category: "right-establishment",
+    name: "Bret Baier", handle: "@BretBaier", category: "right-establishment", reach: 5,
     role: "Anchor, Fox News", composite: 3, domestic: 3, foreign: 4, trade: 4, cultural: 3, orthodoxy: 5, trump: 4,
     takes: [{
         topics: ["domestic-policy"], title: "Adversarial journalism is a service to democracy",
@@ -4952,7 +5067,7 @@ var commentators = [
       }]
   },
   {
-    name: "Erika Kirk", handle: "@mrserikakirk", category: "right-establishment",
+    name: "Erika Kirk", handle: "@mrserikakirk", category: "right-establishment", reach: 3,
     role: "Political Commentator", composite: 5, domestic: 4, foreign: 5, trade: 5, cultural: 5, orthodoxy: 3, trump: 4,
     takes: [{
         topics: ["culture", "domestic-policy"], title: "Conservative women's perspectives are overlooked in media",
@@ -4963,7 +5078,7 @@ var commentators = [
       }]
   },
   {
-    name: "Candace Owens", handle: "@RealCandaceO", category: "right-populist",
+    name: "Candace Owens", handle: "@RealCandaceO", category: "right-populist", reach: 8,
     role: "Commentator, Podcast Host", composite: 2, domestic: 3, foreign: 7, trade: 8, cultural: 1, orthodoxy: 3, trump: 4,
     takes: [
       {
@@ -4975,7 +5090,7 @@ var commentators = [
       }]
   },
   {
-    name: "Steven Crowder", handle: "@scrowder", category: "right-populist",
+    name: "Steven Crowder", handle: "@scrowder", category: "right-populist", reach: 6,
     role: "Host, Louder with Crowder", composite: 2, domestic: 2, foreign: 5, trade: 6, cultural: 1, orthodoxy: 7, trump: 3,
     takes: [{
         topics: ["free-speech"], events: ["free-speech-media"], title: "Big Tech censorship demands independent media alternatives",
@@ -4986,7 +5101,7 @@ var commentators = [
       }]
   },
   {
-    name: "Mollie Hemingway", handle: "@MZHemingway", category: "right-populist",
+    name: "Mollie Hemingway", handle: "@MZHemingway", category: "right-populist", reach: 5,
     role: "Editor, The Federalist", composite: 2, domestic: 3, foreign: 5, trade: 6, cultural: 2, orthodoxy: 7, trump: 2,
     takes: [{
         topics: ["domestic-policy"], title: "Media bias enables bureaucratic resistance to elected governance",
@@ -4997,7 +5112,7 @@ var commentators = [
       }]
   },
   {
-    name: "Ann Coulter", handle: "@AnnCoulter", category: "right-populist",
+    name: "Ann Coulter", handle: "@AnnCoulter", category: "right-populist", reach: 7,
     role: "Author, Commentator", composite: 2, domestic: 3, foreign: 7, trade: 9, cultural: 1, orthodoxy: 4, trump: 6,
     takes: [
       {
@@ -5009,7 +5124,7 @@ var commentators = [
       }]
   },
   {
-    name: "Mike Rowe", handle: "@mikerowe", category: "out-of-box",
+    name: "Mike Rowe", handle: "@mikerowe", category: "out-of-box", reach: 5,
     role: "Host, Dirty Jobs; mikeroweWORKS Foundation", composite: 4, domestic: 3, foreign: 5, trade: 6, cultural: 3, orthodoxy: 2, trump: 4,
     takes: [{
         topics: ["college-value"], title: "The trades are the overlooked path to the American dream",
@@ -5020,7 +5135,7 @@ var commentators = [
       }]
   },
   {
-    name: "Douglas Murray", handle: "@DouglasKMurray", category: "out-of-box",
+    name: "Douglas Murray", handle: "@DouglasKMurray", category: "out-of-box", reach: 7,
     role: "Author, The Free Press", composite: 3, domestic: 3, foreign: 3, trade: 4, cultural: 2, orthodoxy: 2, trump: 4,
     takes: [{
         topics: ["churchill"], title: "Tearing down Churchill is dangerous revisionism",
@@ -5038,7 +5153,7 @@ var commentators = [
       }]
   },
   {
-    name: "Bret Stephens", handle: "@BretStephensNYT", category: "center-right",
+    name: "Bret Stephens", handle: "@BretStephensNYT", category: "center-right", reach: 4,
     role: "NYT Columnist", composite: 4, domestic: 3, foreign: 2, trade: 2, cultural: 4, orthodoxy: 3, trump: 8,
     takes: [{
         topics: ["israel"], title: "Israel has a right to self-defense that faces double standards",
@@ -5056,7 +5171,7 @@ var commentators = [
       }]
   },
   {
-    name: "Chamath Palihapitiya", handle: "@chamath", category: "out-of-box",
+    name: "Chamath Palihapitiya", handle: "@chamath", category: "out-of-box", reach: 5,
     role: "CEO, Social Capital; Co-Host, All-In", composite: 4, domestic: 2, foreign: 6, trade: 4, cultural: 5, orthodoxy: 1, trump: 4,
     takes: [{
         topics: ["wealth-inequality"], title: "Wealth concentration is a symptom of broken competition",
@@ -5074,7 +5189,7 @@ var commentators = [
       }]
   },
   {
-    name: "David Sacks", handle: "@DavidSacks", category: "right-populist",
+    name: "David Sacks", handle: "@DavidSacks", category: "right-populist", reach: 6,
     role: "Co-Host, All-In; White House AI/Crypto Czar", composite: 2.5, domestic: 2, foreign: 7, trade: 6, cultural: 3, orthodoxy: 5, trump: 2,
     takes: [{
         topics: ["ai-tech", "free-speech"], events: ["ai-regulation"], title: "AI regulation is the new censorship frontier",
@@ -5085,7 +5200,7 @@ var commentators = [
       }]
   },
   {
-    name: "John McWhorter", handle: "@JohnHMcWhorter", category: "out-of-box",
+    name: "John McWhorter", handle: "@JohnHMcWhorter", category: "out-of-box", reach: 5,
     role: "NYT Columnist, Columbia Professor", composite: 5.5, domestic: 5, foreign: 5, trade: 4, cultural: 4, orthodoxy: 2, trump: 7,
     takes: [{
         topics: ["culture"], title: "Anti-racism has become a new religion that harms Black Americans",
@@ -5096,7 +5211,7 @@ var commentators = [
       }]
   },
   {
-    name: "Konstantin Kisin", handle: "@KonstantinKisin", category: "out-of-box",
+    name: "Konstantin Kisin", handle: "@KonstantinKisin", category: "out-of-box", reach: 4,
     role: "Co-Host, TRIGGERnometry", composite: 4, domestic: 3, foreign: 4, trade: 4, cultural: 3, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["free-speech", "immigration"], title: "The West's crisis of self-belief is fueling the immigration debate",
@@ -5107,7 +5222,7 @@ var commentators = [
       }]
   },
   {
-    name: "Piers Morgan", handle: "@piersmorgan", category: "out-of-box",
+    name: "Piers Morgan", handle: "@piersmorgan", category: "out-of-box", reach: 7,
     role: "Host, Piers Morgan Uncensored", composite: 4.5, domestic: 4, foreign: 4, trade: 5, cultural: 4, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["free-speech", "culture"], title: "Nuance is dead and tribal thinking has taken over",
@@ -5118,7 +5233,7 @@ var commentators = [
       }]
   },
   {
-    name: "Robin DiAngelo", handle: "@RobinDiAngelo", category: "left-sj",
+    name: "Robin DiAngelo", handle: "@RobinDiAngelo", category: "left-sj", reach: 5,
     role: "Author, White Fragility", composite: 9, domestic: 8, foreign: 5, trade: 5, cultural: 10, orthodoxy: 9, trump: 10,
     takes: [{
         topics: ["culture", "policing"], title: "Whiteness is an invisible system structuring American life",
@@ -5129,7 +5244,7 @@ var commentators = [
       }]
   },
   {
-    name: "Gad Saad", handle: "@GadSaad", category: "out-of-box",
+    name: "Gad Saad", handle: "@GadSaad", category: "out-of-box", reach: 4,
     role: "Professor, Concordia University; Author, The Parasitic Mind", composite: 4, domestic: 3, foreign: 4, trade: 4, cultural: 3, orthodoxy: 2, trump: 4,
     takes: [{
         topics: ["culture", "free-speech"], title: "Idea pathogens are infecting the parasitic mind",
@@ -5162,7 +5277,7 @@ var commentators = [
     ]
   },
   {
-    name: "Christopher Rufo", handle: "@realchrisrufo", category: "right-establishment",
+    name: "Christopher Rufo", handle: "@realchrisrufo", category: "right-establishment", reach: 5,
     role: "Senior Fellow, Manhattan Institute", composite: 2, domestic: 2, foreign: 4, trade: 3, cultural: 1, orthodoxy: 4, trump: 3,
     takes: [{
         topics: ["culture", "domestic-policy"], title: "Critical race theory is an institutional capture strategy, not an academic theory",
@@ -5195,7 +5310,7 @@ var commentators = [
     ]
   },
   {
-    name: "Lex Fridman", handle: "@lexfridman", category: "out-of-box",
+    name: "Lex Fridman", handle: "@lexfridman", category: "out-of-box", reach: 8,
     role: "MIT Researcher; Host, Lex Fridman Podcast", composite: 4.5, domestic: 4, foreign: 5, trade: 4, cultural: 5, orthodoxy: 1, trump: 5,
     takes: [{
         topics: ["ai-tech"], title: "The greatest risk of AI is not malice but the loss of human meaning",
@@ -5206,7 +5321,7 @@ var commentators = [
       }]
   },
   {
-    name: "Andy Ngo", handle: "@MrAndyNgo", category: "right-establishment",
+    name: "Andy Ngo", handle: "@MrAndyNgo", category: "right-establishment", reach: 4,
     role: "Editor-at-Large, The Post Millennial", composite: 2.5, domestic: 2, foreign: 4, trade: 4, cultural: 2, orthodoxy: 4, trump: 3,
     takes: [{
         topics: ["free-speech", "culture"], title: "Antifa is an organized movement that the media refuses to cover honestly",
@@ -5217,7 +5332,7 @@ var commentators = [
       }]
   },
   {
-    name: "Bill Kristol", handle: "@BillKristol", category: "center-right",
+    name: "Bill Kristol", handle: "@BillKristol", category: "center-right", reach: 4,
     role: "Editor-at-Large, The Bulwark", composite: 5, domestic: 4, foreign: 3, trade: 5, cultural: 5, orthodoxy: 2, trump: 9,
     takes: [{
         topics: ["domestic-policy", "culture"], title: "The conservative movement I helped build has been consumed by authoritarianism",
@@ -5228,7 +5343,7 @@ var commentators = [
       }]
   },
   {
-    name: "Charlie Sykes", handle: "@SykesCharlie", category: "center-right",
+    name: "Charlie Sykes", handle: "@SykesCharlie", category: "center-right", reach: 4,
     role: "Editor-at-Large, The Bulwark; Host, The Bulwark Podcast", composite: 5, domestic: 4, foreign: 4, trade: 5, cultural: 5, orthodoxy: 2, trump: 9,
     takes: [{
         topics: ["free-speech", "culture"], events: ["free-speech-media"], title: "Conservative media built the post-truth machine that consumed the right",
@@ -5239,7 +5354,7 @@ var commentators = [
       }]
   },
   {
-    name: "Jesse Singal", handle: "@jessesingal", category: "center-left",
+    name: "Jesse Singal", handle: "@jessesingal", category: "center-left", reach: 4,
     role: "Journalist; Co-host, Blocked and Reported", composite: 5, domestic: 5, foreign: 5, trade: 5, cultural: 4, orthodoxy: 2, trump: 6,
     takes: [{
         topics: ["gender-identity"], events: ["gender-debate"], title: "The evidence base for youth gender medicine does not support the confidence of its advocates",
@@ -5250,7 +5365,7 @@ var commentators = [
       }]
   },
   {
-    name: "Mike Cernovich", handle: "@Cernovich", category: "right-populist",
+    name: "Mike Cernovich", handle: "@Cernovich", category: "right-populist", reach: 4,
     role: "Author; Documentary Filmmaker; Social Media Commentator", composite: 2.5, domestic: 2, foreign: 3, trade: 3, cultural: 2, orthodoxy: 2, trump: 2,
     takes: [{
         topics: ["culture"], events: ["epstein"], title: "The Epstein case proves citizen journalism can break stories the mainstream won't touch",
@@ -5261,7 +5376,7 @@ var commentators = [
       }]
   },
   {
-    name: "Michael Malice", handle: "@michaelmalice", category: "out-of-box",
+    name: "Michael Malice", handle: "@michaelmalice", category: "out-of-box", reach: 5,
     role: "Author; Host, YOUR WELCOME Podcast", composite: 3, domestic: 1, foreign: 5, trade: 2, cultural: 4, orthodoxy: 1, trump: 4,
     takes: [{
         topics: ["domestic-policy", "culture"], title: "The state is not your friend and never has been — left or right",
@@ -5272,7 +5387,7 @@ var commentators = [
       }]
   },
   {
-    name: "David Axelrod", handle: "@davidaxelrod", category: "center-left",
+    name: "David Axelrod", handle: "@davidaxelrod", category: "center-left", reach: 5,
     role: "CNN Senior Political Commentator; Former Obama Senior Advisor", composite: 6, domestic: 6, foreign: 6, trade: 6, cultural: 6, orthodoxy: 4, trump: 8,
     takes: [{
         topics: ["domestic-policy"], title: "Democrats keep losing the working class because they stopped listening to it",
@@ -8692,9 +8807,289 @@ showPage('landing');
 
 </script>
 
-<!-- ===== MEDIA LITERACY PAGE ===== -->
+<!-- ===== MEDIA LITERACY HUB PAGE ===== -->
 <style>
 .medialiteracy-page {
+  display: none;
+  min-height: 100vh;
+  padding-top: 80px;
+  background: var(--warm-bg);
+}
+.ml-hub {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+.ml-hub-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.ml-hub-header h1 {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+.ml-hub-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.ml-hub-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.ml-hub-card {
+  background: white;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.22s;
+  text-decoration: none;
+  display: block;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.ml-hub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  border-color: rgba(0,0,0,0.16);
+}
+.ml-hub-preview {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: #f0ede6;
+}
+/* Label the Take preview — stance cards stacked on spectrum */
+.mlp-ltt {
+  background: linear-gradient(160deg, #f7f5f0 0%, #edeae3 100%);
+}
+.mlp-spectrum-bar {
+  position: absolute;
+  bottom: 40px;
+  left: 24px;
+  right: 24px;
+  height: 4px;
+  background: linear-gradient(90deg, #3B7DD8, #8a9eb5, #D83B3B);
+  border-radius: 2px;
+}
+.mlp-spectrum-label {
+  position: absolute;
+  bottom: 22px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.mlp-spec-l { left: 24px; color: #3B7DD8; }
+.mlp-spec-c { left: 50%; transform: translateX(-50%); }
+.mlp-spec-r { right: 24px; color: #D83B3B; }
+.mlp-card {
+  position: absolute;
+  background: white;
+  border-radius: 10px;
+  border: 1.5px solid rgba(0,0,0,0.09);
+  padding: 8px 10px;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  font-family: var(--sans);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  width: 108px;
+}
+.mlp-card-1 { top: 22px; left: 20px; transform: rotate(-2deg); }
+.mlp-card-2 { top: 18px; left: 50%; transform: translateX(-50%) rotate(1deg); }
+.mlp-card-3 { top: 24px; right: 18px; transform: rotate(2deg); }
+.mlp-card-num {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.mlp-drag-hint {
+  position: absolute;
+  bottom: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.7;
+}
+
+/* Spot the Bias preview — word cloud */
+.mlp-stb {
+  background: linear-gradient(160deg, #f5f3ef 0%, #eae7e0 100%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 20px 18px;
+}
+.mlp-word {
+  font-family: var(--sans);
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: var(--text-secondary);
+  background: rgba(0,0,0,0.0);
+}
+.mlp-word.w-left  { color: #3B7DD8; font-size: 0.78rem; }
+.mlp-word.w-right { color: #D83B3B; font-size: 0.82rem; }
+.mlp-word.w-neutral { color: #aaa; font-size: 0.7rem; }
+.mlp-word.w-lg { font-size: 1.05rem; }
+.mlp-word.w-xl { font-size: 1.2rem; font-weight: 700; }
+
+.ml-hub-card-body {
+  padding: 22px 24px 26px;
+}
+.ml-hub-card-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.ml-hub-card-title {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.ml-hub-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+.ml-hub-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2A5425;
+  color: white;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background 0.18s;
+}
+.ml-hub-card:hover .ml-hub-card-cta { background: #1E3D1B; }
+.ml-hub-card-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.ml-hub-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: rgba(42,84,37,0.07);
+  color: #2A5425;
+  border: 1px solid rgba(42,84,37,0.12);
+}
+@media (max-width: 680px) {
+  .ml-hub-cards { grid-template-columns: 1fr; }
+  .ml-hub-header h1 { font-size: 1.8rem; }
+  .ml-hub-preview { height: 180px; }
+  .mlp-card { width: 90px; font-size: 0.6rem; }
+}
+</style>
+
+<div id="medialiteracy-page" class="medialiteracy-page">
+  <div class="ml-hub">
+    <div class="ml-hub-header">
+      <h1>Media Literacy</h1>
+      <p>Two tools to sharpen your ability to read political language — how it's framed, who's pushing it, and what it leaves out.</p>
+    </div>
+    <div class="ml-hub-cards">
+
+      <!-- Label the Take card -->
+      <div class="ml-hub-card" onclick="showPage('labelthetake')">
+        <div class="ml-hub-preview mlp-ltt">
+          <div class="mlp-card mlp-card-1">
+            <div class="mlp-card-num">Stance 1</div>
+            The policy prioritizes community investment over punitive enforcement.
+          </div>
+          <div class="mlp-card mlp-card-2">
+            <div class="mlp-card-num">Stance 2</div>
+            Both sides agree that outcomes matter more than ideology here.
+          </div>
+          <div class="mlp-card mlp-card-3">
+            <div class="mlp-card-num">Stance 3</div>
+            Strong enforcement is the only credible deterrent we have left.
+          </div>
+          <div class="mlp-drag-hint">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Drag each stance to Left, Center, or Right
+          </div>
+          <div class="mlp-spectrum-bar"></div>
+          <span class="mlp-spectrum-label mlp-spec-l">Left</span>
+          <span class="mlp-spectrum-label mlp-spec-c">Center</span>
+          <span class="mlp-spectrum-label mlp-spec-r">Right</span>
+        </div>
+        <div class="ml-hub-card-body">
+          <div class="ml-hub-card-title">Label the Take</div>
+          <div class="ml-hub-card-desc">Three unlabeled stances on one political topic. Drag each one to where you think it falls on the spectrum. Can you tell which lane is which?</div>
+          <span class="ml-hub-card-cta">Play Label the Take →</span>
+        </div>
+      </div>
+
+      <!-- Spot the Bias card -->
+      <div class="ml-hub-card" onclick="showPage('spotbias')">
+        <div class="ml-hub-preview mlp-stb">
+          <span class="mlp-word w-right w-xl">illegal alien</span>
+          <span class="mlp-word w-neutral">border security</span>
+          <span class="mlp-word w-left w-lg">family separation</span>
+          <span class="mlp-word w-neutral">deportation</span>
+          <span class="mlp-word w-right w-lg">invasion</span>
+          <span class="mlp-word w-left">undocumented worker</span>
+          <span class="mlp-word w-neutral">asylum seeker</span>
+          <span class="mlp-word w-right">open borders</span>
+          <span class="mlp-word w-left w-lg">dreamers</span>
+          <span class="mlp-word w-neutral">visa overstay</span>
+          <span class="mlp-word w-right">chain migration</span>
+          <span class="mlp-word w-neutral w-lg">sanctuary city</span>
+          <span class="mlp-word w-left">humanitarian crisis</span>
+        </div>
+        <div class="ml-hub-card-body">
+          <div class="ml-hub-card-title">Spot the Bias</div>
+          <div class="ml-hub-card-desc">A word cloud on a political topic. Click every word that feels loaded or partisan — then label it Left or Right-leaning for bonus points.</div>
+          <span class="ml-hub-card-cta">Play Spot the Bias →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== MEDIA LITERACY PAGE ===== -->
+<style>
+.labelthetake-page {
   display: none;
   min-height: 100vh;
   padding-top: 80px;
@@ -9170,7 +9565,7 @@ showPage('landing');
 .ml-intro-btn:hover { background: #1E3D1B; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(42,84,37,0.35); }
 
 @media (max-width: 700px) {
-  .medialiteracy-page { padding-top: 150px; }
+  .labelthetake-page { padding-top: 150px; }
   .ml-header { padding: 12px 20px 16px; }
   .ml-header h1 { font-size: 1.7rem; }
   .ml-game { padding: 0 14px 40px; }
@@ -9183,7 +9578,7 @@ showPage('landing');
 }
 </style>
 
-<div id="medialiteracy-page" class="medialiteracy-page">
+<div id="labelthetake-page" class="labelthetake-page">
   <div class="ml-header">
     <div class="nav-logo" style="margin-bottom:16px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
       <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeML" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeML2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeML2)" stroke-width="2.8" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeML)" stroke-width="2.8" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
@@ -9324,9 +9719,1155 @@ showPage('landing');
   </div>
 </div>
 
-<script>
-// ===== MEDIA LITERACY GAME =====
+<!-- ===== SPOT THE BIAS PAGE ===== -->
+<style>
+.spotbias-page {
+  display: none;
+  min-height: 100vh;
+  padding-top: 80px;
+  background: var(--warm-bg);
+}
+.sb-header {
+  text-align: center;
+  padding: 40px 24px 20px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+.sb-header h1 {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.sb-header p {
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 12px;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+.sb-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.sb-legend-item { display: flex; align-items: center; gap: 6px; }
+.sb-legend-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.sb-legend-dot.neutral  { background: #cbd5e0; }
+.sb-legend-dot.left-bias  { background: #3B7DD8; }
+.sb-legend-dot.right-bias { background: #D83B3B; }
+.sb-legend-dot.correct  { background: #2A5425; }
 
+/* Scoreboard */
+.sb-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.sb-score-chip {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 80px;
+}
+.sb-score-chip .sc-val {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.sb-score-chip .sc-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Game area */
+.sb-game {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+.sb-intro {
+  text-align: center;
+  padding: 48px 20px;
+}
+.sb-intro-btn {
+  background: #2A5425;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 44px;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.sb-intro-btn:hover { background: #1E3D1B; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(42,84,37,0.35); }
+
+/* Round card */
+.sb-round-card {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  padding: 28px 28px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  margin-top: 20px;
+}
+.sb-topic-bar {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.sb-topic-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.sb-topic-name {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.sb-instructions {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* Word cloud */
+.sb-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0 20px;
+  min-height: 160px;
+}
+.sb-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--sans);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  user-select: none;
+  line-height: 1.3;
+}
+.sb-word:hover:not(.revealed) {
+  color: var(--text-primary);
+  background: rgba(0,0,0,0.05);
+}
+/* After click — pending label state */
+.sb-word.pending-left {
+  color: #3B7DD8;
+  background: rgba(59,125,216,0.08);
+}
+.sb-word.pending-right {
+  color: #D83B3B;
+  background: rgba(216,59,59,0.08);
+}
+/* Revealed states */
+.sb-word.correct-left {
+  color: #3B7DD8;
+  background: rgba(59,125,216,0.1);
+  cursor: default;
+  font-weight: 700;
+}
+.sb-word.correct-right {
+  color: #D83B3B;
+  background: rgba(216,59,59,0.1);
+  cursor: default;
+  font-weight: 700;
+}
+.sb-word.correct-either {
+  color: #2A5425;
+  background: rgba(42,84,37,0.08);
+  cursor: default;
+  font-weight: 700;
+}
+.sb-word.wrong {
+  color: #b08800;
+  background: rgba(224,176,0,0.07);
+  cursor: default;
+  opacity: 0.8;
+}
+.sb-word.missed {
+  color: #bbb;
+  background: transparent;
+  cursor: default;
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+.sb-word.selecting {
+  color: var(--text-primary);
+  background: rgba(0,0,0,0.07);
+  outline: 2px solid rgba(0,0,0,0.15);
+  outline-offset: 1px;
+}
+.sb-word.revealed { pointer-events: none; }
+/* Final reveal colorings applied in-place */
+.sb-word.sb-final-left    { color: #3B7DD8 !important; background: rgba(59,125,216,0.07) !important; font-weight: 700; }
+.sb-word.sb-final-right   { color: #D83B3B !important; background: rgba(216,59,59,0.07) !important; font-weight: 700; }
+.sb-word.sb-final-neutral { color: #bbb !important; background: transparent !important; font-weight: 500; }
+.sb-word-icon { font-size: 0.75em; }
+
+/* Picker zone — fixed slot between instructions and cloud */
+.sb-picker-zone {
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 4px;
+}
+.sb-picker-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.sb-picker-prompt {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.sb-picker-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sb-label-btn-left, .sb-label-btn-right, .sb-label-btn-neutral {
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.14s, transform 0.1s;
+  white-space: nowrap;
+}
+.sb-label-btn-left:active, .sb-label-btn-right:active, .sb-label-btn-neutral:active { transform: scale(0.97); }
+.sb-label-btn-left    { background: rgba(59,125,216,0.1);  color: #2a5ca8; }
+.sb-label-btn-left:hover  { background: rgba(59,125,216,0.2); }
+.sb-label-btn-right   { background: rgba(216,59,59,0.1);   color: #a82a2a; }
+.sb-label-btn-right:hover { background: rgba(216,59,59,0.2); }
+.sb-label-btn-neutral { background: rgba(0,0,0,0.05); color: var(--text-secondary); }
+.sb-label-btn-neutral:hover { background: rgba(0,0,0,0.1); }
+
+/* Live score strip */
+.sb-live-score {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sb-live-pts {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.sb-live-pts.pos { color: #2A5425; }
+.sb-live-pts.neg { color: #a82a2a; }
+.sb-live-pts.zero { color: var(--text-muted); }
+
+/* Round footer */
+.sb-round-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+}
+.sb-done-btn {
+  background: #2A5425;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 24px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.sb-done-btn:hover { background: #1E3D1B; }
+.sb-next-btn {
+  background: #2A5425;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 24px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.sb-next-btn:hover { background: #1E3D1B; }
+
+/* Reveal summary */
+.sb-inline-results {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.sb-reveal-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.sb-reveal-stat {
+  flex: 1;
+  min-width: 100px;
+  background: var(--warm-bg);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+}
+.sb-reveal-stat .rv-val {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+}
+.sb-reveal-stat .rv-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.sb-explainer {
+  background: var(--warm-bg);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.sb-explainer-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.sb-explainer-row + .sb-explainer-row {
+  margin-top: 8px;
+}
+.sb-explainer-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.sb-explainer-label.lbl-left  { color: #3B7DD8; }
+.sb-explainer-label.lbl-right { color: #D83B3B; }
+
+@media (max-width: 600px) {
+  .sb-round-card { padding: 20px 16px; }
+  .sb-cloud { gap: 8px 10px; }
+  .sb-word { padding: 6px 11px; }
+  .sb-reveal-stats { gap: 10px; }
+  .sb-header h1 { font-size: 1.6rem; }
+}
+</style>
+
+<div id="spotbias-page" class="spotbias-page">
+  <div class="sb-header">
+    <div class="nav-logo" style="margin-bottom:16px; display:inline-block; cursor:pointer;" onclick="showPage('landing')">
+      <span class="d">D</span><span class="e1">E</span><span class="f">F</span><span class="u"><svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;top:0.08em;"><defs><linearGradient id="hshoeSB" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B7DD8"/><stop offset="40%" stop-color="#7B4EA0"/><stop offset="70%" stop-color="#D4A012"/><stop offset="100%" stop-color="#D83B3B"/></linearGradient><linearGradient id="hshoeSB2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D83B3B"/><stop offset="30%" stop-color="#D4A012"/><stop offset="60%" stop-color="#7B4EA0"/><stop offset="100%" stop-color="#3B7DD8"/></linearGradient></defs><path d="M3 9 C3 1.5, 3 0, 8 0 C13 0, 13 1.5, 13 9" fill="none" stroke="url(#hshoeSB2)" stroke-width="2.8" stroke-linecap="round"/><path d="M3 15 C3 22.5, 3 24, 8 24 C13 24, 13 22.5, 13 15" fill="none" stroke="url(#hshoeSB)" stroke-width="2.8" stroke-linecap="round"/></svg></span><span class="s">S</span><span class="e2">E</span>
+    </div>
+    <h1>Spot the Bias</h1>
+    <p>A word cloud about a political topic. Click every word you think is biased or loaded — then label it Left-leaning or Right-leaning for bonus points.</p>
+    <div class="sb-legend">
+      <span class="sb-legend-item"><span class="sb-legend-dot neutral"></span>Not clicked yet</span>
+      <span class="sb-legend-item"><span class="sb-legend-dot left-bias"></span>Flagged as Left</span>
+      <span class="sb-legend-item"><span class="sb-legend-dot right-bias"></span>Flagged as Right</span>
+      <span class="sb-legend-item"><span class="sb-legend-dot correct"></span>Confirmed correct</span>
+    </div>
+  </div>
+
+  <div class="sb-scoreboard" id="sb-scoreboard" style="display:none;">
+    <div class="sb-score-chip">
+      <div class="sc-val" id="sb-sc-total">0</div>
+      <div class="sc-label">Points</div>
+    </div>
+    <div class="sb-score-chip">
+      <div class="sc-val" id="sb-sc-rounds">0</div>
+      <div class="sc-label">Rounds</div>
+    </div>
+    <div class="sb-score-chip">
+      <div class="sc-val" id="sb-sc-found">—</div>
+      <div class="sc-label">Bias found</div>
+    </div>
+    <div class="sb-score-chip">
+      <div class="sc-val" id="sb-sc-bonus">—</div>
+      <div class="sc-label">Label accuracy</div>
+    </div>
+  </div>
+
+  <div class="sb-game">
+    <div class="sb-intro" id="sb-intro">
+      <p style="color:var(--text-muted); font-size:0.9rem; max-width:420px; margin:0 auto 24px; line-height:1.6;">Click every word that feels politically charged or loaded. Then say whether it leans Left or Right. Neutral words score −1 if you flag them. Miss a biased word and you just lose the point — no penalty.</p>
+      <button class="sb-intro-btn" onclick="sbStartRound()">Start a Round →</button>
+    </div>
+    <div id="sb-round-area" style="display:none;">
+      <div class="sb-round-card" id="sb-round-card">
+        <div class="sb-topic-bar">
+          <span class="sb-topic-label">Topic</span>
+          <span class="sb-topic-name" id="sb-topic-name"></span>
+        </div>
+        <div class="sb-instructions">Click every word that is <strong>biased or loaded</strong>. Neutral, factual, or broadly shared words should be left alone.</div>
+        <!-- Picker lives here permanently, centered, shown on word click -->
+        <div id="sb-picker-zone" class="sb-picker-zone">
+          <div id="sb-picker-inner" class="sb-picker-inner" style="display:none;">
+            <span class="sb-picker-prompt" id="sb-picker-prompt">Is this word biased?</span>
+            <div class="sb-picker-btns">
+              <button class="sb-label-btn-left"  onclick="sbPickerChoice('left')">◀ Left-leaning</button>
+              <button class="sb-label-btn-right" onclick="sbPickerChoice('right')">▶ Right-leaning</button>
+              <button class="sb-label-btn-neutral" onclick="sbPickerChoice('neutral')">— Not biased</button>
+            </div>
+          </div>
+          <!-- Live score line -->
+          <div id="sb-live-score" class="sb-live-score" style="display:none;"></div>
+        </div>
+        <div class="sb-cloud" id="sb-cloud"></div>
+        <!-- Inline results: appears in place after See full results -->
+        <div id="sb-inline-results" style="display:none;">
+          <div class="sb-reveal-stats" id="sb-reveal-stats"></div>
+          <div class="sb-explainer" id="sb-explainer"></div>
+        </div>
+        <div class="sb-round-footer" id="sb-round-footer">
+          <button class="sb-done-btn" id="sb-done-btn" onclick="sbFinishRound()" style="display:none;">See full results →</button>
+          <button class="sb-next-btn" id="sb-next-btn" onclick="sbNextRound()" style="display:none;">Next Round →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== SPOT THE BIAS =====
+
+// Each topic: { topic, words: [{word, bias: 'left'|'right'|null, size: 1|2|3 }] }
+// bias null = neutral. size 1=small 2=normal 3=large (visual weight only, not scoring)
+var SB_TOPICS = [
+  {
+    topic: "Iran Strikes",
+    words: [
+      { word: "warmonger",          bias: "left",  size: 3 },
+      { word: "illegal war",        bias: "left",  size: 3 },
+      { word: "regime change",      bias: "left",  size: 2 },
+      { word: "nuclear threat",     bias: "right", size: 3 },
+      { word: "preemptive strike",  bias: "right", size: 2 },
+      { word: "existential danger", bias: "right", size: 2 },
+      { word: "enrichment",         bias: null,    size: 2 },
+      { word: "air strikes",        bias: null,    size: 2 },
+      { word: "diplomacy",          bias: null,    size: 3 },
+      { word: "sanctions",          bias: null,    size: 2 },
+      { word: "sovereignty",        bias: null,    size: 2 },
+      { word: "military action",    bias: null,    size: 1 },
+      { word: "reckless aggression",bias: "left",  size: 2 },
+      { word: "peace deal",         bias: null,    size: 1 },
+      { word: "axis of evil",       bias: "right", size: 2 },
+      { word: "appeasement",        bias: "right", size: 3 },
+      { word: "proxy war",          bias: null,    size: 1 },
+      { word: "nuclear deal",       bias: null,    size: 2 }
+    ]
+  },
+  {
+    topic: "Nuclear Deterrence",
+    words: [
+      { word: "mutually assured destruction", bias: null,    size: 2 },
+      { word: "peace through strength",        bias: "right", size: 3 },
+      { word: "arms race",                     bias: null,    size: 2 },
+      { word: "nuke fetish",                   bias: "left",  size: 3 },
+      { word: "first-strike capability",       bias: null,    size: 2 },
+      { word: "disarmament dreamers",          bias: "right", size: 3 },
+      { word: "deterrence theory",             bias: null,    size: 1 },
+      { word: "escalation dominance",          bias: "right", size: 2 },
+      { word: "proliferation",                 bias: null,    size: 2 },
+      { word: "global security",               bias: null,    size: 2 },
+      { word: "anti-nuke activism",            bias: "left",  size: 2 },
+      { word: "warhead modernization",         bias: null,    size: 1 },
+      { word: "nuclear blackmail",             bias: "right", size: 2 },
+      { word: "naive pacifism",                bias: "right", size: 3 },
+      { word: "unilateral disarmament",        bias: "left",  size: 2 },
+      { word: "treaties",                      bias: null,    size: 1 },
+      { word: "civilian casualties",           bias: null,    size: 2 }
+    ]
+  },
+  {
+    topic: "Healthcare System",
+    words: [
+      { word: "Medicare for All",          bias: "left",  size: 3 },
+      { word: "socialized medicine",        bias: "right", size: 3 },
+      { word: "government takeover",        bias: "right", size: 3 },
+      { word: "universal coverage",         bias: "left",  size: 2 },
+      { word: "free market",                bias: "right", size: 2 },
+      { word: "rationing care",             bias: "right", size: 2 },
+      { word: "insurance premiums",         bias: null,    size: 2 },
+      { word: "pre-existing conditions",    bias: null,    size: 2 },
+      { word: "death panels",               bias: "right", size: 3 },
+      { word: "healthcare is a right",      bias: "left",  size: 3 },
+      { word: "wait times",                 bias: null,    size: 1 },
+      { word: "medical bankruptcy",         bias: "left",  size: 2 },
+      { word: "provider choice",            bias: "right", size: 2 },
+      { word: "Medicaid expansion",         bias: null,    size: 1 },
+      { word: "profit-driven system",       bias: "left",  size: 2 },
+      { word: "hospital network",           bias: null,    size: 1 },
+      { word: "out-of-pocket costs",        bias: null,    size: 2 }
+    ]
+  },
+  {
+    topic: "Tariffs and Trade Policy",
+    words: [
+      { word: "economic nationalism",     bias: "right", size: 3 },
+      { word: "free trade sellout",        bias: "right", size: 2 },
+      { word: "race to the bottom",        bias: "left",  size: 3 },
+      { word: "China shock",               bias: null,    size: 2 },
+      { word: "protectionism",             bias: null,    size: 2 },
+      { word: "trade deficit",             bias: null,    size: 2 },
+      { word: "worker exploitation",       bias: "left",  size: 3 },
+      { word: "import duties",             bias: null,    size: 1 },
+      { word: "supply chains",             bias: null,    size: 1 },
+      { word: "globalist agenda",          bias: "right", size: 3 },
+      { word: "manufacturing jobs",        bias: null,    size: 2 },
+      { word: "corporate outsourcing",     bias: "left",  size: 2 },
+      { word: "tariff walls",              bias: null,    size: 1 },
+      { word: "America First",             bias: "right", size: 3 },
+      { word: "WTO rules",                 bias: null,    size: 1 },
+      { word: "reciprocal tariffs",        bias: "right", size: 2 },
+      { word: "unfair competition",        bias: null,    size: 2 }
+    ]
+  },
+  {
+    topic: "Immigration Enforcement",
+    words: [
+      { word: "illegal alien",          bias: "right", size: 3 },
+      { word: "undocumented worker",    bias: "left",  size: 3 },
+      { word: "open borders",           bias: "right", size: 3 },
+      { word: "family separation",      bias: "left",  size: 3 },
+      { word: "invasion",               bias: "right", size: 3 },
+      { word: "dreamers",               bias: "left",  size: 2 },
+      { word: "deportation",            bias: null,    size: 2 },
+      { word: "asylum seeker",          bias: null,    size: 2 },
+      { word: "border security",        bias: null,    size: 2 },
+      { word: "mass deportation",       bias: "right", size: 2 },
+      { word: "sanctuary city",         bias: null,    size: 2 },
+      { word: "chain migration",        bias: "right", size: 2 },
+      { word: "family reunification",   bias: "left",  size: 2 },
+      { word: "ICE raids",              bias: null,    size: 1 },
+      { word: "humanitarian crisis",    bias: "left",  size: 2 },
+      { word: "visa overstay",          bias: null,    size: 1 },
+      { word: "replacement theory",     bias: "right", size: 2 }
+    ]
+  },
+  {
+    topic: "Climate Policy",
+    words: [
+      { word: "climate alarmism",        bias: "right", size: 3 },
+      { word: "climate denier",          bias: "left",  size: 3 },
+      { word: "green new deal",          bias: null,    size: 2 },
+      { word: "existential threat",      bias: "left",  size: 3 },
+      { word: "job-killing regulations", bias: "right", size: 3 },
+      { word: "eco-terrorism",           bias: "right", size: 2 },
+      { word: "carbon emissions",        bias: null,    size: 2 },
+      { word: "climate emergency",       bias: "left",  size: 2 },
+      { word: "fossil fuel lobby",       bias: "left",  size: 2 },
+      { word: "energy independence",     bias: "right", size: 2 },
+      { word: "renewable energy",        bias: null,    size: 2 },
+      { word: "carbon tax",              bias: null,    size: 1 },
+      { word: "climate hoax",            bias: "right", size: 3 },
+      { word: "net zero",                bias: null,    size: 1 },
+      { word: "drill baby drill",        bias: "right", size: 3 },
+      { word: "stranded assets",         bias: null,    size: 1 },
+      { word: "people over planet",      bias: "right", size: 2 }
+    ]
+  },
+  {
+    topic: "AI and the Military",
+    words: [
+      { word: "killer robots",           bias: "left",  size: 3 },
+      { word: "autonomous weapons",      bias: null,    size: 2 },
+      { word: "military advantage",      bias: "right", size: 2 },
+      { word: "AI arms race",            bias: null,    size: 2 },
+      { word: "unaccountable machines",  bias: "left",  size: 3 },
+      { word: "battlefield AI",          bias: null,    size: 1 },
+      { word: "China threat",            bias: "right", size: 3 },
+      { word: "collateral damage",       bias: null,    size: 2 },
+      { word: "drone warfare",           bias: null,    size: 2 },
+      { word: "tech bro warmongers",     bias: "left",  size: 3 },
+      { word: "precision strikes",       bias: "right", size: 2 },
+      { word: "AI safety",               bias: null,    size: 2 },
+      { word: "lethal autonomy",         bias: "left",  size: 2 },
+      { word: "surveillance state",      bias: "left",  size: 2 },
+      { word: "national security",       bias: null,    size: 2 },
+      { word: "Pentagon AI",             bias: null,    size: 1 },
+      { word: "algorithmic warfare",     bias: null,    size: 1 }
+    ]
+  },
+  {
+    topic: "Free Speech and Media",
+    words: [
+      { word: "fake news",               bias: "right", size: 3 },
+      { word: "censorship",              bias: null,    size: 2 },
+      { word: "misinformation",          bias: "left",  size: 2 },
+      { word: "mainstream media bias",   bias: "right", size: 3 },
+      { word: "hate speech",             bias: "left",  size: 2 },
+      { word: "deplatforming",           bias: null,    size: 2 },
+      { word: "lamestream media",        bias: "right", size: 3 },
+      { word: "woke journalism",         bias: "right", size: 3 },
+      { word: "content moderation",      bias: null,    size: 1 },
+      { word: "speech police",           bias: "right", size: 2 },
+      { word: "disinformation campaign", bias: "left",  size: 2 },
+      { word: "media literacy",          bias: null,    size: 1 },
+      { word: "viewpoint discrimination",bias: "right", size: 2 },
+      { word: "propaganda",              bias: null,    size: 2 },
+      { word: "chilling effect",         bias: "left",  size: 2 },
+      { word: "editorial independence",  bias: null,    size: 1 },
+      { word: "cancel culture",          bias: "right", size: 3 }
+    ]
+  },
+  {
+    topic: "Israel and the Middle East",
+    words: [
+      { word: "apartheid state",         bias: "left",  size: 3 },
+      { word: "self-defense",            bias: "right", size: 2 },
+      { word: "genocide",                bias: "left",  size: 3 },
+      { word: "terror organization",     bias: "right", size: 3 },
+      { word: "ethnic cleansing",        bias: "left",  size: 3 },
+      { word: "occupation",              bias: "left",  size: 2 },
+      { word: "two-state solution",      bias: null,    size: 2 },
+      { word: "hostages",                bias: null,    size: 2 },
+      { word: "ceasefire",               bias: null,    size: 2 },
+      { word: "antisemitism",            bias: null,    size: 2 },
+      { word: "Islamophobia",            bias: "left",  size: 2 },
+      { word: "settler colonialism",     bias: "left",  size: 3 },
+      { word: "existential threat",      bias: "right", size: 2 },
+      { word: "right to exist",          bias: "right", size: 2 },
+      { word: "collective punishment",   bias: "left",  size: 2 },
+      { word: "civilian casualties",     bias: null,    size: 2 },
+      { word: "terrorist sympathizer",   bias: "right", size: 3 }
+    ]
+  },
+  {
+    topic: "Taiwan and U.S. Foreign Policy",
+    words: [
+      { word: "Chinese aggression",      bias: "right", size: 3 },
+      { word: "strategic ambiguity",     bias: null,    size: 2 },
+      { word: "reckless escalation",     bias: "left",  size: 3 },
+      { word: "freedom and democracy",   bias: "right", size: 2 },
+      { word: "one China policy",        bias: null,    size: 2 },
+      { word: "warmongers in D.C.",      bias: "left",  size: 3 },
+      { word: "deterrence",              bias: null,    size: 1 },
+      { word: "Taiwan Strait",           bias: null,    size: 2 },
+      { word: "Chinese imperialism",     bias: "right", size: 2 },
+      { word: "military adventurism",    bias: "left",  size: 2 },
+      { word: "defense treaty",          bias: null,    size: 1 },
+      { word: "economic coercion",       bias: null,    size: 2 },
+      { word: "chip war",                bias: null,    size: 1 },
+      { word: "reunification",           bias: null,    size: 2 },
+      { word: "provocation",             bias: null,    size: 2 },
+      { word: "regime in Beijing",       bias: "right", size: 2 },
+      { word: "proxy conflict",          bias: "left",  size: 2 }
+    ]
+  },
+  {
+    topic: "MAHA and Public Health",
+    words: [
+      { word: "deep state medicine",     bias: "right", size: 3 },
+      { word: "corporate capture",       bias: "left",  size: 2 },
+      { word: "anti-vaxxer",             bias: "left",  size: 3 },
+      { word: "medical freedom",         bias: "right", size: 3 },
+      { word: "pharma shill",            bias: "right", size: 3 },
+      { word: "evidence-based",          bias: null,    size: 1 },
+      { word: "mandates",                bias: null,    size: 2 },
+      { word: "Big Pharma",              bias: "right", size: 3 },
+      { word: "herd immunity",           bias: null,    size: 2 },
+      { word: "food dyes",               bias: null,    size: 1 },
+      { word: "CDC corruption",          bias: "right", size: 2 },
+      { word: "informed consent",        bias: null,    size: 2 },
+      { word: "natural immunity",        bias: "right", size: 2 },
+      { word: "public health tyranny",   bias: "right", size: 3 },
+      { word: "vaccine hesitancy",       bias: "left",  size: 2 },
+      { word: "regulatory capture",      bias: "left",  size: 2 },
+      { word: "wellness industry",       bias: null,    size: 1 }
+    ]
+  },
+  {
+    topic: "Wealth Inequality",
+    words: [
+      { word: "class warfare",           bias: "right", size: 3 },
+      { word: "wealth hoarding",         bias: "left",  size: 3 },
+      { word: "meritocracy",             bias: "right", size: 2 },
+      { word: "billionaire class",       bias: "left",  size: 3 },
+      { word: "job creators",            bias: "right", size: 3 },
+      { word: "trickle-down",            bias: "left",  size: 3 },
+      { word: "income mobility",         bias: null,    size: 2 },
+      { word: "wealth gap",              bias: null,    size: 2 },
+      { word: "redistribution",          bias: null,    size: 2 },
+      { word: "tax the rich",            bias: "left",  size: 2 },
+      { word: "wealth tax",              bias: null,    size: 1 },
+      { word: "Gini coefficient",        bias: null,    size: 1 },
+      { word: "bootstraps",              bias: "right", size: 2 },
+      { word: "oligarchy",               bias: "left",  size: 2 },
+      { word: "inherited wealth",        bias: null,    size: 2 },
+      { word: "estate tax",              bias: null,    size: 1 },
+      { word: "envy economics",          bias: "right", size: 3 }
+    ]
+  },
+  {
+    topic: "Policing in the United States",
+    words: [
+      { word: "defund the police",       bias: "left",  size: 3 },
+      { word: "law and order",           bias: "right", size: 3 },
+      { word: "systemic racism",         bias: "left",  size: 3 },
+      { word: "blue lives matter",       bias: "right", size: 3 },
+      { word: "abolition",               bias: "left",  size: 2 },
+      { word: "crime surge",             bias: "right", size: 2 },
+      { word: "use of force",            bias: null,    size: 2 },
+      { word: "qualified immunity",      bias: null,    size: 2 },
+      { word: "police accountability",   bias: null,    size: 2 },
+      { word: "progressive prosecutors", bias: "right", size: 3 },
+      { word: "community policing",      bias: null,    size: 1 },
+      { word: "warrior cops",            bias: "left",  size: 2 },
+      { word: "thin blue line",          bias: "right", size: 2 },
+      { word: "overcriminalization",     bias: "left",  size: 2 },
+      { word: "bodycam",                 bias: null,    size: 1 },
+      { word: "stop-and-frisk",          bias: null,    size: 2 },
+      { word: "crime statistics",        bias: null,    size: 1 }
+    ]
+  },
+  {
+    topic: "Gender Identity",
+    words: [
+      { word: "gender ideology",         bias: "right", size: 3 },
+      { word: "trans rights",            bias: "left",  size: 3 },
+      { word: "biological sex",          bias: "right", size: 2 },
+      { word: "grooming",                bias: "right", size: 3 },
+      { word: "gender-affirming care",   bias: "left",  size: 3 },
+      { word: "mutilation",              bias: "right", size: 3 },
+      { word: "pronoun policing",        bias: "right", size: 2 },
+      { word: "gender dysphoria",        bias: null,    size: 2 },
+      { word: "LGBTQ+ rights",           bias: null,    size: 2 },
+      { word: "bathroom bills",          bias: null,    size: 2 },
+      { word: "social contagion",        bias: "right", size: 2 },
+      { word: "TERF",                    bias: "left",  size: 2 },
+      { word: "transition",              bias: null,    size: 1 },
+      { word: "erasure",                 bias: "left",  size: 2 },
+      { word: "women's sports",          bias: null,    size: 2 },
+      { word: "parental rights",         bias: "right", size: 2 },
+      { word: "de-transition",           bias: "right", size: 2 }
+    ]
+  }
+];
+
+// State
+var sbState = {
+  round: 0,
+  totalPoints: 0,
+  totalFound: 0,
+  totalBiasWords: 0,
+  totalBonus: 0,
+  totalBonusEligible: 0,
+  usedIndices: [],
+  currentTopic: null,
+  // per-round tracking
+  roundPoints: 0,
+  roundFound: 0,
+  roundBiasTotal: 0,
+  roundBonusEarned: 0,
+  roundBonusEligible: 0,
+  labelledCount: 0,
+  pendingWi: null,   // word index awaiting a label choice
+  pendingEl: null,   // the DOM element awaiting label
+  done: false
+};
+
+function sbInit() {
+  if (sbState.round > 0) {
+    document.getElementById('sb-scoreboard').style.display = 'flex';
+  }
+}
+
+function sbUpdateScoreboard() {
+  document.getElementById('sb-sc-total').textContent = sbState.totalPoints;
+  document.getElementById('sb-sc-rounds').textContent = sbState.round;
+  var foundPct = sbState.totalBiasWords > 0
+    ? Math.round(100 * sbState.totalFound / sbState.totalBiasWords) + '%' : '—';
+  var bonusPct = sbState.totalBonusEligible > 0
+    ? Math.round(100 * sbState.totalBonus / sbState.totalBonusEligible) + '%' : '—';
+  document.getElementById('sb-sc-found').textContent = foundPct;
+  document.getElementById('sb-sc-bonus').textContent = bonusPct;
+  document.getElementById('sb-scoreboard').style.display = 'flex';
+}
+
+function sbStartRound() {
+  if (sbState.usedIndices.length >= SB_TOPICS.length) sbState.usedIndices = [];
+  var remaining = SB_TOPICS.map(function(_, i) { return i; })
+    .filter(function(i) { return sbState.usedIndices.indexOf(i) === -1; });
+  var idx = remaining[Math.floor(Math.random() * remaining.length)];
+  sbState.usedIndices.push(idx);
+  sbState.currentTopic = SB_TOPICS[idx];
+
+  // Count bias words upfront for this round
+  var biasTotal = 0;
+  sbState.currentTopic.words.forEach(function(w) { if (w.bias) biasTotal++; });
+
+  // Reset round state
+  sbState.roundPoints = 0;
+  sbState.roundFound = 0;
+  sbState.roundBiasTotal = biasTotal;
+  sbState.roundBonusEarned = 0;
+  sbState.roundBonusEligible = 0;
+  sbState.labelledCount = 0;
+  sbState.pendingWi = null;
+  sbState.pendingEl = null;
+  sbState.done = false;
+  sbState.round++;
+
+  document.getElementById('sb-intro').style.display = 'none';
+  document.getElementById('sb-round-area').style.display = 'block';
+  document.getElementById('sb-round-card').style.display = 'block';
+  document.getElementById('sb-topic-name').textContent = sbState.currentTopic.topic;
+
+  // Reset picker zone
+  document.getElementById('sb-picker-inner').style.display = 'none';
+  document.getElementById('sb-live-score').style.display = 'none';
+  document.getElementById('sb-done-btn').style.display = 'none';
+  document.getElementById('sb-next-btn').style.display = 'none';
+  document.getElementById('sb-inline-results').style.display = 'none';
+  document.getElementById('sb-reveal-stats').innerHTML = '';
+  document.getElementById('sb-explainer').innerHTML = '';
+
+  sbRenderCloud();
+  sbUpdateScoreboard();
+  window.scrollTo({ top: document.getElementById('sb-round-card').offsetTop - 100, behavior: 'smooth' });
+}
+
+function sbRenderCloud() {
+  var cloud = document.getElementById('sb-cloud');
+  cloud.innerHTML = '';
+  var words = sbState.currentTopic.words;
+  var order = words.map(function(_, i) { return i; });
+  for (var i = order.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+  }
+  order.forEach(function(wi) {
+    var w = words[wi];
+    var el = document.createElement('span');
+    el.className = 'sb-word';
+    el.setAttribute('data-wi', wi);
+    var sizes = { 1: '0.8rem', 2: '0.95rem', 3: '1.12rem' };
+    el.style.fontSize = sizes[w.size] || '0.95rem';
+    el.textContent = w.word;
+    el.addEventListener('click', function(e) { sbWordClick(wi, el, e); });
+    cloud.appendChild(el);
+  });
+}
+
+function sbWordClick(wi, el, e) {
+  if (sbState.done) return;
+  // If already scored this word, ignore re-click
+  if (el.classList.contains('revealed')) return;
+  // Set as pending
+  sbState.pendingWi = wi;
+  sbState.pendingEl = el;
+  // Highlight as selected
+  document.querySelectorAll('.sb-word.selecting').forEach(function(w) { w.classList.remove('selecting'); });
+  el.classList.add('selecting');
+  // Show picker with word name
+  document.getElementById('sb-picker-prompt').textContent = '"' + el.textContent.replace(/[◀▶✓✗~○]/g, '').trim() + '"';
+  document.getElementById('sb-picker-inner').style.display = 'flex';
+}
+
+function sbPickerChoice(label) {
+  var wi = sbState.pendingWi;
+  var el = sbState.pendingEl;
+  if (wi === null || !el) return;
+
+  var w = sbState.currentTopic.words[wi];
+  var pts = 0;
+  var feedback = '';
+
+  el.classList.remove('selecting');
+  el.classList.add('revealed');
+  // Remove any existing icon
+  var icon = el.querySelector('.sb-word-icon');
+  if (icon) icon.remove();
+
+  if (w.bias) {
+    // It IS biased
+    if (label === 'left' || label === 'right') {
+      // Base point for identifying bias
+      pts++;
+      sbState.roundFound++;
+      sbState.roundBonusEligible++;
+      if (label === w.bias) {
+        // Correct direction — bonus point
+        pts++;
+        sbState.roundBonusEarned++;
+        el.className = 'sb-word revealed correct-' + w.bias;
+        feedback = '✓ Correct! ' + (w.bias === 'left' ? 'Left' : 'Right') + '-leaning (+2)';
+      } else {
+        // Right that it's biased, wrong direction
+        el.className = 'sb-word revealed correct-either';
+        feedback = '~ Biased, but leans ' + (w.bias === 'left' ? 'Left' : 'Right') + ' (+1)';
+      }
+    } else {
+      // Said not biased — wrong, penalty
+      pts--;
+      el.className = 'sb-word revealed wrong';
+      feedback = '✗ That\'s actually ' + (w.bias === 'left' ? 'Left' : 'Right') + '-leaning (−1)';
+    }
+  } else {
+    // It is neutral
+    if (label === 'left' || label === 'right') {
+      // Incorrectly flagged — penalty
+      pts--;
+      el.className = 'sb-word revealed wrong';
+      feedback = '✗ That one\'s neutral (−1)';
+    } else {
+      // Correctly said not biased
+      el.className = 'sb-word revealed';
+      feedback = '— Correct, that word is neutral';
+    }
+  }
+
+  sbState.roundPoints += pts;
+  sbState.labelledCount++;
+
+  // Reset pending
+  sbState.pendingWi = null;
+  sbState.pendingEl = null;
+
+  // Hide picker prompt (stays visible but cleared) — show live score
+  document.getElementById('sb-picker-prompt').textContent = feedback;
+  sbUpdateLiveScore();
+
+  // Show "done" button after first label
+  document.getElementById('sb-done-btn').style.display = 'block';
+}
+
+function sbUpdateLiveScore() {
+  var scoreEl = document.getElementById('sb-live-score');
+  scoreEl.style.display = 'flex';
+  var pts = sbState.roundPoints;
+  var cls = pts > 0 ? 'pos' : pts < 0 ? 'neg' : 'zero';
+  var sign = pts > 0 ? '+' : '';
+  scoreEl.innerHTML =
+    '<span class="sb-live-pts ' + cls + '">' + sign + pts + '</span>' +
+    '<span style="color:var(--text-muted);">pts &nbsp;·&nbsp; ' +
+    sbState.labelledCount + ' labelled</span>';
+}
+
+function sbFinishRound() {
+  if (sbState.done) return;
+  sbState.done = true;
+
+  // Close picker zone
+  document.getElementById('sb-picker-inner').style.display = 'none';
+  document.getElementById('sb-live-score').style.display = 'none';
+
+  // Recolor ALL words in place based on their true bias
+  var words = sbState.currentTopic.words;
+  var sizes = { 1: '0.8rem', 2: '0.95rem', 3: '1.12rem' };
+  words.forEach(function(w, wi) {
+    var el = document.querySelector('.sb-word[data-wi="' + wi + '"]');
+    if (!el) return;
+    el.classList.remove('selecting');
+    el.classList.add('revealed');
+    var icon = el.querySelector('.sb-word-icon');
+    if (icon) icon.remove();
+    el.textContent = w.word;
+    el.style.fontSize = sizes[w.size] || '0.95rem';
+    if (w.bias === 'left') {
+      el.className = 'sb-word revealed sb-final-left';
+    } else if (w.bias === 'right') {
+      el.className = 'sb-word revealed sb-final-right';
+    } else {
+      el.className = 'sb-word revealed sb-final-neutral';
+    }
+  });
+
+  // Tally into totals
+  sbState.totalPoints += sbState.roundPoints;
+  sbState.totalFound += sbState.roundFound;
+  sbState.totalBiasWords += sbState.roundBiasTotal;
+  sbState.totalBonus += sbState.roundBonusEarned;
+  sbState.totalBonusEligible += sbState.roundBonusEligible;
+
+  sbUpdateScoreboard();
+  sbShowReveal();
+}
+
+var SB_EXPLAINERS = {
+  "Iran Strikes": {
+    left:  "The left frames Iran strikes as reckless executive overreach — using words like 'illegal war' and 'regime change' to invoke the memory of Iraq and warn against repeating a catastrophic mistake.",
+    right: "The right leans on words like 'existential danger' and 'appeasement' to cast the strikes as a necessary act of strength against a regime that has made its intentions clear."
+  },
+  "Nuclear Deterrence": {
+    left:  "The left uses language like 'nuke fetish' and 'unilateral disarmament' to mock what it sees as a militarist obsession with weapons that make the world less safe, not more.",
+    right: "The right reaches for phrases like 'peace through strength' and 'naive pacifism' to argue that only credible nuclear power keeps adversaries from testing the limits."
+  },
+  "Healthcare System": {
+    left:  "The left uses phrases like 'healthcare is a right' and 'medical bankruptcy' to frame the current system as a moral failure that leaves ordinary people exposed to catastrophic risk.",
+    right: "The right deploys 'government takeover,' 'death panels,' and 'socialized medicine' to stoke fear of bureaucratic control and the erosion of patient choice."
+  },
+  "Tariffs and Trade Policy": {
+    left:  "The left uses 'race to the bottom' and 'worker exploitation' to argue that free trade agreements have been written for corporations, not the workers they displaced.",
+    right: "The right leans on 'America First,' 'globalist agenda,' and 'economic nationalism' to frame tariffs as a long-overdue correction after decades of one-sided deals."
+  },
+  "Immigration Enforcement": {
+    left:  "The left favors 'undocumented worker,' 'dreamers,' and 'family separation' to keep the human cost of enforcement in the foreground and resist language that dehumanizes migrants.",
+    right: "The right uses 'illegal alien,' 'invasion,' and 'chain migration' to frame immigration as a law-and-order crisis requiring urgent, uncompromising action."
+  },
+  "Climate Policy": {
+    left:  "The left reaches for 'climate emergency,' 'climate denier,' and 'fossil fuel lobby' to convey urgency and assign blame to those it sees as standing in the way of necessary action.",
+    right: "The right uses 'climate alarmism,' 'climate hoax,' and 'job-killing regulations' to push back on policies it views as economically destructive responses to overstated science."
+  },
+  "AI and the Military": {
+    left:  "The left uses 'killer robots,' 'tech bro warmongers,' and 'lethal autonomy' to highlight the dangers of removing human judgment from decisions about life and death.",
+    right: "The right leans on 'China threat,' 'precision strikes,' and 'military advantage' to argue that adversaries won't wait, so America can't afford to either."
+  },
+  "Free Speech and Media": {
+    left:  "The left uses 'hate speech,' 'disinformation campaign,' and 'chilling effect' to argue that some speech causes real harm and that platforms have a responsibility to act.",
+    right: "The right deploys 'fake news,' 'lamestream media,' 'woke journalism,' and 'cancel culture' to paint mainstream institutions as ideologically captured enemies of honest discourse."
+  },
+  "Israel and the Middle East": {
+    left:  "The left uses 'apartheid state,' 'genocide,' 'ethnic cleansing,' and 'settler colonialism' to foreground Palestinian suffering and frame Israeli policy as a systemic injustice.",
+    right: "The right reaches for 'terror organization,' 'terrorist sympathizer,' and 'existential threat' to center the horrors of October 7th and assert Israel's absolute right to self-defense."
+  },
+  "Taiwan and U.S. Foreign Policy": {
+    left:  "The left uses 'reckless escalation,' 'warmongers in D.C.,' and 'military adventurism' to warn that hawkish posturing over Taiwan risks a catastrophic war no one has actually voted for.",
+    right: "The right leans on 'Chinese aggression,' 'Chinese imperialism,' and 'freedom and democracy' to frame Taiwan as a democratic ally that America has a moral obligation to defend."
+  },
+  "MAHA and Public Health": {
+    left:  "The left uses 'anti-vaxxer,' 'vaccine hesitancy,' and 'regulatory capture' to distinguish between legitimate institutional critique and what it sees as dangerous pseudoscience dressed up as reform.",
+    right: "The right reaches for 'deep state medicine,' 'Big Pharma,' 'medical freedom,' and 'public health tyranny' to challenge an expert class it views as captured by financial and political interests."
+  },
+  "Wealth Inequality": {
+    left:  "The left uses 'billionaire class,' 'wealth hoarding,' 'trickle-down,' and 'oligarchy' to frame extreme inequality as a structural failure that serves the powerful at everyone else's expense.",
+    right: "The right deploys 'class warfare,' 'job creators,' 'bootstraps,' and 'envy economics' to defend earned success and resist redistribution policies it views as punitive and counterproductive."
+  },
+  "Policing in the United States": {
+    left:  "The left uses 'defund the police,' 'systemic racism,' 'warrior cops,' and 'overcriminalization' to argue that the current system causes disproportionate harm to Black communities and needs structural reform.",
+    right: "The right reaches for 'law and order,' 'blue lives matter,' 'thin blue line,' and 'progressive prosecutors' to defend police as the essential line between civic order and chaos."
+  },
+  "Gender Identity": {
+    left:  "The left uses 'trans rights,' 'gender-affirming care,' 'erasure,' and 'TERF' to frame restrictions on gender identity as targeted attacks on a vulnerable group's basic dignity.",
+    right: "The right deploys 'gender ideology,' 'grooming,' 'mutilation,' and 'social contagion' to argue that medical and educational institutions have gone far beyond what science or parental consent supports."
+  }
+};
+
+function sbShowReveal() {
+  var topic = sbState.currentTopic;
+
+  var pts = sbState.roundPoints;
+  var found = sbState.roundFound;
+  var biasTotal = sbState.roundBiasTotal;
+  var bonusEarned = sbState.roundBonusEarned;
+  var bonusEligible = sbState.roundBonusEligible;
+  var missed = biasTotal - found;
+
+  // Score stats
+  var statsHtml =
+    '<div class="sb-reveal-stat"><div class="rv-val" style="color:' + (pts > 0 ? '#2A5425' : pts < 0 ? '#a82a2a' : 'inherit') + ';">' +
+    (pts > 0 ? '+' : '') + pts + '</div><div class="rv-label">Points this round</div></div>' +
+    '<div class="sb-reveal-stat"><div class="rv-val">' + found + ' / ' + biasTotal + '</div><div class="rv-label">Bias found</div></div>' +
+    '<div class="sb-reveal-stat"><div class="rv-val">' + bonusEarned + ' / ' + bonusEligible + '</div><div class="rv-label">Labels correct</div></div>' +
+    '<div class="sb-reveal-stat"><div class="rv-val">' + missed + '</div><div class="rv-label">Missed</div></div>';
+  document.getElementById('sb-reveal-stats').innerHTML = statsHtml;
+
+  // Explainer
+  var exp = SB_EXPLAINERS[topic.topic];
+  var explainerHtml = '';
+  if (exp) {
+    explainerHtml =
+      '<div class="sb-explainer-row">' +
+        '<span class="sb-explainer-label lbl-left">Left</span>' +
+        '<span>' + exp.left + '</span>' +
+      '</div>' +
+      '<div class="sb-explainer-row">' +
+        '<span class="sb-explainer-label lbl-right">Right</span>' +
+        '<span>' + exp.right + '</span>' +
+      '</div>';
+  }
+  document.getElementById('sb-explainer').innerHTML = explainerHtml;
+
+  // Show inline results
+  document.getElementById('sb-inline-results').style.display = 'block';
+
+  // Swap buttons
+  document.getElementById('sb-done-btn').style.display = 'none';
+  document.getElementById('sb-next-btn').style.display = 'inline-block';
+
+  // Scroll to show results
+  document.getElementById('sb-inline-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function sbNextRound() {
+  sbStartRound();
+}
+</script>
+
+<script>
 var mlState = {
   round: 0,
   totalPoints: 0,
@@ -9922,7 +11463,7 @@ function mlShowQuizBackBanner() {
     if (cp2) cp2.classList.remove('ml-banner-active');
     var ctx = document.getElementById('ml-comm-context');
     if (ctx) { ctx.style.display = 'none'; ctx.textContent = ''; }
-    showPage('medialiteracy');
+    showPage('labelthetake');
   };
   document.body.appendChild(banner);
   // Push commentariat content down by banner height
@@ -10025,6 +11566,257 @@ function mlShowReveal(results) {
 function mlNextRound() {
   document.getElementById('ml-reveal').style.display = 'none';
   mlStartRound();
+}
+</script>
+
+<script>
+// ===== VOICE MAP =====
+
+const CATEGORY_COLORS = {
+  'left-sj':             '#1B3A5C',
+  'left-prog':           '#3B7DD8',
+  'center-left':         '#6BA3D6',
+  'out-of-box':          '#7B4EA0',
+  'center-right':        '#D67A6B',
+  'right-establishment': '#D83B3B',
+  'right-populist':      '#8B1A1A'
+};
+
+function openVoiceMap() {
+  const modal = document.getElementById('voice-map-modal');
+  modal.style.display = 'flex';
+
+  // Get active event key from the media literacy / commentariat view
+  const activeEventBtn = document.querySelector('.event-btn.active');
+  const activeEvent = activeEventBtn ? activeEventBtn.getAttribute('data-key') : null;
+  const activeEventLabel = activeEventBtn ? activeEventBtn.textContent.trim() : null;
+
+  renderVoiceMap(activeEvent, activeEventLabel);
+}
+
+function closeVoiceMap() {
+  document.getElementById('voice-map-modal').style.display = 'none';
+}
+
+// Close on backdrop click
+document.getElementById('voice-map-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeVoiceMap();
+});
+
+function renderVoiceMap(eventKey, eventLabel) {
+  const svg = document.getElementById('voice-map-svg');
+  const empty = document.getElementById('voice-map-empty');
+  const subtitle = document.getElementById('voice-map-subtitle');
+  svg.innerHTML = '';
+
+  // Collect commentators who have takes on this event
+  let nodes = [];
+  if (typeof commentators !== 'undefined') {
+    commentators.forEach(c => {
+      if (!c.takes || !c.reach) return;
+      const hasTake = c.takes.some(t => {
+        if (!eventKey) return true;
+        return (t.events && t.events.includes(eventKey)) || (t.topics && t.topics.includes(eventKey));
+      });
+      if (hasTake) {
+        nodes.push({
+          name: c.name,
+          category: c.category,
+          reach: c.reach || 5
+        });
+      }
+    });
+  }
+
+  // Update subtitle
+  if (eventLabel) {
+    subtitle.textContent = `Who's covering "${eventLabel}" — and how big their megaphone is`;
+  } else {
+    subtitle.textContent = 'Who\'s talking — and how big their megaphone is';
+  }
+
+  if (nodes.length === 0) {
+    svg.style.display = 'none';
+    empty.style.display = 'flex';
+    return;
+  }
+  svg.style.display = 'block';
+  empty.style.display = 'none';
+
+  // Get dimensions
+  const wrap = document.getElementById('voice-map-canvas-wrap');
+  const W = wrap.clientWidth || 600;
+  const H = wrap.clientHeight || 380;
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  // Radius scale: reach 1-10 → r 20-72px, adjusted for node count
+  const countFactor = nodes.length > 20 ? 0.72 : nodes.length > 12 ? 0.86 : 1;
+  function getR(reach) {
+    return (14 + (reach / 10) * 54) * countFactor;
+  }
+
+  // Sort descending by reach so large nodes start near center
+  nodes.sort((a, b) => b.reach - a.reach);
+
+  // Assign initial positions: large nodes start at center, smaller spiral out
+  nodes.forEach((d, i) => {
+    d.r = getR(d.reach);
+    const spread = i * 0.8;
+    const angle = i * 2.4; // golden angle ish
+    d.x = W / 2 + Math.cos(angle) * spread;
+    d.y = H / 2 + Math.sin(angle) * spread;
+    d.vx = 0;
+    d.vy = 0;
+  });
+
+  // Force simulation — large bubbles pulled to center more strongly
+  function runForce(nodes, W, H, iterations) {
+    const cx = W / 2, cy = H / 2;
+    const padding = 3;
+    const maxReach = Math.max(...nodes.map(n => n.reach));
+
+    for (let iter = 0; iter < iterations; iter++) {
+      const alpha = 1 - iter / iterations;
+
+      // Reach-weighted gravity: bigger bubbles pulled center harder
+      nodes.forEach(d => {
+        const gravStrength = 0.012 + (d.reach / maxReach) * 0.03;
+        d.vx += (cx - d.x) * gravStrength * alpha;
+        d.vy += (cy - d.y) * gravStrength * alpha;
+      });
+
+      // Collision resolution — larger bubble yields less
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+          const minDist = a.r + b.r + padding;
+          if (dist < minDist) {
+            const overlap = (minDist - dist) / dist;
+            // Distribute push inversely proportional to reach (bigger moves less)
+            const totalR = a.reach + b.reach;
+            const aShare = b.reach / totalR;
+            const bShare = a.reach / totalR;
+            a.vx -= dx * overlap * aShare * 0.5;
+            a.vy -= dy * overlap * aShare * 0.5;
+            b.vx += dx * overlap * bShare * 0.5;
+            b.vy += dy * overlap * bShare * 0.5;
+          }
+        }
+      }
+
+      // Apply velocity + damping + boundary
+      nodes.forEach(d => {
+        d.vx *= 0.8;
+        d.vy *= 0.8;
+        d.x += d.vx;
+        d.y += d.vy;
+        d.x = Math.max(d.r + 2, Math.min(W - d.r - 2, d.x));
+        d.y = Math.max(d.r + 2, Math.min(H - d.r - 2, d.y));
+      });
+    }
+  }
+
+  runForce(nodes, W, H, 300);
+
+  // Render bubbles — draw largest first (bottom of stack)
+  const ns = 'http://www.w3.org/2000/svg';
+  [...nodes].sort((a, b) => b.r - a.r).forEach(d => {
+    const color = CATEGORY_COLORS[d.category] || '#999';
+    const clipId = 'clip-' + d.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+
+    const g = document.createElementNS(ns, 'g');
+
+    // Clip path — constrains text to circle
+    const defs = document.createElementNS(ns, 'defs');
+    const clipPath = document.createElementNS(ns, 'clipPath');
+    clipPath.setAttribute('id', clipId);
+    const clipCircle = document.createElementNS(ns, 'circle');
+    clipCircle.setAttribute('cx', d.x);
+    clipCircle.setAttribute('cy', d.y);
+    clipCircle.setAttribute('r', d.r - 3);
+    clipPath.appendChild(clipCircle);
+    defs.appendChild(clipPath);
+    g.appendChild(defs);
+
+    // Circle fill
+    const circle = document.createElementNS(ns, 'circle');
+    circle.setAttribute('cx', d.x);
+    circle.setAttribute('cy', d.y);
+    circle.setAttribute('r', d.r);
+    circle.setAttribute('fill', color);
+    circle.setAttribute('fill-opacity', '0.9');
+    g.appendChild(circle);
+
+    // Text group with clip
+    const textGroup = document.createElementNS(ns, 'g');
+    textGroup.setAttribute('clip-path', `url(#${clipId})`);
+
+    const fontSize = d.r < 20 ? 7 : d.r < 28 ? 9 : d.r < 38 ? 11 : 13;
+    const lineH = fontSize + 3;
+    const nameParts = splitName(d.name, d.r, fontSize);
+    const totalTextH = nameParts.length * lineH;
+    const startY = d.y - totalTextH / 2 + lineH / 2;
+
+    nameParts.forEach((part, idx) => {
+      const text = document.createElementNS(ns, 'text');
+      text.setAttribute('x', d.x);
+      text.setAttribute('y', startY + idx * lineH);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('fill', 'white');
+      text.setAttribute('font-family', 'var(--sans), sans-serif');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('font-size', fontSize);
+      text.setAttribute('pointer-events', 'none');
+      text.textContent = part;
+      textGroup.appendChild(text);
+    });
+
+    g.appendChild(textGroup);
+    svg.appendChild(g);
+  });
+}
+
+function splitName(name, r, fontSize) {
+  // Estimate max chars that fit in bubble width (diameter * 0.85 / ~0.6em per char)
+  const maxCharsPerLine = Math.floor((r * 1.7) / (fontSize * 0.62));
+
+  // Very small: last name only
+  if (r < 20) {
+    const parts = name.split(' ');
+    return [parts[parts.length - 1].slice(0, maxCharsPerLine)];
+  }
+
+  const words = name.split(' ');
+
+  // Single word
+  if (words.length === 1) return [name.slice(0, maxCharsPerLine)];
+
+  // Two words: try on one line, else split
+  if (words.length === 2) {
+    if (name.length <= maxCharsPerLine) return [name];
+    return words.map(w => w.slice(0, maxCharsPerLine));
+  }
+
+  // 3+ words: greedy line-wrap into 2 lines max
+  const lines = [];
+  let current = '';
+  for (const word of words) {
+    const test = current ? current + ' ' + word : word;
+    if (test.length <= maxCharsPerLine) {
+      current = test;
+    } else {
+      if (current) lines.push(current);
+      current = word;
+      if (lines.length >= 1) break; // max 2 lines
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 2);
 }
 </script>
 </body>
